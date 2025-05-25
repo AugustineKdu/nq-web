@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const { locale, push, asPath } = useRouter()
     const [mobileOpen, setMobileOpen] = useState(false)
     return (
-        <div className="min-h-screen bg-light-background dark:bg-dark-background text-light-textPrimary dark:text-dark-textPrimary transition-colors">
+        <div className="min-h-screen bg-primaryBg text-primaryText transition-colors">
             <nav className="flex items-center justify-between px-8 py-4 shadow-sm relative">
                 {/* 로고 */}
                 <Link href="/" className="text-2xl font-bold">NQ</Link>

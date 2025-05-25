@@ -1,5 +1,5 @@
 module.exports = {
-    darkMode: 'class',  // class 기반 다크모드 토글
+    darkMode: 'class',
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx}',
         './src/components/**/*.{js,ts,jsx,tsx}',
@@ -7,6 +7,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                /* CSS 변수 기반 다크/라이트 배경 및 텍스트 */
+                primaryBg: 'var(--color-bg)',
+                primaryText: 'var(--color-text)',
+                // 기존 light/dark palettes...
                 light: {
                     primary: '#2563EB',
                     secondary: '#10B981',

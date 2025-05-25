@@ -7,7 +7,7 @@ import Process from '@/components/Process'
 
 export default function Home() {
   return (
-    <main className="bg-light-background dark:bg-dark-background text-light-textPrimary dark:text-dark-textPrimary transition-colors">
+    <main className="bg-primaryBg text-primaryText transition-colors">
       <section id="hero" className="min-h-screen flex flex-col items-center justify-center p-8">
         <Hero />
       </section>
