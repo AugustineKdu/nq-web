@@ -1,13 +1,18 @@
-import { Html, Head, Main, NextScript } from "next/document";
+// @ts-nocheck
+import Document, { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html lang="ko">
+        <Head />
+        <body className="bg-light-background dark:bg-dark-background antialiased">
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
+
+export default MyDocument;
