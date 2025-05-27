@@ -12,14 +12,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="min-h-screen bg-primaryBg text-primaryText transition-colors">
             <nav className="flex items-center justify-between px-8 py-4 shadow-sm relative">
                 {/* 로고 */}
-                <Link href="/" className="text-2xl font-bold">NQ</Link>
+                <Link href="/" className="flex items-center">
+                    <img src="/NQlogo.png" alt="NQ Logo" className="h-8" />
+                </Link>
 
                 {/* Desktop 메뉴 */}
                 <div className="hidden md:flex items-center space-x-6">
-                    <Link href="/" className="hover:text-blue-600">Home</Link>
-                    <Link href="/about" className="hover:text-blue-600">About</Link>
-                    <Link href="/service" className="hover:text-blue-600">Service</Link>
-                    <Link href="/contact" className="hover:text-blue-600">Contact</Link>
+                    <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+                    <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400">About</Link>
+                    <Link href="/service" className="hover:text-blue-600 dark:hover:text-blue-400">Service</Link>
+                    <Link href="/contact" className="hover:text-blue-600 dark:hover:text-blue-400">Contact</Link>
                 </div>
 
                 {/* Mobile 햄버거 */}
@@ -36,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <ThemeToggle />
                     <button
                         onClick={() => push(asPath, undefined, { locale: locale === 'ko' ? 'en' : 'ko' })}
-                        className="px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="px-2 py-1 rounded hover:text-blue-600 dark:hover:text-blue-400"
                     >
                         {locale === 'ko' ? 'EN' : 'KO'}
                     </button>
@@ -45,10 +47,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {mobileOpen && (
                 <div className="md:hidden absolute top-16 left-0 w-full bg-light-background/75 dark:bg-dark-background/75 backdrop-blur-sm z-20 p-4">
                     <nav className="flex flex-col space-y-4">
-                        <Link href="/" onClick={() => setMobileOpen(false)}>Home</Link>
-                        <Link href="/about" onClick={() => setMobileOpen(false)}>About</Link>
-                        <Link href="/service" onClick={() => setMobileOpen(false)}>Service</Link>
-                        <Link href="/contact" onClick={() => setMobileOpen(false)}>Contact</Link>
+                        <Link href="/" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+                        <Link href="/about" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">About</Link>
+                        <Link href="/service" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Service</Link>
+                        <Link href="/contact" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Contact</Link>
                         <div className="mt-6 flex items-center space-x-4">
                             <ThemeToggle />
                             <button
@@ -63,7 +65,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </nav>
                 </div>
             )}
-            <main>{children}</main>
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {children}
+            </main>
         </div>
     )
 }

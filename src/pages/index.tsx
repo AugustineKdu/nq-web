@@ -1,9 +1,9 @@
 // src/pages/index.tsx
-import Hero from '@/components/Hero'
-import Services from '@/components/Services'
-import Importance from '@/components/Importance'
-import Conversion from '@/components/Conversion'
-import Process from '@/components/Process'
+import Hero from '@/components/Home_Hero'
+// import Services from '@/components/Services'
+import Importance from '@/components/Home_Importance'
+import Conversion from '@/components/Home_Conversion'
+import Process from '@/components/Home_Process'
 
 export default function Home() {
   return (
@@ -11,9 +11,9 @@ export default function Home() {
       <section id="hero" className="min-h-screen flex flex-col items-center justify-center p-8">
         <Hero />
       </section>
-      <section id="services" className="py-16 px-8 bg-light-surface dark:bg-dark-surface">
+      {/* <section id="services" className="py-16 px-8 bg-light-surface dark:bg-dark-surface">
         <Services />
-      </section>
+      </section> */}
       <section id="importance" className="py-16 px-8">
         <Importance />
       </section>
@@ -26,3 +26,4 @@ export default function Home() {
     </main>
   )
 }
+
