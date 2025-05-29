@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "i18next": "^25.2.1",
     "next": "15.3.2",
     "next-i18next": "^15.4.2",

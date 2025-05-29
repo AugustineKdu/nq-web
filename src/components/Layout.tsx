@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {/* Desktop 메뉴 */}
                 <div className="hidden md:flex items-center space-x-6">
                     <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
-                    <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400">About</Link>
+                    <Link href="/portfolio" className="hover:text-blue-600 dark:hover:text-blue-400">Portfolio</Link>
                     <Link href="/service" className="hover:text-blue-600 dark:hover:text-blue-400">Service</Link>
                     <Link href="/contact" className="hover:text-blue-600 dark:hover:text-blue-400">Contact</Link>
                 </div>
@@ -45,10 +45,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
             </nav>
             {mobileOpen && (
-                <div className="md:hidden absolute top-16 left-0 w-full bg-light-background/75 dark:bg-dark-background/75 backdrop-blur-sm z-20 p-4">
+                <div className="md:hidden absolute top-16 left-0 w-full h-[calc(100%-4rem)] bg-primaryBg/75 backdrop-blur-sm z-20 p-8">
                     <nav className="flex flex-col space-y-4">
                         <Link href="/" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
-                        <Link href="/about" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">About</Link>
+                        <Link href="/portfolio" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Portfolio</Link>
                         <Link href="/service" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Service</Link>
                         <Link href="/contact" onClick={() => setMobileOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Contact</Link>
                         <div className="mt-6 flex items-center space-x-4">
@@ -65,7 +65,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </nav>
                 </div>
             )}
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {children}
+            </main> */}
+            <main className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-8">
                 {children}
             </main>
         </div>
