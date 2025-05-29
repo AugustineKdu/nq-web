@@ -1,303 +1,570 @@
-// src/pages/contact.tsx
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function Contact() {
+    const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
+    const [terminalInput, setTerminalInput] = useState('')
+    const [terminalHistory, setTerminalHistory] = useState<string[]>(['user@nqsolution:~$ start_new_project'])
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        projectType: '',
+        budget: '',
+        message: '',
+        timeline: ''
+    })
+
+    // Intersection Observer for animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(prev => ({ ...prev, [entry.target.id]: true }))
+                    }
+                })
+            },
+            { threshold: 0.1 }
+        )
+
+        const elements = document.querySelectorAll('[data-animate]')
+        elements.forEach((el) => observer.observe(el))
+
+        return () => observer.disconnect()
+    }, [])
+
+    // Terminal typing effect
+    const handleTerminalCommand = (command: string) => {
+        setTerminalHistory([...terminalHistory, `> ${command}`])
+        // Process commands
+        if (command.toLowerCase().includes('help')) {
+            setTerminalHistory(prev => [...prev, 'Available commands: name, email, phone, project, submit'])
+        }
+    }
+
+    const contactChannels = [
+        {
+            icon: '📧',
+            title: '이메일 상담',
+            subtitle: '자세하고 체계적인 상담',
+            features: ['24시간 이내 상세 답변', '포트폴리오 및 견적서 제공', '모든 내용 기록 보존'],
+            action: 'contact@nqsolution.com',
+            best: '상세한 프로젝트 설명이 필요할 때'
+        },
+        {
+            icon: '📞',
+            title: '전화 상담',
+            subtitle: '즉시 해결, 빠른 소통',
+            features: ['평일 09:00-18:00', '주말/공휴일 긴급 상담', '실시간 문제 해결'],
+            action: '010-XXXX-XXXX',
+            best: '급한 문의나 즉시 답변이 필요할 때'
+        },
+        {
+            icon: '💬',
+            title: '카카오톡 채팅',
+            subtitle: '간편하고 친근한 대화',
+            features: ['실시간 응답 (평균 5분)', '이미지/파일 공유 가능', '편안한 대화 형식'],
+            action: '@nqsolution',
+            best: '간단한 문의나 빠른 확인이 필요할 때'
+        },
+        {
+            icon: '🏢',
+            title: '오프라인 미팅',
+            subtitle: '직접 만나는 진솔한 대화',
+            features: ['강남 사무실 또는 방문 상담', '상세한 프레젠테이션', '즉석 아이디어 스케치'],
+            action: '미팅 예약하기',
+            best: '중요한 프로젝트나 장기 협업 논의'
+        }
+    ]
+
+    const checklistItems = [
+        {
+            icon: '🎯',
+            title: '프로젝트 목적 파악',
+            question: '왜 이 프로젝트가 필요한가요?',
+            tips: ['해결하려는 핵심 문제', '기대하는 비즈니스 성과', '성공의 측정 기준']
+        },
+        {
+            icon: '👥',
+            title: '타겟 사용자 정의',
+            question: '누가 사용할 서비스인가요?',
+            tips: ['주 사용자 연령대와 특성', '기술 친숙도 수준', '주요 사용 디바이스']
+        },
+        {
+            icon: '🔍',
+            title: '참고 레퍼런스',
+            question: '어떤 스타일을 원하시나요?',
+            tips: ['좋아하는 사이트/앱 3-5개', '선호하는 색상과 분위기', '피하고 싶은 스타일']
+        },
+        {
+            icon: '⚙️',
+            title: '핵심 기능 정리',
+            question: '꼭 필요한 기능은 무엇인가요?',
+            tips: ['MVP 필수 기능', '2차 개발 기능', '차별화 포인트']
+        },
+        {
+            icon: '💰',
+            title: '예산과 일정',
+            question: '언제까지, 얼마의 예산으로?',
+            tips: ['전체 예산 범위', '희망 런칭 날짜', '단계별 개발 여부']
+        }
+    ]
+
+    const faqs = [
+        {
+            q: '견적은 어떻게 받을 수 있나요?',
+            a: '무료 상담 후 1-2일 내에 상세한 맞춤 견적서를 제공합니다. 정확한 견적을 위해 위의 체크리스트를 미리 준비해주시면 더욱 빠른 진행이 가능합니다.'
+        },
+        {
+            q: '개발 기간은 얼마나 걸리나요?',
+            a: '프로젝트 규모에 따라 2주~3개월이며, 일반적인 웹사이트는 4-6주, 복잡한 플랫폼은 8-12주 정도 소요됩니다. 애자일 방식으로 2주마다 결과물을 확인하실 수 있습니다.'
+        },
+        {
+            q: '개발 중 수정이 가능한가요?',
+            a: '물론입니다! 기획 단계에서는 무제한 수정, 디자인 단계 3회, 개발 단계 2회 무료 수정을 제공합니다. 추가 수정도 합리적인 비용으로 가능합니다.'
+        },
+        {
+            q: '유지보수는 어떻게 되나요?',
+            a: '런칭 후 1개월간 무료 유지보수를 제공하며, 이후 월 단위 또는 건별 유지보수 계약이 가능합니다. 긴급 이슈는 24시간 내 대응합니다.'
+        },
+        {
+            q: '소스코드는 제공되나요?',
+            a: '네, 프로젝트 완료 후 전체 소스코드와 문서를 제공합니다. 향후 다른 개발자가 유지보수할 수 있도록 깔끔한 코드와 상세한 문서를 작성합니다.'
+        }
+    ]
+
     return (
-        <main className="bg-primaryBg text-primaryText transition-colors">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
-                {/* 1. Hero Section */}
+        <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-900 dark:text-gray-100 transition-all duration-300">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                {/* Hero Section */}
                 <section
                     id="hero"
-                    className="min-h-screen flex flex-col items-center justify-center p-8 bg-light-surface dark:bg-dark-surface"
+                    data-animate
+                    className={`min-h-screen flex flex-col items-center justify-center py-20 transition-all duration-1000 ${isVisible.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
                 >
-                    <h1 className="text-4xl md:text-5xl font-bold text-center">
-                        당신의 아이디어를 현실로 만들 준비가 되었습니다
-                    </h1>
-                    <h2 className="text-xl md:text-2xl mt-4 text-center">
-                        새로운 가능성의 시작, 지금 바로 연락하세요
-                    </h2>
-                    <div className="mt-6 p-6 bg-blue-50 dark:bg-blue-900 rounded-lg text-center space-y-2">
-                        <p>💬 24시간 이내 답변 보장</p>
-                        <p>☕ 무료 상담으로 시작</p>
-                        <p>🚀 빠른 프로토타입 제작</p>
-                    </div>
-                    <p className="mt-6 max-w-xl text-center">
-                        작은 아이디어든 큰 프로젝트든,<br />
-                        모든 것은 첫 번째 대화에서 시작됩니다.<br />
-                        지금 바로 연락하세요!
-                    </p>
-                    <div className="mt-8 flex space-x-4">
-                        <a
-                            href="tel:010-XXXX-XXXX"
-                            className="px-6 py-3 bg-blue-600 text-white rounded hover:shadow-lg transition-shadow"
-                        >
-                            📞 지금 연락하기
-                        </a>
-                        <button className="px-6 py-3 border border-blue-600 text-blue-600 rounded hover:shadow-lg transition-shadow">
-                            💬 채팅상담
-                        </button>
-                    </div>
-                </section>
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="text-4xl md:text-6xl font-bold">
+                            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                당신의 아이디어를 현실로
+                            </span>
+                            <br />
+                            만들 준비가 되었습니다
+                        </h1>
+                        <p className="mt-6 text-xl md:text-2xl text-gray-600 dark:text-gray-300">
+                            새로운 가능성의 시작, 지금 바로 연락하세요
+                        </p>
 
-                {/* 2. 온라인 명함 섹션 */}
-                <section id="business-card" className="py-16 px-8">
-                    <div className="max-w-md mx-auto bg-white/50 dark:bg-gray-700/50 p-8 rounded-lg shadow-lg text-center space-y-4">
-                        <h3 className="text-2xl font-bold">NQ Solution Digital Business Card</h3>
-                        <p>🏢 NQ Solution</p>
-                        <p>💡 "Next, Query our Solution"</p>
-                        <p>👨‍💻 대표: [이름]</p>
-                        <p>📧 contact@nqsolution.com</p>
-                        <p>📱 010-XXXX-XXXX</p>
-                        <p>🌐 www.nqsolution.com</p>
-                        <p>📍 서울특별시 강남구</p>
-                        <div className="mt-4 bg-white p-4 rounded-lg">
-                            {/* QR 코드 이미지 또는 컴포넌트 */}
-                            <p>QR코드 - 연락처 저장</p>
+                        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+                            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                                <div className="text-3xl mb-2">💬</div>
+                                <p className="font-semibold">24시간 이내 답변</p>
+                            </div>
+                            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                                <div className="text-3xl mb-2">☕</div>
+                                <p className="font-semibold">무료 상담 제공</p>
+                            </div>
+                            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                                <div className="text-3xl mb-2">🚀</div>
+                                <p className="font-semibold">빠른 프로토타입</p>
+                            </div>
                         </div>
-                        <div className="mt-4 flex justify-center space-x-4">
-                            <button className="px-4 py-2 border rounded">💾 연락처 저장</button>
-                            <button className="px-4 py-2 border rounded">📤 카카오톡 공유</button>
-                            <button className="px-4 py-2 border rounded">📄 vCard 다운로드</button>
+
+                        <p className="mt-10 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                            작은 아이디어든 큰 프로젝트든,<br />
+                            모든 것은 첫 번째 대화에서 시작됩니다.<br />
+                            <span className="font-semibold text-blue-600 dark:text-blue-400">지금 바로 연락하세요!</span>
+                        </p>
+
+                        <div className="mt-10 flex flex-wrap justify-center gap-4">
+                            <a
+                                href="tel:010-XXXX-XXXX"
+                                className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:shadow-2xl transition-all transform hover:scale-105"
+                            >
+                                <span className="mr-2">📞</span>
+                                지금 전화하기
+                                <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                            </a>
+                            <button className="px-8 py-4 bg-white dark:bg-gray-800 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-700 transition-all">
+                                <span className="mr-2">💬</span>
+                                채팅 상담 시작
+                            </button>
                         </div>
                     </div>
                 </section>
 
-                {/* 3. 터미널 문의 폼 섹션 */}
-                <section id="terminal-form" className="py-16 px-8 bg-light-surface dark:bg-dark-surface">
-                    <div className="max-w-lg mx-auto">
-                        <div className="bg-white/50 dark:bg-gray-700/50 p-6 rounded-lg font-mono">
-                            <p>user@nqsolution:~$ start_new_project</p>
-                            <form className="mt-4 space-y-4">
-                                <div>
-                                    <label className="block">성함을 입력하세요:</label>
-                                    <input className="w-full border p-2 rounded" type="text" placeholder="홍길동" />
+                {/* Digital Business Card */}
+                <section
+                    id="business-card"
+                    data-animate
+                    className={`py-20 transition-all duration-1000 ${isVisible['business-card'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
+                >
+                    <div className="max-w-md mx-auto">
+                        <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-900 p-8 rounded-3xl shadow-2xl overflow-hidden">
+                            {/* Background Pattern */}
+                            <div className="absolute inset-0 opacity-10">
+                                <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500 rounded-full blur-3xl"></div>
+                                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
+                            </div>
+
+                            <div className="relative z-10 text-white text-center space-y-4">
+                                <div className="mb-6">
+                                    <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                        NQ Solution
+                                    </h3>
+                                    <p className="text-sm opacity-80 mt-1">Digital Business Card</p>
                                 </div>
-                                <div>
-                                    <label className="block">이메일 주소:</label>
-                                    <input className="w-full border p-2 rounded" type="email" placeholder="hong@example.com" />
+
+                                <div className="space-y-3">
+                                    <p className="flex items-center justify-center">
+                                        <span className="mr-3 text-xl">💡</span>
+                                        "Next, Query our Solution"
+                                    </p>
+                                    <p className="flex items-center justify-center">
+                                        <span className="mr-3 text-xl">👨‍💻</span>
+                                        대표: Augustine Kim
+                                    </p>
+                                    <p className="flex items-center justify-center">
+                                        <span className="mr-3 text-xl">📧</span>
+                                        contact@nqsolution.com
+                                    </p>
+                                    <p className="flex items-center justify-center">
+                                        <span className="mr-3 text-xl">📱</span>
+                                        010-XXXX-XXXX
+                                    </p>
+                                    <p className="flex items-center justify-center">
+                                        <span className="mr-3 text-xl">🌐</span>
+                                        www.nqsolution.com
+                                    </p>
+                                    <p className="flex items-center justify-center">
+                                        <span className="mr-3 text-xl">📍</span>
+                                        서울특별시 강남구
+                                    </p>
                                 </div>
-                                <div>
-                                    <label className="block">연락처 (선택):</label>
-                                    <input className="w-full border p-2 rounded" type="text" placeholder="010-1234-5678" />
+
+                                <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-xl">
+                                    <div className="w-32 h-32 mx-auto bg-white rounded-lg flex items-center justify-center">
+                                        <span className="text-gray-900 text-sm">QR Code</span>
+                                    </div>
                                 </div>
-                                {/* 추가 입력 필드 생략 */}
-                                <button type="submit" className="mt-4 px-6 py-3 bg-blue-600 text-white rounded">
-                                    Submit
-                                </button>
-                            </form>
+
+                                <div className="mt-6 flex justify-center gap-3">
+                                    <button className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all">
+                                        💾 저장
+                                    </button>
+                                    <button className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all">
+                                        📤 공유
+                                    </button>
+                                    <button className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all">
+                                        📄 vCard
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                {/* 4. 다양한 연락 방법 섹션 */}
-                <section id="channels" className="py-16 px-8">
-                    <h2 className="text-3xl font-bold text-center">가장 편한 방법으로 연락하세요</h2>
-                    <p className="mt-2 text-center">4가지 소통 채널로 언제든 접근 가능</p>
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Email */}
-                        <div className="p-6 bg-white/50 dark:bg-gray-700/50 rounded-lg shadow">
-                            <h3 className="text-xl font-semibold">📧 이메일 상담</h3>
-                            <p className="mt-2 italic">자세하고 체계적인 상담</p>
-                            <ul className="mt-2 list-disc list-inside space-y-1">
-                                <li>24시간 이내 상세 답변 보장</li>
-                                <li>포트폴리오 및 견적서 함께 제공</li>
-                                <li>모든 내용이 기록으로 남음</li>
-                            </ul>
-                            <button className="mt-4 px-4 py-2 border rounded">이메일하기</button>
-                        </div>
-                        {/* Phone */}
-                        <div className="p-6 bg-white/50 dark:bg-gray-700/50 rounded-lg shadow">
-                            <h3 className="text-xl font-semibold">📞 전화 상담</h3>
-                            <p className="mt-2 italic">즉시 해결, 빠른 소통</p>
-                            <ul className="mt-2 list-disc list-inside space-y-1">
-                                <li>평일 09:00-18:00 실시간 상담</li>
-                                <li>주말/공휴일 응급 상담 가능</li>
-                                <li>복잡한 내용도 대화로 쉽게 해결</li>
-                            </ul>
-                            <button className="mt-4 px-4 py-2 border rounded">전화걸기</button>
-                        </div>
-                        {/* Chat */}
-                        <div className="p-6 bg-white/50 dark:bg-gray-700/50 rounded-lg shadow">
-                            <h3 className="text-xl font-semibold">💬 실시간 채팅</h3>
-                            <p className="mt-2 italic">간단한 궁금증 즉시 해결</p>
-                            <ul className="mt-2 list-disc list-inside space-y-1">
-                                <li>@nqsolution</li>
-                                <li>평일 실시간 응답 (평균 5분 이내)</li>
-                                <li>빠른 확인에 최적화</li>
-                            </ul>
-                            <button className="mt-4 px-4 py-2 border rounded">채팅시작</button>
-                        </div>
-                        {/* Offline */}
-                        <div className="p-6 bg-white/50 dark:bg-gray-700/50 rounded-lg shadow">
-                            <h3 className="text-xl font-semibold">🏢 오프라인 미팅</h3>
-                            <p className="mt-2 italic">직접 만나는 진솔한 대화</p>
-                            <ul className="mt-2 list-disc list-inside space-y-1">
-                                <li>서울 강남구 NQ Solution 사무실</li>
-                                <li>고객사 직접 방문 상담 가능</li>
-                                <li>사전 예약 필수 (2일 전)</li>
-                            </ul>
-                            <button className="mt-4 px-4 py-2 border rounded">미팅예약</button>
-                        </div>
-                    </div>
-                    <p className="mt-6 text-center">
-                        🤔 아이디어 단계 → 💬 채팅상담&nbsp;|&nbsp;
-                        📋 구체적 계획 → 📧 이메일상담&nbsp;|&nbsp;
-                        ⚡ 급한 문의 → 📞 전화상담&nbsp;|&nbsp;
-                        🎯 중요한 프로젝트 → 🏢 오프라인미팅
-                    </p>
-                </section>
+                {/* Terminal Style Contact Form */}
+                <section
+                    id="terminal-form"
+                    data-animate
+                    className={`py-20 transition-all duration-1000 ${isVisible['terminal-form'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
+                >
+                    <div className="max-w-3xl mx-auto">
+                        <div className="bg-gray-900 dark:bg-black rounded-2xl shadow-2xl overflow-hidden">
+                            {/* Terminal Header */}
+                            <div className="bg-gray-800 dark:bg-gray-900 px-4 py-2 flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                <span className="text-gray-400 text-sm font-mono">contact@nqsolution</span>
+                            </div>
 
-                {/* 5. 문의 가이드 섹션 */}
-                <section id="inquiry-guide" className="py-16 px-8 bg-light-surface dark:bg-dark-surface">
-                    <h2 className="text-3xl font-bold text-center">더 나은 상담을 위한 가이드</h2>
-                    <p className="mt-2 text-center text-lg">미리 준비하시면 더 정확하고 빠른 상담이 가능합니다</p>
-                    <div className="mt-8 max-w-3xl mx-auto space-y-6">
-                        {/* 체크리스트 */}
-                        {[
-                            {
-                                title: '🎯 프로젝트 목적 파악',
-                                question: 'Q: 왜 이 프로젝트가 필요한가요?',
-                                tips: [
-                                    '해결하려는 문제가 무엇인지',
-                                    '어떤 결과를 기대하는지',
-                                    '성공의 기준은 무엇인지',
-                                ],
-                            },
-                            {
-                                title: '👥 타겟 사용자 정의',
-                                question: 'Q: 누가 사용할 서비스인가요?',
-                                tips: [
-                                    '주 사용자의 연령대, 성별, 직업',
-                                    '사용자의 기술 수준',
-                                    '모바일 vs 데스크톱 선호도',
-                                ],
-                            },
-                            {
-                                title: '🔍 참고 자료 준비',
-                                question: 'Q: 어떤 스타일을 원하시나요?',
-                                tips: [
-                                    '마음에 드는 사이트/앱 3-5개',
-                                    '원하는 색상이나 느낌',
-                                    '피하고 싶은 디자인 스타일',
-                                ],
-                            },
-                            {
-                                title: '⚙️ 필수 기능 정리',
-                                question: 'Q: 꼭 필요한 기능은 무엇인가요?',
-                                tips: [
-                                    '핵심 기능 vs 부가 기능 구분',
-                                    '1단계, 2단계 기능 우선순위',
-                                    '유사 서비스 대비 차별점',
-                                ],
-                            },
-                            {
-                                title: '💰 예산과 일정 계획',
-                                question: 'Q: 언제까지 얼마의 예산으로?',
-                                tips: [
-                                    '현실적인 예산 범위 설정',
-                                    '런칭 희망 일정',
-                                    '단계별 개발 가능 여부',
-                                ],
-                            },
-                            {
-                                title: '🔗 연동 시스템 확인',
-                                question: 'Q: 기존 시스템과 연동이 필요한가요?',
-                                tips: [
-                                    '현재 사용 중인 프로그램들',
-                                    '데이터 이전 필요 여부',
-                                    '제3자 서비스 연동 필요성',
-                                ],
-                            },
-                        ].map((item) => (
-                            <details key={item.title} className="bg-white/50 dark:bg-gray-700/50 p-4 rounded-lg">
-                                <summary className="font-semibold cursor-pointer">{item.title}</summary>
-                                <p className="mt-2">{item.question}</p>
-                                <ul className="mt-2 list-disc list-inside space-y-1">
-                                    {item.tips.map((tip) => <li key={tip}>{tip}</li>)}
-                                </ul>
-                            </details>
-                        ))}
-                    </div>
+                            {/* Terminal Body */}
+                            <div className="p-6 font-mono text-green-400">
+                                <div className="mb-4 space-y-1">
+                                    {terminalHistory.map((line, idx) => (
+                                        <p key={idx}>{line}</p>
+                                    ))}
+                                </div>
 
-                    {/* FAQ */}
-                    <div className="mt-12 max-w-3xl mx-auto">
-                        <h3 className="text-2xl font-bold mb-4">자주 묻는 질문</h3>
-                        {[
-                            { q: '견적은 어떻게 받을 수 있나요?', a: '무료 상담 후 1-2일 내 맞춤 견적서를 제공합니다. 정확한 견적을 위해 체크리스트를 참고해 주세요.' },
-                            { q: '개발 기간은 얼마나 걸리나요?', a: '프로젝트 규모에 따라 2주~3개월이며, 평균 6-8주입니다. 복잡도와 기능 수에 따라 달라집니다.' },
-                            { q: '중간에 수정이 가능한가요?', a: '각 단계별 피드백을 받아 수정합니다. 기획 단계: 무제한 수정 / 개발 단계: 3회 무료 수정' },
-                            { q: '유지보수는 어떻게 되나요?', a: '런칭 후 1개월 무료 지원 제공, 이후 월/연 단위 유지보수 계약 가능합니다.' },
-                            { q: '디자인도 함께 해주시나요?', a: 'UI/UX 디자인부터 개발까지 원스톱 서비스 제공합니다. 디자인 시안은 3안까지 제시해드립니다.' },
-                            { q: '모바일 최적화는 기본인가요?', a: '모든 프로젝트에서 반응형 웹을 기본으로 제공합니다. 모바일 우선 설계로 최적의 사용자 경험을 보장합니다.' },
-                        ].map((item) => (
-                            <details key={item.q} className="mt-2 bg-white/50 dark:bg-gray-700/50 p-4 rounded-lg">
-                                <summary className="font-semibold cursor-pointer">{item.q}</summary>
-                                <p className="mt-2">{item.a}</p>
-                            </details>
-                        ))}
+                                <div className="space-y-4">
+                                    <div className="space-y-2">
+                                        <p className="text-gray-400">> Enter your name:</p>
+                                        <div className="flex items-center">
+                                            <span className="mr-2">$</span>
+                                            <input
+                                                type="text"
+                                                value={formData.name}
+                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                className="flex-1 bg-transparent border-b border-green-400 outline-none text-white"
+                                                placeholder="John Doe"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="text-gray-400">> Enter your email:</p>
+                                        <div className="flex items-center">
+                                            <span className="mr-2">$</span>
+                                            <input
+                                                type="email"
+                                                value={formData.email}
+                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                className="flex-1 bg-transparent border-b border-green-400 outline-none text-white"
+                                                placeholder="john@example.com"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="text-gray-400">> Select project type:</p>
+                                        <div className="space-y-1 ml-4">
+                                            {['Web Development', 'Mobile App', 'Full Platform', 'Technical Consulting'].map((type) => (
+                                                <div key={type} className="flex items-center cursor-pointer hover:text-green-300">
+                                                    <input
+                                                        type="radio"
+                                                        name="projectType"
+                                                        value={type}
+                                                        onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                                                        className="mr-2"
+                                                    />
+                                                    <span>{type}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <p className="text-gray-400">> Project description:</p>
+                                        <div className="flex items-start">
+                                            <span className="mr-2 mt-1">$</span>
+                                            <textarea
+                                                value={formData.message}
+                                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                                className="flex-1 bg-transparent border border-green-400 rounded p-2 outline-none text-white min-h-[100px]"
+                                                placeholder="Tell us about your project..."
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center space-x-4 mt-6">
+                                        <button
+                                            onClick={() => console.log('Submit:', formData)}
+                                            className="px-6 py-2 bg-green-500 text-black font-bold rounded hover:bg-green-400 transition-colors"
+                                        >
+                                            [Submit]
+                                        </button>
+                                        <button
+                                            onClick={() => setFormData({ name: '', email: '', phone: '', projectType: '', budget: '', message: '', timeline: '' })}
+                                            className="px-6 py-2 border border-green-500 text-green-500 rounded hover:bg-green-500 hover:text-black transition-all"
+                                        >
+                                            [Clear]
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <p className="mt-4 text-gray-400 text-sm">Type 'help' for available commands_</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                {/* 6. 선택 이유 섹션 */}
-                <section id="reasons" className="py-16 px-8">
-                    <h2 className="text-3xl font-bold text-center">왜 NQ Solution을 선택해야 할까요?</h2>
-                    <p className="mt-2 text-center text-lg">5가지 명확한 이유가 있습니다</p>
-                    <div className="mt-8 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[
-                            {
-                                title: '🚀 압도적인 속도',
-                                desc: '24시간 답변, 48시간 프로토타입 (애자일 방식으로 빠른 개발 진행)',
-                                example: 'A사 홈페이지, 상담 후 3일 만에 초안 완성',
-                            },
-                            {
-                                title: '🎯 완전 맞춤형 솔루션',
-                                desc: '템플릿 사용 없이 100% 맞춤 개발 (비즈니스 모델 완벽 반영)',
-                                example: '업종별 차별화된 설계 제공',
-                            },
-                            {
-                                title: '💰 투명하고 합리적 가격',
-                                desc: '숨겨진 비용 Zero, 단계별 상세 견적 제공',
-                                example: '초기 견적=최종 견적, 추가 비용 없음',
-                            },
-                            {
-                                title: '🤝 평생 파트너십',
-                                desc: '런칭 후 1개월 무료 지원 및 장기적 호환 유지',
-                                example: '5년 후에도 함께하는 고객들',
-                            },
-                            {
-                                title: '📊 검증된 기술력',
-                                desc: 'React, Next.js, Python 등 최신 스택 사용',
-                                example: '안정적이고 확장 가능한 시스템 제공',
-                            },
-                        ].map((item) => (
-                            <div key={item.title} className="bg-white/50 dark:bg-gray-700/50 p-6 rounded-lg">
-                                <h3 className="font-semibold mb-1">{item.title}</h3>
-                                <p>{item.desc}</p>
-                                <p className="mt-2 italic">{item.example}</p>
+                {/* Contact Channels */}
+                <section
+                    id="channels"
+                    data-animate
+                    className={`py-20 transition-all duration-1000 ${isVisible.channels ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
+                >
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                            가장 편한 방법으로 연락하세요
+                        </h2>
+                        <p className="text-xl text-gray-600 dark:text-gray-400">
+                            4가지 소통 채널로 언제든 접근 가능합니다
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        {contactChannels.map((channel, index) => (
+                            <div
+                                key={channel.title}
+                                className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                                style={{ animationDelay: `${index * 100}ms` }}
+                            >
+                                <div className="p-8">
+                                    <div className="text-5xl mb-4">{channel.icon}</div>
+                                    <h3 className="text-2xl font-bold mb-2">{channel.title}</h3>
+                                    <p className="text-gray-600 dark:text-gray-400 italic mb-4">{channel.subtitle}</p>
+
+                                    <ul className="space-y-2 mb-6">
+                                        {channel.features.map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <span className="text-green-500 mr-2 mt-1">✓</span>
+                                                <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg mb-4">
+                                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                                            💡 Best for: {channel.best}
+                                        </p>
+                                    </div>
+
+                                    <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all transform hover:scale-105">
+                                        {channel.action}
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
-                </section>
 
-                {/* 7. 최종 CTA 섹션 */}
-                <section id="final-cta" className="py-16 px-8 bg-light-surface dark:bg-dark-surface text-center">
-                    <h2 className="text-3xl font-bold">지금이 바로 시작할 때입니다</h2>
-                    <div className="mt-6 max-w-3xl mx-auto p-6 bg-white/50 dark:bg-gray-700/50 rounded-lg space-y-4">
-                        <p>
-                            세상을 바꿀 아이디어가 있으시다면,<br />
-                            NQ Solution이 그 아이디어를 현실로 만들어드리겠습니다.
+                    <div className="mt-12 p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl text-center max-w-4xl mx-auto">
+                        <p className="text-lg">
+                            <span className="font-semibold">상황별 추천 채널</span><br />
+                            🤔 아이디어 단계 → 💬 채팅상담 |
+                            📋 구체적 계획 → 📧 이메일상담 |
+                            ⚡ 급한 문의 → 📞 전화상담 |
+                            🎯 중요 프로젝트 → 🏢 오프라인 미팅
                         </p>
-                        <p>
-                            💭 '언젠가는 해야지'라고 생각하고 계신가요?<br />
-                            ⏰ 그 '언젠가'가 바로 지금입니다.
-                        </p>
-                        <p>망설이는 시간도 비용입니다. 다음 단계로 나아갈 준비가 되셨다면, 지금 바로 연락하세요!</p>
-                        <p className="font-semibold">⚡ 이번 달 상담 신청 시 특별 혜택: 프로젝트 기획서 무료 제작 · 경쟁사 분석 리포트 제공 · 기술 컨설팅 1회 무료 (월 10팀 한정)</p>
-                        <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded hover:shadow-lg transition-shadow">
-                            Next, Query our Solution!
-                        </button>
                     </div>
                 </section>
+
+                {/* Inquiry Guide */}
+                <section
+                    id="inquiry-guide"
+                    data-animate
+                    className={`py-20 bg-gray-100/50 dark:bg-gray-800/30 rounded-3xl transition-all duration-1000 ${isVisible['inquiry-guide'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
+                >
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                            더 나은 상담을 위한 가이드
+                        </h2>
+                        <p className="text-xl text-gray-600 dark:text-gray-400">
+                            미리 준비하시면 더 정확하고 빠른 상담이 가능합니다
+                        </p>
+                    </div>
+
+                    <div className="max-w-4xl mx-auto">
+                        {/* Checklist */}
+                        <div className="space-y-4 mb-12">
+                            {checklistItems.map((item, index) => (
+                                <details
+                                    key={item.title}
+                                    className="group bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all"
+                                >
+                                    <summary className="p-6 cursor-pointer flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors rounded-xl">
+                                        <div className="flex items-center">
+                                            <span className="text-3xl mr-4">{item.icon}</span>
+                                            <div>
+                                                <h4 className="text-xl font-semibold">{item.title}</h4>
+                                                <p className="text-gray-600 dark:text-gray-400">{item.question}</p>
+                                            </div>
+                                        </div>
+                                        <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                                    </summary>
+                                    <div className="px-6 pb-6 space-y-2">
+                                        {item.tips.map((tip) => (
+                                            <p key={tip} className="flex items-start ml-12">
+                                                <span className="text-blue-600 mr-2">→</span>
+                                                <span className="text-gray-700 dark:text-gray-300">{tip}</span>
+                                            </p>
+                                        ))}
+                                    </div>
+                                </details>
+                            ))}
+                        </div>
+
+                        {/* FAQ */}
+                        <div>
+                            <h3 className="text-2xl font-bold mb-6 text-center">자주 묻는 질문</h3>
+                            <div className="space-y-3">
+                                {faqs.map((faq) => (
+                                    <details
+                                        key={faq.q}
+                                        className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all"
+                                    >
+                                        <summary className="p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors rounded-xl font-semibold">
+                                            {faq.q}
+                                        </summary>
+                                        <div className="px-5 pb-5 text-gray-700 dark:text-gray-300">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Final CTA */}
+                <section
+                    id="final-cta"
+                    data-animate
+                    className={`py-20 mb-20 transition-all duration-1000 ${isVisible['final-cta'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                        }`}
+                >
+                    <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white text-center">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                            지금이 바로 시작할 때입니다
+                        </h2>
+
+                        <div className="max-w-3xl mx-auto space-y-6">
+                            <p className="text-xl">
+                                세상을 바꿀 아이디어가 있으시다면,<br />
+                                NQ Solution이 그 아이디어를 현실로 만들어드리겠습니다.
+                            </p>
+
+                            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                                <p className="text-2xl mb-4">
+                                    💭 '언젠가는 해야지'라고 생각하고 계신가요?
+                                </p>
+                                <p className="text-3xl font-bold">
+                                    ⏰ 그 '언젠가'가 바로 지금입니다!
+                                </p>
+                            </div>
+
+                            <p className="text-lg">
+                                망설이는 시간도 비용입니다.<br />
+                                다음 단계로 나아갈 준비가 되셨다면, 지금 바로 연락하세요!
+                            </p>
+
+                            <div className="bg-yellow-400/20 backdrop-blur-sm rounded-xl p-6 text-left">
+                                <p className="font-bold text-xl mb-2">⚡ 이번 달 특별 혜택</p>
+                                <ul className="space-y-1">
+                                    <li>• 프로젝트 기획서 무료 제작</li>
+                                    <li>• 경쟁사 분석 리포트 제공</li>
+                                    <li>• 기술 컨설팅 1회 무료</li>
+                                </ul>
+                                <p className="text-sm mt-2 opacity-80">* 월 10팀 한정</p>
+                            </div>
+
+                            <button className="px-10 py-5 bg-white text-blue-600 rounded-xl text-xl font-bold hover:shadow-2xl transition-all transform hover:scale-105">
+                                Next, Query our Solution! →
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Floating Contact Button */}
+                <div className="fixed bottom-8 right-8 z-50">
+                    <button className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110">
+                        <span className="absolute -top-12 right-0 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            빠른 상담
+                        </span>
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </main>
     )

@@ -19,9 +19,11 @@ function InnerApp({ Component, pageProps }: AppProps) {
   }, [setTheme])
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <div className={theme}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </div>
   )
 }
 
@@ -31,6 +33,8 @@ function App(props: AppProps) {
       attribute="class"
       enableSystem={false}
       defaultTheme="light"
+      enableSystem={true}
+      disableTransitionOnChange={false}
     >
       <InnerApp {...props} />
     </ThemeProvider>
