@@ -34,7 +34,7 @@
     "**/*.tsx",
     "**/*.d.ts",
     "next-i18next.config.js",
-    "src/components/Layout.tsx"
+    "src/components/Draft/Layoutdraft.tsx"
   ],
   "exclude": [
     "node_modules"

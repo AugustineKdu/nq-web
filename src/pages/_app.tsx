@@ -1,44 +1,44 @@
 // src/pages/_app.tsx
-'use client'
+'use client';
 
-import '@/styles/globals.css'
-import { AppProps } from 'next/app'
-import { ThemeProvider, useTheme } from 'next-themes'
-import { appWithTranslation } from 'next-i18next'
-import nextI18NextConfig from '../../next-i18next.config.js'
-import Layout from '@/components/Layout'
-import { useEffect } from 'react'
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
+import { ThemeProvider, useTheme } from 'next-themes';
+import { appWithTranslation } from 'next-i18next';
+import nextI18NextConfig from '../../next-i18next.config.js';
+import Layout from '@/components/Layout';
+import { useEffect } from 'react';
 
 function InnerApp({ Component, pageProps }: AppProps) {
-  const { theme, setTheme, systemTheme } = useTheme()
+  const { setTheme } = useTheme();
 
-  // 마운트 직후 저장된 테마가 없으면 라이트 모드로 초기화
+  // 마운트 후 저장된 테마가 없으면 라이트 모드 초기화
   useEffect(() => {
-    const stored = localStorage.getItem('theme')
-    if (!stored) setTheme('light')
-  }, [setTheme])
+    const stored = localStorage.getItem('theme');
+    if (!stored) setTheme('light');
+  }, [setTheme]);
+
+  // 페이지별 title prop 전달 (없으면 Layout의 기본값 사용)
+  const title = (Component as any).pageTitle ?? 'NQ Solution';
 
   return (
-    <div className={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </div>
-  )
+    <Layout title={title}>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
 function App(props: AppProps) {
   return (
     <ThemeProvider
       attribute="class"
-      enableSystem={false}
       defaultTheme="light"
-      enableSystem={true}
+      enableSystem={false}
       disableTransitionOnChange={false}
     >
       <InnerApp {...props} />
     </ThemeProvider>
-  )
+  );
 }
 
-export default appWithTranslation(App, nextI18NextConfig)
+export default appWithTranslation(App, nextI18NextConfig);
