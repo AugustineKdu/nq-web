@@ -4,34 +4,47 @@ module.exports = {
     content: [
         './src/pages/**/*.{js,ts,jsx,tsx}',
         './src/components/**/*.{js,ts,jsx,tsx}',
-        // src/app 폴더를 쓰지 않는다면, 이 라인을 지워도 무방합니다.
         './src/app/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
         extend: {
             colors: {
-                // 라이트/다크 팔레트 예시. 필요에 따라 수정하세요.
+                // NQ Solution 특화 색상
+                nq: {
+                    blue600: '#2563eb',
+                    purple600: '#9333ea',
+                    teal400: '#2dd4bf',
+                    darkBlue: '#000000',      // 완전 검은색
+                    deepBlue: '#0a0a0a',      // 아주 진한 회색
+                    blue900: '#1e3a8a',
+                    green500: '#22c55e',
+                },
+                // 라이트/다크 팔레트
                 light: {
-                    primary: '#2563EB',
-                    secondary: '#10B981',
-                    accent: '#F59E0B',
-                    background: '#FFFFFF',
-                    surface: '#F8FAFC',
-                    textPrimary: '#1E293B',
-                    textSecondary: '#64748B',
+                    primary: '#2563eb',      // Blue 600
+                    secondary: '#f3f3f7',
+                    accent: '#e9ebef',
+                    background: '#ffffff',
+                    surface: '#f8fafc',
+                    textPrimary: '#030213',
+                    textSecondary: '#717182',
+                    muted: '#ececf0',
+                    destructive: '#d4183d',
                 },
                 dark: {
-                    primary: '#3B82F6',
-                    secondary: '#34D399',
-                    accent: '#FBBF24',
-                    background: '#0F172A',
-                    surface: '#1E293B',
-                    textPrimary: '#F1F5F9',
-                    textSecondary: '#94A3B8',
-                    gradientStart: '#1E40AF',
-                    gradientEnd: '#7C3AED',
+                    primary: '#fcfcfc',
+                    secondary: '#1a1a1a',
+                    accent: '#262626',
+                    background: '#000000',
+                    surface: '#0a0a0a',
+                    textPrimary: '#ffffff',
+                    textSecondary: '#a3a3a3',
+                    muted: '#171717',
+                    destructive: '#7d2d33',
+                    gradientStart: '#2563eb',
+                    gradientEnd: '#9333ea',
                 },
-                // 공통 색상(예: 팔레트 50~900까지)
+                // 공통 색상 팔레트
                 primary: {
                     50: '#eff6ff',
                     100: '#dbeafe',

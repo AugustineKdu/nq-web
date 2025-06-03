@@ -18,11 +18,8 @@ function InnerApp({ Component, pageProps }: AppProps) {
     if (!stored) setTheme('light');
   }, [setTheme]);
 
-  // 페이지별 title prop 전달 (없으면 Layout의 기본값 사용)
-  const title = (Component as any).pageTitle ?? 'NQ Solution';
-
   return (
-    <Layout title={title}>
+    <Layout>
       <Component {...pageProps} />
     </Layout>
   );
