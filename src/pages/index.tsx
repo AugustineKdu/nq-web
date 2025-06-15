@@ -58,22 +58,12 @@ const HomePage: NextPage = () => {
                 최신 기술과 창의적인 아이디어를 결합하여 최적의 디지털 솔루션을 제공합니다.
               </p>
               <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-4xl font-bold gradient-text mb-2">50+</h3>
-                  <p className="text-gray-600 dark:text-gray-400">완료된 프로젝트</p>
-                </div>
-                <div>
-                  <h3 className="text-4xl font-bold gradient-text mb-2">98%</h3>
-                  <p className="text-gray-600 dark:text-gray-400">고객 만족도</p>
-                </div>
+
                 <div>
                   <h3 className="text-4xl font-bold gradient-text mb-2">24/7</h3>
                   <p className="text-gray-600 dark:text-gray-400">지속적인 지원</p>
                 </div>
-                <div>
-                  <h3 className="text-4xl font-bold gradient-text mb-2">5년+</h3>
-                  <p className="text-gray-600 dark:text-gray-400">업계 경험</p>
-                </div>
+
               </div>
             </div>
             <div className="relative">

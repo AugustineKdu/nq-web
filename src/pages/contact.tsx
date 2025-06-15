@@ -2,12 +2,27 @@ import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-const ContactPage: NextPage = () => {
-    const [activeMethod, setActiveMethod] = useState('email');
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
-    const [copyMessage, setCopyMessage] = useState('');
+interface ContactMethod {
+    id: string;
+    icon: string;
+    title: string;
+    subtitle: string;
+    features: string[];
+    action: string;
+    best: string;
+}
 
-    const contactMethods = [
+interface FAQ {
+    question: string;
+    answer: string;
+}
+
+const ContactPage: NextPage = () => {
+    const [activeMethod, setActiveMethod] = useState<string>('email');
+    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [copyMessage, setCopyMessage] = useState<string>('');
+
+    const contactMethods: ContactMethod[] = [
         {
             id: 'email',
             icon: '📧',
@@ -37,7 +52,7 @@ const ContactPage: NextPage = () => {
         }
     ];
 
-    const faqs = [
+    const faqs: FAQ[] = [
         {
             question: '견적은 어떻게 받을 수 있나요?',
             answer: '무료 상담 후 1-2일 내에 상세한 맞춤 견적서를 제공합니다. 프로젝트 규모와 요구사항에 따라 정확한 비용을 산정해드립니다.'
@@ -56,7 +71,7 @@ const ContactPage: NextPage = () => {
         }
     ];
 
-    const copyToClipboard = async (text: string, type: string) => {
+    const copyToClipboard = async (text: string, type: string): Promise<void> => {
         try {
             await navigator.clipboard.writeText(text);
             setCopyMessage(`${type}이(가) 복사되었습니다!`);
@@ -66,7 +81,7 @@ const ContactPage: NextPage = () => {
         }
     };
 
-    const handleContactAction = (method: any) => {
+    const handleContactAction = (method: ContactMethod): void => {
         if (method.id === 'email') {
             copyToClipboard(method.action, '이메일');
         } else if (method.id === 'call') {
@@ -80,11 +95,12 @@ const ContactPage: NextPage = () => {
         <>
             <Head>
                 <title>문의하기 - NQ Solution</title>
+                <meta name="description" content="NQ Solution에 프로젝트를 문의하세요. 이메일, 전화, 카카오톡으로 상담 가능합니다." />
             </Head>
 
-            {/* Copy Message */}
+            {/* Copy Message Toast */}
             {copyMessage && (
-                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in">
                     {copyMessage}
                 </div>
             )}
@@ -98,7 +114,9 @@ const ContactPage: NextPage = () => {
                             당신의 아이디어를<br />
                             <span className="gradient-text">현실로 만들 준비가 되었습니다</span>
                         </h1>
-                        <p className="text-2xl text-gray-600 dark:text-gray-300 mb-8">새로운 가능성의 시작, 지금 바로 연락하세요</p>
+                        <p className="text-2xl text-gray-600 dark:text-gray-300 mb-8">
+                            새로운 가능성의 시작, 지금 바로 연락하세요
+                        </p>
 
                         <div className="flex flex-wrap gap-4 justify-center mb-12">
                             <a href="mailto:contact@nqsolution.com" className="btn btn-primary">
@@ -113,40 +131,49 @@ const ContactPage: NextPage = () => {
                             <div className="card p-6 text-center">
                                 <span className="text-3xl mb-3 block">💬</span>
                                 <h3 className="text-lg mb-2">24시간 이내 답변</h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">빠른 응답으로 프로젝트 진행</p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    빠른 응답으로 프로젝트 진행
+                                </p>
                             </div>
                             <div className="card p-6 text-center">
                                 <span className="text-3xl mb-3 block">☕</span>
                                 <h3 className="text-lg mb-2">무료 상담 제공</h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">첫 상담은 부담 없이</p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    첫 상담은 부담 없이
+                                </p>
                             </div>
                             <div className="card p-6 text-center">
                                 <span className="text-3xl mb-3 block">🚀</span>
                                 <h3 className="text-lg mb-2">빠른 프로토타입</h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">아이디어를 신속하게 구현</p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    아이디어를 신속하게 구현
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Contact Methods */}
+            {/* Contact Methods Section */}
             <section className="section-padding bg-gray-50 dark:bg-gray-950">
                 <div className="container">
                     <div className="text-center mb-12">
                         <span className="badge">연락 방법</span>
                         <h2 className="mt-4 mb-4">가장 편한 방법으로 연락하세요</h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-300">3가지 소통 채널로 개발 상담을 받아보세요</p>
+                        <p className="text-xl text-gray-600 dark:text-gray-300">
+                            3가지 소통 채널로 개발 상담을 받아보세요
+                        </p>
                     </div>
 
                     <div className="max-w-4xl mx-auto">
+                        {/* Tab Navigation */}
                         <div className="flex flex-wrap justify-center gap-2 bg-gray-200 dark:bg-gray-900 p-1 rounded-xl mb-8">
                             {contactMethods.map(method => (
                                 <button
                                     key={method.id}
                                     className={`flex-1 min-w-fit px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeMethod === method.id
-                                        ? 'bg-white dark:bg-[#2563eb] text-gray-900 dark:text-white shadow'
-                                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                                            ? 'bg-white dark:bg-[#2563eb] text-gray-900 dark:text-white shadow'
+                                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                                         }`}
                                     onClick={() => setActiveMethod(method.id)}
                                 >
@@ -156,6 +183,7 @@ const ContactPage: NextPage = () => {
                             ))}
                         </div>
 
+                        {/* Tab Content */}
                         {contactMethods.map(method => {
                             if (activeMethod !== method.id) return null;
 
@@ -168,9 +196,13 @@ const ContactPage: NextPage = () => {
                                                     <span>{method.icon}</span>
                                                     {method.title}
                                                 </h3>
-                                                <p className="text-gray-600 dark:text-gray-300">{method.subtitle}</p>
+                                                <p className="text-gray-600 dark:text-gray-300">
+                                                    {method.subtitle}
+                                                </p>
                                             </div>
-                                            <span className="badge bg-white dark:bg-gray-900 text-gray-600 dark:text-[#2dd4bf]">추천 용도</span>
+                                            <span className="badge bg-white dark:bg-gray-900 text-gray-600 dark:text-[#2dd4bf]">
+                                                추천 용도
+                                            </span>
                                         </div>
                                     </div>
 
@@ -189,7 +221,9 @@ const ContactPage: NextPage = () => {
 
                                         <div>
                                             <h4 className="font-semibold mb-3">이럴 때 좋아요</h4>
-                                            <p className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">{method.best}</p>
+                                            <p className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                                {method.best}
+                                            </p>
                                         </div>
 
                                         <div>
@@ -202,7 +236,8 @@ const ContactPage: NextPage = () => {
                                                     className="btn btn-primary"
                                                     onClick={() => handleContactAction(method)}
                                                 >
-                                                    {method.id === 'call' ? '복사' : method.id === 'chat' ? '톡방 바로가기' : '복사'}
+                                                    {method.id === 'call' ? '복사' :
+                                                        method.id === 'chat' ? '톡방 바로가기' : '복사'}
                                                 </button>
                                             </div>
                                         </div>
@@ -214,13 +249,15 @@ const ContactPage: NextPage = () => {
                 </div>
             </section>
 
-            {/* 문의 안내 섹션 */}
+            {/* Inquiry Guide Section */}
             <section className="section-padding">
                 <div className="container">
                     <div className="text-center mb-12">
                         <span className="badge">문의 안내</span>
                         <h2 className="mt-4 mb-4">효과적인 문의 방법</h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-300">구체적인 정보를 제공해주실수록 더 정확하고 빠른 상담이 가능합니다</p>
+                        <p className="text-xl text-gray-600 dark:text-gray-300">
+                            구체적인 정보를 제공해주실수록 더 정확하고 빠른 상담이 가능합니다
+                        </p>
                     </div>
 
                     <div className="max-w-4xl mx-auto">
@@ -297,7 +334,7 @@ const ContactPage: NextPage = () => {
                 </div>
             </section>
 
-            {/* FAQ */}
+            {/* FAQ Section */}
             <section className="section-padding bg-gray-50 dark:bg-gray-950">
                 <div className="container">
                     <div className="text-center mb-12">
@@ -309,7 +346,7 @@ const ContactPage: NextPage = () => {
                         {faqs.map((faq, index) => (
                             <div key={index} className="card">
                                 <button
-                                    className="w-full p-6 text-left flex items-center justify-between"
+                                    className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                                 >
                                     <span className="font-medium">{faq.question}</span>
@@ -329,7 +366,10 @@ const ContactPage: NextPage = () => {
             </section>
 
             {/* Floating Action Button */}
-            <button className="fixed bottom-6 right-6 w-16 h-16 gradient-bg text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center">
+            <button
+                className="fixed bottom-6 right-6 w-16 h-16 gradient-bg text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
+                aria-label="채팅 상담"
+            >
                 💬
             </button>
         </>
