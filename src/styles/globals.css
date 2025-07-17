@@ -3,77 +3,249 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    html {
-        scroll-behavior: smooth;
+/* Font Import - Pretendard */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+
+/* Root Variables */
+:root {
+    --color-neutral: #0a0a0a;
+    --color-accent: #2563eb;
+    --color-bg: #fafafa;
+}
+
+html {
+    color-scheme: dark light;
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200;
+    font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-light tracking-tight text-neutral-800 dark:text-neutral-100;
+}
+
+/* Minimal Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
     }
 
-    body {
-        @apply text-gray-900 dark:text-white antialiased;
-    }
-
-    h1 {
-        @apply text-4xl md:text-5xl font-bold tracking-tight dark:text-white;
-    }
-
-    h2 {
-        @apply text-3xl md:text-4xl font-bold dark:text-white;
-    }
-
-    h3 {
-        @apply text-2xl font-semibold dark:text-white;
+    to {
+        opacity: 1;
     }
 }
 
-@layer components {
-    .container {
-        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
 
-    .btn {
-        @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black;
-    }
-
-    .btn-primary {
-        @apply bg-gradient-to-r from-[#2563eb] to-[#9333ea] text-white hover:shadow-lg hover:-translate-y-0.5 focus:ring-blue-500 dark:focus:ring-[#2563eb];
-    }
-
-    .btn-secondary {
-        @apply bg-white dark:bg-gray-900 text-gray-700 dark:text-white border-2 border-gray-300 dark:border-gray-700 hover:border-[#2563eb] dark:hover:border-[#2563eb] hover:text-[#2563eb] dark:hover:text-[#2563eb] focus:ring-gray-500 dark:focus:ring-[#2563eb];
-    }
-
-    .card {
-        @apply bg-white dark:bg-gray-900 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/20 overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/30 dark:border dark:border-gray-800;
-    }
-
-    .badge {
-        @apply inline-block px-3 py-1 text-sm font-medium rounded-full bg-[#2563eb]/10 text-[#2563eb] dark:bg-[#2563eb]/20 dark:text-[#2dd4bf];
-    }
-
-    .section-padding {
-        @apply py-16 md:py-24;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+/* Animation Classes */
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+}
+
+/* Buttons - Minimal Style */
+.btn {
+    @apply inline-flex items-center gap-3 px-6 py-3 text-sm tracking-wide uppercase transition-all duration-300;
+}
+
+.btn-primary {
+    @apply bg-neutral-800 text-white dark:bg-neutral-200 dark:text-neutral-900;
+    @apply hover:bg-neutral-700 dark:hover:bg-neutral-300;
+}
+
+.btn-outline {
+    @apply border border-neutral-700 dark:border-neutral-300 text-neutral-700 dark:text-neutral-200;
+    @apply hover:bg-neutral-700 hover:text-white dark:hover:bg-neutral-200 dark:hover:text-neutral-900;
+}
+
+/* Links */
+a {
+    @apply transition-colors duration-300;
+}
+
+/* Custom Scrollbar - Minimal */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 dark:bg-neutral-700;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400 dark:bg-neutral-600;
+}
+
+/* Selection */
+::selection {
+    @apply bg-neutral-700 text-white dark:bg-neutral-300 dark:text-neutral-900;
+}
+
+/* Focus States */
+*:focus {
+    @apply outline-none;
+}
+
+*:focus-visible {
+    @apply ring-1 ring-neutral-700 dark:ring-neutral-300 ring-offset-2 ring-offset-white dark:ring-offset-neutral-900;
+}
+
+/* Container */
+.container {
+    @apply max-w-6xl mx-auto px-8;
+}
+
+/* Section Spacing */
+.section {
+    @apply py-20 md:py-32;
+}
+
+/* Grid Pattern Background */
+.grid-pattern {
+    background-image:
+        linear-gradient(to right, currentColor 1px, transparent 1px),
+        linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* Line Dividers */
+.divider-h {
+    @apply w-full h-px bg-neutral-200 dark:bg-neutral-800;
+}
+
+.divider-v {
+    @apply w-px h-full bg-neutral-200 dark:bg-neutral-800;
+}
+
+/* Matte Surface Effect */
+.matte {
+    @apply bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-sm;
+}
+
+/* Typography Utilities */
+.text-balance {
+    text-wrap: balance;
+}
+
+/* Hover Underline Effect */
+.hover-underline {
+    @apply relative;
+}
+
+.hover-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500;
+}
+
+.hover-underline:hover::after {
+    @apply w-full;
+}
+
+/* Number Labels - 부드러운 대비 */
+.label-number {
+    @apply text-xs text-neutral-500 dark:text-neutral-400 tracking-wider;
+}
+
+/* Card Minimal */
+.card-minimal {
+    @apply bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700;
+    @apply hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors;
+}
+
+/* Responsive Text Sizes */
+.text-responsive-xl {
+    font-size: clamp(3rem, 10vw, 8rem);
+}
+
+.text-responsive-lg {
+    font-size: clamp(2rem, 8vw, 6rem);
+}
+
+.text-responsive-md {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Remove all gradients and complex effects for minimal design */
+.no-gradient {
+    background: none !important;
+    background-image: none !important;
+}
+
+/* Noise texture for matte effect */
+.noise-texture {
+    position: relative;
+}
+
+.noise-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* Transition utilities */
+.transition-slow {
+    @apply transition-all duration-700 ease-out;
+}
+
+.transition-medium {
+    @apply transition-all duration-500 ease-out;
+}
+
+.transition-fast {
+    @apply transition-all duration-300 ease-out;
+}
+
+/* Text Color Utilities - 부드러운 대비 */
 @layer utilities {
-    .gradient-text {
-        @apply bg-gradient-to-r from-[#2563eb] to-[#9333ea] bg-clip-text text-transparent;
+    .text-primary {
+        @apply text-neutral-800 dark:text-neutral-100;
     }
 
-    .gradient-bg {
-        @apply bg-gradient-to-r from-[#2563eb] to-[#9333ea];
+    .text-secondary {
+        @apply text-neutral-700 dark:text-neutral-200;
     }
 
-    /* NQ Solution 특화 그라디언트 */
-    .gradient-nq {
-        @apply bg-gradient-to-r from-nq-blue600 to-nq-purple600;
+    .text-tertiary {
+        @apply text-neutral-600 dark:text-neutral-300;
     }
 
-    .gradient-nq-text {
-        @apply bg-gradient-to-r from-nq-blue600 to-nq-purple600 bg-clip-text text-transparent;
+    .text-muted {
+        @apply text-neutral-500 dark:text-neutral-400;
     }
 
-    .gradient-nq-dark {
-        @apply bg-gradient-to-r from-nq-darkBlue to-nq-deepBlue;
+    .text-faint {
+        @apply text-neutral-400 dark:text-neutral-500;
     }
 }

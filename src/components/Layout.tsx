@@ -1,162 +1,156 @@
-// src/components/Layout.tsx
-import React, { useState } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useTheme } from 'next-themes';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import ThemeToggle from "./ThemeToggle";
+import { Bars3Icon as Menu, XMarkIcon as X } from "@heroicons/react/24/outline";
 
-interface LayoutProps {
-    children: React.ReactNode;
-    title?: string;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children, title = 'NQ Solution' }) => {
+const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => void }) => {
+    const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const router = useRouter();
-    const { theme, setTheme } = useTheme();
 
-    const navigation = [
-        { name: '홈', path: '/', icon: '🏠' },
-        { name: '포트폴리오', path: '/portfolio', icon: '🎨' },
-        { name: '서비스', path: '/services', icon: '⚙️' },
-        { name: '문의하기', path: '/contact', icon: '📞' },
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const navItems = [
+        { href: "/about", label: "About" },
+        { href: "/services", label: "Services" },
+        { href: "/portfolio", label: "Portfolio" },
+        { href: "/contact", label: "Contact" },
     ];
 
-    const isActive = (path: string) => router.pathname === path;
-
     return (
-        <>
-            <Head>
-                <title>{title}</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+            ? "bg-neutral-50/90 dark:bg-neutral-950/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+            : "bg-transparent"
+            }`}>
+            <div className="max-w-6xl mx-auto px-8">
+                <div className="flex justify-between items-center h-20">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-3">
+                        <div className="text-2xl font-light tracking-tight">
+                            <span className="text-neutral-900 dark:text-neutral-100">NQ</span>
+                        </div>
+                    </Link>
 
-            <div className="min-h-screen flex flex-col bg-white dark:bg-black text-gray-900 dark:text-white">
-                {/* Header */}
-                <header className="sticky top-0 z-40 w-full border-b bg-white/95 dark:bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/60 border-gray-200 dark:border-gray-800">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex h-16 items-center justify-between">
-                            {/* Logo */}
-                            <Link href="/" className="flex items-center">
-                                <span className="text-2xl font-bold bg-gradient-to-r from-[#2563eb] to-[#9333ea] bg-clip-text text-transparent">
-                                    NQ Solution
-                                </span>
-                            </Link>
-
-                            {/* Desktop Navigation */}
-                            <nav className="hidden md:flex items-center space-x-8">
-                                {navigation.map((item) => (
-                                    <Link
-                                        key={item.path}
-                                        href={item.path}
-                                        className={`text-sm font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#2dd4bf] ${isActive(item.path)
-                                            ? 'text-[#2563eb] dark:text-[#2dd4bf]'
-                                            : 'text-gray-600 dark:text-gray-400'
-                                            }`}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                ))}
-
-                                {/* Dark Mode Toggle */}
-                                <button
-                                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
-                                    aria-label="Toggle dark mode"
-                                >
-                                    {theme === 'dark' ? (
-                                        <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                                        </svg>
-                                    ) : (
-                                        <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                        </svg>
-                                    )}
-                                </button>
-                            </nav>
-
-                            {/* Mobile Menu Button */}
-                            <button
-                                className="md:hidden p-2 text-gray-600 dark:text-gray-300"
-                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex items-center gap-12">
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className={`relative text-sm tracking-wide uppercase transition-colors ${router.pathname === item.href
+                                    ? "text-neutral-900 dark:text-neutral-100"
+                                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                                    }`}
                             >
-                                <svg
-                                    className="h-6 w-6"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    {mobileMenuOpen ? (
-                                        <path d="M6 18L18 6M6 6l12 12" />
-                                    ) : (
-                                        <path d="M4 6h16M4 12h16M4 18h16" />
-                                    )}
-                                </svg>
-                            </button>
+                                {item.label}
+                                {router.pathname === item.href && (
+                                    <span className="absolute -bottom-2 left-0 right-0 h-px bg-neutral-900 dark:bg-neutral-100" />
+                                )}
+                            </Link>
+                        ))}
+
+                        <div className="flex items-center gap-6 ml-8">
+                            <ThemeToggle dark={dark} setDark={setDark} />
                         </div>
                     </div>
 
-                    {/* Mobile Menu */}
-                    {mobileMenuOpen && (
-                        <div className="md:hidden border-t dark:border-gray-800">
-                            <div className="space-y-1 px-4 pb-3 pt-2">
-                                {navigation.map((item) => (
-                                    <Link
-                                        key={item.path}
-                                        href={item.path}
-                                        className={`block px-3 py-2 rounded-md text-base font-medium ${isActive(item.path)
-                                            ? 'bg-blue-50 dark:bg-[#2563eb]/20 text-[#2563eb] dark:text-[#2dd4bf]'
-                                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-white'
-                                            }`}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                        <span className="mr-2">{item.icon}</span>
-                                        {item.name}
-                                    </Link>
-                                ))}
-
-                                {/* Mobile Dark Mode Toggle */}
-                                <button
-                                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                    className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-white flex items-center"
-                                >
-                                    <span className="mr-2">{theme === 'dark' ? '☀️' : '🌙'}</span>
-                                    {theme === 'dark' ? '라이트 모드' : '다크 모드'}
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </header>
-
-                {/* Main Content */}
-                <main className="flex-1">
-                    {children}
-                </main>
-
-                {/* Footer */}
-                <footer className="border-t bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                        <div className="flex flex-col md:flex-row justify-between items-center">
-                            <div className="mb-4 md:mb-0">
-                                <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    © 2025 NQ Solution. All rights reserved.
-                                </p>
-                            </div>
-                            <div className="flex items-center space-x-4">
-                                <Link href="/contact" className="text-sm text-gray-600 dark:text-gray-400 hover:text-[#2563eb] dark:hover:text-[#2dd4bf]">
-                                    contact@nqsolution.com
-                                </Link>
-                            </div>
-                        </div>
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden flex items-center gap-4">
+                        <ThemeToggle dark={dark} setDark={setDark} />
+                        <button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            className="p-2"
+                        >
+                            {mobileMenuOpen ? (
+                                <X className="w-6 h-6" />
+                            ) : (
+                                <Menu className="w-6 h-6" />
+                            )}
+                        </button>
                     </div>
-                </footer>
+                </div>
             </div>
-        </>
+
+            {/* Mobile Menu */}
+            <div className={`md:hidden absolute top-full left-0 right-0 bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+                }`}>
+                <div className="px-8 py-6 space-y-4">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className={`block text-sm tracking-wide uppercase ${router.pathname === item.href
+                                ? "text-neutral-900 dark:text-neutral-100"
+                                : "text-neutral-500 dark:text-neutral-400"
+                                }`}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </nav>
+    );
+};
+
+const Footer = () => {
+    return (
+        <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+            <div className="max-w-6xl mx-auto px-8 py-20">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                    {/* Brand */}
+                    <div className="md:col-span-2">
+                        <h3 className="text-2xl font-light tracking-tight mb-4">NQ SOLUTION</h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md">
+                            New idea를 더하고 Quick action으로 실행하여<br />
+                            솔루션을 제공합니다.
+                        </p>
+                    </div>
+
+                    {/* Quick Links */}
+
+                    {/* Contact */}
+                    <div>
+                        <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">Contact</h4>
+                        <ul className="space-y-2 text-sm">
+                            <li>hello@nqsolution.com</li>
+                            <li>+82 10-1234-5678</li>
+                            <li>Seoul, South Korea</li>
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                        © 2025 NQ Solution. All rights reserved.
+                    </p>
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                        Design & Development by NQ
+                    </p>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+const Layout = ({ children, dark, setDark }: { children: React.ReactNode, dark: boolean, setDark: (d: boolean) => void }) => {
+    return (
+        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+            <Navbar dark={dark} setDark={setDark} />
+            <main className="pt-20">
+                {children}
+            </main>
+            <Footer />
+        </div>
     );
 };
 

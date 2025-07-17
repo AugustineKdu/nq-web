@@ -1,41 +1,49 @@
 // src/pages/_app.tsx
 'use client';
 
-import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
-import { ThemeProvider, useTheme } from 'next-themes';
-import { appWithTranslation } from 'next-i18next';
-import nextI18NextConfig from '../../next-i18next.config.js';
-import Layout from '@/components/Layout';
-import { useEffect } from 'react';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import Layout from "../components/Layout";
+import React, { useEffect, useState } from "react";
 
-function InnerApp({ Component, pageProps }: AppProps) {
-  const { setTheme } = useTheme();
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const [dark, setDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // 마운트 후 저장된 테마가 없으면 라이트 모드 초기화
   useEffect(() => {
-    const stored = localStorage.getItem('theme');
-    if (!stored) setTheme('light');
-  }, [setTheme]);
+    setMounted(true);
+    // localStorage에서 테마 설정 불러오기
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setDark(savedTheme === 'dark');
+    } else {
+      // 시스템 테마 설정 확인
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDark(prefersDark);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      // 테마 변경 시 localStorage에 저장
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+
+      if (dark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    }
+  }, [dark, mounted]);
+
+  // 초기 렌더링 시 깜빡임 방지
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <Layout>
+    <Layout dark={dark} setDark={setDark}>
       <Component {...pageProps} />
     </Layout>
   );
 }
-
-function App(props: AppProps) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="light"
-      enableSystem={false}
-      disableTransitionOnChange={false}
-    >
-      <InnerApp {...props} />
-    </ThemeProvider>
-  );
-}
-
-export default appWithTranslation(App, nextI18NextConfig);
