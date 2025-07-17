@@ -68,7 +68,108 @@ export default function Contact() {
                 </div>
             </section>
 
+            {/* Contact Form */}
+            {/* <section className="py-20 px-8 bg-white dark:bg-neutral-900">
+                <div className="max-w-4xl mx-auto">
+                    <form onSubmit={handleSubmit} className="space-y-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div>
+                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
+                                    Name *
+                                </label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
+                                    placeholder="홍길동"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
+                                    Email *
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
+                                    placeholder="hello@company.com"
+                                />
+                            </div>
+                        </div>
 
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div>
+                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
+                                    Company
+                                </label>
+                                <input
+                                    type="text"
+                                    name="company"
+                                    value={formData.company}
+                                    onChange={handleChange}
+                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
+                                    placeholder="회사명"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
+                                    Project Type *
+                                </label>
+                                <select
+                                    name="project"
+                                    value={formData.project}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
+                                >
+                                    <option value="">선택하세요</option>
+                                    <option value="web">웹 개발</option>
+                                    <option value="app">앱 개발</option>
+                                    <option value="design">UI/UX 디자인</option>
+                                    <option value="consulting">컨설팅</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
+                                Message *
+                            </label>
+                            <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                required
+                                rows={6}
+                                className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors resize-none"
+                                placeholder="프로젝트에 대해 자세히 설명해주세요..."
+                            />
+                        </div>
+
+                        <div className="flex justify-between items-center pt-8">
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                                * 필수 항목
+                            </p>
+                            <button
+                                type="submit"
+                                className="group inline-flex items-center gap-4 text-lg"
+                            >
+                                <span className="relative">
+                                    Send Message
+                                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-neutral-900 dark:bg-neutral-100 group-hover:w-full transition-all duration-500" />
+                                </span>
+                                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section> */}
 
             {/* FAQ Section */}
             <section className="py-20 px-8">

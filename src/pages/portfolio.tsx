@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowRightIcon, ArrowTopRightOnSquareIcon as ExternalLink } from "@heroicons/react/24/outline";
+import { ArrowRight } from "lucide-react";
+import Link from 'next/link';
 
 interface Project {
     id: number;
@@ -112,8 +113,8 @@ export default function Portfolio() {
                                 key={filter.value}
                                 onClick={() => setActiveFilter(filter.value)}
                                 className={`text-sm uppercase tracking-wider transition-colors ${activeFilter === filter.value
-                                        ? 'text-neutral-900 dark:text-neutral-100'
-                                        : 'text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'
+                                    ? 'text-neutral-900 dark:text-neutral-100'
+                                    : 'text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'
                                     }`}
                             >
                                 {filter.label}
@@ -201,7 +202,7 @@ export default function Portfolio() {
                     <h2 className="text-4xl font-light mb-8">
                         다음 프로젝트를 함께 만들어볼까요?
                     </h2>
-                    <a
+                    <Link
                         href="/contact"
                         className="inline-flex items-center gap-4 text-lg group"
                     >
@@ -209,8 +210,8 @@ export default function Portfolio() {
                             Start a Project
                             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
                         </span>
-                        <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                    </a>
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                    </Link>
                 </div>
             </section>
 

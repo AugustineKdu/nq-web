@@ -152,10 +152,10 @@ export default function Services() {
             {/* CTA Section */}
             <section className="py-20 px-8 bg-neutral-900 dark:bg-black text-white">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h2 className="text-4xl font-light mb-8">
+                    <h2 className="text-4xl font-light text-neutral-200 mb-8">
                         어떤 서비스가 필요하신가요?
                     </h2>
-                    <p className="text-lg text-neutral-400 mb-12">
+                    <p className="text-lg text-neutral-200 mb-12">
                         프로젝트의 규모와 상관없이, 최선의 솔루션을 제공합니다.
                     </p>
                     <a
