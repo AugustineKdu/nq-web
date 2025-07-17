@@ -1,26 +1,13 @@
-import React, { useState } from "react";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import React from "react";
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        company: '',
-        project: '',
-        message: ''
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        alert('문의가 접수되었습니다. 24시간 내에 연락드리겠습니다.');
-    };
+    // const [formData, setFormData] = useState({
+    //     name: '',
+    //     email: '',
+    //     company: '',
+    //     project: '',
+    //     message: ''
+    // });
 
     return (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
@@ -32,7 +19,7 @@ export default function Contact() {
                             Contact Us
                         </p>
                         <h1 className="text-[clamp(3rem,8vw,6rem)] font-light leading-[0.9] tracking-tighter mb-8">
-                            Let's talk
+                            Let&apos;s talk
                         </h1>
                         <div className="w-full h-px bg-neutral-900 dark:bg-neutral-100" />
                     </div>
@@ -68,108 +55,7 @@ export default function Contact() {
                 </div>
             </section>
 
-            {/* Contact Form */}
-            {/* <section className="py-20 px-8 bg-white dark:bg-neutral-900">
-                <div className="max-w-4xl mx-auto">
-                    <form onSubmit={handleSubmit} className="space-y-12">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <div>
-                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
-                                    Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
-                                    placeholder="홍길동"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
-                                    Email *
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
-                                    placeholder="hello@company.com"
-                                />
-                            </div>
-                        </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <div>
-                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
-                                    Company
-                                </label>
-                                <input
-                                    type="text"
-                                    name="company"
-                                    value={formData.company}
-                                    onChange={handleChange}
-                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
-                                    placeholder="회사명"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
-                                    Project Type *
-                                </label>
-                                <select
-                                    name="project"
-                                    value={formData.project}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors"
-                                >
-                                    <option value="">선택하세요</option>
-                                    <option value="web">웹 개발</option>
-                                    <option value="app">앱 개발</option>
-                                    <option value="design">UI/UX 디자인</option>
-                                    <option value="consulting">컨설팅</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
-                                Message *
-                            </label>
-                            <textarea
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                rows={6}
-                                className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 pb-4 focus:border-neutral-900 dark:focus:border-neutral-100 outline-none transition-colors resize-none"
-                                placeholder="프로젝트에 대해 자세히 설명해주세요..."
-                            />
-                        </div>
-
-                        <div className="flex justify-between items-center pt-8">
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                                * 필수 항목
-                            </p>
-                            <button
-                                type="submit"
-                                className="group inline-flex items-center gap-4 text-lg"
-                            >
-                                <span className="relative">
-                                    Send Message
-                                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-neutral-900 dark:bg-neutral-100 group-hover:w-full transition-all duration-500" />
-                                </span>
-                                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section> */}
 
             {/* FAQ Section */}
             <section className="py-20 px-8">
@@ -180,7 +66,7 @@ export default function Contact() {
                         {[
                             {
                                 q: "프로젝트는 얼마나 걸리나요?",
-                                a: "프로젝트의 규모와 복잡도에 따라 다르지만, 일반적으로 웹사이트는 2-4주, 앱은 4-8주 정도 소요됩니다."
+                                a: "프로젝트의 규모와 복잡도에 따라 다르지만, 일반적으로 웹사이트는 1-2달, 앱은 4-8달 정도 소요됩니다. 기간은 초기 상담 후 구체적으로 안내해드립니다. 또한 프로젝트 크기에 따라 달라질수 있습니다"
                             },
                             {
                                 q: "비용은 어떻게 책정되나요?",

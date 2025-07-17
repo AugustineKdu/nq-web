@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import Link from 'next/link';
 
 export default function About() {
     return (
@@ -86,7 +87,7 @@ export default function About() {
             </section>
 
             {/* Team Section */}
-            <section className="py-20 px-8">
+            {/* <section className="py-20 px-8">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-16">
                         <h2 className="text-5xl font-light tracking-tight">Our Expertise</h2>
@@ -126,7 +127,7 @@ export default function About() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* CTA Section */}
             <section className="py-20 px-8 bg-neutral-900 dark:bg-black text-white">
@@ -140,7 +141,7 @@ export default function About() {
                                 당신의 아이디어에 NQ의 실행력을 더해보세요.
                             </p>
                         </div>
-                        <a
+                        <Link
                             href="/contact"
                             className="group inline-flex items-center gap-4 text-lg"
                         >
@@ -149,7 +150,7 @@ export default function About() {
                                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
                             </span>
                             <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>

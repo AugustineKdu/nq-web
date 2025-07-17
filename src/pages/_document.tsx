@@ -1,17 +1,14 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+// src/pages/_document.tsx
+import { Html, Head, Main, NextScript } from 'next/document'
 
-class MyDocument extends Document {
-  render() {
+export default function Document() {
     return (
-      <Html lang="ko">
-        <Head />
-        <body className="bg-light-background dark:bg-dark-background antialiased">
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+        <Html lang="ko">
+            <Head />
+            <body className="bg-light-background dark:bg-dark-background antialiased">
+                <Main />
+                <NextScript />
+            </body>
+        </Html>
+    )
 }
-
-export default MyDocument;

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import Link from 'next/link';
 
 export default function Services() {
-    const [hoveredService, setHoveredService] = useState<number | null>(null);
-
     const services = [
         {
             number: "01",
@@ -91,8 +90,6 @@ export default function Services() {
                             <div
                                 key={index}
                                 className="py-16 group cursor-pointer"
-                                onMouseEnter={() => setHoveredService(index)}
-                                onMouseLeave={() => setHoveredService(null)}
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                                     <div className="md:col-span-1">
@@ -158,7 +155,7 @@ export default function Services() {
                     <p className="text-lg text-neutral-200 mb-12">
                         프로젝트의 규모와 상관없이, 최선의 솔루션을 제공합니다.
                     </p>
-                    <a
+                    <Link
                         href="/contact"
                         className="inline-flex items-center gap-4 text-lg group"
                     >
@@ -167,7 +164,7 @@ export default function Services() {
                             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
                         </span>
                         <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                    </a>
+                    </Link>
                 </div>
             </section>
         </div>
