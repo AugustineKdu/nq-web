@@ -36,7 +36,7 @@ export default function About() {
                             <div className="space-y-12">
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Founded</p>
-                                    <p className="text-2xl font-light">2023</p>
+                                    <p className="text-2xl font-light">2025</p>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Location</p>
@@ -86,48 +86,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Team Section */}
-            {/* <section className="py-20 px-8">
-                <div className="max-w-6xl mx-auto">
-                    <div className="mb-16">
-                        <h2 className="text-5xl font-light tracking-tight">Our Expertise</h2>
-                    </div>
 
-                    <div className="space-y-px">
-                        {[
-                            {
-                                area: "Development",
-                                skills: "React, Next.js, TypeScript, Node.js, Flutter",
-                                percentage: "90"
-                            },
-                            {
-                                area: "Design",
-                                skills: "UI/UX, Branding, Motion, 3D Design",
-                                percentage: "85"
-                            },
-                            {
-                                area: "Strategy",
-                                skills: "Research, Planning, Analytics, Growth",
-                                percentage: "80"
-                            }
-                        ].map((expertise, i) => (
-                            <div key={i} className="group">
-                                <div className="flex items-center gap-8 py-8 border-b border-neutral-200 dark:border-neutral-800">
-                                    <h3 className="text-2xl font-light w-48">{expertise.area}</h3>
-                                    <p className="flex-1 text-neutral-600 dark:text-neutral-400">{expertise.skills}</p>
-                                    <p className="text-sm text-neutral-400 dark:text-neutral-600">{expertise.percentage}%</p>
-                                </div>
-                                <div className="h-px bg-neutral-200 dark:bg-neutral-800 relative overflow-hidden">
-                                    <div
-                                        className="absolute left-0 top-0 h-full bg-neutral-900 dark:bg-neutral-100 transition-all duration-1000 ease-out"
-                                        style={{ width: `${expertise.percentage}%` }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section> */}
 
             {/* CTA Section */}
             <section className="py-20 px-8 bg-neutral-900 dark:bg-black text-white">

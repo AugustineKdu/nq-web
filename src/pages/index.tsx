@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Link from 'next/link';
+import Image from "next/image";
 
 export default function Home() {
 
@@ -30,13 +31,22 @@ export default function Home() {
             </p>
           </div>
 
+
           {/* Main Typography */}
           <div className="mb-16">
+            <Image
+              src="/nq_textlogo.png"
+              alt="NQ Solution"
+              width={480}
+              height={160}
+              className="w-full max-w-md mx-auto md:mx-0 dark:invert"
+              priority
+            />
             <h1 className="text-[clamp(3rem,10vw,8rem)] font-light leading-[0.9] tracking-tighter">
-              <span className="block text-neutral-900 dark:text-neutral-50">NQ</span>
               <span className="block text-neutral-400 dark:text-neutral-200">SOLUTION</span>
             </h1>
           </div>
+
 
           {/* Divider Line */}
           <div className="w-full h-px bg-neutral-900 dark:bg-neutral-100 mb-8" />
@@ -76,10 +86,10 @@ export default function Home() {
             <p>01</p>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Services Section - Minimal Grid */}
-      <section className="py-32 px-8">
+      < section className="py-32 px-8" >
         <div className="max-w-6xl mx-auto">
           {/* Section Title */}
           <div className="mb-20">
@@ -137,55 +147,57 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* About Section - Typography Layout */}
+
+      {/* About Section - Enhanced */}
       <section className="py-32 px-8 bg-white dark:bg-neutral-900">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
               <span className="text-sm text-neutral-400 dark:text-neutral-500">03</span>
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-neutral-50">About</h2>
+            <h2 className="text-7xl font-light tracking-tight text-neutral-900 dark:text-neutral-50 mb-2">About</h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-400">혁신과 열정으로 만들어가는 디지털 크래프트맨십</p>
           </div>
 
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <div className="md:col-span-2">
-              <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-900 dark:text-neutral-50">
-                우리는 단순함 속에서 혁신을 찾습니다.
-                복잡한 문제를 간결하고 우아하게 해결하며,
-                모든 프로젝트에 깊이와 의미를 담습니다.
+          {/* Main Content */}
+          <div className="mb-32">
+            <div className="max-w-4xl">
+              <p className="text-3xl font-light leading-relaxed text-neutral-900 dark:text-neutral-50 mb-8">
+                우리는 단순함 속에서 <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-semibold">혁신</span>을 찾습니다.
               </p>
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                2023년 설립 이후, 50개 이상의 프로젝트를 성공적으로 완료했으며,
-                클라이언트의 비즈니스 성장을 위한 최적의 솔루션을 제공하고 있습니다.
+              <p className="text-xl text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                복잡한 문제를 본질에 집중하여 명확하게 풀어내며, 모든 프로젝트에 깊이와 의미를 담습니다.
+                기술과 디자인의 경계에서 새로운 가능성을 탐구하고, 클라이언트의 비전을 현실로 만들어갑니다.
               </p>
             </div>
-            <div>
-              <div className="space-y-8">
-                <div>
-                  <p className="text-4xl font-light mb-2 text-neutral-900 dark:text-neutral-50">50+</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">완료된 프로젝트</p>
-                </div>
-                <div>
-                  <p className="text-4xl font-light mb-2 text-neutral-900 dark:text-neutral-50">100%</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">고객 만족도</p>
-                </div>
-                <div>
-                  <p className="text-4xl font-light mb-2 text-neutral-900 dark:text-neutral-50">2년</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">전문 경험</p>
-                </div>
+          </div>
+
+          {/* Values Grid */}
+          <div>
+            <h3 className="text-2xl font-light mb-12 text-neutral-900 dark:text-neutral-50">Our Core Values</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Excellence</h4>
+                <p className="text-neutral-600 dark:text-neutral-400">모든 작업에서 최고의 품질을 추구하며, 디테일에 집착합니다.</p>
+              </div>
+              <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Innovation</h4>
+                <p className="text-neutral-600 dark:text-neutral-400">새로운 기술과 창의적인 접근으로 경계를 넘어섭니다.</p>
+              </div>
+              <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Partnership</h4>
+                <p className="text-neutral-600 dark:text-neutral-400">클라이언트와 함께 성장하는 진정한 파트너가 됩니다.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       {/* Process Section - Linear Design */}
-      <section className="py-32 px-8">
+      < section className="py-32 px-8" >
         <div className="max-w-6xl mx-auto">
           {/* Section Title */}
           <div className="mb-20">
@@ -217,10 +229,10 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Contact Section - Minimal CTA */}
-      <section className="py-32 px-8 bg-neutral-900 dark:bg-black text-white">
+      < section className="py-32 px-8 bg-neutral-900 dark:bg-black text-white" >
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
             <div>
@@ -243,15 +255,15 @@ export default function Home() {
               </Link>
             </div>
             <div className="text-right">
-              <p className="text-sm text-white/60">
+              {/* <p className="text-sm text-white/60">
                 hello@nqsolution.com<br />
                 +82 10-1234-5678<br />
                 Seoul, South Korea
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

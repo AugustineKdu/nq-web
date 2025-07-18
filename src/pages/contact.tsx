@@ -1,13 +1,7 @@
 import React from "react";
 
 export default function Contact() {
-    // const [formData, setFormData] = useState({
-    //     name: '',
-    //     email: '',
-    //     company: '',
-    //     project: '',
-    //     message: ''
-    // });
+
 
     return (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
@@ -39,11 +33,11 @@ export default function Contact() {
                             <div className="space-y-8">
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Email</p>
-                                    <p className="text-lg">hello@nqsolution.com</p>
+                                    <p className="text-lg">duk98823@gmail.com</p>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Phone</p>
-                                    <p className="text-lg">+82 10-1234-5678</p>
+                                    <p className="text-lg">+82 10-7168-1594</p>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Office</p>

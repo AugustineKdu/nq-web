@@ -13,7 +13,7 @@ export default function Portfolio() {
                             Portfolio
                         </p>
                         <h1 className="text-[clamp(3rem,8vw,6rem)] font-light leading-[0.9] tracking-tighter mb-8">
-                            Selected<br />works
+                            Coming<br /> Soon
                         </h1>
                         <div className="w-full h-px bg-neutral-900 dark:bg-neutral-100" />
                     </div>

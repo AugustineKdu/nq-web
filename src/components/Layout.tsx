@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import ThemeToggle from "./ThemeToggle";
 import { Bars3Icon as Menu, XMarkIcon as X } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => void }) => {
     const [scrolled, setScrolled] = useState(false);
@@ -32,10 +33,15 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
             <div className="max-w-6xl mx-auto px-8">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3">
-                        <div className="text-2xl font-light tracking-tight">
-                            <span className="text-neutral-900 dark:text-neutral-100">NQ</span>
-                        </div>
+                    <Link href="/" className="flex items-center">
+                        {/* 테마에 따라 다른 PNG 사용 */}
+                        <Image
+                            src={dark ? "/logo-dark.png" : "/logo-light.png"}
+                            alt="NQ Solution Logo"
+                            width={150}
+                            height={40}
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -101,14 +107,21 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
     );
 };
 
-const Footer = () => {
+const Footer = ({ dark }: { dark: boolean }) => {
     return (
         <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
             <div className="max-w-6xl mx-auto px-8 py-20">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
                     <div className="md:col-span-2">
-                        <h3 className="text-2xl font-light tracking-tight mb-4">NQ SOLUTION</h3>
+                        <div className="mb-6">
+                            <Image
+                                src={dark ? "/logo-dark.png" : "/logo-light.png"}
+                                alt="NQ Solution Logo"
+                                width={150}
+                                height={50}
+                            />
+                        </div>
                         <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md">
                             New idea를 더하고 Quick action으로 실행하여<br />
                             솔루션을 제공합니다.
@@ -121,8 +134,8 @@ const Footer = () => {
                     <div>
                         <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">Contact</h4>
                         <ul className="space-y-2 text-sm">
-                            <li>hello@nqsolution.com</li>
-                            <li>+82 10-1234-5678</li>
+                            <li>duk98823@gmail.com</li>
+                            <li>+82 10-7168-1594</li>
                             <li>Seoul, South Korea</li>
                         </ul>
                     </div>
@@ -149,7 +162,7 @@ const Layout = ({ children, dark, setDark }: { children: React.ReactNode, dark: 
             <main className="pt-20">
                 {children}
             </main>
-            <Footer />
+            <Footer dark={dark} />
         </div>
     );
 };
