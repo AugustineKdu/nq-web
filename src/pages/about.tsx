@@ -88,31 +88,33 @@ export default function About() {
 
 
 
-            {/* CTA Section */}
-            <section className="py-20 px-8 bg-neutral-900 dark:bg-black text-white">
-                <div className="max-w-6xl mx-auto">
-                    <div className="flex items-center justify-between">
+
+        {/* 대안 2: 보더와 카드 스타일 (Pinterest 감성) */}
+        <section className="py-20 px-8">
+            <div className="max-w-6xl mx-auto">
+                <div className="border-2 border-neutral-200 dark:border-neutral-800 rounded-2xl p-12 bg-white dark:bg-neutral-900 shadow-sm hover:shadow-xl transition-shadow duration-500">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                         <div>
-                            <h2 className="text-4xl font-light mb-4">
+                            <h2 className="text-4xl font-light mb-4 text-neutral-900 dark:text-white">
                                 프로젝트를 시작할 준비가 되셨나요?
                             </h2>
-                            <p className="text-lg text-neutral-400">
+                            <p className="text-lg text-neutral-600 dark:text-neutral-400">
                                 당신의 아이디어에 NQ의 실행력을 더해보세요.
                             </p>
                         </div>
                         <Link
                             href="/contact"
-                            className="group inline-flex items-center gap-4 text-lg"
+                            className="group inline-flex items-center gap-4 px-8 py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-full hover:scale-105 transition-all duration-300"
                         >
-                            <span className="relative">
-                                Contact Us
-                                <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
-                            </span>
+                            <span className="font-medium">Contact Us</span>
                             <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                         </Link>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+
+
         </div>
     );
 }

@@ -31,17 +31,21 @@ export default function Contact() {
                         </div>
                         <div>
                             <div className="space-y-8">
+                                 <div>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Email</p>
+                                    <p className="text-lg">대표 김덕웅</p>
+                                </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Email</p>
-                                    <p className="text-lg">duk98823@gmail.com</p>
+                                    <p className="text-lg">E: duk98823@gmail.com</p>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Phone</p>
-                                    <p className="text-lg">+82 10-7168-1594</p>
+                                    <p className="text-lg">M: 010-7168-1594</p>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Office</p>
-                                    <p className="text-lg">Seoul, South Korea</p>
+                                    <p className="text-lg">A: 평택, South Korea</p>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +77,7 @@ export default function Contact() {
                         ].map((faq, i) => (
                             <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-8">
                                 <h3 className="text-xl font-light mb-4">{faq.q}</h3>
-                                <p className="text-neutral-600 dark:text-neutral-400">
+                                <p className="text-neutral-600 dark:text-neutral-500">
                                     {faq.a}
                                 </p>
                             </div>

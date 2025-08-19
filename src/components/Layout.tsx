@@ -128,8 +128,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                         </p>
                     </div>
 
-                    {/* Quick Links */}
-
+             
                     {/* Contact */}
                     <div>
                         <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">Contact</h4>
