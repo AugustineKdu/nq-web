@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Lock, ExternalLink, Github, Globe } from "lucide-react";
+import { ArrowRight, Lock, ExternalLink, Github } from "lucide-react";
 import Link from 'next/link';
 
 type ProjectStatus = 'live' | 'development' | 'confidential';
@@ -55,8 +55,8 @@ const projects: Project[] = [
 ];
 
 export default function Portfolio() {
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
     const [filter, setFilter] = useState<'all' | 'live' | 'confidential'>('all');
+
 
     const filteredProjects = projects.filter(project => {
         if (filter === 'all') return true;
@@ -92,7 +92,7 @@ export default function Portfolio() {
                         ].map((tab) => (
                             <button
                                 key={tab.value}
-                                onClick={() => setFilter(tab.value as any)}
+                                onClick={() => setFilter(tab.value as 'all' | 'live' | 'confidential')}
                                 className={`relative pb-2 transition-all ${
                                     filter === tab.value 
                                         ? 'text-neutral-900 dark:text-white' 
@@ -118,8 +118,6 @@ export default function Portfolio() {
                             <div
                                 key={project.id}
                                 className="group relative"
-                                onMouseEnter={() => setHoveredId(project.id)}
-                                onMouseLeave={() => setHoveredId(null)}
                             >
                                 <div className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
                                     {/* Project Image/Gradient */}
