@@ -53,7 +53,33 @@ export default function Contact() {
                 </div>
             </section>
 
-
+            {/* Inquiry Button Section */}
+            <section className="py-24 px-8">
+                <div className="max-w-6xl mx-auto text-center">
+                    <div className="mb-8">
+                        <h3 className="text-2xl font-light bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent mb-4">
+                            새로운 프로젝트를 시작해보세요
+                        </h3>
+                        <p className="text-lg bg-gradient-to-r from-slate-600 via-gray-600 to-slate-700 dark:from-slate-300 dark:via-gray-300 dark:to-slate-200 bg-clip-text text-transparent">
+                            아이디어를 현실로 만들어드립니다
+                        </p>
+                    </div>
+                    <div className="relative group">
+                        <a 
+                            href="https://www.pluuug.com/form/TFBfcQZvgB"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative inline-flex items-center justify-center px-16 py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 text-xl font-medium tracking-wide rounded-2xl border-2 border-transparent hover:border-white/20 backdrop-blur-sm hover:scale-105 transform"
+                        >
+                            <span className="mr-3">프로젝트 문의하기</span>
+                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-xl -z-10 group-hover:blur-2xl transition-all duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+            </section>
 
             {/* FAQ Section */}
             <section className="py-20 px-8">
