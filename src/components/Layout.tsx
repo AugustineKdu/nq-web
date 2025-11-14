@@ -195,7 +195,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <p className="text-xs text-white/60 font-medium">
-                        © 2025 NQ Solution. All rights reserved.
+                        © 2024 NQ Solution. All rights reserved.
                     </p>
                     <div className="flex items-center gap-4">
                         <p className="text-xs text-white/60 font-medium">

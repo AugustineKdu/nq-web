@@ -274,12 +274,16 @@ export default function Home() {
             ].map((process, i) => (
               <div
                 key={i}
-                className="group flex items-center gap-8 p-8 border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
+                className="group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 p-6 md:p-8 border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
               >
-                <span className="text-sm text-neutral-900 dark:text-white">{process.step}</span>
-                <h3 className="text-2xl font-light flex-1 text-neutral-900 dark:text-white">{process.title}</h3>
-                <p className="text-neutral-900 dark:text-white">{process.desc}</p>
-                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-900 dark:text-white" />
+                <div className="flex items-center gap-4 md:gap-8 md:flex-1">
+                  <span className="text-sm text-neutral-900 dark:text-white font-medium">{process.step}</span>
+                  <h3 className="text-xl md:text-2xl font-light text-neutral-900 dark:text-white">{process.title}</h3>
+                </div>
+                <div className="flex items-center gap-4 md:gap-8">
+                  <p className="text-sm md:text-base text-neutral-900 dark:text-white flex-1">{process.desc}</p>
+                  <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-900 dark:text-white flex-shrink-0" />
+                </div>
               </div>
             ))}
           </div>
