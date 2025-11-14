@@ -5,6 +5,23 @@ export default function Document() {
     return (
         <Html lang="ko">
             <Head>
+                {/* FOUC 방지를 위한 인라인 스크립트 */}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            (function() {
+                                try {
+                                    var theme = localStorage.getItem('theme');
+                                    var isDark = theme === 'dark' ||
+                                        (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                                    if (isDark) {
+                                        document.documentElement.classList.add('dark');
+                                    }
+                                } catch (e) {}
+                            })();
+                        `
+                    }}
+                />
                 {/* SVG 파비콘 */}
                 {/* 파비콘 설정 - 3가지 사이즈 */}
                 <link rel="icon" href="/favicon.ico" />
@@ -40,7 +57,7 @@ export default function Document() {
                     }}
                 />
             </Head>
-            <body className="bg-light-background dark:bg-dark-background antialiased">
+            <body className="bg-white dark:bg-neutral-900 antialiased transition-colors duration-300">
                 <Main />
                 <NextScript />
             </body>

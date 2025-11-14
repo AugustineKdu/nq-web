@@ -28,18 +28,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       // 테마 변경 시 localStorage에 저장
       localStorage.setItem('theme', dark ? 'dark' : 'light');
 
+      // 부드러운 전환을 위한 transition 추가
+      const root = document.documentElement;
+      root.style.setProperty('transition', 'background-color 0.3s ease-in-out, color 0.3s ease-in-out');
+
       if (dark) {
-        document.documentElement.classList.add("dark");
+        root.classList.add("dark");
       } else {
-        document.documentElement.classList.remove("dark");
+        root.classList.remove("dark");
       }
     }
   }, [dark, mounted]);
-
-  // 초기 렌더링 시 깜빡임 방지
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <Layout dark={dark} setDark={setDark}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ThemeToggle from "./ThemeToggle";
+import AnimatedBackground from "./AnimatedBackground";
 import { Bars3Icon as Menu, XMarkIcon as X } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
@@ -27,21 +28,32 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? "bg-neutral-50/90 dark:bg-neutral-950/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+            ? "bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
             : "bg-transparent"
             }`}>
             <div className="max-w-6xl mx-auto px-8">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center">
-                        {/* 테마에 따라 다른 PNG 사용 */}
-                        <Image
-                            src={dark ? "/logo-dark.png" : "/logo-light.png"}
-                            alt="NQ Solution Logo"
-                            width={150}
-                            height={40}
-                            priority
-                        />
+                    <Link href="/" className="flex items-center relative">
+                        {/* 테마에 따라 다른 PNG 사용 - Cross-fade 효과 */}
+                        <div className="relative w-[150px] h-[40px]">
+                            <Image
+                                src="/logo-light.png"
+                                alt="NQ Solution Logo"
+                                width={150}
+                                height={40}
+                                priority
+                                className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-0' : 'opacity-100'}`}
+                            />
+                            <Image
+                                src="/logo-dark.png"
+                                alt="NQ Solution Logo"
+                                width={150}
+                                height={40}
+                                priority
+                                className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-100' : 'opacity-0'}`}
+                            />
+                        </div>
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -85,7 +97,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
             </div>
 
             {/* Mobile Menu */}
-            <div className={`md:hidden absolute top-full left-0 right-0 bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+            <div className={`md:hidden absolute top-full left-0 right-0 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
                 }`}>
                 <div className="px-8 py-6 space-y-4">
                     {navItems.map((item) => (
@@ -114,12 +126,20 @@ const Footer = ({ dark }: { dark: boolean }) => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
                     <div className="md:col-span-2">
-                        <div className="mb-6">
+                        <div className="mb-6 relative w-[150px] h-[50px]">
                             <Image
-                                src={dark ? "/logo-dark.png" : "/logo-light.png"}
+                                src="/logo-light.png"
                                 alt="NQ Solution Logo"
                                 width={150}
                                 height={50}
+                                className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-0' : 'opacity-100'}`}
+                            />
+                            <Image
+                                src="/logo-dark.png"
+                                alt="NQ Solution Logo"
+                                width={150}
+                                height={50}
+                                className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-100' : 'opacity-0'}`}
                             />
                         </div>
                         <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md">
@@ -156,9 +176,12 @@ const Footer = ({ dark }: { dark: boolean }) => {
 
 const Layout = ({ children, dark, setDark }: { children: React.ReactNode, dark: boolean, setDark: (d: boolean) => void }) => {
     return (
-        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+        <div className="min-h-screen bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative">
+            {/* Animated Background */}
+            <AnimatedBackground dark={dark} />
+
             <Navbar dark={dark} setDark={setDark} />
-            <main className="pt-20">
+            <main className="pt-20 relative z-10">
                 {children}
             </main>
             <Footer dark={dark} />
