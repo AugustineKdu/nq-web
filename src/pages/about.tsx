@@ -25,7 +25,7 @@ export default function About() {
             <section className="pt-32 pb-20 px-8">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-20">
-                        <p className="text-sm tracking-[0.3em] text-neutral-500 dark:text-neutral-400 uppercase mb-8">
+                        <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             About NQ Solution
                         </p>
                         <h1 className="text-[clamp(3rem,8vw,6rem)] font-light leading-[0.9] tracking-tighter mb-8">
@@ -37,11 +37,11 @@ export default function About() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                         <div className="md:col-span-2">
-                            <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-800 dark:text-neutral-100">
+                            <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-900 dark:text-white">
                                 우리는 복잡함을 단순하게, 평범함을 특별하게 만듭니다.
                                 최소한의 요소로 최대한의 가치를 창출하는 것이 우리의 철학입니다.
                             </p>
-                            <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                            <p className="text-lg text-neutral-900 dark:text-white leading-relaxed">
                                 NQ Solution은 혁신적인 아이디어와 빠른 실행력을 바탕으로
                                 클라이언트의 비즈니스 성장을 돕는 디지털 솔루션 파트너입니다.
                                 우리는 단순히 서비스를 제공하는 것이 아니라,
@@ -51,12 +51,12 @@ export default function About() {
                         <div>
                             <div className="space-y-12">
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Founded</p>
-                                    <p className="text-2xl font-light text-neutral-800 dark:text-neutral-100">2024</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Founded</p>
+                                    <p className="text-2xl font-light text-neutral-900 dark:text-white">2024</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Location</p>
-                                    <p className="text-2xl font-light text-neutral-800 dark:text-neutral-100">KOREA</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Location</p>
+                                    <p className="text-2xl font-light text-neutral-900 dark:text-white">KOREA</p>
                                 </div>
 
                             </div>
@@ -69,7 +69,7 @@ export default function About() {
             <section className="py-20 px-8 bg-white dark:bg-neutral-900">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-16">
-                        <h2 className="text-5xl font-light tracking-tight text-neutral-800 dark:text-neutral-100">Our Values</h2>
+                        <h2 className="text-5xl font-light tracking-tight text-neutral-900 dark:text-white">Our Values</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-200 dark:bg-neutral-800">
@@ -91,9 +91,9 @@ export default function About() {
                             }
                         ].map((value, i) => (
                             <div key={i} className="p-12 bg-white dark:bg-neutral-900">
-                                <p className="text-sm text-neutral-400 dark:text-neutral-600 mb-4">{value.number}</p>
-                                <h3 className="text-2xl font-light mb-4 text-neutral-800 dark:text-neutral-100">{value.title}</h3>
-                                <p className="text-neutral-700 dark:text-neutral-300">
+                                <p className="text-sm text-neutral-900 dark:text-white mb-4">{value.number}</p>
+                                <h3 className="text-2xl font-light mb-4 text-neutral-900 dark:text-white">{value.title}</h3>
+                                <p className="text-neutral-900 dark:text-white">
                                     {value.desc}
                                 </p>
                             </div>
@@ -114,7 +114,7 @@ export default function About() {
                             <h2 className="text-4xl font-light mb-4 text-neutral-900 dark:text-white">
                                 프로젝트를 시작할 준비가 되셨나요?
                             </h2>
-                            <p className="text-lg text-neutral-700 dark:text-neutral-300">
+                            <p className="text-lg text-neutral-900 dark:text-white">
                                 당신의 아이디어에 NQ의 실행력을 더해보세요.
                             </p>
                         </div>

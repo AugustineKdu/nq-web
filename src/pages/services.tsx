@@ -79,7 +79,7 @@ export default function Services() {
             <section className="pt-32 pb-20 px-8">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-20">
-                        <p className="text-sm tracking-[0.3em] text-neutral-500 dark:text-neutral-400 uppercase mb-8">
+                        <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             Our Services
                         </p>
                         <h1 className="text-[clamp(3rem,8vw,6rem)] font-light leading-[0.9] tracking-tighter mb-8">
@@ -89,7 +89,7 @@ export default function Services() {
                     </div>
 
                     <div className="max-w-3xl">
-                        <p className="text-2xl font-light leading-relaxed text-neutral-800 dark:text-neutral-100">
+                        <p className="text-2xl font-light leading-relaxed text-neutral-900 dark:text-white">
                             우리는 디지털 제품과 서비스를 통해 비즈니스 문제를 해결합니다.
                             전략부터 실행까지, 모든 단계에서 최고의 품질을 보장합니다.
                         </p>
@@ -108,21 +108,21 @@ export default function Services() {
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                                     <div className="md:col-span-1">
-                                        <p className="text-sm text-neutral-400 dark:text-neutral-100">{service.number}</p>
+                                        <p className="text-sm text-neutral-900 dark:text-white">{service.number}</p>
                                     </div>
 
                                     <div className="md:col-span-4">
-                                        <h3 className="text-3xl font-light mb-2  text-neutral-700 dark:text-neutral-200">{service.title}</h3>
-                                        <p className="text-sm text-neutral-500 dark:text-neutral-400">{service.subtitle}</p>
+                                        <h3 className="text-3xl font-light mb-2 text-neutral-900 dark:text-white">{service.title}</h3>
+                                        <p className="text-sm text-neutral-900 dark:text-white">{service.subtitle}</p>
                                     </div>
 
                                     <div className="md:col-span-5">
-                                        <p className="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
+                                        <p className="text-neutral-900 dark:text-white mb-6 leading-relaxed">
                                             {service.description}
                                         </p>
                                         <div className="flex flex-wrap gap-4">
                                             {service.details.map((detail, i) => (
-                                                <span key={i} className="text-sm text-neutral-600 dark:text-neutral-400">
+                                                <span key={i} className="text-sm text-neutral-900 dark:text-white">
                                                     {detail}
                                                 </span>
                                             ))}
@@ -140,7 +140,7 @@ export default function Services() {
             <section className="py-20 px-8 bg-white dark:bg-neutral-900">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-16">
-                        <h2 className="text-5xl font-light tracking-tight text-neutral-800 dark:text-neutral-100">Our Process</h2>
+                        <h2 className="text-5xl font-light tracking-tight text-neutral-900 dark:text-white">Our Process</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
@@ -152,9 +152,9 @@ export default function Services() {
                             { step: "05", title: "Launch", duration: "1 week" }
                         ].map((process, i) => (
                             <div key={i} className="text-center">
-                                <p className="text-4xl font-light mb-4 text-neutral-800 dark:text-neutral-100">{process.step}</p>
-                                <h3 className="text-lg mb-2 text-neutral-800 dark:text-neutral-100">{process.title}</h3>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400">{process.duration}</p>
+                                <p className="text-4xl font-light mb-4 text-neutral-900 dark:text-white">{process.step}</p>
+                                <h3 className="text-lg mb-2 text-neutral-900 dark:text-white">{process.title}</h3>
+                                <p className="text-sm text-neutral-900 dark:text-white">{process.duration}</p>
                             </div>
                         ))}
                     </div>
@@ -167,7 +167,7 @@ export default function Services() {
                     <h2 className="text-4xl font-light text-white mb-8">
                         어떤 서비스가 필요하신가요?
                     </h2>
-                    <p className="text-lg text-neutral-300 mb-12">
+                    <p className="text-lg text-white mb-12">
                         프로젝트의 규모와 상관없이, 최선의 솔루션을 제공합니다.
                     </p>
                     <Link

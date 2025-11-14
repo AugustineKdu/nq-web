@@ -25,7 +25,7 @@ export default function Contact() {
             <section className="pt-32 pb-20 px-8">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-20">
-                        <p className="text-sm tracking-[0.3em] text-neutral-500 dark:text-neutral-400 uppercase mb-8">
+                        <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             Contact Us
                         </p>
                         <h1 className="text-[clamp(3rem,8vw,6rem)] font-light leading-[0.9] tracking-tighter mb-8">
@@ -36,36 +36,36 @@ export default function Contact() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div>
-                            <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-800 dark:text-neutral-100">
+                            <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-900 dark:text-white">
                                 프로젝트에 대해 이야기해보세요.
                                 작은 아이디어부터 큰 비전까지,
                                 함께 현실로 만들어갑니다.
                             </p>
-                            <p className="text-lg text-neutral-700 dark:text-neutral-300">
+                            <p className="text-lg text-neutral-900 dark:text-white">
                                 24시간 내에 답변드립니다.
                             </p>
                         </div>
                         <div>
                             <div className="space-y-8">
                                  <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Representative</p>
-                                    <p className="text-lg text-neutral-800 dark:text-neutral-100">김덕웅</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Representative</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white">김덕웅</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Email</p>
-                                    <p className="text-lg text-neutral-800 dark:text-neutral-100">duk98823@gmail.com</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Email</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white">duk98823@gmail.com</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Phone</p>
-                                    <p className="text-lg text-neutral-800 dark:text-neutral-100">010-3368-1594</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Phone</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white">010-3368-1594</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Company Phone</p>
-                                    <p className="text-lg text-neutral-800 dark:text-neutral-100">031-8027-3368</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Company Phone</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white">031-8027-3368</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">Office</p>
-                                    <p className="text-lg text-neutral-800 dark:text-neutral-100">평택, South Korea</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Office</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white">평택, South Korea</p>
                                 </div>
                             </div>
                         </div>
@@ -77,10 +77,10 @@ export default function Contact() {
             <section className="py-24 px-8">
                 <div className="max-w-6xl mx-auto text-center">
                     <div className="mb-8">
-                        <h3 className="text-2xl font-light text-neutral-800 dark:text-transparent dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-teal-600 dark:bg-clip-text mb-4">
+                        <h3 className="text-2xl font-light text-neutral-900 dark:text-transparent dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-teal-600 dark:bg-clip-text mb-4">
                             새로운 프로젝트를 시작해보세요
                         </h3>
-                        <p className="text-lg text-neutral-700 dark:text-neutral-300">
+                        <p className="text-lg text-neutral-900 dark:text-white">
                             아이디어를 현실로 만들어드립니다
                         </p>
                     </div>
@@ -104,7 +104,7 @@ export default function Contact() {
             {/* FAQ Section */}
             <section className="py-20 px-8">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-4xl font-light mb-16 text-neutral-800 dark:text-neutral-100">자주 묻는 질문</h2>
+                    <h2 className="text-4xl font-light mb-16 text-neutral-900 dark:text-white">자주 묻는 질문</h2>
 
                     <div className="space-y-12">
                         {[
@@ -122,8 +122,8 @@ export default function Contact() {
                             }
                         ].map((faq, i) => (
                             <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-8">
-                                <h3 className="text-xl font-light mb-4 text-neutral-800 dark:text-neutral-100">{faq.q}</h3>
-                                <p className="text-neutral-700 dark:text-neutral-300">
+                                <h3 className="text-xl font-light mb-4 text-neutral-900 dark:text-white">{faq.q}</h3>
+                                <p className="text-neutral-900 dark:text-white">
                                     {faq.a}
                                 </p>
                             </div>

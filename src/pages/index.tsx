@@ -48,7 +48,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto w-full">
           {/* Small Label */}
           <div className="mb-8">
-            <p className="text-sm tracking-[0.3em] text-neutral-500 dark:text-neutral-100 uppercase">
+            <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase">
               New & Quick Solution
             </p>
           </div>
@@ -65,7 +65,7 @@ export default function Home() {
               priority
             />
             <h1 className="text-[clamp(3rem,10vw,8rem)] font-light leading-[0.9] tracking-tighter">
-              <span className="block text-neutral-400 dark:text-neutral-200">SOLUTION</span>
+              <span className="block text-neutral-900 dark:text-white">SOLUTION</span>
             </h1>
           </div>
 
@@ -76,13 +76,13 @@ export default function Home() {
           {/* Description */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div>
-              <p className="text-lg font-light leading-relaxed text-neutral-800 dark:text-neutral-50">
+              <p className="text-lg font-light leading-relaxed text-neutral-900 dark:text-white">
                 혁신적인 아이디어를 빠르게 실현하는<br />
                 디지털 솔루션 파트너
               </p>
             </div>
             <div className="md:text-right">
-              <p className="text-sm text-neutral-700 dark:text-neutral-100">
+              <p className="text-sm text-neutral-900 dark:text-white">
                 웹 개발 / 앱 개발 / UI·UX 디자인<br />
                 2024 평택, 대한민국
               </p>
@@ -95,7 +95,7 @@ export default function Home() {
               href="/contact"
               className="group inline-flex items-center gap-4 text-lg"
             >
-              <span className="relative text-neutral-900 dark:text-neutral-50">
+              <span className="relative text-neutral-900 dark:text-white">
                 프로젝트 시작하기
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-neutral-900 dark:bg-neutral-100 group-hover:w-full transition-all duration-500" />
               </span>
@@ -104,7 +104,7 @@ export default function Home() {
           </div>
 
           {/* Corner Numbers */}
-          <div className="absolute top-20 right-8 text-sm text-neutral-400 dark:text-neutral-200">
+          <div className="absolute top-20 right-8 text-sm text-neutral-900 dark:text-white">
             <p>01</p>
           </div>
         </div>
@@ -116,10 +116,10 @@ export default function Home() {
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-neutral-400 dark:text-neutral-500">02</span>
+              <span className="text-sm text-neutral-900 dark:text-white">02</span>
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-800 dark:text-neutral-50">Services</h2>
+            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-white">Services</h2>
           </div>
 
           {/* Services Grid */}
@@ -150,20 +150,20 @@ export default function Home() {
                 key={i}
                 className="group relative p-12 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:shadow-lg dark:hover:shadow-2xl transition-all"
               >
-                <h3 className="text-3xl font-light mb-4 text-neutral-900 dark:text-neutral-50">{service.title}</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">
+                <h3 className="text-3xl font-light mb-4 text-neutral-900 dark:text-white">{service.title}</h3>
+                <p className="text-neutral-900 dark:text-white mb-8 leading-relaxed">
                   {service.desc}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {service.tags.map((tag, j) => (
-                    <span key={j} className="text-xs px-3 py-1 border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-full">
+                    <span key={j} className="text-xs px-3 py-1 border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white rounded-full">
                       {tag}
                     </span>
                   ))}
                 </div>
                 {/* Hover Indicator */}
                 <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
+                  <ArrowRight className="w-5 h-5 text-neutral-900 dark:text-white" />
                 </div>
               </div>
             ))}
@@ -178,20 +178,20 @@ export default function Home() {
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-neutral-400 dark:text-neutral-500">03</span>
+              <span className="text-sm text-neutral-900 dark:text-white">03</span>
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <h2 className="text-7xl font-light tracking-tight text-neutral-900 dark:text-neutral-50 mb-2">About</h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-400">혁신과 열정으로 만들어가는 디지털 크래프트맨십</p>
+            <h2 className="text-7xl font-light tracking-tight text-neutral-900 dark:text-white mb-2">About</h2>
+            <p className="text-xl text-neutral-900 dark:text-white">혁신과 열정으로 만들어가는 디지털 크래프트맨십</p>
           </div>
 
           {/* Main Content */}
           <div className="mb-32">
             <div className="max-w-4xl">
-              <p className="text-3xl font-light leading-relaxed text-neutral-800 dark:text-neutral-50 mb-8">
-                우리는 단순함 속에서 <span className="text-neutral-800 dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-500 dark:bg-clip-text dark:text-transparent font-semibold">혁신</span>을 찾습니다.
+              <p className="text-3xl font-light leading-relaxed text-neutral-900 dark:text-white mb-8">
+                우리는 단순함 속에서 <span className="text-neutral-900 dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-500 dark:bg-clip-text dark:text-transparent font-semibold">혁신</span>을 찾습니다.
               </p>
-              <p className="text-xl text-neutral-700 dark:text-neutral-300 leading-relaxed">
+              <p className="text-xl text-neutral-900 dark:text-white leading-relaxed">
                 복잡한 문제를 본질에 집중하여 명확하게 풀어내며, 모든 프로젝트에 깊이와 의미를 담습니다.
                 기술과 디자인의 경계에서 새로운 가능성을 탐구하고, 클라이언트의 비전을 현실로 만들어갑니다.
               </p>
@@ -200,19 +200,19 @@ export default function Home() {
 
           {/* Values Grid */}
           <div>
-            <h3 className="text-2xl font-light mb-12 text-neutral-800 dark:text-neutral-50">Our Core Values</h3>
+            <h3 className="text-2xl font-light mb-12 text-neutral-900 dark:text-white">Our Core Values</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Excellence</h4>
-                <p className="text-neutral-700 dark:text-neutral-300">모든 작업에서 최고의 품질을 추구하며, 디테일에 집착합니다.</p>
+                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">Excellence</h4>
+                <p className="text-neutral-900 dark:text-white">모든 작업에서 최고의 품질을 추구하며, 디테일에 집착합니다.</p>
               </div>
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Innovation</h4>
-                <p className="text-neutral-700 dark:text-neutral-300">새로운 기술과 창의적인 접근으로 경계를 넘어섭니다.</p>
+                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">Innovation</h4>
+                <p className="text-neutral-900 dark:text-white">새로운 기술과 창의적인 접근으로 경계를 넘어섭니다.</p>
               </div>
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Partnership</h4>
-                <p className="text-neutral-700 dark:text-neutral-300">클라이언트와 함께 성장하는 진정한 파트너가 됩니다.</p>
+                <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">Partnership</h4>
+                <p className="text-neutral-900 dark:text-white">클라이언트와 함께 성장하는 진정한 파트너가 됩니다.</p>
               </div>
             </div>
           </div>
@@ -224,10 +224,10 @@ export default function Home() {
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-neutral-400 dark:text-neutral-500">04</span>
+              <span className="text-sm text-neutral-900 dark:text-white">04</span>
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-800 dark:text-neutral-50">Process</h2>
+            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-white">Process</h2>
           </div>
 
           {/* Process Steps */}
@@ -243,10 +243,10 @@ export default function Home() {
                 key={i}
                 className="group flex items-center gap-8 p-8 border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
               >
-                <span className="text-sm text-neutral-400 dark:text-neutral-300">{process.step}</span>
-                <h3 className="text-2xl font-light flex-1 text-neutral-900 dark:text-neutral-50">{process.title}</h3>
-                <p className="text-neutral-700 dark:text-neutral-200">{process.desc}</p>
-                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-700 dark:text-neutral-300" />
+                <span className="text-sm text-neutral-900 dark:text-white">{process.step}</span>
+                <h3 className="text-2xl font-light flex-1 text-neutral-900 dark:text-white">{process.title}</h3>
+                <p className="text-neutral-900 dark:text-white">{process.desc}</p>
+                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-900 dark:text-white" />
               </div>
             ))}
           </div>
