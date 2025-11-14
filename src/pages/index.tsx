@@ -148,7 +148,7 @@ export default function Home() {
             ].map((service, i) => (
               <div
                 key={i}
-                className="group relative p-12 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:shadow-lg dark:hover:shadow-2xl transition-all"
+                className="group relative p-12 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-neutral-800 hover:shadow-lg dark:hover:shadow-2xl transition-all"
               >
                 <h3 className="text-3xl font-light mb-4 text-neutral-900 dark:text-white">{service.title}</h3>
                 <p className="text-neutral-900 dark:text-white mb-8 leading-relaxed">
@@ -173,7 +173,7 @@ export default function Home() {
 
 
       {/* About Section - Enhanced */}
-      <section className="py-32 px-8 bg-white dark:bg-neutral-900">
+      <section className="py-32 px-8 bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="mb-20">
@@ -202,15 +202,15 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-light mb-12 text-neutral-900 dark:text-white">Our Core Values</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+              <div className="group p-8 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">Excellence</h4>
                 <p className="text-neutral-900 dark:text-white">모든 작업에서 최고의 품질을 추구하며, 디테일에 집착합니다.</p>
               </div>
-              <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+              <div className="group p-8 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">Innovation</h4>
                 <p className="text-neutral-900 dark:text-white">새로운 기술과 창의적인 접근으로 경계를 넘어섭니다.</p>
               </div>
-              <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+              <div className="group p-8 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-white">Partnership</h4>
                 <p className="text-neutral-900 dark:text-white">클라이언트와 함께 성장하는 진정한 파트너가 됩니다.</p>
               </div>
@@ -241,7 +241,7 @@ export default function Home() {
             ].map((process, i) => (
               <div
                 key={i}
-                className="group flex items-center gap-8 p-8 border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
+                className="group flex items-center gap-8 p-8 border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-neutral-900 transition-colors"
               >
                 <span className="text-sm text-neutral-900 dark:text-white">{process.step}</span>
                 <h3 className="text-2xl font-light flex-1 text-neutral-900 dark:text-white">{process.title}</h3>
@@ -271,7 +271,7 @@ export default function Home() {
               >
                 <span className="relative text-white">
                   프로젝트 문의하기
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-slate-50 group-hover:w-full transition-all duration-500" />
                 </span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform text-white" />
               </Link>

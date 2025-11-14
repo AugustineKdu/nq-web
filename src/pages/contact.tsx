@@ -31,7 +31,7 @@ export default function Contact() {
             </Head>
 
         (
-        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
                 <div className="max-w-6xl mx-auto">
@@ -182,7 +182,7 @@ export default function Contact() {
                                 a: "네, 프로젝트 완료 후에도 지속적인 유지보수와 업데이트 서비스를 제공합니다."
                             }
                         ].map((faq, i) => (
-                            <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-8">
+                            <div key={i} className="border-b border-slate-200 dark:border-slate-700 pb-8">
                                 <h3 className="text-xl font-light mb-4 text-neutral-900 dark:text-white">{faq.q}</h3>
                                 <p className="text-neutral-900 dark:text-white">
                                     {faq.a}
