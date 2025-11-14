@@ -76,13 +76,13 @@ export default function Home() {
           {/* Description */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div>
-              <p className="text-lg font-light leading-relaxed text-neutral-900 dark:text-white">
+              <p className="text-lg leading-relaxed text-neutral-900 dark:text-white font-medium">
                 혁신적인 아이디어를 빠르게 실현하는<br />
                 디지털 솔루션 파트너
               </p>
             </div>
             <div className="md:text-right">
-              <p className="text-sm text-neutral-900 dark:text-white">
+              <p className="text-sm text-neutral-900 dark:text-white font-medium">
                 웹 개발 / 앱 개발 / UI·UX 디자인<br />
                 2024 평택, 대한민국
               </p>
@@ -182,16 +182,16 @@ export default function Home() {
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
             <h2 className="text-7xl font-light tracking-tight text-neutral-900 dark:text-white mb-2">About</h2>
-            <p className="text-xl text-neutral-900 dark:text-white">혁신과 열정으로 만들어가는 디지털 크래프트맨십</p>
+            <p className="text-xl text-neutral-900 dark:text-white font-medium">혁신과 열정으로 만들어가는 디지털 크래프트맨십</p>
           </div>
 
           {/* Main Content */}
           <div className="mb-32">
             <div className="max-w-4xl">
-              <p className="text-3xl font-light leading-relaxed text-neutral-900 dark:text-white mb-8">
+              <p className="text-3xl leading-relaxed text-neutral-900 dark:text-white mb-8 font-medium">
                 우리는 단순함 속에서 <span className="text-neutral-900 dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-500 dark:bg-clip-text dark:text-transparent font-semibold">혁신</span>을 찾습니다.
               </p>
-              <p className="text-xl text-neutral-900 dark:text-white leading-relaxed">
+              <p className="text-xl text-neutral-900 dark:text-white leading-relaxed font-medium">
                 복잡한 문제를 본질에 집중하여 명확하게 풀어내며, 모든 프로젝트에 깊이와 의미를 담습니다.
                 기술과 디자인의 경계에서 새로운 가능성을 탐구하고, 클라이언트의 비전을 현실로 만들어갑니다.
               </p>

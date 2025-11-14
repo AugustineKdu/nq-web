@@ -37,11 +37,11 @@ export default function About() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                         <div className="md:col-span-2">
-                            <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-900 dark:text-white">
+                            <p className="text-2xl leading-relaxed mb-8 text-neutral-900 dark:text-white font-medium">
                                 우리는 복잡함을 단순하게, 평범함을 특별하게 만듭니다.
                                 최소한의 요소로 최대한의 가치를 창출하는 것이 우리의 철학입니다.
                             </p>
-                            <p className="text-lg text-neutral-900 dark:text-white leading-relaxed">
+                            <p className="text-lg text-neutral-900 dark:text-white leading-relaxed font-medium">
                                 NQ Solution은 혁신적인 아이디어와 빠른 실행력을 바탕으로
                                 클라이언트의 비즈니스 성장을 돕는 디지털 솔루션 파트너입니다.
                                 우리는 단순히 서비스를 제공하는 것이 아니라,
@@ -51,12 +51,12 @@ export default function About() {
                         <div>
                             <div className="space-y-12">
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Founded</p>
-                                    <p className="text-2xl font-light text-neutral-900 dark:text-white">2024</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Founded</p>
+                                    <p className="text-2xl text-neutral-900 dark:text-white font-semibold">2024</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Location</p>
-                                    <p className="text-2xl font-light text-neutral-900 dark:text-white">KOREA</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Location</p>
+                                    <p className="text-2xl text-neutral-900 dark:text-white font-semibold">KOREA</p>
                                 </div>
 
                             </div>

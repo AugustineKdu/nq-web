@@ -89,7 +89,7 @@ export default function Services() {
                     </div>
 
                     <div className="max-w-3xl">
-                        <p className="text-2xl font-light leading-relaxed text-neutral-900 dark:text-white">
+                        <p className="text-2xl leading-relaxed text-neutral-900 dark:text-white font-medium">
                             우리는 디지털 제품과 서비스를 통해 비즈니스 문제를 해결합니다.
                             전략부터 실행까지, 모든 단계에서 최고의 품질을 보장합니다.
                         </p>
@@ -153,8 +153,8 @@ export default function Services() {
                         ].map((process, i) => (
                             <div key={i} className="text-center">
                                 <p className="text-4xl font-light mb-4 text-neutral-900 dark:text-white">{process.step}</p>
-                                <h3 className="text-lg mb-2 text-neutral-900 dark:text-white">{process.title}</h3>
-                                <p className="text-sm text-neutral-900 dark:text-white">{process.duration}</p>
+                                <h3 className="text-lg mb-2 text-neutral-900 dark:text-white font-medium">{process.title}</h3>
+                                <p className="text-sm text-neutral-900 dark:text-white font-medium">{process.duration}</p>
                             </div>
                         ))}
                     </div>
@@ -167,7 +167,7 @@ export default function Services() {
                     <h2 className="text-4xl font-light text-white mb-8">
                         어떤 서비스가 필요하신가요?
                     </h2>
-                    <p className="text-lg text-white mb-12">
+                    <p className="text-lg text-white mb-12 font-medium">
                         프로젝트의 규모와 상관없이, 최선의 솔루션을 제공합니다.
                     </p>
                     <Link

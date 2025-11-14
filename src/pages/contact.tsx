@@ -36,36 +36,36 @@ export default function Contact() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div>
-                            <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-900 dark:text-white">
+                            <p className="text-2xl leading-relaxed mb-8 text-neutral-900 dark:text-white font-medium">
                                 프로젝트에 대해 이야기해보세요.
                                 작은 아이디어부터 큰 비전까지,
                                 함께 현실로 만들어갑니다.
                             </p>
-                            <p className="text-lg text-neutral-900 dark:text-white">
+                            <p className="text-lg text-neutral-900 dark:text-white font-medium">
                                 24시간 내에 답변드립니다.
                             </p>
                         </div>
                         <div>
                             <div className="space-y-8">
                                  <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Representative</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white">김덕웅</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Representative</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">김덕웅</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Email</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white">duk98823@gmail.com</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Email</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">duk98823@gmail.com</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Phone</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white">010-3368-1594</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Phone</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">010-3368-1594</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Company Phone</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white">031-8027-3368</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Company Phone</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">031-8027-3368</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2">Office</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white">평택, South Korea</p>
+                                    <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Office</p>
+                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">평택, South Korea</p>
                                 </div>
                             </div>
                         </div>
