@@ -30,7 +30,6 @@ export default function Contact() {
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
-        (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
@@ -103,10 +102,10 @@ export default function Contact() {
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Company Phone</p>
                                     <button
-                                        onClick={() => copyToClipboard('031-8027-3368', 'companyPhone')}
+                                        onClick={() => copyToClipboard('010-33681594', 'companyPhone')}
                                         className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                     >
-                                        <span>031-8027-3368</span>
+                                        <span>010-33681594</span>
                                         {copiedField === 'companyPhone' ? (
                                             <CheckIcon className="w-4 h-4 text-green-600" />
                                         ) : (

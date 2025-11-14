@@ -27,7 +27,6 @@ export default function Home() {
         <meta name="twitter:image" content="https://nqsolution.kr/nq_textlogo.png" />
       </Head>
 
-    (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
       {/* Grid Background */}
       <div className="fixed inset-0 opacity-[0.02] dark:opacity-[0.05]">
@@ -139,6 +138,11 @@ export default function Home() {
                 title: "UI/UX 디자인",
                 desc: "사용자 중심의 인터페이스 설계",
                 tags: ["Research", "Design", "Prototype"]
+              },
+              {
+                title: "MVP & 베타 개발",
+                desc: "빠른 검증을 위한 초기 프로토타입 개발",
+                tags: ["MVP", "Beta", "Prototype"]
               },
               {
                 title: "컨설팅",

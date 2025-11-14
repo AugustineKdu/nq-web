@@ -19,7 +19,6 @@ export default function About() {
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
-        (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">

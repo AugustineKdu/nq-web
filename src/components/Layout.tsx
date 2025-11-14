@@ -135,7 +135,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
     const contactInfo = [
         { label: 'Email', value: 'duk98823@gmail.com', field: 'footer-email' },
         { label: 'Phone', value: '010-3368-1594', field: 'footer-phone' },
-        { label: 'Company', value: '031-8027-3368', field: 'footer-company' },
+        { label: 'Company', value: '010-33681594', field: 'footer-company' },
         { label: 'Location', value: '평택, South Korea', field: 'footer-location' }
     ];
 
@@ -198,7 +198,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                     </p>
                     <div className="flex items-center gap-4">
                         <p className="text-xs text-white/60 font-medium">
-                            Made with ❤️ in 평택
+                            Design and developed by NQ
                         </p>
                     </div>
                 </div>

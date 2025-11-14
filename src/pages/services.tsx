@@ -46,6 +46,19 @@ export default function Services() {
         },
         {
             number: "04",
+            title: "MVP & 베타 개발",
+            subtitle: "MVP & Beta Development",
+            description: "빠른 시장 검증을 위한 MVP 기반 베타 및 초기 프로토타입 개발에 참여합니다. 아이디어를 신속하게 실현하고 검증합니다.",
+            details: [
+                "MVP Development",
+                "Beta Testing",
+                "Rapid Prototyping",
+                "Market Validation"
+            ],
+
+        },
+        {
+            number: "05",
             title: "컨설팅",
             subtitle: "Consulting",
             description: "비즈니스 목표에 맞는 디지털 전략을 수립합니다. 데이터 기반의 의사결정을 통해 성장을 가속화합니다.",
