@@ -132,90 +132,75 @@ const Footer = ({ dark }: { dark: boolean }) => {
         }
     };
 
+    const contactInfo = [
+        { label: 'Email', value: 'duk98823@gmail.com', field: 'footer-email' },
+        { label: 'Phone', value: '010-3368-1594', field: 'footer-phone' },
+        { label: 'Company', value: '031-8027-3368', field: 'footer-company' },
+        { label: 'Location', value: '평택, South Korea', field: 'footer-location' }
+    ];
+
     return (
-        <footer className="bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
-            <div className="max-w-6xl mx-auto px-8 py-20">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                    {/* Brand */}
-                    <div className="md:col-span-2">
-                        <div className="mb-6 relative w-[150px] h-[50px]">
-                            <Image
-                                src="/logo-light.png"
-                                alt="NQ Solution Logo"
-                                width={150}
-                                height={50}
-                                className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-0' : 'opacity-100'}`}
-                            />
+        <footer className="relative bg-neutral-900 dark:bg-black text-white border-t border-neutral-800">
+            <div className="max-w-6xl mx-auto px-8 py-16">
+                {/* Main Footer Content */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+                    {/* Brand Section */}
+                    <div className="md:col-span-5">
+                        <div className="mb-6 relative w-[160px] h-[50px]">
                             <Image
                                 src="/logo-dark.png"
                                 alt="NQ Solution Logo"
-                                width={150}
+                                width={160}
                                 height={50}
-                                className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-100' : 'opacity-0'}`}
+                                className="brightness-0 invert"
                             />
                         </div>
-                        <p className="text-sm text-neutral-900 dark:text-white max-w-md font-medium">
-                            New idea를 더하고 Quick action으로 실행하여<br />
-                            솔루션을 제공합니다.
+                        <p className="text-sm text-white/80 max-w-sm leading-relaxed font-medium mb-6">
+                            혁신적인 아이디어를 빠르게 실행하여<br />
+                            비즈니스의 성장을 함께 만들어갑니다.
                         </p>
+                        <div className="flex gap-4">
+                            <Link href="/about" className="text-xs text-white/60 hover:text-white transition-colors font-medium">About</Link>
+                            <Link href="/services" className="text-xs text-white/60 hover:text-white transition-colors font-medium">Services</Link>
+                            <Link href="/portfolio" className="text-xs text-white/60 hover:text-white transition-colors font-medium">Portfolio</Link>
+                            <Link href="/contact" className="text-xs text-white/60 hover:text-white transition-colors font-medium">Contact</Link>
+                        </div>
                     </div>
 
-
-                    {/* Contact */}
-                    <div>
-                        <h4 className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-4 font-medium">Contact</h4>
-                        <ul className="space-y-3 text-sm">
-                            <li>
-                                <button
-                                    onClick={() => copyToClipboard('duk98823@gmail.com', 'footer-email')}
-                                    className="group flex items-center gap-2 text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold"
-                                >
-                                    <span>duk98823@gmail.com</span>
-                                    {copiedField === 'footer-email' ? (
-                                        <CheckIcon className="w-3 h-3 text-green-600" />
-                                    ) : (
-                                        <ClipboardDocumentIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    )}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    onClick={() => copyToClipboard('010-3368-1594', 'footer-phone')}
-                                    className="group flex items-center gap-2 text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold"
-                                >
-                                    <span>+82 10-3368-1594</span>
-                                    {copiedField === 'footer-phone' ? (
-                                        <CheckIcon className="w-3 h-3 text-green-600" />
-                                    ) : (
-                                        <ClipboardDocumentIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    )}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    onClick={() => copyToClipboard('평택, South Korea', 'footer-location')}
-                                    className="group flex items-center gap-2 text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold"
-                                >
-                                    <span>평택, South Korea</span>
-                                    {copiedField === 'footer-location' ? (
-                                        <CheckIcon className="w-3 h-3 text-green-600" />
-                                    ) : (
-                                        <ClipboardDocumentIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    )}
-                                </button>
-                            </li>
-                        </ul>
+                    {/* Contact Information */}
+                    <div className="md:col-span-7">
+                        <h4 className="text-xs uppercase tracking-wider text-white/60 mb-6 font-semibold">Get in Touch</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {contactInfo.map((item) => (
+                                <div key={item.field} className="group">
+                                    <p className="text-[10px] uppercase tracking-wider text-white/40 mb-2 font-medium">{item.label}</p>
+                                    <button
+                                        onClick={() => copyToClipboard(item.value, item.field)}
+                                        className="flex items-center gap-2 text-sm text-white hover:text-blue-400 transition-colors font-semibold"
+                                    >
+                                        <span>{item.value}</span>
+                                        {copiedField === item.field ? (
+                                            <CheckIcon className="w-3.5 h-3.5 text-green-400" />
+                                        ) : (
+                                            <ClipboardDocumentIcon className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        )}
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-neutral-900 dark:text-white font-medium">
+                <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-white/60 font-medium">
                         © 2025 NQ Solution. All rights reserved.
                     </p>
-                    <p className="text-xs text-neutral-900 dark:text-white font-medium">
-                        Design & Development by NQ
-                    </p>
+                    <div className="flex items-center gap-4">
+                        <p className="text-xs text-white/60 font-medium">
+                            Made with ❤️ in 평택
+                        </p>
+                    </div>
                 </div>
             </div>
         </footer>

@@ -125,22 +125,18 @@ export default function Portfolio() {
                                 key={project.id}
                                 className="group relative border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100/50 dark:hover:bg-neutral-900/50 transition-colors"
                             >
-                                <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                                    {/* Number */}
-                                    <div className="md:col-span-1">
-                                        <span className="text-sm text-neutral-900 dark:text-white">
+                                <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start md:items-center">
+                                    {/* Number and Badge - Combined on mobile */}
+                                    <div className="md:col-span-2 flex items-center gap-4">
+                                        <span className="text-sm text-neutral-900 dark:text-white font-medium">
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
-                                    </div>
-
-                                    {/* Status Badge */}
-                                    <div className="md:col-span-1">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                                        <span className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
                                             project.status === 'live'
                                                 ? 'bg-green-500/90 text-white'
                                                 : 'bg-neutral-500/90 text-white'
                                         }`}>
-                                            {project.status === 'live' ? 'LIVE' : 'CONFIDENTIAL'}
+                                            {project.status === 'live' ? 'LIVE' : 'CONF'}
                                         </span>
                                     </div>
 
