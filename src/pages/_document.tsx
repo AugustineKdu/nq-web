@@ -41,8 +41,18 @@ export default function Document() {
                 <meta property="og:description" content="맞춤형 IT 솔루션과 외주개발 서비스" />
                 <meta property="og:url" content="https://nqsolution.kr" />
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+                <meta property="og:image:width" content="600" />
+                <meta property="og:image:height" content="200" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:alt" content="NQ Solution Logo" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="NQ Solution | IT 외주개발 전문" />
+                <meta name="twitter:description" content="맞춤형 IT 솔루션과 외주개발 서비스" />
+                <meta name="twitter:image" content="https://nqsolution.kr/nq_textlogo.png" />
                 
-                {/* 구조화 데이터 - 최소 버전 */}
+                {/* 구조화 데이터 - 조직 정보 */}
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
@@ -50,9 +60,31 @@ export default function Document() {
                             "@context": "https://schema.org",
                             "@type": "Organization",
                             "name": "NQ Solution",
+                            "alternateName": "엔큐솔루션",
                             "url": "https://nqsolution.kr",
-                            "logo": "https://nqsolution.kr/nq_textlogo.png",
-                            "description": "IT 외주개발 및 맞춤형 솔루션 전문 기업"
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://nqsolution.kr/nq_textlogo.png",
+                                "width": 600,
+                                "height": 200
+                            },
+                            "description": "New ideas, Quick execution. 혁신적인 아이디어를 빠르게 실현하는 디지털 솔루션 파트너",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "평택",
+                                "addressCountry": "KR"
+                            },
+                            "contactPoint": {
+                                "@type": "ContactPoint",
+                                "telephone": "+82-10-3368-1594",
+                                "contactType": "customer service",
+                                "email": "duk98823@gmail.com"
+                            },
+                            "sameAs": [
+                                "https://www.emecs.kr"
+                            ],
+                            "foundingDate": "2024",
+                            "serviceType": ["웹 개발", "앱 개발", "UI/UX 디자인", "MVP & 베타 개발", "컨설팅"]
                         })
                     }}
                 />

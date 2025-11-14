@@ -85,6 +85,16 @@ export default function Services() {
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://nqsolution.kr/services" />
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+                <meta property="og:image:width" content="600" />
+                <meta property="og:image:height" content="200" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:alt" content="NQ Solution Logo" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Services | NQ Solution - 웹/앱 개발, UI/UX 디자인" />
+                <meta name="twitter:description" content="디지털 제품과 서비스를 통해 비즈니스 문제를 해결합니다." />
+                <meta name="twitter:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">

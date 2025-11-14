@@ -28,6 +28,16 @@ export default function Contact() {
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://nqsolution.kr/contact" />
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+                <meta property="og:image:width" content="600" />
+                <meta property="og:image:height" content="200" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:alt" content="NQ Solution Logo" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Contact | NQ Solution - 프로젝트 문의" />
+                <meta name="twitter:description" content="새로운 프로젝트를 시작해보세요. 아이디어를 현실로 만들어드립니다." />
+                <meta name="twitter:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">

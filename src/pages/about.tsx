@@ -17,6 +17,16 @@ export default function About() {
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://nqsolution.kr/about" />
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+                <meta property="og:image:width" content="600" />
+                <meta property="og:image:height" content="200" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:alt" content="NQ Solution Logo" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="About | NQ Solution - 혁신과 빠른 실행" />
+                <meta name="twitter:description" content="New ideas, Quick execution. 복잡함을 단순하게, 평범함을 특별하게 만듭니다." />
+                <meta name="twitter:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
