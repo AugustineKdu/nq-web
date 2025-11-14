@@ -1,9 +1,25 @@
 import React from "react";
+import Head from "next/head";
 
 export default function Contact() {
 
 
     return (
+        <>
+            <Head>
+                <title>Contact | NQ Solution - 프로젝트 문의</title>
+                <meta name="description" content="프로젝트에 대해 이야기해보세요. 작은 아이디어부터 큰 비전까지, 함께 현실로 만들어갑니다. 24시간 내 답변 드립니다." />
+                <meta name="keywords" content="프로젝트문의, 상담신청, 견적문의, NQ Solution 연락처" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content="Contact | NQ Solution - 프로젝트 문의" />
+                <meta property="og:description" content="새로운 프로젝트를 시작해보세요. 아이디어를 현실로 만들어드립니다." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://nqsolution.kr/contact" />
+                <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+            </Head>
+
+        (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
@@ -25,7 +41,7 @@ export default function Contact() {
                                 작은 아이디어부터 큰 비전까지,
                                 함께 현실로 만들어갑니다.
                             </p>
-                            <p className="text-lg text-neutral-600 dark:text-neutral-400">
+                            <p className="text-lg text-neutral-700 dark:text-neutral-300">
                                 24시간 내에 답변드립니다.
                             </p>
                         </div>
@@ -103,7 +119,7 @@ export default function Contact() {
                         ].map((faq, i) => (
                             <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-8">
                                 <h3 className="text-xl font-light mb-4">{faq.q}</h3>
-                                <p className="text-neutral-600 dark:text-neutral-500">
+                                <p className="text-neutral-700 dark:text-neutral-300">
                                     {faq.a}
                                 </p>
                             </div>
@@ -112,5 +128,6 @@ export default function Contact() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

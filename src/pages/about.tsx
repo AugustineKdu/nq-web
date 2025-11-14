@@ -1,9 +1,25 @@
 import React from "react";
+import Head from "next/head";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
 
 export default function About() {
     return (
+        <>
+            <Head>
+                <title>About | NQ Solution - 혁신과 빠른 실행</title>
+                <meta name="description" content="NQ Solution은 혁신적인 아이디어와 빠른 실행력을 바탕으로 클라이언트의 비즈니스 성장을 돕는 디지털 솔루션 파트너입니다." />
+                <meta name="keywords" content="NQ Solution, 회사소개, 디지털솔루션, 웹개발회사, 앱개발회사" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content="About | NQ Solution - 혁신과 빠른 실행" />
+                <meta property="og:description" content="New ideas, Quick execution. 복잡함을 단순하게, 평범함을 특별하게 만듭니다." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://nqsolution.kr/about" />
+                <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+            </Head>
+
+        (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
@@ -25,7 +41,7 @@ export default function About() {
                                 우리는 복잡함을 단순하게, 평범함을 특별하게 만듭니다.
                                 최소한의 요소로 최대한의 가치를 창출하는 것이 우리의 철학입니다.
                             </p>
-                            <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                            <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
                                 NQ Solution은 혁신적인 아이디어와 빠른 실행력을 바탕으로
                                 클라이언트의 비즈니스 성장을 돕는 디지털 솔루션 파트너입니다.
                                 우리는 단순히 서비스를 제공하는 것이 아니라,
@@ -77,7 +93,7 @@ export default function About() {
                             <div key={i} className="p-12 bg-white dark:bg-neutral-900">
                                 <p className="text-sm text-neutral-400 dark:text-neutral-600 mb-4">{value.number}</p>
                                 <h3 className="text-2xl font-light mb-4">{value.title}</h3>
-                                <p className="text-neutral-600 dark:text-neutral-400">
+                                <p className="text-neutral-700 dark:text-neutral-300">
                                     {value.desc}
                                 </p>
                             </div>
@@ -98,7 +114,7 @@ export default function About() {
                             <h2 className="text-4xl font-light mb-4 text-neutral-900 dark:text-white">
                                 프로젝트를 시작할 준비가 되셨나요?
                             </h2>
-                            <p className="text-lg text-neutral-600 dark:text-neutral-400">
+                            <p className="text-lg text-neutral-700 dark:text-neutral-300">
                                 당신의 아이디어에 NQ의 실행력을 더해보세요.
                             </p>
                         </div>
@@ -116,5 +132,6 @@ export default function About() {
 
 
         </div>
+        </>
     );
 }

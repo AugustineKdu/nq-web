@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
 
@@ -59,6 +60,20 @@ export default function Services() {
     ];
 
     return (
+        <>
+            <Head>
+                <title>Services | NQ Solution - 웹/앱 개발, UI/UX 디자인</title>
+                <meta name="description" content="웹 개발, 앱 개발, UI/UX 디자인, 컨설팅 서비스를 제공합니다. 전략부터 실행까지 최고의 품질을 보장합니다." />
+                <meta name="keywords" content="웹개발, 앱개발, UI/UX디자인, 컨설팅, Next.js, React, Flutter, 크로스플랫폼" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content="Services | NQ Solution - 웹/앱 개발, UI/UX 디자인" />
+                <meta property="og:description" content="디지털 제품과 서비스를 통해 비즈니스 문제를 해결합니다. 전략부터 실행까지, 모든 단계에서 최고의 품질을 보장합니다." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://nqsolution.kr/services" />
+                <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+            </Head>
+
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
@@ -102,12 +117,12 @@ export default function Services() {
                                     </div>
 
                                     <div className="md:col-span-5">
-                                        <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                                        <p className="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
                                             {service.description}
                                         </p>
                                         <div className="flex flex-wrap gap-4">
                                             {service.details.map((detail, i) => (
-                                                <span key={i} className="text-sm text-neutral-500 dark:text-neutral-400">
+                                                <span key={i} className="text-sm text-neutral-600 dark:text-neutral-400">
                                                     {detail}
                                                 </span>
                                             ))}
@@ -168,5 +183,6 @@ export default function Services() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

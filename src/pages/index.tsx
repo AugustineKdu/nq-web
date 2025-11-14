@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { ArrowRight } from "lucide-react";
 import Link from 'next/link';
 import Image from "next/image";
@@ -6,6 +7,27 @@ import Image from "next/image";
 export default function Home() {
 
   return (
+    <>
+      <Head>
+        <title>NQ Solution | 혁신적인 디지털 솔루션 파트너</title>
+        <meta name="description" content="New idea를 더하고 Quick action으로 실행하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인 전문." />
+        <meta name="keywords" content="웹개발, 앱개발, UI/UX디자인, Next.js, React, 디지털솔루션, NQ Solution" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="NQ Solution | 혁신적인 디지털 솔루션 파트너" />
+        <meta property="og:description" content="New idea를 더하고 Quick action으로 실행하는 디지털 솔루션 파트너" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://nqsolution.kr" />
+        <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="NQ Solution | 혁신적인 디지털 솔루션 파트너" />
+        <meta name="twitter:description" content="New idea를 더하고 Quick action으로 실행하는 디지털 솔루션 파트너" />
+        <meta name="twitter:image" content="https://nqsolution.kr/nq_textlogo.png" />
+      </Head>
+
+    (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
       {/* Grid Background */}
       <div className="fixed inset-0 opacity-[0.02] dark:opacity-[0.05]">
@@ -129,7 +151,7 @@ export default function Home() {
                 className="group relative p-12 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:shadow-lg dark:hover:shadow-2xl transition-all"
               >
                 <h3 className="text-3xl font-light mb-4 text-neutral-900 dark:text-neutral-50">{service.title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-300 mb-8">
+                <p className="text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">
                   {service.desc}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -182,15 +204,15 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Excellence</h4>
-                <p className="text-neutral-600 dark:text-neutral-400">모든 작업에서 최고의 품질을 추구하며, 디테일에 집착합니다.</p>
+                <p className="text-neutral-700 dark:text-neutral-300">모든 작업에서 최고의 품질을 추구하며, 디테일에 집착합니다.</p>
               </div>
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Innovation</h4>
-                <p className="text-neutral-600 dark:text-neutral-400">새로운 기술과 창의적인 접근으로 경계를 넘어섭니다.</p>
+                <p className="text-neutral-700 dark:text-neutral-300">새로운 기술과 창의적인 접근으로 경계를 넘어섭니다.</p>
               </div>
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Partnership</h4>
-                <p className="text-neutral-600 dark:text-neutral-400">클라이언트와 함께 성장하는 진정한 파트너가 됩니다.</p>
+                <p className="text-neutral-700 dark:text-neutral-300">클라이언트와 함께 성장하는 진정한 파트너가 됩니다.</p>
               </div>
             </div>
           </div>
@@ -223,8 +245,8 @@ export default function Home() {
               >
                 <span className="text-sm text-neutral-400 dark:text-neutral-300">{process.step}</span>
                 <h3 className="text-2xl font-light flex-1 text-neutral-900 dark:text-neutral-50">{process.title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-100">{process.desc}</p>
-                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-600 dark:text-neutral-300" />
+                <p className="text-neutral-700 dark:text-neutral-200">{process.desc}</p>
+                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-700 dark:text-neutral-300" />
               </div>
             ))}
           </div>
@@ -265,5 +287,6 @@ export default function Home() {
         </div>
       </section >
     </div >
+    </>
   );
 }
