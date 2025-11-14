@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
+import { ClipboardDocumentIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 export default function Contact() {
+    const [copiedField, setCopiedField] = useState<string | null>(null);
 
+    const copyToClipboard = async (text: string, field: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopiedField(field);
+            setTimeout(() => setCopiedField(null), 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
 
     return (
         <>
@@ -49,23 +60,73 @@ export default function Contact() {
                             <div className="space-y-8">
                                  <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Representative</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">김덕웅</p>
+                                    <button
+                                        onClick={() => copyToClipboard('김덕웅', 'name')}
+                                        className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >
+                                        <span>김덕웅</span>
+                                        {copiedField === 'name' ? (
+                                            <CheckIcon className="w-4 h-4 text-green-600" />
+                                        ) : (
+                                            <ClipboardDocumentIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        )}
+                                    </button>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Email</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">duk98823@gmail.com</p>
+                                    <button
+                                        onClick={() => copyToClipboard('duk98823@gmail.com', 'email')}
+                                        className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >
+                                        <span>duk98823@gmail.com</span>
+                                        {copiedField === 'email' ? (
+                                            <CheckIcon className="w-4 h-4 text-green-600" />
+                                        ) : (
+                                            <ClipboardDocumentIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        )}
+                                    </button>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Phone</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">010-3368-1594</p>
+                                    <button
+                                        onClick={() => copyToClipboard('010-3368-1594', 'phone')}
+                                        className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >
+                                        <span>010-3368-1594</span>
+                                        {copiedField === 'phone' ? (
+                                            <CheckIcon className="w-4 h-4 text-green-600" />
+                                        ) : (
+                                            <ClipboardDocumentIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        )}
+                                    </button>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Company Phone</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">031-8027-3368</p>
+                                    <button
+                                        onClick={() => copyToClipboard('031-8027-3368', 'companyPhone')}
+                                        className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >
+                                        <span>031-8027-3368</span>
+                                        {copiedField === 'companyPhone' ? (
+                                            <CheckIcon className="w-4 h-4 text-green-600" />
+                                        ) : (
+                                            <ClipboardDocumentIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        )}
+                                    </button>
                                 </div>
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Office</p>
-                                    <p className="text-lg text-neutral-900 dark:text-white font-semibold">평택, South Korea</p>
+                                    <button
+                                        onClick={() => copyToClipboard('평택, South Korea', 'office')}
+                                        className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >
+                                        <span>평택, South Korea</span>
+                                        {copiedField === 'office' ? (
+                                            <CheckIcon className="w-4 h-4 text-green-600" />
+                                        ) : (
+                                            <ClipboardDocumentIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         </div>

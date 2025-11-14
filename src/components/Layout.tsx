@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import ThemeToggle from "./ThemeToggle";
 import AnimatedBackground from "./AnimatedBackground";
-import { Bars3Icon as Menu, XMarkIcon as X } from "@heroicons/react/24/outline";
+import { Bars3Icon as Menu, XMarkIcon as X, ClipboardDocumentIcon, CheckIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => void }) => {
@@ -28,7 +28,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? "bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+            ? "bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700"
             : "bg-transparent"
             }`}>
             <div className="max-w-6xl mx-auto px-8">
@@ -97,7 +97,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
             </div>
 
             {/* Mobile Menu */}
-            <div className={`md:hidden absolute top-full left-0 right-0 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+            <div className={`md:hidden absolute top-full left-0 right-0 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
                 }`}>
                 <div className="px-8 py-6 space-y-4">
                     {navItems.map((item) => (
@@ -120,8 +120,20 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
 };
 
 const Footer = ({ dark }: { dark: boolean }) => {
+    const [copiedField, setCopiedField] = useState<string | null>(null);
+
+    const copyToClipboard = async (text: string, field: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopiedField(field);
+            setTimeout(() => setCopiedField(null), 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
+
     return (
-        <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+        <footer className="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
             <div className="max-w-6xl mx-auto px-8 py-20">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
@@ -142,30 +154,66 @@ const Footer = ({ dark }: { dark: boolean }) => {
                                 className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-100' : 'opacity-0'}`}
                             />
                         </div>
-                        <p className="text-sm text-neutral-700 dark:text-neutral-400 max-w-md">
+                        <p className="text-sm text-neutral-900 dark:text-white max-w-md font-medium">
                             New idea를 더하고 Quick action으로 실행하여<br />
                             솔루션을 제공합니다.
                         </p>
                     </div>
 
-             
+
                     {/* Contact */}
                     <div>
-                        <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">Contact</h4>
-                        <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-                            <li>duk98823@gmail.com</li>
-                            <li>+82 10-3368-1594</li>
-                            <li>평택, South Korea</li>
+                        <h4 className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-4 font-medium">Contact</h4>
+                        <ul className="space-y-3 text-sm">
+                            <li>
+                                <button
+                                    onClick={() => copyToClipboard('duk98823@gmail.com', 'footer-email')}
+                                    className="group flex items-center gap-2 text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold"
+                                >
+                                    <span>duk98823@gmail.com</span>
+                                    {copiedField === 'footer-email' ? (
+                                        <CheckIcon className="w-3 h-3 text-green-600" />
+                                    ) : (
+                                        <ClipboardDocumentIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    )}
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => copyToClipboard('010-3368-1594', 'footer-phone')}
+                                    className="group flex items-center gap-2 text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold"
+                                >
+                                    <span>+82 10-3368-1594</span>
+                                    {copiedField === 'footer-phone' ? (
+                                        <CheckIcon className="w-3 h-3 text-green-600" />
+                                    ) : (
+                                        <ClipboardDocumentIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    )}
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => copyToClipboard('평택, South Korea', 'footer-location')}
+                                    className="group flex items-center gap-2 text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold"
+                                >
+                                    <span>평택, South Korea</span>
+                                    {copiedField === 'footer-location' ? (
+                                        <CheckIcon className="w-3 h-3 text-green-600" />
+                                    ) : (
+                                        <ClipboardDocumentIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    )}
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                <div className="pt-8 border-t border-slate-200 dark:border-slate-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-neutral-900 dark:text-white font-medium">
                         © 2025 NQ Solution. All rights reserved.
                     </p>
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    <p className="text-xs text-neutral-900 dark:text-white font-medium">
                         Design & Development by NQ
                     </p>
                 </div>
@@ -176,7 +224,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
 
 const Layout = ({ children, dark, setDark }: { children: React.ReactNode, dark: boolean, setDark: (d: boolean) => void }) => {
     return (
-        <div className="min-h-screen bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative">
             {/* Animated Background */}
             <AnimatedBackground dark={dark} />
 

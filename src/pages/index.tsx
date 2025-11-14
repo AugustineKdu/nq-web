@@ -28,7 +28,7 @@ export default function Home() {
       </Head>
 
     (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-neutral-900 dark:text-neutral-100">
       {/* Grid Background */}
       <div className="fixed inset-0 opacity-[0.02] dark:opacity-[0.05]">
         <div
@@ -61,7 +61,7 @@ export default function Home() {
               alt="NQ Solution"
               width={480}
               height={160}
-              className="w-full max-w-md mx-auto md:mx-0 dark:invert"
+              className="w-full max-w-md mx-auto md:mx-0 dark:brightness-0 dark:invert dark:hue-rotate-90 dark:saturate-150"
               priority
             />
             <h1 className="text-[clamp(3rem,10vw,8rem)] font-light leading-[0.9] tracking-tighter">

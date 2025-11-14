@@ -57,7 +57,7 @@ export default function Document() {
                     }}
                 />
             </Head>
-            <body className="bg-white dark:bg-neutral-900 antialiased transition-colors duration-300">
+            <body className="bg-slate-50 dark:bg-slate-900 antialiased transition-colors duration-300">
                 <Main />
                 <NextScript />
             </body>
