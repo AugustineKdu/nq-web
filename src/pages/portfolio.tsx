@@ -75,7 +75,7 @@ export default function Portfolio() {
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
                 <div className="max-w-6xl mx-auto">
@@ -90,7 +90,7 @@ export default function Portfolio() {
                     </div>
 
                     {/* Filter Tabs */}
-                    <div className="flex gap-6 border-b border-slate-200 dark:border-slate-700">
+                    <div className="flex gap-6 border-b border-neutral-200 dark:border-neutral-800">
                         {[
                             { value: 'all', label: 'All', count: projects.length },
                             { value: 'live', label: 'Live', count: projects.filter(p => p.status === 'live').length },
@@ -123,7 +123,7 @@ export default function Portfolio() {
                         {filteredProjects.map((project, index) => (
                             <div
                                 key={project.id}
-                                className="group relative border-b border-slate-200 dark:border-slate-700 hover:bg-neutral-100/50 dark:hover:bg-neutral-900/50 transition-colors"
+                                className="group relative border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100/50 dark:hover:bg-neutral-900/50 transition-colors"
                             >
                                 <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                                     {/* Number */}
@@ -138,7 +138,7 @@ export default function Portfolio() {
                                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                                             project.status === 'live'
                                                 ? 'bg-green-500/90 text-white'
-                                                : 'bg-slate-500/90 text-white'
+                                                : 'bg-neutral-500/90 text-white'
                                         }`}>
                                             {project.status === 'live' ? 'LIVE' : 'CONFIDENTIAL'}
                                         </span>
@@ -217,7 +217,7 @@ export default function Portfolio() {
                         </div>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-50 text-neutral-900 rounded-full hover:scale-105 transition-transform group"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-neutral-50 text-neutral-900 rounded-full hover:scale-105 transition-transform group"
                         >
                             <span className="font-medium">Start a Project</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -28,7 +28,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? "bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700"
+            ? "bg-neutral-50/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
             : "bg-transparent"
             }`}>
             <div className="max-w-6xl mx-auto px-8">
@@ -97,7 +97,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
             </div>
 
             {/* Mobile Menu */}
-            <div className={`md:hidden absolute top-full left-0 right-0 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+            <div className={`md:hidden absolute top-full left-0 right-0 bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 ${mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
                 }`}>
                 <div className="px-8 py-6 space-y-4">
                     {navItems.map((item) => (
@@ -133,7 +133,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
     };
 
     return (
-        <footer className="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
+        <footer className="bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
             <div className="max-w-6xl mx-auto px-8 py-20">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
@@ -209,7 +209,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-slate-200 dark:border-slate-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-xs text-neutral-900 dark:text-white font-medium">
                         © 2025 NQ Solution. All rights reserved.
                     </p>
@@ -224,7 +224,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
 
 const Layout = ({ children, dark, setDark }: { children: React.ReactNode, dark: boolean, setDark: (d: boolean) => void }) => {
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative">
+        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative">
             {/* Animated Background */}
             <AnimatedBackground dark={dark} />
 

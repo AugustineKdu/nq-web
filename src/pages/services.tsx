@@ -74,7 +74,7 @@ export default function Services() {
                 <meta property="og:image" content="https://nqsolution.kr/nq_textlogo.png" />
             </Head>
 
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
                 <div className="max-w-6xl mx-auto">
@@ -137,7 +137,7 @@ export default function Services() {
             </section>
 
             {/* Process Section */}
-            <section className="py-20 px-8 bg-slate-50 dark:bg-slate-900">
+            <section className="py-20 px-8 bg-neutral-50 dark:bg-neutral-900">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-16">
                         <h2 className="text-5xl font-light tracking-tight text-neutral-900 dark:text-white">Our Process</h2>
@@ -176,7 +176,7 @@ export default function Services() {
                     >
                         <span className="relative">
                             무료 상담 신청
-                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-slate-50 group-hover:w-full transition-all duration-500" />
+                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-neutral-50 group-hover:w-full transition-all duration-500" />
                         </span>
                         <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                     </Link>
