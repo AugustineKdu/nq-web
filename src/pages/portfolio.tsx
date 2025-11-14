@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { ArrowRight, Lock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from 'next/link';
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 

@@ -119,7 +119,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (d: boolean) => voi
     );
 };
 
-const Footer = ({ dark }: { dark: boolean }) => {
+const Footer = () => {
     const [copiedField, setCopiedField] = useState<string | null>(null);
 
     const copyToClipboard = async (text: string, field: string) => {
@@ -218,7 +218,7 @@ const Layout = ({ children, dark, setDark }: { children: React.ReactNode, dark: 
             <main className="pt-20 relative z-10">
                 {children}
             </main>
-            <Footer dark={dark} />
+            <Footer />
         </div>
     );
 };
