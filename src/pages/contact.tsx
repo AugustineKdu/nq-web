@@ -12,7 +12,22 @@ export default function Contact() {
 
     const copyToClipboard = async (text: string, field: string) => {
         try {
-            await navigator.clipboard.writeText(text);
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                // Fallback for older browsers or non-secure contexts
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                textArea.remove();
+            }
             setCopiedField(field);
             setTimeout(() => setCopiedField(null), 2000);
         } catch (err) {
@@ -167,9 +182,6 @@ export default function Contact() {
                 >
                     {/* Business Card with Flip Animation */}
                     <div className="relative perspective-1000">
-                        {/* Decorative Background */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-20 dark:opacity-30"></div>
-
                         {/* Flip Container */}
                         <div
                             className={`relative w-full transition-transform duration-700 transform-style-3d ${
@@ -185,124 +197,123 @@ export default function Contact() {
                                 className="portrait:block landscape:hidden backface-hidden"
                                 style={{ backfaceVisibility: 'hidden' }}
                             >
-                                <div className="relative bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800">
-                                    {/* Top Gradient Bar */}
-                                    <div className="h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
-
+                                <div className="relative bg-white dark:bg-neutral-900 rounded-3xl shadow-xl overflow-hidden border-2 border-neutral-200 dark:border-neutral-800">
                                     {/* Card Body */}
                                     <div className="p-8">
                                         {/* Company Info */}
-                                        <div className="mb-6 text-center">
-                                            <h2 className="text-3xl font-light tracking-tight text-neutral-900 dark:text-white mb-2">
-                                                NQ Solution
+                                        <div className="mb-8 text-center">
+                                            <h2 className="text-4xl font-bold tracking-tighter text-neutral-900 dark:text-white mb-2">
+                                                NQ
                                             </h2>
-                                            <p className="text-sm text-neutral-600 dark:text-neutral-400 tracking-wider">
+                                            <p className="text-xs text-neutral-600 dark:text-neutral-400 tracking-[0.3em] uppercase">
+                                                Solution
+                                            </p>
+                                        </div>
+
+                                        {/* Representative Name - No Copy */}
+                                        <div className="mb-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+                                            <p className="text-center text-lg font-semibold text-neutral-900 dark:text-white">
+                                                대표 김덕웅
+                                            </p>
+                                            <p className="text-center text-xs text-neutral-500 dark:text-neutral-500 mt-1 italic">
                                                 Digital Innovation Partner
                                             </p>
                                         </div>
 
-                                        {/* Divider */}
-                                        <div className="w-16 h-px bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent mx-auto mb-6"></div>
-
-                                        {/* Contact Information */}
-                                        <div className="space-y-4">
-                                            <div>
-                                                <p className="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-2 font-semibold">Representative</p>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        copyToClipboard('김덕웅', 'name');
-                                                    }}
-                                                    className="group w-full flex items-center justify-between text-neutral-900 dark:text-white active:text-blue-600 dark:active:text-blue-400 transition-colors"
-                                                >
-                                                    <span className="font-semibold">대표 김덕웅</span>
-                                                    {copiedField === 'name' ? (
-                                                        <CheckIcon className="w-4 h-4 text-green-500" />
-                                                    ) : (
-                                                        <ClipboardDocumentIcon className="w-4 h-4" />
-                                                    )}
-                                                </button>
+                                        {/* Contact Grid */}
+                                        <div className="space-y-5">
+                                            {/* Email */}
+                                            <div className="flex items-start gap-4">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                    <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">E</span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-500 mb-1">Email</p>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            copyToClipboard('duk98823@gmail.com', 'email');
+                                                        }}
+                                                        className="w-full text-left group"
+                                                    >
+                                                        <p className="text-sm font-medium text-neutral-900 dark:text-white group-active:text-blue-600 dark:group-active:text-blue-400 transition-colors break-all">
+                                                            duk98823@gmail.com
+                                                            {copiedField === 'email' && (
+                                                                <span className="ml-2 text-xs text-green-500">✓ Copied</span>
+                                                            )}
+                                                        </p>
+                                                    </button>
+                                                </div>
                                             </div>
 
-                                            <div>
-                                                <p className="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-2 font-semibold">Email</p>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        copyToClipboard('duk98823@gmail.com', 'email');
-                                                    }}
-                                                    className="group w-full flex items-center justify-between text-neutral-900 dark:text-white active:text-blue-600 dark:active:text-blue-400 transition-colors"
-                                                >
-                                                    <span className="font-medium text-sm">duk98823@gmail.com</span>
-                                                    {copiedField === 'email' ? (
-                                                        <CheckIcon className="w-4 h-4 text-green-500" />
-                                                    ) : (
-                                                        <ClipboardDocumentIcon className="w-4 h-4" />
-                                                    )}
-                                                </button>
+                                            {/* Mobile */}
+                                            <div className="flex items-start gap-4">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                    <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">M</span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-500 mb-1">Mobile</p>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            copyToClipboard('01071681594', 'phone');
+                                                        }}
+                                                        className="w-full text-left group"
+                                                    >
+                                                        <p className="text-base font-semibold text-neutral-900 dark:text-white group-active:text-blue-600 dark:group-active:text-blue-400 transition-colors">
+                                                            010-7168-1594
+                                                            {copiedField === 'phone' && (
+                                                                <span className="ml-2 text-xs text-green-500">✓ Copied</span>
+                                                            )}
+                                                        </p>
+                                                    </button>
+                                                </div>
                                             </div>
 
-                                            <div>
-                                                <p className="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-2 font-semibold">Phone</p>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        copyToClipboard('01071681594', 'phone');
-                                                    }}
-                                                    className="group w-full flex items-center justify-between text-neutral-900 dark:text-white active:text-blue-600 dark:active:text-blue-400 transition-colors"
-                                                >
-                                                    <span className="font-semibold">010-7168-1594</span>
-                                                    {copiedField === 'phone' ? (
-                                                        <CheckIcon className="w-4 h-4 text-green-500" />
-                                                    ) : (
-                                                        <ClipboardDocumentIcon className="w-4 h-4" />
-                                                    )}
-                                                </button>
+                                            {/* Company Phone */}
+                                            <div className="flex items-start gap-4">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                    <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">T</span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-500 mb-1">Tel</p>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            copyToClipboard('01033681594', 'companyPhone');
+                                                        }}
+                                                        className="w-full text-left group"
+                                                    >
+                                                        <p className="text-base font-semibold text-neutral-900 dark:text-white group-active:text-blue-600 dark:group-active:text-blue-400 transition-colors">
+                                                            010-3368-1594
+                                                            {copiedField === 'companyPhone' && (
+                                                                <span className="ml-2 text-xs text-green-500">✓ Copied</span>
+                                                            )}
+                                                        </p>
+                                                    </button>
+                                                </div>
                                             </div>
 
-                                            <div>
-                                                <p className="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-2 font-semibold">Company Phone</p>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        copyToClipboard('01033681594', 'companyPhone');
-                                                    }}
-                                                    className="group w-full flex items-center justify-between text-neutral-900 dark:text-white active:text-blue-600 dark:active:text-blue-400 transition-colors"
-                                                >
-                                                    <span className="font-semibold">010-3368-1594</span>
-                                                    {copiedField === 'companyPhone' ? (
-                                                        <CheckIcon className="w-4 h-4 text-green-500" />
-                                                    ) : (
-                                                        <ClipboardDocumentIcon className="w-4 h-4" />
-                                                    )}
-                                                </button>
-                                            </div>
-
-                                            <div>
-                                                <p className="text-[10px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-2 font-semibold">Office</p>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        copyToClipboard('평택, South Korea', 'office');
-                                                    }}
-                                                    className="group w-full flex items-center justify-between text-neutral-900 dark:text-white active:text-blue-600 dark:active:text-blue-400 transition-colors"
-                                                >
-                                                    <span className="font-medium">평택, South Korea</span>
-                                                    {copiedField === 'office' ? (
-                                                        <CheckIcon className="w-4 h-4 text-green-500" />
-                                                    ) : (
-                                                        <ClipboardDocumentIcon className="w-4 h-4" />
-                                                    )}
-                                                </button>
+                                            {/* Office - No Copy */}
+                                            <div className="flex items-start gap-4">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                    <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">L</span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-500 mb-1">Location</p>
+                                                    <p className="text-sm font-medium text-neutral-900 dark:text-white">
+                                                        평택, South Korea
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
 
                                         {/* Flip Hint */}
                                         <button
                                             onClick={() => setIsFlipped(true)}
-                                            className="mt-6 pt-4 w-full border-t border-neutral-200 dark:border-neutral-800 text-center text-xs text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors"
+                                            className="mt-8 pt-6 w-full border-t border-neutral-200 dark:border-neutral-800 text-center text-xs text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors"
                                         >
-                                            Tap to flip →
+                                            Tap to see more →
                                         </button>
                                     </div>
                                 </div>
@@ -347,118 +358,102 @@ export default function Contact() {
 
                             {/* Landscape Card Layout */}
                             <div className="portrait:hidden landscape:block">
-                                <div className="relative bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800">
+                                <div className="relative bg-white dark:bg-neutral-900 rounded-3xl shadow-xl overflow-hidden border-2 border-neutral-200 dark:border-neutral-800">
                                     <div className="flex h-[280px]">
                                         {/* Left Side - Company Info */}
-                                        <div className="w-1/3 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex flex-col items-center justify-center p-6 text-white">
+                                        <div className="w-2/5 bg-neutral-900 dark:bg-neutral-800 flex flex-col items-center justify-center p-6 text-white">
                                             <div className="text-center">
-                                                <h2 className="text-2xl font-bold tracking-tight mb-2">
+                                                <h2 className="text-3xl font-bold tracking-tighter mb-2">
                                                     NQ
                                                 </h2>
-                                                <p className="text-xs tracking-widest opacity-80 mb-6">
-                                                    SOLUTION
+                                                <p className="text-xs tracking-[0.3em] uppercase opacity-80 mb-6">
+                                                    Solution
                                                 </p>
                                                 <div className="w-12 h-px bg-white/30 mx-auto mb-4"></div>
-                                                <p className="text-[10px] leading-relaxed opacity-90">
-                                                    Digital<br />Innovation<br />Partner
+                                                <p className="text-sm font-semibold mb-2">
+                                                    대표 김덕웅
+                                                </p>
+                                                <p className="text-[10px] opacity-70 italic">
+                                                    Digital Innovation Partner
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* Right Side - Contact Info */}
-                                        <div className="w-2/3 p-6 overflow-y-auto">
-                                            <div className="space-y-3">
-                                                <div>
-                                                    <p className="text-[8px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-1 font-semibold">Representative</p>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            copyToClipboard('김덕웅', 'name');
-                                                        }}
-                                                        className="w-full flex items-center justify-between text-sm text-neutral-900 dark:text-white active:text-blue-600 transition-colors"
-                                                    >
-                                                        <span className="font-semibold">대표 김덕웅</span>
-                                                        {copiedField === 'name' ? (
-                                                            <CheckIcon className="w-3 h-3 text-green-500" />
-                                                        ) : (
-                                                            <ClipboardDocumentIcon className="w-3 h-3" />
-                                                        )}
-                                                    </button>
-                                                </div>
-                                                <div>
-                                                    <p className="text-[8px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-1 font-semibold">Email</p>
+                                        <div className="w-3/5 p-6 overflow-y-auto">
+                                            <div className="space-y-4">
+                                                {/* Email */}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                        <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">E</span>
+                                                    </div>
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             copyToClipboard('duk98823@gmail.com', 'email');
                                                         }}
-                                                        className="w-full flex items-center justify-between text-xs text-neutral-900 dark:text-white active:text-blue-600 transition-colors"
+                                                        className="flex-1 text-left group"
                                                     >
-                                                        <span className="font-medium">duk98823@gmail.com</span>
-                                                        {copiedField === 'email' ? (
-                                                            <CheckIcon className="w-3 h-3 text-green-500" />
-                                                        ) : (
-                                                            <ClipboardDocumentIcon className="w-3 h-3" />
-                                                        )}
+                                                        <p className="text-xs font-medium text-neutral-900 dark:text-white group-active:text-blue-600 transition-colors break-all">
+                                                            duk98823@gmail.com
+                                                            {copiedField === 'email' && (
+                                                                <span className="ml-1 text-[10px] text-green-500">✓</span>
+                                                            )}
+                                                        </p>
                                                     </button>
                                                 </div>
-                                                <div>
-                                                    <p className="text-[8px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-1 font-semibold">Phone</p>
+
+                                                {/* Mobile */}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                        <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">M</span>
+                                                    </div>
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             copyToClipboard('01071681594', 'phone');
                                                         }}
-                                                        className="w-full flex items-center justify-between text-sm text-neutral-900 dark:text-white active:text-blue-600 transition-colors"
+                                                        className="flex-1 text-left group"
                                                     >
-                                                        <span className="font-semibold">010-7168-1594</span>
-                                                        {copiedField === 'phone' ? (
-                                                            <CheckIcon className="w-3 h-3 text-green-500" />
-                                                        ) : (
-                                                            <ClipboardDocumentIcon className="w-3 h-3" />
-                                                        )}
+                                                        <p className="text-sm font-semibold text-neutral-900 dark:text-white group-active:text-blue-600 transition-colors">
+                                                            010-7168-1594
+                                                            {copiedField === 'phone' && (
+                                                                <span className="ml-1 text-xs text-green-500">✓</span>
+                                                            )}
+                                                        </p>
                                                     </button>
                                                 </div>
-                                                <div>
-                                                    <p className="text-[8px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-1 font-semibold">Company</p>
+
+                                                {/* Tel */}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                        <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">T</span>
+                                                    </div>
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             copyToClipboard('01033681594', 'companyPhone');
                                                         }}
-                                                        className="w-full flex items-center justify-between text-sm text-neutral-900 dark:text-white active:text-blue-600 transition-colors"
+                                                        className="flex-1 text-left group"
                                                     >
-                                                        <span className="font-semibold">010-3368-1594</span>
-                                                        {copiedField === 'companyPhone' ? (
-                                                            <CheckIcon className="w-3 h-3 text-green-500" />
-                                                        ) : (
-                                                            <ClipboardDocumentIcon className="w-3 h-3" />
-                                                        )}
+                                                        <p className="text-sm font-semibold text-neutral-900 dark:text-white group-active:text-blue-600 transition-colors">
+                                                            010-3368-1594
+                                                            {copiedField === 'companyPhone' && (
+                                                                <span className="ml-1 text-xs text-green-500">✓</span>
+                                                            )}
+                                                        </p>
                                                     </button>
                                                 </div>
-                                                <div>
-                                                    <p className="text-[8px] uppercase tracking-widest text-neutral-500 dark:text-neutral-500 mb-1 font-semibold">Office</p>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            copyToClipboard('평택, South Korea', 'office');
-                                                        }}
-                                                        className="w-full flex items-center justify-between text-xs text-neutral-900 dark:text-white active:text-blue-600 transition-colors"
-                                                    >
-                                                        <span className="font-medium">평택, South Korea</span>
-                                                        {copiedField === 'office' ? (
-                                                            <CheckIcon className="w-3 h-3 text-green-500" />
-                                                        ) : (
-                                                            <ClipboardDocumentIcon className="w-3 h-3" />
-                                                        )}
-                                                    </button>
-                                                </div>
-                                            </div>
 
-                                            <div className="mt-4 pt-3 border-t border-neutral-200 dark:border-neutral-800">
-                                                <p className="text-center text-[10px] text-neutral-500 dark:text-neutral-500 italic">
-                                                    New ideas, Quick execution
-                                                </p>
+                                                {/* Location */}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                                                        <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">L</span>
+                                                    </div>
+                                                    <p className="text-xs font-medium text-neutral-900 dark:text-white">
+                                                        평택, South Korea
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -467,8 +462,8 @@ export default function Contact() {
                         </div>
 
                         {/* Tap to Copy Hint */}
-                        <p className="text-center text-xs text-neutral-500 dark:text-neutral-500 mt-4 animate-pulse">
-                            Tap any field to copy
+                        <p className="text-center text-xs text-neutral-500 dark:text-neutral-500 mt-4">
+                            Tap phone or email to copy
                         </p>
                     </div>
                 </div>
