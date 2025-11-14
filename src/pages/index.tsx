@@ -76,15 +76,15 @@ export default function Home() {
           {/* Description */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div>
-              <p className="text-lg font-light leading-relaxed text-neutral-900 dark:text-neutral-50">
+              <p className="text-lg font-light leading-relaxed text-neutral-800 dark:text-neutral-50">
                 혁신적인 아이디어를 빠르게 실현하는<br />
                 디지털 솔루션 파트너
               </p>
             </div>
             <div className="md:text-right">
-              <p className="text-sm text-neutral-800 dark:text-neutral-100">
+              <p className="text-sm text-neutral-700 dark:text-neutral-100">
                 웹 개발 / 앱 개발 / UI·UX 디자인<br />
-                2025 서울, 대한민국
+                2024 평택, 대한민국
               </p>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function Home() {
               <span className="text-sm text-neutral-400 dark:text-neutral-500">02</span>
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-neutral-50">Services</h2>
+            <h2 className="text-6xl font-light tracking-tight text-neutral-800 dark:text-neutral-50">Services</h2>
           </div>
 
           {/* Services Grid */}
@@ -188,8 +188,8 @@ export default function Home() {
           {/* Main Content */}
           <div className="mb-32">
             <div className="max-w-4xl">
-              <p className="text-3xl font-light leading-relaxed text-neutral-900 dark:text-neutral-50 mb-8">
-                우리는 단순함 속에서 <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-semibold">혁신</span>을 찾습니다.
+              <p className="text-3xl font-light leading-relaxed text-neutral-800 dark:text-neutral-50 mb-8">
+                우리는 단순함 속에서 <span className="text-neutral-800 dark:bg-gradient-to-r dark:from-blue-500 dark:to-cyan-500 dark:bg-clip-text dark:text-transparent font-semibold">혁신</span>을 찾습니다.
               </p>
               <p className="text-xl text-neutral-700 dark:text-neutral-300 leading-relaxed">
                 복잡한 문제를 본질에 집중하여 명확하게 풀어내며, 모든 프로젝트에 깊이와 의미를 담습니다.
@@ -200,7 +200,7 @@ export default function Home() {
 
           {/* Values Grid */}
           <div>
-            <h3 className="text-2xl font-light mb-12 text-neutral-900 dark:text-neutral-50">Our Core Values</h3>
+            <h3 className="text-2xl font-light mb-12 text-neutral-800 dark:text-neutral-50">Our Core Values</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="group p-8 border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <h4 className="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-50">Excellence</h4>
@@ -227,7 +227,7 @@ export default function Home() {
               <span className="text-sm text-neutral-400 dark:text-neutral-500">04</span>
               <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
             </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-neutral-50">Process</h2>
+            <h2 className="text-6xl font-light tracking-tight text-neutral-800 dark:text-neutral-50">Process</h2>
           </div>
 
           {/* Process Steps */}

@@ -89,7 +89,7 @@ export default function Services() {
                     </div>
 
                     <div className="max-w-3xl">
-                        <p className="text-2xl font-light leading-relaxed">
+                        <p className="text-2xl font-light leading-relaxed text-neutral-800 dark:text-neutral-100">
                             우리는 디지털 제품과 서비스를 통해 비즈니스 문제를 해결합니다.
                             전략부터 실행까지, 모든 단계에서 최고의 품질을 보장합니다.
                         </p>
@@ -140,7 +140,7 @@ export default function Services() {
             <section className="py-20 px-8 bg-white dark:bg-neutral-900">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-16">
-                        <h2 className="text-5xl font-light tracking-tight">Our Process</h2>
+                        <h2 className="text-5xl font-light tracking-tight text-neutral-800 dark:text-neutral-100">Our Process</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
@@ -152,9 +152,9 @@ export default function Services() {
                             { step: "05", title: "Launch", duration: "1 week" }
                         ].map((process, i) => (
                             <div key={i} className="text-center">
-                                <p className="text-4xl font-light mb-4">{process.step}</p>
-                                <h3 className="text-lg mb-2">{process.title}</h3>
-                                <p className="text-sm text-neutral-500 dark:text-neutral-400">{process.duration}</p>
+                                <p className="text-4xl font-light mb-4 text-neutral-800 dark:text-neutral-100">{process.step}</p>
+                                <h3 className="text-lg mb-2 text-neutral-800 dark:text-neutral-100">{process.title}</h3>
+                                <p className="text-sm text-neutral-600 dark:text-neutral-400">{process.duration}</p>
                             </div>
                         ))}
                     </div>
@@ -164,10 +164,10 @@ export default function Services() {
             {/* CTA Section */}
             <section className="py-20 px-8 bg-neutral-900 dark:bg-black text-white">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h2 className="text-4xl font-light text-neutral-200 mb-8">
+                    <h2 className="text-4xl font-light text-white mb-8">
                         어떤 서비스가 필요하신가요?
                     </h2>
-                    <p className="text-lg text-neutral-200 mb-12">
+                    <p className="text-lg text-neutral-300 mb-12">
                         프로젝트의 규모와 상관없이, 최선의 솔루션을 제공합니다.
                     </p>
                     <Link

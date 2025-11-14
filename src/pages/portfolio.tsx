@@ -27,7 +27,7 @@ const projects: Project[] = [
         link: "https://nqsolution.kr",
         status: 'live',
         year: "2025",
-        gradient: "from-neutral-700 to-neutral-900"
+        gradient: "from-neutral-100 to-neutral-200"
     },
     {
         id: 2,
@@ -38,7 +38,7 @@ const projects: Project[] = [
         link: "https://www.emecs.kr",
         status: 'live',
         year: "2025",
-        gradient: "from-blue-600 to-indigo-700"
+        gradient: "from-neutral-100 to-neutral-200"
     },
     {
         id: 3,
@@ -48,7 +48,7 @@ const projects: Project[] = [
         tags: ["JavaScript", "PHP", "Laravel", "MySQL"],
         status: 'confidential',
         year: "2024",
-        gradient: "from-emerald-500 to-teal-600"
+        gradient: "from-neutral-100 to-neutral-200"
     }
 ];
 
@@ -135,10 +135,10 @@ export default function Portfolio() {
 
                                     {/* Project Preview */}
                                     <div className="md:col-span-3">
-                                        <div className={`aspect-[4/3] rounded-lg bg-gradient-to-br ${project.gradient} relative overflow-hidden group-hover:scale-[1.02] transition-transform`}>
+                                        <div className={`aspect-[4/3] rounded-lg bg-gradient-to-br ${project.gradient} dark:from-neutral-700 dark:to-neutral-900 relative overflow-hidden group-hover:scale-[1.02] transition-transform border border-neutral-200 dark:border-neutral-800`}>
                                             {project.status === 'confidential' && (
                                                 <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                                                    <Lock className="w-8 h-8 text-white/80" />
+                                                    <Lock className="w-8 h-8 text-neutral-400 dark:text-white/80" />
                                                 </div>
                                             )}
                                             {/* Status Badge */}
@@ -156,7 +156,7 @@ export default function Portfolio() {
 
                                     {/* Project Info */}
                                     <div className="md:col-span-6">
-                                        <h3 className="text-2xl font-light mb-2 text-neutral-900 dark:text-white">
+                                        <h3 className="text-2xl font-light mb-2 text-neutral-800 dark:text-white">
                                             {project.title}
                                         </h3>
                                         <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
@@ -200,12 +200,12 @@ export default function Portfolio() {
                     <div className="mt-24 text-center py-16 border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-lg">
                         <div className="max-w-md mx-auto">
                             <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center">
-                                <span className="text-neutral-600 dark:text-neutral-400">+</span>
+                                <span className="text-neutral-700 dark:text-neutral-400">+</span>
                             </div>
-                            <h3 className="text-xl font-light mb-2 text-neutral-700 dark:text-neutral-300">
+                            <h3 className="text-xl font-light mb-2 text-neutral-800 dark:text-neutral-300">
                                 More Projects Coming Soon
                             </h3>
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400">
                                 새로운 프로젝트를 준비중입니다
                             </p>
                         </div>

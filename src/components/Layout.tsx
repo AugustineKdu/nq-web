@@ -142,7 +142,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                                 className={`absolute inset-0 transition-opacity duration-300 ${dark ? 'opacity-100' : 'opacity-0'}`}
                             />
                         </div>
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md">
+                        <p className="text-sm text-neutral-700 dark:text-neutral-400 max-w-md">
                             New idea를 더하고 Quick action으로 실행하여<br />
                             솔루션을 제공합니다.
                         </p>
@@ -152,10 +152,10 @@ const Footer = ({ dark }: { dark: boolean }) => {
                     {/* Contact */}
                     <div>
                         <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">Contact</h4>
-                        <ul className="space-y-2 text-sm">
+                        <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
                             <li>duk98823@gmail.com</li>
-                            <li>+82 10-7168-1594</li>
-                            <li>Seoul, South Korea</li>
+                            <li>+82 10-3368-1594</li>
+                            <li>평택, South Korea</li>
                         </ul>
                     </div>
                 </div>
