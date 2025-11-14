@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import { ArrowRight, Lock } from "lucide-react";
 import Link from 'next/link';
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 type ProjectStatus = 'live' | 'confidential';
 
@@ -54,6 +55,9 @@ const projects: Project[] = [
 
 export default function Portfolio() {
     const [filter, setFilter] = useState<'all' | 'live' | 'confidential'>('all');
+    const heroAnim = useScrollAnimation(0.1);
+    const projectsAnim = useScrollAnimation(0.15);
+    const ctaAnim = useScrollAnimation(0.15);
 
     const filteredProjects = projects.filter(project => {
         if (filter === 'all') return true;
@@ -88,7 +92,14 @@ export default function Portfolio() {
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={heroAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        heroAnim.isVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
                     <div className="mb-16">
                         <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             Portfolio
@@ -128,7 +139,14 @@ export default function Portfolio() {
 
             {/* Projects List */}
             <section className="pb-32 px-8">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={projectsAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        projectsAnim.isVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
                     <div className="space-y-px">
                         {filteredProjects.map((project, index) => (
                             <div
@@ -211,7 +229,14 @@ export default function Portfolio() {
 
             {/* CTA Section */}
             <section className="py-20 px-8 bg-neutral-900 dark:bg-black">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={ctaAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        ctaAnim.isVisible
+                            ? 'opacity-100 scale-100'
+                            : 'opacity-0 scale-95'
+                    }`}
+                >
                     <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                         <div>
                             <h2 className="text-3xl font-light mb-2 text-white">

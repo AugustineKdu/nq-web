@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { ClipboardDocumentIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function Contact() {
     const [copiedField, setCopiedField] = useState<string | null>(null);
+    const heroAnim = useScrollAnimation(0.1);
+    const inquiryAnim = useScrollAnimation(0.15);
+    const faqAnim = useScrollAnimation(0.15);
 
     const copyToClipboard = async (text: string, field: string) => {
         try {
@@ -43,7 +47,14 @@ export default function Contact() {
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={heroAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        heroAnim.isVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
                     <div className="mb-20">
                         <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             Contact Us
@@ -73,7 +84,7 @@ export default function Contact() {
                                         onClick={() => copyToClipboard('김덕웅', 'name')}
                                         className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                     >
-                                        <span>김덕웅</span>
+                                        <span>대표 김덕웅</span>
                                         {copiedField === 'name' ? (
                                             <CheckIcon className="w-4 h-4 text-green-600" />
                                         ) : (
@@ -98,10 +109,10 @@ export default function Contact() {
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Phone</p>
                                     <button
-                                        onClick={() => copyToClipboard('010-3368-1594', 'phone')}
+                                        onClick={() => copyToClipboard('01071681594', 'phone')}
                                         className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                     >
-                                        <span>010-3368-1594</span>
+                                        <span>010-7168-1594</span>
                                         {copiedField === 'phone' ? (
                                             <CheckIcon className="w-4 h-4 text-green-600" />
                                         ) : (
@@ -112,10 +123,10 @@ export default function Contact() {
                                 <div>
                                     <p className="text-xs uppercase tracking-wider text-neutral-900 dark:text-white mb-2 font-medium">Company Phone</p>
                                     <button
-                                        onClick={() => copyToClipboard('010-33681594', 'companyPhone')}
+                                        onClick={() => copyToClipboard('01033681594', 'companyPhone')}
                                         className="group flex items-center gap-2 text-lg text-neutral-900 dark:text-white font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                     >
-                                        <span>010-33681594</span>
+                                        <span>010-3368-1594</span>
                                         {copiedField === 'companyPhone' ? (
                                             <CheckIcon className="w-4 h-4 text-green-600" />
                                         ) : (
@@ -145,7 +156,14 @@ export default function Contact() {
 
             {/* Inquiry Button Section */}
             <section className="py-24 px-8">
-                <div className="max-w-6xl mx-auto text-center">
+                <div
+                    ref={inquiryAnim.ref}
+                    className={`max-w-6xl mx-auto text-center transition-all duration-1000 ${
+                        inquiryAnim.isVisible
+                            ? 'opacity-100 scale-100'
+                            : 'opacity-0 scale-95'
+                    }`}
+                >
                     <div className="mb-8">
                         <h3 className="text-2xl font-light text-neutral-900 dark:text-transparent dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-teal-600 dark:bg-clip-text mb-4">
                             새로운 프로젝트를 시작해보세요
@@ -173,7 +191,14 @@ export default function Contact() {
 
             {/* FAQ Section */}
             <section className="py-20 px-8">
-                <div className="max-w-4xl mx-auto">
+                <div
+                    ref={faqAnim.ref}
+                    className={`max-w-4xl mx-auto transition-all duration-1000 ${
+                        faqAnim.isVisible
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 -translate-x-10'
+                    }`}
+                >
                     <h2 className="text-4xl font-light mb-16 text-neutral-900 dark:text-white">자주 묻는 질문</h2>
 
                     <div className="space-y-12">

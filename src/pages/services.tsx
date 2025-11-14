@@ -2,8 +2,14 @@ import React from "react";
 import Head from "next/head";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function Services() {
+    const heroAnim = useScrollAnimation(0.1);
+    const servicesAnim = useScrollAnimation(0.15);
+    const processAnim = useScrollAnimation(0.15);
+    const ctaAnim = useScrollAnimation(0.15);
+
     const services = [
         {
             number: "01",
@@ -100,7 +106,14 @@ export default function Services() {
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={heroAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        heroAnim.isVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
                     <div className="mb-20">
                         <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             Our Services
@@ -122,7 +135,14 @@ export default function Services() {
 
             {/* Services List */}
             <section className="pb-20 px-8">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={servicesAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        servicesAnim.isVisible
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 -translate-x-10'
+                    }`}
+                >
                     <div className="divide-y divide-neutral-200 dark:divide-neutral-800">
                         {services.map((service, index) => (
                             <div
@@ -161,7 +181,14 @@ export default function Services() {
 
             {/* Process Section */}
             <section className="py-20 px-8 bg-neutral-50 dark:bg-neutral-900">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={processAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        processAnim.isVisible
+                            ? 'opacity-100 scale-100'
+                            : 'opacity-0 scale-95'
+                    }`}
+                >
                     <div className="mb-16">
                         <h2 className="text-5xl font-light tracking-tight text-neutral-900 dark:text-white">Our Process</h2>
                     </div>
@@ -186,7 +213,14 @@ export default function Services() {
 
             {/* CTA Section */}
             <section className="py-20 px-8 bg-neutral-900 dark:bg-black text-white">
-                <div className="max-w-6xl mx-auto text-center">
+                <div
+                    ref={ctaAnim.ref}
+                    className={`max-w-6xl mx-auto text-center transition-all duration-1000 ${
+                        ctaAnim.isVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
                     <h2 className="text-4xl font-light text-white mb-8">
                         어떤 서비스가 필요하신가요?
                     </h2>

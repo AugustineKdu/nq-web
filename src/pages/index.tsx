@@ -3,8 +3,13 @@ import Head from "next/head";
 import { ArrowRight } from "lucide-react";
 import Link from 'next/link';
 import Image from "next/image";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function Home() {
+  const servicesAnim = useScrollAnimation(0.15);
+  const aboutAnim = useScrollAnimation(0.15);
+  const processAnim = useScrollAnimation(0.15);
+  const contactAnim = useScrollAnimation(0.15);
 
   return (
     <>
@@ -111,7 +116,14 @@ export default function Home() {
 
       {/* Services Section - Minimal Grid */}
       < section className="py-32 px-8" >
-        <div className="max-w-6xl mx-auto">
+        <div
+          ref={servicesAnim.ref}
+          className={`max-w-6xl mx-auto transition-all duration-1000 ${
+            servicesAnim.isVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'
+          }`}
+        >
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
@@ -152,7 +164,10 @@ export default function Home() {
             ].map((service, i) => (
               <div
                 key={i}
-                className="group relative p-12 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:shadow-lg dark:hover:shadow-2xl transition-all"
+                className="group relative p-12 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:shadow-lg dark:hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                style={{
+                  animation: servicesAnim.isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
+                }}
               >
                 <h3 className="text-3xl font-light mb-4 text-neutral-900 dark:text-white">{service.title}</h3>
                 <p className="text-neutral-900 dark:text-white mb-8 leading-relaxed">
@@ -178,7 +193,14 @@ export default function Home() {
 
       {/* About Section - Enhanced */}
       <section className="py-32 px-8 bg-neutral-50 dark:bg-neutral-900">
-        <div className="max-w-7xl mx-auto">
+        <div
+          ref={aboutAnim.ref}
+          className={`max-w-7xl mx-auto transition-all duration-1000 ${
+            aboutAnim.isVisible
+              ? 'opacity-100 translate-x-0'
+              : 'opacity-0 -translate-x-10'
+          }`}
+        >
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
@@ -224,7 +246,14 @@ export default function Home() {
       </section>
       {/* Process Section - Linear Design */}
       < section className="py-32 px-8" >
-        <div className="max-w-6xl mx-auto">
+        <div
+          ref={processAnim.ref}
+          className={`max-w-6xl mx-auto transition-all duration-1000 ${
+            processAnim.isVisible
+              ? 'opacity-100 scale-100'
+              : 'opacity-0 scale-95'
+          }`}
+        >
           {/* Section Title */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-4">
@@ -259,7 +288,14 @@ export default function Home() {
 
       {/* Contact Section - Minimal CTA */}
       < section className="py-32 px-8 bg-neutral-900 dark:bg-black text-white" >
-        <div className="max-w-6xl mx-auto">
+        <div
+          ref={contactAnim.ref}
+          className={`max-w-6xl mx-auto transition-all duration-1000 ${
+            contactAnim.isVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'
+          }`}
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
             <div>
               <h2 className="text-6xl font-light tracking-tight mb-8 text-white">

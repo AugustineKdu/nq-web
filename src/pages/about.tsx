@@ -2,8 +2,13 @@ import React from "react";
 import Head from "next/head";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function About() {
+    const heroAnim = useScrollAnimation(0.1);
+    const valuesAnim = useScrollAnimation(0.15);
+    const ctaAnim = useScrollAnimation(0.15);
+
     return (
         <>
             <Head>
@@ -32,7 +37,14 @@ export default function About() {
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={heroAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        heroAnim.isVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
                     <div className="mb-20">
                         <p className="text-sm tracking-[0.3em] text-neutral-900 dark:text-white uppercase mb-8">
                             About NQ Solution
@@ -76,7 +88,14 @@ export default function About() {
 
             {/* Values Section */}
             <section className="py-20 px-8 bg-neutral-50 dark:bg-neutral-900">
-                <div className="max-w-6xl mx-auto">
+                <div
+                    ref={valuesAnim.ref}
+                    className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                        valuesAnim.isVisible
+                            ? 'opacity-100 scale-100'
+                            : 'opacity-0 scale-95'
+                    }`}
+                >
                     <div className="mb-16">
                         <h2 className="text-5xl font-light tracking-tight text-neutral-900 dark:text-white">Our Values</h2>
                     </div>
@@ -116,7 +135,14 @@ export default function About() {
 
         {/* 대안 2: 보더와 카드 스타일 (Pinterest 감성) */}
         <section className="py-20 px-8">
-            <div className="max-w-6xl mx-auto">
+            <div
+                ref={ctaAnim.ref}
+                className={`max-w-6xl mx-auto transition-all duration-1000 ${
+                    ctaAnim.isVisible
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-10'
+                }`}
+            >
                 <div className="border-2 border-neutral-200 dark:border-neutral-800 rounded-2xl p-12 bg-neutral-50 dark:bg-neutral-900 shadow-sm hover:shadow-xl transition-shadow duration-500">
                     <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                         <div>

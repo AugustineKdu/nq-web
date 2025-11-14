@@ -133,10 +133,11 @@ const Footer = ({ dark }: { dark: boolean }) => {
     };
 
     const contactInfo = [
-        { label: 'Email', value: 'duk98823@gmail.com', field: 'footer-email' },
-        { label: 'Phone', value: '010-3368-1594', field: 'footer-phone' },
-        { label: 'Company', value: '010-33681594', field: 'footer-company' },
-        { label: 'Location', value: '평택, South Korea', field: 'footer-location' }
+        { label: 'Representative', value: '김덕웅', displayValue: '대표 김덕웅', field: 'footer-name' },
+        { label: 'Email', value: 'duk98823@gmail.com', displayValue: 'duk98823@gmail.com', field: 'footer-email' },
+        { label: 'Phone', value: '01071681594', displayValue: '010-7168-1594', field: 'footer-phone' },
+        { label: 'Company Phone', value: '01033681594', displayValue: '010-3368-1594', field: 'footer-company' },
+        { label: 'Location', value: '평택, South Korea', displayValue: '평택, South Korea', field: 'footer-location' }
     ];
 
     return (
@@ -178,7 +179,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                                         onClick={() => copyToClipboard(item.value, item.field)}
                                         className="flex items-center gap-2 text-sm text-white hover:text-blue-400 transition-colors font-semibold"
                                     >
-                                        <span>{item.value}</span>
+                                        <span>{item.displayValue}</span>
                                         {copiedField === item.field ? (
                                             <CheckIcon className="w-3.5 h-3.5 text-green-400" />
                                         ) : (

@@ -76,7 +76,7 @@ export default function Document() {
                             },
                             "contactPoint": {
                                 "@type": "ContactPoint",
-                                "telephone": "+82-10-3368-1594",
+                                "telephone": "+82-10-7168-1594",
                                 "contactType": "customer service",
                                 "email": "duk98823@gmail.com"
                             },
