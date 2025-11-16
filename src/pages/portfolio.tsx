@@ -201,7 +201,7 @@ export default function Portfolio() {
 
                                     {/* Project Info */}
                                     <div className="md:col-span-8">
-                                        <h3 className="text-2xl font-light mb-2 text-neutral-900 dark:text-white">
+                                        <h3 className="text-2xl font-semibold mb-2 text-neutral-900 dark:text-white">
                                             {project.title}
                                         </h3>
                                         <p className="text-sm text-neutral-900 dark:text-white mb-4">

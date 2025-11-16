@@ -247,11 +247,11 @@ export default function Contact() {
                                     <div className="bg-neutral-900 dark:bg-black rounded-2xl shadow-2xl overflow-hidden h-[450px] flex items-center justify-center p-16">
                                         <div className="text-center text-white">
                                             <div className="mb-12">
-                                                <div className="text-7xl font-bold mb-4">
-                                                    NQ
+                                                <div className="text-5xl font-bold mb-2">
+                                                    엔큐솔루션
                                                 </div>
-                                                <p className="text-sm tracking-[0.3em] text-white/60 mb-8">
-                                                    SOLUTION
+                                                <p className="text-lg tracking-[0.2em] text-white/60 mb-8">
+                                                    NQ SOLUTION
                                                 </p>
                                                 <h3 className="text-2xl font-light leading-relaxed text-white/90">
                                                     혁신적인 아이디어를<br />
@@ -455,11 +455,11 @@ export default function Contact() {
                                 <div className="relative bg-neutral-900 dark:bg-black rounded-2xl shadow-2xl overflow-hidden h-full flex items-center justify-center p-10">
                                     <div className="text-center">
                                         <div>
-                                            <div className="text-7xl font-bold text-white mb-4">
-                                                NQ
+                                            <div className="text-5xl font-bold text-white mb-2">
+                                                엔큐솔루션
                                             </div>
-                                            <p className="text-white/60 text-xs tracking-[0.3em] uppercase mb-12">
-                                                Solution
+                                            <p className="text-white/60 text-sm tracking-[0.2em] mb-12">
+                                                NQ SOLUTION
                                             </p>
                                             <p className="text-xl font-light text-white/90 leading-relaxed mb-12">
                                                 혁신적인 아이디어를<br />

@@ -29,9 +29,9 @@ export default function Document() {
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 
                 {/* 기본 SEO */}
-                <meta name="title" content="NQ Solution | IT 외주개발 전문" />
-                <meta name="description" content="NQ Solution - IT 외주개발 전문. 웹/앱 개발, 맞춤형 솔루션 제공." />
-                <meta name="keywords" content="외주개발, IT솔루션, 웹개발, 앱개발, 시스템개발" />
+                <meta name="title" content="NQ Solution | 엔큐솔루션 | IT 외주개발 전문" />
+                <meta name="description" content="NQ Solution (엔큐솔루션) - IT 외주개발 전문. 웹/앱 개발, 맞춤형 솔루션 제공." />
+                <meta name="keywords" content="엔큐솔루션, NQ Solution, 외주개발, IT솔루션, 웹개발, 앱개발, 시스템개발, 엔큐, nqsolution" />
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href="https://nqsolution.kr" />
 
