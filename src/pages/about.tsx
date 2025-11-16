@@ -15,6 +15,7 @@ export default function About() {
                 <title>About | NQ Solution - 혁신과 빠른 실행</title>
                 <meta name="description" content="NQ Solution은 혁신적인 아이디어와 빠른 실행력을 바탕으로 클라이언트의 비즈니스 성장을 돕는 디지털 솔루션 파트너입니다." />
                 <meta name="keywords" content="NQ Solution, 회사소개, 디지털솔루션, 웹개발회사, 앱개발회사" />
+                <link rel="canonical" href="https://nqsolution.kr/about" />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="About | NQ Solution - 혁신과 빠른 실행" />

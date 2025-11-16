@@ -50,6 +50,36 @@ const projects: Project[] = [
         status: 'confidential',
         year: "2024",
         gradient: "from-neutral-100 to-neutral-200"
+    },
+    {
+        id: 4,
+        title: "All Sports",
+        subtitle: "MVP Development",
+        description: "스포츠 관련 플랫폼 MVP 개발. 초기 기획부터 개발까지 전체 프로세스 참여. 현재 투자 준비 중인 프로젝트.",
+        tags: ["Next.js", "TypeScript", "Node.js", "MongoDB"],
+        status: 'confidential',
+        year: "2025",
+        gradient: "from-blue-100 to-purple-100"
+    },
+    {
+        id: 5,
+        title: "판타지 쥬스",
+        subtitle: "E-Commerce Platform",
+        description: "카페24 기반 도매업 전문 이커머스 플랫폼 구축. 맞춤형 테마 개발 및 결제 시스템 연동.",
+        tags: ["Cafe24", "JavaScript", "HTML/CSS", "jQuery"],
+        status: 'live',
+        year: "2025",
+        gradient: "from-green-100 to-teal-100"
+    },
+    {
+        id: 6,
+        title: "따숨",
+        subtitle: "Platform Development",
+        description: "서비스 플랫폼 기획 지원 및 개발 참여. UI/UX 디자인과 프론트엔드 개발 담당.",
+        tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+        status: 'live',
+        year: "2025",
+        gradient: "from-orange-100 to-red-100"
     }
 ];
 
@@ -70,6 +100,7 @@ export default function Portfolio() {
                 <title>Portfolio | NQ Solution - 프로젝트 사례</title>
                 <meta name="description" content="NQ Solution의 프로젝트 포트폴리오. 웹사이트, 앱, 시스템 개발 사례를 확인하세요." />
                 <meta name="keywords" content="포트폴리오, 프로젝트사례, 웹개발사례, 앱개발사례, NQ Solution" />
+                <link rel="canonical" href="https://nqsolution.kr/portfolio" />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="Portfolio | NQ Solution - 프로젝트 사례" />
@@ -157,7 +188,7 @@ export default function Portfolio() {
                                     {/* Number and Badge - Combined on mobile */}
                                     <div className="md:col-span-2 flex items-center gap-4">
                                         <span className="text-sm text-neutral-900 dark:text-white font-medium">
-                                            {String(index + 1).padStart(2, '0')}
+                                            {String(index).padStart(2, '0')}
                                         </span>
                                         <span className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
                                             project.status === 'live'

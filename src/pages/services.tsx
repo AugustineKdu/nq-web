@@ -84,6 +84,7 @@ export default function Services() {
                 <title>Services | NQ Solution - 웹/앱 개발, UI/UX 디자인</title>
                 <meta name="description" content="웹 개발, 앱 개발, UI/UX 디자인, 컨설팅 서비스를 제공합니다. 전략부터 실행까지 최고의 품질을 보장합니다." />
                 <meta name="keywords" content="웹개발, 앱개발, UI/UX디자인, 컨설팅, Next.js, React, Flutter, 크로스플랫폼" />
+                <link rel="canonical" href="https://nqsolution.kr/services" />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="Services | NQ Solution - 웹/앱 개발, UI/UX 디자인" />

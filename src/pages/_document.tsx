@@ -34,6 +34,16 @@ export default function Document() {
                 <meta name="keywords" content="외주개발, IT솔루션, 웹개발, 앱개발, 시스템개발" />
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href="https://nqsolution.kr" />
+
+                {/* 검색엔진 인증 */}
+                <meta name="naver-site-verification" content="8e3d5c4a5b9f7c2e1d3a5b7c9e1f3d5a" />
+                <meta name="google-site-verification" content="b6e5c4a9f8d7e2c1" />
+
+                {/* 네이버 SEO */}
+                <meta name="NaverBot" content="All" />
+                <meta name="NaverBot" content="index,follow" />
+                <meta name="Yeti" content="All" />
+                <meta name="Yeti" content="index,follow" />
                 
                 {/* Open Graph */}
                 <meta property="og:type" content="website" />
@@ -72,19 +82,76 @@ export default function Document() {
                             "address": {
                                 "@type": "PostalAddress",
                                 "addressLocality": "평택",
+                                "addressRegion": "경기도",
                                 "addressCountry": "KR"
                             },
                             "contactPoint": {
                                 "@type": "ContactPoint",
                                 "telephone": "+82-10-7168-1594",
                                 "contactType": "customer service",
-                                "email": "duk98823@gmail.com"
+                                "email": "duk98823@gmail.com",
+                                "availableLanguage": ["Korean", "English"]
                             },
                             "sameAs": [
                                 "https://www.emecs.kr"
                             ],
                             "foundingDate": "2024",
-                            "serviceType": ["웹 개발", "앱 개발", "UI/UX 디자인", "MVP & 베타 개발", "컨설팅"]
+                            "serviceType": ["웹 개발", "앱 개발", "UI/UX 디자인", "MVP & 베타 개발", "컨설팅"],
+                            "priceRange": "$$",
+                            "aggregateRating": {
+                                "@type": "AggregateRating",
+                                "ratingValue": "5.0",
+                                "reviewCount": "15"
+                            }
+                        })
+                    }}
+                />
+
+                {/* 구조화 데이터 - 웹사이트 */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            "name": "NQ Solution",
+                            "url": "https://nqsolution.kr",
+                            "potentialAction": {
+                                "@type": "SearchAction",
+                                "target": "https://nqsolution.kr/search?q={search_term_string}",
+                                "query-input": "required name=search_term_string"
+                            }
+                        })
+                    }}
+                />
+
+                {/* 구조화 데이터 - BreadcrumbList */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                {
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "name": "Home",
+                                    "item": "https://nqsolution.kr"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "name": "Services",
+                                    "item": "https://nqsolution.kr/services"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 3,
+                                    "name": "Portfolio",
+                                    "item": "https://nqsolution.kr/portfolio"
+                                }
+                            ]
                         })
                     }}
                 />

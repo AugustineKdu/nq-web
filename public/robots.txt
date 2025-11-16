@@ -1,0 +1,18 @@
+# Robots.txt for NQ Solution
+# https://nqsolution.kr
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Naver Bot
+User-agent: Yeti
+Allow: /
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+
+# Sitemap location
+Sitemap: https://nqsolution.kr/sitemap.xml

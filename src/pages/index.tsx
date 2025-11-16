@@ -17,6 +17,7 @@ export default function Home() {
         <title>NQ Solution | 혁신적인 디지털 솔루션 파트너</title>
         <meta name="description" content="New idea를 더하고 Quick action으로 실행하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인 전문." />
         <meta name="keywords" content="웹개발, 앱개발, UI/UX디자인, Next.js, React, 디지털솔루션, NQ Solution" />
+        <link rel="canonical" href="https://nqsolution.kr/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="NQ Solution | 혁신적인 디지털 솔루션 파트너" />
