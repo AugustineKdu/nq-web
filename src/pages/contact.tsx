@@ -1,26 +1,13 @@
-import React, { useState } from "react";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import React from "react";
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        company: '',
-        project: '',
-        message: ''
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        alert('문의가 접수되었습니다. 24시간 내에 연락드리겠습니다.');
-    };
+    // const [formData, setFormData] = useState({
+    //     name: '',
+    //     email: '',
+    //     company: '',
+    //     project: '',
+    //     message: ''
+    // });
 
     return (
         <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
@@ -32,7 +19,7 @@ export default function Contact() {
                             Contact Us
                         </p>
                         <h1 className="text-[clamp(3rem,8vw,6rem)] font-light leading-[0.9] tracking-tighter mb-8">
-                            Let's talk
+                            Let&apos;s talk
                         </h1>
                         <div className="w-full h-px bg-neutral-900 dark:bg-neutral-100" />
                     </div>

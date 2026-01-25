@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import Link from 'next/link';
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
@@ -67,7 +59,7 @@ export default function Home() {
 
           {/* CTA */}
           <div className="flex items-center gap-8">
-            <a
+            <Link
               href="/contact"
               className="group inline-flex items-center gap-4 text-lg"
             >
@@ -76,7 +68,7 @@ export default function Home() {
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-neutral-900 dark:bg-neutral-100 group-hover:w-full transition-all duration-500" />
               </span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-            </a>
+            </Link>
           </div>
 
           {/* Corner Numbers */}
@@ -233,13 +225,13 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
             <div>
               <h2 className="text-6xl font-light tracking-tight mb-8 text-white">
-                Let's work<br />together
+                Let&apos;s work<br />together
               </h2>
               <p className="text-lg text-white/80 mb-8">
                 프로젝트에 대해 이야기해보세요.<br />
                 24시간 내에 답변드립니다.
               </p>
-              <a
+              <Link
                 href="/contact"
                 className="inline-flex items-center gap-4 text-lg group"
               >
@@ -248,7 +240,7 @@ export default function Home() {
                   <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
                 </span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform text-white" />
-              </a>
+              </Link>
             </div>
             <div className="text-right">
               <p className="text-sm text-white/60">
