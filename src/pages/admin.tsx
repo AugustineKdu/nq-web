@@ -338,10 +338,14 @@ export default function Admin() {
             });
             if (res.ok) {
                 showSaveNotification();
+            } else {
+                const errorData = await res.json().catch(() => ({}));
+                console.error("Settings save failed:", res.status, errorData);
+                alert(`저장에 실패했습니다. (${res.status})`);
             }
         } catch (error) {
             console.error("Failed to save settings:", error);
-            alert("저장에 실패했습니다.");
+            alert("저장에 실패했습니다. 네트워크 오류");
         } finally {
             setLoading(false);
         }
@@ -358,10 +362,14 @@ export default function Admin() {
             });
             if (res.ok) {
                 showSaveNotification();
+            } else {
+                const errorData = await res.json().catch(() => ({}));
+                console.error("Stats save failed:", res.status, errorData);
+                alert(`저장에 실패했습니다. (${res.status})`);
             }
         } catch (error) {
             console.error("Failed to save stats:", error);
-            alert("저장에 실패했습니다.");
+            alert("저장에 실패했습니다. 네트워크 오류");
         } finally {
             setLoading(false);
         }
@@ -385,10 +393,16 @@ export default function Admin() {
             ]);
             if (resKo.ok && resEn.ok) {
                 showSaveNotification();
+            } else {
+                const errors = [];
+                if (!resKo.ok) errors.push(`KO: ${resKo.status}`);
+                if (!resEn.ok) errors.push(`EN: ${resEn.status}`);
+                console.error("Content save failed:", errors);
+                alert(`저장에 실패했습니다. (${errors.join(", ")})`);
             }
         } catch (error) {
             console.error("Failed to save content:", error);
-            alert("저장에 실패했습니다.");
+            alert("저장에 실패했습니다. 네트워크 오류");
         } finally {
             setLoading(false);
         }
