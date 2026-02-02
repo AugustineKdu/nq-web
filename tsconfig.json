@@ -37,6 +37,7 @@
     "src/components/Draft/Layoutdraft.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "prisma"
   ]
 }
