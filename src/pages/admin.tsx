@@ -128,7 +128,7 @@ interface FaqItem {
     order: number;
 }
 
-const PORTFOLIO_CATEGORIES = ["Digital Product", "Mobile App", "Design", "Web"] as const;
+const PORTFOLIO_CATEGORIES = ["Web", "Design", "App"] as const;
 const DEFAULT_PASSWORD = "nqadmin1234";
 
 export default function Admin() {

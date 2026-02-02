@@ -11,7 +11,7 @@ export interface Project {
     title: string;
     titleKo?: string;
     client: string;
-    category: "Digital Product" | "Mobile App" | "Design" | "Web";
+    category: "Web" | "Design" | "App";
     year: string;
     description: string;
     descriptionKo?: string;
@@ -31,7 +31,7 @@ export const projects: Project[] = [
         title: "E-Commerce Platform",
         titleKo: "이커머스 플랫폼",
         client: "Fashion Brand",
-        category: "Digital Product",
+        category: "Web",
         year: "2024",
         description: "Mobile-first shopping experience for a premium fashion brand",
         descriptionKo: "프리미엄 패션 브랜드를 위한 모바일 퍼스트 쇼핑 경험",
@@ -44,7 +44,7 @@ export const projects: Project[] = [
         title: "Fitness Application",
         titleKo: "피트니스 앱",
         client: "Health Startup",
-        category: "Mobile App",
+        category: "App",
         year: "2024",
         description: "Wellness app with workout tracking and community features",
         descriptionKo: "운동 트래킹과 커뮤니티 기능을 갖춘 웰니스 앱",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
         title: "Social Platform",
         titleKo: "소셜 플랫폼",
         client: "Community",
-        category: "Mobile App",
+        category: "App",
         year: "2024",
         description: "Real-time social networking platform",
         descriptionKo: "실시간 소셜 네트워킹 플랫폼",
@@ -107,5 +107,5 @@ export const projects: Project[] = [
 ];
 
 // 카테고리 목록 / Category list
-export const categories = ["All", "Digital Product", "Mobile App", "Design", "Web"] as const;
+export const categories = ["All", "Web", "Design", "App"] as const;
 export type Category = typeof categories[number];

@@ -44,7 +44,7 @@ export default function PortfolioEN() {
             });
     }, []);
 
-    const filters = ["All", "Digital Product", "Mobile App", "Design", "Web"];
+    const filters = ["All", "Web", "Design", "App"];
 
     const filteredProjects = activeFilter === "All"
         ? projects
