@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Building, Tag, CheckCircle, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Building, CheckCircle, Globe } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 
 interface PortfolioProject {
@@ -107,10 +107,10 @@ export default function PortfolioDetail() {
                                 )}
                             </div>
                             <h1 className={`text-4xl md:text-5xl font-normal tracking-tight mb-6 ${dark ? "text-white" : "text-neutral-900"}`}>
-                                {project.title}
+                                {project.titleKo || project.title}
                             </h1>
                             <p className={`text-xl leading-relaxed ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
-                                {project.description}
+                                {project.descriptionKo || project.description}
                             </p>
                         </div>
                         <div className="col-span-12 lg:col-span-4">
@@ -129,13 +129,6 @@ export default function PortfolioDetail() {
                                     <div>
                                         <p className={`text-xs ${dark ? "text-neutral-500" : "text-neutral-400"}`}>Year</p>
                                         <p className={`font-medium ${dark ? "text-white" : "text-neutral-900"}`}>{project.year}</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <Tag className="w-5 h-5 text-teal-500" />
-                                    <div>
-                                        <p className={`text-xs ${dark ? "text-neutral-500" : "text-neutral-400"}`}>Category</p>
-                                        <p className={`font-medium ${dark ? "text-white" : "text-neutral-900"}`}>{project.category}</p>
                                     </div>
                                 </div>
                                 {project.url && (
@@ -198,29 +191,6 @@ export default function PortfolioDetail() {
                     </div>
                 </section>
             )}
-
-            {/* Tech Stack */}
-            <section className="py-16">
-                <div className="container-custom">
-                    <h2 className={`text-2xl font-medium mb-8 ${dark ? "text-white" : "text-neutral-900"}`}>
-                        Tech Stack
-                    </h2>
-                    <div className="flex flex-wrap gap-3">
-                        {project.tags.map((tag, i) => (
-                            <span
-                                key={i}
-                                className={`px-5 py-2.5 rounded-full text-sm font-medium ${
-                                    dark
-                                        ? "bg-neutral-800 text-neutral-300 border border-neutral-700"
-                                        : "bg-neutral-100 text-neutral-700 border border-neutral-200"
-                                }`}
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* Challenges & Solutions */}
             {(project.challenges || project.solutions || project.results) && (
