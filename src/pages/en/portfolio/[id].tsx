@@ -25,152 +25,24 @@ interface PortfolioProject {
     results?: string[];
 }
 
-const DEFAULT_PROJECTS: PortfolioProject[] = [
-    {
-        id: 1,
-        title: "E-Commerce Platform",
-        client: "Fashion Brand",
-        category: "Digital Product",
-        year: "2024",
-        description: "Mobile-first shopping platform for a premium fashion brand",
-        longDescription: `We built a mobile-first e-commerce platform for a fashion brand.
-
-Prioritizing user experience, we implemented intuitive product navigation, fast checkout process, and personalized recommendation system.
-
-With responsive design, we provide an optimized shopping experience across all devices, and the admin dashboard enables real-time order and inventory management.`,
-        tags: ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "AWS"],
-        featured: true,
-        images: ["/portfolio/ecommerce-1.jpg", "/portfolio/ecommerce-2.jpg"],
-        url: "https://example.com",
-        isActive: true,
-        challenges: [
-            "Large product data processing and search optimization",
-            "Payment system security and stability",
-            "Consistent UX across various devices"
-        ],
-        solutions: [
-            "10x search performance improvement with Elasticsearch",
-            "PCI DSS compliant payment system implementation",
-            "Cross-platform support with responsive design system"
-        ],
-        results: [
-            "300% increase in monthly active users",
-            "40% reduction in cart abandonment rate",
-            "250% improvement in mobile conversion rate"
-        ]
-    },
-    {
-        id: 2,
-        title: "Fitness Application",
-        client: "Health Startup",
-        category: "Mobile App",
-        year: "2024",
-        description: "Workout tracking and social features app",
-        longDescription: `We developed a fitness tracking app for a healthcare startup.
-
-Through GPS-based workout tracking, AI-powered exercise recommendations, and social challenge features, we help users build healthy habits.
-
-Using Flutter, we provide the same user experience on iOS and Android, and implemented real-time data synchronization through Firebase.`,
-        tags: ["Flutter", "Firebase", "AI/ML", "Google Fit", "Health Kit"],
-        featured: true,
-        images: ["/portfolio/fitness-1.jpg"],
-        url: "https://apps.apple.com/example",
-        isActive: true,
-        challenges: [
-            "Accurate workout data tracking",
-            "Battery-efficient GPS usage",
-            "User engagement"
-        ],
-        solutions: [
-            "Improved accuracy with sensor fusion algorithm",
-            "30% battery savings with adaptive GPS sampling",
-            "Enhanced retention with gamification elements"
-        ],
-        results: [
-            "Top 10 in App Store Health/Fitness category",
-            "50,000 daily active users achieved",
-            "Average session time over 15 minutes"
-        ]
-    },
-    {
-        id: 3,
-        title: "Corporate Website",
-        client: "Tech Company",
-        category: "Web",
-        year: "2023",
-        description: "Corporate branding and promotional website",
-        longDescription: `We created a corporate website that captures the brand identity of a global tech company.
-
-With modern and sophisticated design, we effectively communicate the company's vision and values, and improved visibility in the global market through multilingual support and SEO optimization.`,
-        tags: ["React", "Framer Motion", "Headless CMS", "i18n"],
-        featured: false,
-        images: [],
-        isActive: true
-    },
-    {
-        id: 4,
-        title: "Dashboard System",
-        client: "Fintech",
-        category: "Design",
-        year: "2023",
-        description: "Financial data visualization dashboard",
-        longDescription: `We designed a financial data visualization dashboard for a fintech company.
-
-We visualized complex financial data intuitively and designed an interface that allows users to quickly gain insights.`,
-        tags: ["Figma", "D3.js", "React", "Data Visualization"],
-        featured: false,
-        images: [],
-        isActive: true
-    },
-    {
-        id: 5,
-        title: "Social Network App",
-        client: "Community Platform",
-        category: "Mobile App",
-        year: "2024",
-        description: "Real-time social networking app",
-        longDescription: `We developed a real-time social networking app for a community platform.
-
-Through WebSocket-based real-time messaging, feed algorithms, and group features, we support users in forming interest-based communities.`,
-        tags: ["Flutter", "Node.js", "WebSocket", "Redis"],
-        featured: false,
-        images: [],
-        isActive: true
-    },
-    {
-        id: 6,
-        title: "Brand Identity",
-        client: "Startup Studio",
-        category: "Design",
-        year: "2024",
-        description: "Brand identity and design system",
-        longDescription: `We built a brand identity and design system for a startup studio.
-
-We defined the visual language of the brand including logo, color palette, typography, and icon system, and created design guidelines for consistent brand experience.`,
-        tags: ["Figma", "Illustration", "Motion Design", "Brand Guidelines"],
-        featured: false,
-        images: [],
-        isActive: true
-    }
-];
-
 export default function PortfolioDetailEN() {
     const router = useRouter();
     const { id } = router.query;
     const { dark } = useTheme();
-    const [projects, setProjects] = useState<PortfolioProject[]>(DEFAULT_PROJECTS);
+    const [projects, setProjects] = useState<PortfolioProject[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch from API
         fetch("/api/projects")
-            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(res => res.ok ? res.json() : [])
             .then(data => {
-                if (data && data.length > 0) {
-                    setProjects(data);
-                }
+                setProjects(data || []);
             })
             .catch(() => {
-                console.log("Using default projects");
+                setProjects([]);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, []);
 
@@ -178,6 +50,16 @@ export default function PortfolioDetailEN() {
     const currentIndex = projects.findIndex(p => p.id === Number(id));
     const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
     const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+
+    if (loading) {
+        return (
+            <div className={`min-h-screen flex items-center justify-center ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
+                <p className={`text-lg ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+                    Loading...
+                </p>
+            </div>
+        );
+    }
 
     if (!project) {
         return (

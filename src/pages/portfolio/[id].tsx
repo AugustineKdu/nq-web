@@ -24,154 +24,41 @@ interface PortfolioProject {
     results?: string[];
 }
 
-const DEFAULT_PROJECTS: PortfolioProject[] = [
-    {
-        id: 1,
-        title: "E-Commerce Platform",
-        titleKo: "이커머스 플랫폼",
-        client: "Fashion Brand",
-        category: "Digital Product",
-        year: "2024",
-        description: "Mobile-first shopping platform",
-        descriptionKo: "모바일 퍼스트 쇼핑몰 플랫폼 구축",
-        longDescription: `패션 브랜드를 위한 모바일 퍼스트 이커머스 플랫폼을 구축했습니다.
-
-사용자 경험을 최우선으로 하여 직관적인 상품 탐색, 빠른 결제 프로세스, 개인화된 추천 시스템을 구현했습니다.
-
-반응형 디자인으로 모든 디바이스에서 최적화된 쇼핑 경험을 제공하며, 관리자 대시보드를 통해 실시간으로 주문과 재고를 관리할 수 있습니다.`,
-        tags: ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "AWS"],
-        featured: true,
-        images: ["/portfolio/ecommerce-1.jpg", "/portfolio/ecommerce-2.jpg"],
-        url: "https://example.com",
-        isActive: true,
-        challenges: [
-            "대용량 상품 데이터 처리 및 검색 최적화",
-            "결제 시스템 보안 및 안정성 확보",
-            "다양한 디바이스에서의 일관된 UX 제공"
-        ],
-        solutions: [
-            "Elasticsearch 도입으로 검색 성능 10배 향상",
-            "PCI DSS 준수 결제 시스템 구축",
-            "반응형 디자인 시스템으로 크로스 플랫폼 지원"
-        ],
-        results: [
-            "월간 활성 사용자 300% 증가",
-            "장바구니 이탈률 40% 감소",
-            "모바일 전환율 250% 향상"
-        ]
-    },
-    {
-        id: 2,
-        title: "Fitness App",
-        client: "Health Startup",
-        category: "App",
-        year: "2024",
-        description: "운동 트래킹 및 소셜 기능 앱",
-        longDescription: `헬스케어 스타트업을 위한 피트니스 트래킹 앱을 개발했습니다.
-
-GPS 기반 운동 트래킹, AI 기반 운동 추천, 소셜 챌린지 기능을 통해 사용자들이 건강한 습관을 만들 수 있도록 돕습니다.
-
-Flutter를 활용하여 iOS와 Android에서 동일한 사용자 경험을 제공하며, Firebase를 통해 실시간 데이터 동기화를 구현했습니다.`,
-        tags: ["Flutter", "Firebase", "AI/ML", "Google Fit", "Health Kit"],
-        featured: true,
-        images: ["/portfolio/fitness-1.jpg"],
-        url: "https://apps.apple.com/example",
-        isActive: true,
-        challenges: [
-            "정확한 운동 데이터 트래킹",
-            "배터리 효율적인 GPS 사용",
-            "사용자 참여 유도"
-        ],
-        solutions: [
-            "센서 퓨전 알고리즘으로 정확도 향상",
-            "적응형 GPS 샘플링으로 배터리 30% 절약",
-            "게이미피케이션 요소로 리텐션 향상"
-        ],
-        results: [
-            "App Store 건강/피트니스 카테고리 10위",
-            "일일 활성 사용자 50,000명 달성",
-            "평균 세션 시간 15분 이상"
-        ]
-    },
-    {
-        id: 3,
-        title: "Corporate Website",
-        client: "Tech Company",
-        category: "Web",
-        year: "2023",
-        description: "기업 브랜딩 및 홍보 웹사이트",
-        longDescription: `글로벌 테크 기업의 브랜드 아이덴티티를 담은 기업 웹사이트를 제작했습니다.
-
-모던하고 세련된 디자인으로 기업의 비전과 가치를 효과적으로 전달하며, 다국어 지원과 SEO 최적화를 통해 글로벌 시장에서의 가시성을 높였습니다.`,
-        tags: ["React", "Framer Motion", "Headless CMS", "i18n"],
-        featured: false,
-        images: [],
-        isActive: true
-    },
-    {
-        id: 4,
-        title: "Dashboard System",
-        client: "Fintech",
-        category: "Design",
-        year: "2023",
-        description: "금융 데이터 시각화 대시보드",
-        longDescription: `핀테크 기업을 위한 금융 데이터 시각화 대시보드를 디자인했습니다.
-
-복잡한 금융 데이터를 직관적으로 이해할 수 있도록 시각화하고, 사용자가 빠르게 인사이트를 얻을 수 있는 인터페이스를 설계했습니다.`,
-        tags: ["Figma", "D3.js", "React", "Data Visualization"],
-        featured: false,
-        images: [],
-        isActive: true
-    },
-    {
-        id: 5,
-        title: "Social Network App",
-        client: "Community Platform",
-        category: "App",
-        year: "2024",
-        description: "실시간 소셜 네트워킹 앱",
-        longDescription: `커뮤니티 플랫폼을 위한 실시간 소셜 네트워킹 앱을 개발했습니다.
-
-WebSocket 기반 실시간 메시징, 피드 알고리즘, 그룹 기능을 통해 사용자들이 관심사 기반의 커뮤니티를 형성할 수 있도록 지원합니다.`,
-        tags: ["Flutter", "Node.js", "WebSocket", "Redis"],
-        featured: false,
-        images: [],
-        isActive: true
-    },
-    {
-        id: 6,
-        title: "Brand Identity",
-        client: "Startup Studio",
-        category: "Design",
-        year: "2024",
-        description: "브랜드 아이덴티티 및 디자인 시스템",
-        longDescription: `스타트업 스튜디오의 브랜드 아이덴티티와 디자인 시스템을 구축했습니다.
-
-로고, 컬러 팔레트, 타이포그래피, 아이콘 시스템 등 브랜드의 시각적 언어를 정의하고, 일관된 브랜드 경험을 제공하기 위한 디자인 가이드라인을 제작했습니다.`,
-        tags: ["Figma", "Illustration", "Motion Design", "Brand Guidelines"],
-        featured: false,
-        images: [],
-        isActive: true
-    }
-];
-
 export default function PortfolioDetail() {
     const router = useRouter();
     const { id } = router.query;
     const { dark } = useTheme();
-    const [projects, setProjects] = useState<PortfolioProject[]>(DEFAULT_PROJECTS);
+    const [projects, setProjects] = useState<PortfolioProject[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const savedProjects = localStorage.getItem("nq-portfolio-projects");
-        if (savedProjects) {
-            setProjects(JSON.parse(savedProjects));
-        }
+        fetch("/api/projects")
+            .then(res => res.ok ? res.json() : [])
+            .then(data => {
+                setProjects(data || []);
+            })
+            .catch(() => {
+                setProjects([]);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     const project = projects.find(p => p.id === Number(id));
     const currentIndex = projects.findIndex(p => p.id === Number(id));
     const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
     const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+
+    if (loading) {
+        return (
+            <div className={`min-h-screen flex items-center justify-center ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
+                <p className={`text-lg ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+                    로딩 중...
+                </p>
+            </div>
+        );
+    }
 
     if (!project) {
         return (
