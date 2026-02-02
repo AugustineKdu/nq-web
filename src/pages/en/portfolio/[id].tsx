@@ -143,7 +143,7 @@ export default function PortfolioDetailEN() {
                                 </div>
                                 {project.url && (
                                     <a
-                                        href={project.url}
+                                        href={project.url.startsWith('http') ? project.url : `https://${project.url}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-3 group"
