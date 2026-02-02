@@ -28,6 +28,17 @@ model SiteSettings {
   updatedAt      DateTime @updatedAt
 }
 
+// 외부 플랫폼 링크 / External Platform Links
+model ExternalLink {
+  id        Int      @id @default(autoincrement())
+  name      String   // 표시 이름 (예: 숨고, 카카오톡, 인스타그램)
+  url       String   // 링크 URL
+  isVisible Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // 페이지뷰 추적 / Page View Tracking
 model PageView {
   id        Int      @id @default(autoincrement())

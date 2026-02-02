@@ -176,6 +176,13 @@ interface SiteSettings {
     showLocation?: boolean;
 }
 
+interface ExternalLink {
+    id: number;
+    name: string;
+    url: string;
+    isVisible: boolean;
+}
+
 const DEFAULT_SETTINGS: SiteSettings = {
     email: "hello@nqsolution.com",
     phone: "+82 10-1234-5678",
@@ -188,11 +195,12 @@ const DEFAULT_SETTINGS: SiteSettings = {
 const Footer = ({ dark }: { dark: boolean }) => {
     const currentYear = new Date().getFullYear();
     const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
+    const [externalLinks, setExternalLinks] = useState<ExternalLink[]>([]);
     const router = useRouter();
-
     const isEnglish = router.pathname.startsWith("/en");
 
     useEffect(() => {
+        // Fetch settings
         fetch("/api/settings")
             .then(res => res.ok ? res.json() : null)
             .then(data => {
@@ -207,117 +215,92 @@ const Footer = ({ dark }: { dark: boolean }) => {
                     });
                 }
             })
-            .catch(() => {
-                // Use default settings on error
-            });
-    }, []);
+            .catch(() => {});
 
-    const navItems = isEnglish
-        ? [
-            { href: "/en/about", label: "About" },
-            { href: "/en/services", label: "Services" },
-            { href: "/en/portfolio", label: "Works" },
-            { href: "/en/contact", label: "Contact" },
-        ]
-        : [
-            { href: "/about", label: "About Us" },
-            { href: "/services", label: "Services" },
-            { href: "/portfolio", label: "Works" },
-            { href: "/contact", label: "Contact" },
-        ];
+        // Fetch external links
+        fetch("/api/external-links")
+            .then(res => res.ok ? res.json() : [])
+            .then(data => setExternalLinks(data.filter((link: ExternalLink) => link.isVisible)))
+            .catch(() => {});
+    }, []);
 
     return (
         <footer className="border-t border-[var(--color-border)]">
-            {/* Main Footer */}
-            <div className="container-custom py-20 md:py-24">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
-                    {/* Brand */}
-                    <div className="md:col-span-5">
+            <div className="container-custom py-16 md:py-20">
+                {/* Top Section */}
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-12">
+                    {/* Brand & Tagline */}
+                    <div className="max-w-sm">
                         <Image
                             src={dark ? "/logo-dark.png" : "/logo-light.png"}
                             alt="NQ Solution"
                             width={120}
                             height={48}
-                            className={`h-10 w-auto mb-8 ${dark ? "brightness-0 invert" : ""}`}
+                            className={`h-9 w-auto mb-4 ${dark ? "brightness-0 invert" : ""}`}
                         />
-                        <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed max-w-sm mb-10">
-                            {isEnglish ? (
-                                <>
-                                    Digital Craftsmanship.<br />
-                                    Where innovation meets elegance.
-                                </>
-                            ) : (
-                                <>
-                                    디지털 크래프트맨십.<br />
-                                    혁신과 우아함이 만나는 곳.
-                                </>
-                            )}
+                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                            {isEnglish
+                                ? "Turning new ideas into reality, fast."
+                                : "새로운 아이디어를 빠르게 현실로."
+                            }
                         </p>
-
                     </div>
 
-                    {/* Navigation */}
-                    <div className="md:col-span-3">
-                        <h4 className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] mb-6">
-                            Navigation
-                        </h4>
-                        <ul className="space-y-4">
-                            {navItems.map((item) => (
-                                <li key={item.href}>
-                                    <Link
-                                        href={item.href}
-                                        className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
-                                    >
-                                        {item.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Contact */}
-                    <div className="md:col-span-4">
-                        <h4 className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] mb-6">
-                            Contact
-                        </h4>
-                        <ul className="space-y-4 text-sm text-[var(--color-text-secondary)]">
-                            {settings.showEmail !== false && (
-                                <li>
+                    {/* Contact & Links */}
+                    <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
+                        {/* Contact */}
+                        <div>
+                            <h4 className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] mb-4">
+                                Contact
+                            </h4>
+                            <div className="space-y-2 text-sm">
+                                {settings.showEmail !== false && (
                                     <a
                                         href={`mailto:${settings.email}`}
-                                        className="hover:text-[var(--color-accent)] transition-colors"
+                                        className="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                                     >
-                                        <span className="text-[var(--color-text-tertiary)] mr-2">E</span>
                                         {settings.email}
                                     </a>
-                                </li>
-                            )}
-                            {settings.showPhone !== false && (
-                                <li>
+                                )}
+                                {settings.showPhone !== false && (
                                     <a
                                         href={`tel:${settings.phone.replace(/[^+\d]/g, '')}`}
-                                        className="hover:text-[var(--color-accent)] transition-colors"
+                                        className="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                                     >
-                                        <span className="text-[var(--color-text-tertiary)] mr-2">T</span>
                                         {settings.phone}
                                     </a>
-                                </li>
-                            )}
-                            {settings.showLocation && (
-                                <li className="text-[var(--color-text-tertiary)]">
-                                    {settings.location}
-                                </li>
-                            )}
-                        </ul>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* External Links */}
+                        {externalLinks.length > 0 && (
+                            <div>
+                                <h4 className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] mb-4">
+                                    Links
+                                </h4>
+                                <div className="space-y-2 text-sm">
+                                    {externalLinks.map(link => (
+                                        <a
+                                            key={link.id}
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-            </div>
 
-            {/* Bottom Bar */}
-            <div className="border-t border-[var(--color-border)]">
-                <div className="container-custom py-6 flex justify-center items-center">
+                {/* Bottom Section */}
+                <div className="pt-8 border-t border-[var(--color-border)]">
                     <p className="text-xs text-[var(--color-text-tertiary)]">
-                        © {currentYear} NQ Solution
+                        © {currentYear} NQ Solution. All rights reserved.
                     </p>
                 </div>
             </div>

@@ -35,6 +35,14 @@ interface SiteSettings {
     showLocation?: boolean;
 }
 
+interface ExternalLink {
+    id: number;
+    name: string;
+    url: string;
+    isVisible: boolean;
+    order: number;
+}
+
 interface AnalyticsData {
     totalViews: number;
     todayViews: number;
@@ -136,7 +144,7 @@ export default function Admin() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState(false);
-    const [activeTab, setActiveTab] = useState<"analytics" | "settings" | "stats" | "portfolio" | "password" | "home" | "about" | "services-page" | "contact-page">("analytics");
+    const [activeTab, setActiveTab] = useState<"analytics" | "settings" | "stats" | "portfolio" | "password" | "home" | "about" | "services-page" | "contact-page" | "links">("analytics");
     const [saved, setSaved] = useState(false);
     const [loading, setLoading] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -197,6 +205,11 @@ export default function Admin() {
     const [processSteps, setProcessSteps] = useState<ProcessStep[]>([]);
     const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
 
+    // External Links State
+    const [externalLinks, setExternalLinks] = useState<ExternalLink[]>([]);
+    const [newLink, setNewLink] = useState({ name: "", url: "" });
+    const [editingLink, setEditingLink] = useState<ExternalLink | null>(null);
+
     // Translation loading state
     const [translating, setTranslating] = useState(false);
 
@@ -208,7 +221,7 @@ export default function Admin() {
                 settingsRes, statsRes, projectsRes, analyticsRes,
                 homeKoRes, homeEnRes, aboutKoRes, aboutEnRes,
                 servicesKoRes, servicesEnRes, contactKoRes, contactEnRes,
-                serviceItemsRes, processStepsRes, faqItemsRes
+                serviceItemsRes, processStepsRes, faqItemsRes, externalLinksRes
             ] = await Promise.all([
                 fetch("/api/settings"),
                 fetch("/api/stats"),
@@ -224,7 +237,8 @@ export default function Admin() {
                 fetch("/api/contact-content?lang=en"),
                 fetch("/api/services"),
                 fetch("/api/process"),
-                fetch("/api/faq")
+                fetch("/api/faq"),
+                fetch("/api/external-links")
             ]);
 
             if (settingsRes.ok) {
@@ -254,6 +268,7 @@ export default function Admin() {
             if (serviceItemsRes.ok) setServiceItems(await serviceItemsRes.json());
             if (processStepsRes.ok) setProcessSteps(await processStepsRes.json());
             if (faqItemsRes.ok) setFaqItems(await faqItemsRes.json());
+            if (externalLinksRes.ok) setExternalLinks(await externalLinksRes.json());
         } catch (error) {
             console.error("Failed to fetch data:", error);
         } finally {
@@ -651,6 +666,73 @@ export default function Admin() {
         }
     };
 
+    // External Links CRUD
+    const addExternalLink = async () => {
+        if (!newLink.name || !newLink.url) return;
+        setLoading(true);
+        try {
+            const res = await fetch("/api/external-links", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...newLink, isVisible: true, order: externalLinks.length })
+            });
+            if (res.ok) {
+                const link = await res.json();
+                setExternalLinks([...externalLinks, link]);
+                setNewLink({ name: "", url: "" });
+                showSaveNotification();
+            }
+        } catch (error) {
+            console.error("Failed to add link:", error);
+            alert("링크 추가에 실패했습니다.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updateExternalLink = async (link: ExternalLink) => {
+        setLoading(true);
+        try {
+            const res = await fetch("/api/external-links", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(link)
+            });
+            if (res.ok) {
+                setExternalLinks(externalLinks.map(l => l.id === link.id ? link : l));
+                setEditingLink(null);
+                showSaveNotification();
+            }
+        } catch (error) {
+            console.error("Failed to update link:", error);
+            alert("링크 수정에 실패했습니다.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteExternalLink = async (id: number) => {
+        if (!confirm("이 링크를 삭제하시겠습니까?")) return;
+        setLoading(true);
+        try {
+            const res = await fetch(`/api/external-links?id=${id}`, { method: "DELETE" });
+            if (res.ok) {
+                setExternalLinks(externalLinks.filter(l => l.id !== id));
+                showSaveNotification();
+            }
+        } catch (error) {
+            console.error("Failed to delete link:", error);
+            alert("링크 삭제에 실패했습니다.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const toggleLinkVisibility = async (link: ExternalLink) => {
+        const updated = { ...link, isVisible: !link.isVisible };
+        await updateExternalLink(updated);
+    };
+
     // Tags
     const addTag = (isEditing: boolean) => {
         if (!tagInput.trim()) return;
@@ -684,6 +766,7 @@ export default function Admin() {
         { id: "settings", label: "사이트 설정", icon: Settings },
         { id: "stats", label: "통계 수치", icon: BarChart3 },
         { id: "portfolio", label: "포트폴리오", icon: Briefcase },
+        { id: "links", label: "외부 링크", icon: Globe },
         { id: "password", label: "비밀번호 변경", icon: Lock },
     ];
 
@@ -2637,6 +2720,178 @@ export default function Admin() {
                                         <Save className="w-4 h-4" />
                                         문의 페이지 저장
                                     </button>
+                                </div>
+                            )}
+
+                            {/* External Links Tab */}
+                            {activeTab === "links" && (
+                                <div className="space-y-8">
+                                    <div>
+                                        <h2 className={`text-xl font-medium mb-2 ${dark ? "text-white" : "text-neutral-900"}`}>
+                                            외부 플랫폼 링크
+                                        </h2>
+                                        <p className={`text-sm mb-8 ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+                                            푸터에 표시할 외부 링크를 관리합니다. (숨고, 카카오톡, 인스타그램, 블로그 등)
+                                        </p>
+
+                                        {/* Add New Link */}
+                                        <div className={`p-6 rounded-xl mb-6 ${dark ? "bg-neutral-800" : "bg-neutral-100"}`}>
+                                            <h3 className={`text-sm font-medium mb-4 ${dark ? "text-neutral-300" : "text-neutral-700"}`}>
+                                                새 링크 추가
+                                            </h3>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                                <div>
+                                                    <label className={`block text-xs font-medium mb-1.5 ${dark ? "text-neutral-400" : "text-neutral-500"}`}>
+                                                        이름 (표시될 텍스트)
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        value={newLink.name}
+                                                        onChange={(e) => setNewLink({ ...newLink, name: e.target.value })}
+                                                        className={`w-full px-4 py-3 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500/50 ${
+                                                            dark
+                                                                ? "bg-neutral-900 border border-neutral-700 text-white"
+                                                                : "bg-white border border-neutral-200 text-neutral-900"
+                                                        }`}
+                                                        placeholder="예: 숨고, 카카오톡 채널"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className={`block text-xs font-medium mb-1.5 ${dark ? "text-neutral-400" : "text-neutral-500"}`}>
+                                                        URL
+                                                    </label>
+                                                    <input
+                                                        type="url"
+                                                        value={newLink.url}
+                                                        onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
+                                                        className={`w-full px-4 py-3 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500/50 ${
+                                                            dark
+                                                                ? "bg-neutral-900 border border-neutral-700 text-white"
+                                                                : "bg-white border border-neutral-200 text-neutral-900"
+                                                        }`}
+                                                        placeholder="https://..."
+                                                    />
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={addExternalLink}
+                                                disabled={loading || !newLink.name || !newLink.url}
+                                                className="inline-flex items-center gap-2 px-4 py-2 bg-teal-500 text-white rounded-lg text-sm font-medium hover:bg-teal-600 transition-colors disabled:opacity-50"
+                                            >
+                                                <Plus className="w-4 h-4" />
+                                                링크 추가
+                                            </button>
+                                        </div>
+
+                                        {/* Links List */}
+                                        <div className="space-y-3">
+                                            {externalLinks.length === 0 ? (
+                                                <p className={`text-sm py-8 text-center ${dark ? "text-neutral-500" : "text-neutral-400"}`}>
+                                                    등록된 외부 링크가 없습니다.
+                                                </p>
+                                            ) : (
+                                                externalLinks.map((link) => (
+                                                    <div
+                                                        key={link.id}
+                                                        className={`p-4 rounded-xl flex items-center justify-between gap-4 ${
+                                                            dark ? "bg-neutral-800" : "bg-neutral-100"
+                                                        }`}
+                                                    >
+                                                        {editingLink?.id === link.id ? (
+                                                            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                                <input
+                                                                    type="text"
+                                                                    value={editingLink.name}
+                                                                    onChange={(e) => setEditingLink({ ...editingLink, name: e.target.value })}
+                                                                    className={`px-3 py-2 rounded-lg text-sm ${
+                                                                        dark
+                                                                            ? "bg-neutral-900 border border-neutral-700 text-white"
+                                                                            : "bg-white border border-neutral-200 text-neutral-900"
+                                                                    }`}
+                                                                />
+                                                                <input
+                                                                    type="url"
+                                                                    value={editingLink.url}
+                                                                    onChange={(e) => setEditingLink({ ...editingLink, url: e.target.value })}
+                                                                    className={`px-3 py-2 rounded-lg text-sm ${
+                                                                        dark
+                                                                            ? "bg-neutral-900 border border-neutral-700 text-white"
+                                                                            : "bg-white border border-neutral-200 text-neutral-900"
+                                                                    }`}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex-1 min-w-0">
+                                                                <div className="flex items-center gap-2 mb-1">
+                                                                    <span className={`font-medium ${dark ? "text-white" : "text-neutral-900"}`}>
+                                                                        {link.name}
+                                                                    </span>
+                                                                    {!link.isVisible && (
+                                                                        <span className="px-2 py-0.5 text-xs rounded-full bg-neutral-500/20 text-neutral-400">숨김</span>
+                                                                    )}
+                                                                </div>
+                                                                <a
+                                                                    href={link.url}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className={`text-sm truncate block ${dark ? "text-neutral-400" : "text-neutral-500"} hover:text-teal-500`}
+                                                                >
+                                                                    {link.url}
+                                                                </a>
+                                                            </div>
+                                                        )}
+                                                        <div className="flex items-center gap-2 shrink-0">
+                                                            {editingLink?.id === link.id ? (
+                                                                <>
+                                                                    <button
+                                                                        onClick={() => updateExternalLink(editingLink)}
+                                                                        disabled={loading}
+                                                                        className="p-2 rounded-lg bg-teal-500 text-white hover:bg-teal-600 transition-colors"
+                                                                    >
+                                                                        <Check className="w-4 h-4" />
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => setEditingLink(null)}
+                                                                        className={`p-2 rounded-lg ${dark ? "bg-neutral-700 text-neutral-300" : "bg-neutral-200 text-neutral-600"}`}
+                                                                    >
+                                                                        <X className="w-4 h-4" />
+                                                                    </button>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <button
+                                                                        onClick={() => toggleLinkVisibility(link)}
+                                                                        disabled={loading}
+                                                                        className={`p-2 rounded-lg transition-colors ${
+                                                                            link.isVisible
+                                                                                ? dark ? "bg-green-500/20 text-green-400" : "bg-green-100 text-green-600"
+                                                                                : dark ? "bg-neutral-700 text-neutral-400" : "bg-neutral-200 text-neutral-500"
+                                                                        }`}
+                                                                        title={link.isVisible ? "숨기기" : "표시하기"}
+                                                                    >
+                                                                        <Eye className="w-4 h-4" />
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => setEditingLink(link)}
+                                                                        className={`p-2 rounded-lg ${dark ? "bg-neutral-700 text-neutral-300 hover:bg-neutral-600" : "bg-neutral-200 text-neutral-600 hover:bg-neutral-300"} transition-colors`}
+                                                                    >
+                                                                        <Edit3 className="w-4 h-4" />
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => deleteExternalLink(link.id)}
+                                                                        disabled={loading}
+                                                                        className={`p-2 rounded-lg ${dark ? "bg-red-500/20 text-red-400 hover:bg-red-500/30" : "bg-red-100 text-red-600 hover:bg-red-200"} transition-colors`}
+                                                                    >
+                                                                        <Trash2 className="w-4 h-4" />
+                                                                    </button>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </div>
