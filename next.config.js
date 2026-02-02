@@ -6,6 +6,6 @@ module.exports = {
 
     // 기존 옵션 예시
     reactStrictMode: true,
-    // (필요하다면 다른 옵션들도 여기에)
-    // output: 'export',
+    // Docker 배포를 위한 standalone 출력
+    output: 'standalone',
 };
