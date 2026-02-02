@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Save, Plus, Trash2, Settings, BarChart3, FolderOpen, Check, Lock, LogOut, Briefcase, Edit3, X, Globe, RefreshCw, Database, Home, Menu, Moon, Sun, TrendingUp, Eye, Users, Languages, Info, Phone, Wrench } from "lucide-react";
+import { Save, Plus, Trash2, Settings, BarChart3, FolderOpen, Check, Lock, LogOut, Briefcase, Edit3, X, Globe, RefreshCw, Database, Home, Menu, Moon, Sun, TrendingUp, Eye, Users, Languages, Info, Phone, Wrench, ChevronUp, ChevronDown } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -614,6 +614,38 @@ export default function Admin() {
         } catch (error) {
             console.error("Failed to delete project:", error);
             alert("프로젝트 삭제에 실패했습니다.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Reorder portfolio projects
+    const reorderProject = async (index: number, direction: "up" | "down") => {
+        if (direction === "up" && index === 0) return;
+        if (direction === "down" && index === portfolioProjects.length - 1) return;
+
+        const newIndex = direction === "up" ? index - 1 : index + 1;
+        const newProjects = [...portfolioProjects];
+        const [removed] = newProjects.splice(index, 1);
+        newProjects.splice(newIndex, 0, removed);
+
+        // Update order values
+        const orders = newProjects.map((p, i) => ({ id: p.id, order: i }));
+
+        setLoading(true);
+        try {
+            const res = await fetch("/api/projects", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orders })
+            });
+            if (res.ok) {
+                setPortfolioProjects(newProjects);
+                showSaveNotification();
+            }
+        } catch (error) {
+            console.error("Failed to reorder projects:", error);
+            alert("순서 변경에 실패했습니다.");
         } finally {
             setLoading(false);
         }
@@ -1270,7 +1302,7 @@ export default function Admin() {
 
                                         {/* Project List */}
                                         <div className="space-y-3 mb-8">
-                                            {portfolioProjects.map((project) => (
+                                            {portfolioProjects.map((project, index) => (
                                                 <div
                                                     key={project.id}
                                                     className={`p-4 rounded-xl ${
@@ -1278,6 +1310,35 @@ export default function Admin() {
                                                     }`}
                                                 >
                                                     <div className="flex items-start justify-between gap-4">
+                                                        {/* Reorder Buttons */}
+                                                        <div className="flex flex-col gap-0.5">
+                                                            <button
+                                                                onClick={() => reorderProject(index, "up")}
+                                                                disabled={index === 0 || loading}
+                                                                className={`p-1 rounded transition-colors ${
+                                                                    index === 0
+                                                                        ? "opacity-30 cursor-not-allowed"
+                                                                        : dark
+                                                                            ? "text-neutral-400 hover:text-teal-400 hover:bg-neutral-700"
+                                                                            : "text-neutral-500 hover:text-teal-500 hover:bg-neutral-200"
+                                                                }`}
+                                                            >
+                                                                <ChevronUp className="w-4 h-4" />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => reorderProject(index, "down")}
+                                                                disabled={index === portfolioProjects.length - 1 || loading}
+                                                                className={`p-1 rounded transition-colors ${
+                                                                    index === portfolioProjects.length - 1
+                                                                        ? "opacity-30 cursor-not-allowed"
+                                                                        : dark
+                                                                            ? "text-neutral-400 hover:text-teal-400 hover:bg-neutral-700"
+                                                                            : "text-neutral-500 hover:text-teal-500 hover:bg-neutral-200"
+                                                                }`}
+                                                            >
+                                                                <ChevronDown className="w-4 h-4" />
+                                                            </button>
+                                                        </div>
                                                         <div className="flex-1 min-w-0">
                                                             <div className="flex items-center gap-2 mb-1 flex-wrap">
                                                                 <p className={`font-medium ${dark ? "text-white" : "text-neutral-900"}`}>

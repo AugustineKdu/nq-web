@@ -37,6 +37,23 @@ export default async function handler(
             return res.status(204).end();
         }
 
+        if (req.method === "PATCH") {
+            // Bulk update order
+            const { orders } = req.body; // [{ id: 1, order: 0 }, { id: 2, order: 1 }, ...]
+            if (Array.isArray(orders)) {
+                await Promise.all(
+                    orders.map((item: { id: number; order: number }) =>
+                        prisma.project.update({
+                            where: { id: item.id },
+                            data: { order: item.order },
+                        })
+                    )
+                );
+                return res.status(200).json({ success: true });
+            }
+            return res.status(400).json({ error: "Invalid orders data" });
+        }
+
         return res.status(405).json({ error: "Method not allowed" });
     } catch (error) {
         console.error("Projects API error:", error);
