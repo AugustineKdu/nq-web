@@ -3,7 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { koContent, projects as configProjects, categories } from "../config";
+import { koContent, categories } from "../config";
 
 // Animation variants
 const fadeIn = {
@@ -15,23 +15,35 @@ const stagger = {
     visible: { transition: { staggerChildren: 0.1 } }
 };
 
+interface Project {
+    id: number;
+    title: string;
+    titleKo?: string;
+    client: string;
+    category: string;
+    year: string;
+    description: string;
+    descriptionKo?: string;
+}
+
 export default function Portfolio() {
     const content = koContent.portfolio;
     const [activeFilter, setActiveFilter] = useState<typeof categories[number]>("All");
-    const [projects, setProjects] = useState(configProjects);
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Fetch projects from database API
         fetch("/api/projects")
-            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(res => res.ok ? res.json() : [])
             .then(data => {
-                if (data && data.length > 0) {
-                    setProjects(data);
-                }
+                setProjects(data || []);
             })
             .catch(() => {
-                // Fallback to config projects if API fails
-                console.log("Using default projects from config");
+                setProjects([]);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, []);
 
@@ -129,6 +141,16 @@ export default function Portfolio() {
             {/* Projects List */}
             <section className="pb-20">
                 <div className="container-custom">
+                    {loading ? (
+                        <div className="py-20 text-center">
+                            <p className="text-[var(--color-text-tertiary)]">로딩 중...</p>
+                        </div>
+                    ) : filteredProjects.length === 0 ? (
+                        <div className="py-20 text-center">
+                            <p className="text-[var(--color-text-secondary)] mb-2">등록된 프로젝트가 없습니다.</p>
+                            <p className="text-sm text-[var(--color-text-tertiary)]">관리자 페이지에서 프로젝트를 추가해주세요.</p>
+                        </div>
+                    ) : (
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeFilter}
@@ -224,7 +246,8 @@ export default function Portfolio() {
                             ))}
                         </motion.div>
                     </AnimatePresence>
-                    <div className="border-t border-[var(--color-border)]" />
+                    )}
+                    {filteredProjects.length > 0 && <div className="border-t border-[var(--color-border)]" />}
                 </div>
             </section>
 

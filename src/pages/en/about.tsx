@@ -37,13 +37,6 @@ export default function AboutEN() {
         },
     ];
 
-    const roadmap = [
-        { year: "2023", title: "NQ Solution Founded", desc: "Started as a solo web development practice" },
-        { year: "2024", title: "Service Expansion", desc: "Expanded into planning, design, and AI solutions" },
-        { year: "2025", title: "Incorporation", desc: "Preparing for stable growth through incorporation" },
-        { year: "2026", title: "Own Service Launch", desc: "Developing our own app/service products" },
-    ];
-
     return (
         <div className="min-h-screen">
             {/* Hero */}
@@ -195,62 +188,6 @@ export default function AboutEN() {
                             </motion.div>
                         ))}
                     </motion.div>
-                </div>
-            </section>
-
-            {/* Roadmap */}
-            <section className="section-padding">
-                <div className="container-custom">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
-                        variants={stagger}
-                        className="grid grid-cols-12 gap-8 mb-20"
-                    >
-                        <motion.div variants={slideIn} className="col-span-12 lg:col-span-2">
-                            <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
-                                Roadmap
-                            </span>
-                        </motion.div>
-                        <motion.div variants={fadeIn} className="col-span-12 lg:col-span-10">
-                            <h2 className="text-display-sm font-serif">
-                                Our Journey
-                            </h2>
-                        </motion.div>
-                    </motion.div>
-
-                    <div className="grid grid-cols-12 gap-8">
-                        <div className="col-span-12 lg:col-span-2" />
-                        <div className="col-span-12 lg:col-span-10">
-                            {roadmap.map((item, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="flex gap-8 py-8 border-t border-[var(--color-border)] group"
-                                >
-                                    <motion.span
-                                        className="text-3xl font-serif text-[var(--color-accent)] w-24 shrink-0"
-                                        whileHover={{ scale: 1.1 }}
-                                    >
-                                        {item.year}
-                                    </motion.span>
-                                    <div>
-                                        <h3 className="text-xl font-serif mb-2 group-hover:text-[var(--color-accent)] transition-colors">
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-sm text-[var(--color-text-secondary)]">
-                                            {item.desc}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                            <div className="border-t border-[var(--color-border)]" />
-                        </div>
-                    </div>
                 </div>
             </section>
 

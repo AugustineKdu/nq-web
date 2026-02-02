@@ -13,72 +13,35 @@ const stagger = {
     visible: { transition: { staggerChildren: 0.1 } }
 };
 
-const DEFAULT_PROJECTS = [
-    {
-        id: 1,
-        title: "E-Commerce Platform",
-        client: "Fashion Brand",
-        category: "Digital Product",
-        year: "2024",
-        description: "Mobile-first shopping experience for a premium fashion brand",
-        featured: true
-    },
-    {
-        id: 2,
-        title: "Fitness Application",
-        client: "Health Startup",
-        category: "Mobile App",
-        year: "2024",
-        description: "Wellness app with workout tracking and community features",
-        featured: true
-    },
-    {
-        id: 3,
-        title: "Corporate Website",
-        client: "Tech Company",
-        category: "Web",
-        year: "2023",
-        description: "Website capturing a tech company's brand identity",
-        featured: false
-    },
-    {
-        id: 4,
-        title: "Dashboard System",
-        client: "Fintech",
-        category: "Design",
-        year: "2023",
-        description: "Dashboard for financial data visualization and analysis",
-        featured: false
-    },
-    {
-        id: 5,
-        title: "Social Platform",
-        client: "Community",
-        category: "Mobile App",
-        year: "2024",
-        description: "Real-time social networking platform",
-        featured: false
-    },
-    {
-        id: 6,
-        title: "Brand Identity",
-        client: "Startup Studio",
-        category: "Design",
-        year: "2024",
-        description: "Brand identity system for startups",
-        featured: false
-    }
-];
+interface Project {
+    id: number;
+    title: string;
+    titleKo?: string;
+    client: string;
+    category: string;
+    year: string;
+    description: string;
+    descriptionKo?: string;
+}
 
 export default function PortfolioEN() {
     const [activeFilter, setActiveFilter] = useState("All");
-    const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const savedProjects = localStorage.getItem("nq-portfolio-projects-en");
-        if (savedProjects) {
-            setProjects(JSON.parse(savedProjects));
-        }
+        // Fetch projects from database API
+        fetch("/api/projects")
+            .then(res => res.ok ? res.json() : [])
+            .then(data => {
+                setProjects(data || []);
+            })
+            .catch(() => {
+                setProjects([]);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     const filters = ["All", "Digital Product", "Mobile App", "Design", "Web"];
@@ -168,6 +131,16 @@ export default function PortfolioEN() {
             {/* Projects List */}
             <section className="pb-20">
                 <div className="container-custom">
+                    {loading ? (
+                        <div className="py-20 text-center">
+                            <p className="text-[var(--color-text-tertiary)]">Loading...</p>
+                        </div>
+                    ) : filteredProjects.length === 0 ? (
+                        <div className="py-20 text-center">
+                            <p className="text-[var(--color-text-secondary)] mb-2">No projects found.</p>
+                            <p className="text-sm text-[var(--color-text-tertiary)]">Please add projects in the admin page.</p>
+                        </div>
+                    ) : (
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeFilter}
@@ -236,7 +209,8 @@ export default function PortfolioEN() {
                             ))}
                         </motion.div>
                     </AnimatePresence>
-                    <div className="border-t border-[var(--color-border)]" />
+                    )}
+                    {filteredProjects.length > 0 && <div className="border-t border-[var(--color-border)]" />}
                 </div>
             </section>
 
