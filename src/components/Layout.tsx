@@ -167,24 +167,49 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
     );
 };
 
-const DEFAULT_SETTINGS = {
+interface SiteSettings {
+    email: string;
+    phone: string;
+    location: string;
+    showPhone?: boolean;
+    showEmail?: boolean;
+    showLocation?: boolean;
+}
+
+const DEFAULT_SETTINGS: SiteSettings = {
     email: "hello@nqsolution.com",
     phone: "+82 10-1234-5678",
-    location: "Seoul, South Korea"
+    location: "Seoul, South Korea",
+    showPhone: true,
+    showEmail: true,
+    showLocation: false
 };
 
 const Footer = ({ dark }: { dark: boolean }) => {
     const currentYear = new Date().getFullYear();
-    const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+    const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
     const router = useRouter();
 
     const isEnglish = router.pathname.startsWith("/en");
 
     useEffect(() => {
-        const savedSettings = localStorage.getItem("nq-site-settings");
-        if (savedSettings) {
-            setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) });
-        }
+        fetch("/api/settings")
+            .then(res => res.ok ? res.json() : null)
+            .then(data => {
+                if (data) {
+                    setSettings({
+                        email: data.email || DEFAULT_SETTINGS.email,
+                        phone: data.phone || DEFAULT_SETTINGS.phone,
+                        location: data.location || DEFAULT_SETTINGS.location,
+                        showPhone: data.showPhone ?? true,
+                        showEmail: data.showEmail ?? true,
+                        showLocation: data.showLocation ?? false
+                    });
+                }
+            })
+            .catch(() => {
+                // Use default settings on error
+            });
     }, []);
 
     const navItems = isEnglish
@@ -256,25 +281,33 @@ const Footer = ({ dark }: { dark: boolean }) => {
                             Contact
                         </h4>
                         <ul className="space-y-4 text-sm text-[var(--color-text-secondary)]">
-                            <li>
-                                <a
-                                    href={`mailto:${settings.email}`}
-                                    className="hover:text-[var(--color-accent)] transition-colors"
-                                >
-                                    {settings.email}
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href={`tel:${settings.phone.replace(/[^+\d]/g, '')}`}
-                                    className="hover:text-[var(--color-accent)] transition-colors"
-                                >
-                                    {settings.phone}
-                                </a>
-                            </li>
-                            <li className="text-[var(--color-text-tertiary)]">
-                                {settings.location}
-                            </li>
+                            {settings.showEmail !== false && (
+                                <li>
+                                    <a
+                                        href={`mailto:${settings.email}`}
+                                        className="hover:text-[var(--color-accent)] transition-colors"
+                                    >
+                                        <span className="text-[var(--color-text-tertiary)] mr-2">E</span>
+                                        {settings.email}
+                                    </a>
+                                </li>
+                            )}
+                            {settings.showPhone !== false && (
+                                <li>
+                                    <a
+                                        href={`tel:${settings.phone.replace(/[^+\d]/g, '')}`}
+                                        className="hover:text-[var(--color-accent)] transition-colors"
+                                    >
+                                        <span className="text-[var(--color-text-tertiary)] mr-2">T</span>
+                                        {settings.phone}
+                                    </a>
+                                </li>
+                            )}
+                            {settings.showLocation && (
+                                <li className="text-[var(--color-text-tertiary)]">
+                                    {settings.location}
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>
