@@ -1,0 +1,295 @@
+// Prisma Schema for NQ Solution CMS
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 사이트 설정 / Site Settings
+model SiteSettings {
+  id             String   @id @default("main")
+  email          String   @default("hello@nqsolution.com")
+  phone          String   @default("+82 10-1234-5678")
+  location       String   @default("Seoul, South Korea")
+  locationKo     String   @default("서울, 대한민국")
+  contactFormUrl String   @default("https://forms.google.com")
+  ceoName        String   @default("홍길동")
+  companyName    String   @default("NQ Solution")
+  companyNameKo  String   @default("엔큐솔루션")
+  showPhone      Boolean  @default(true)
+  showEmail      Boolean  @default(true)
+  showLocation   Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// 페이지뷰 추적 / Page View Tracking
+model PageView {
+  id        Int      @id @default(autoincrement())
+  path      String
+  date      String   // YYYY-MM-DD format for daily aggregation
+  count     Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([path, date])
+  @@index([date])
+}
+
+// 통계 / Stats
+model SiteStats {
+  id           String   @id @default("main")
+  projectCount String   @default("50+")
+  clientCount  String   @default("30+")
+  satisfaction String   @default("100%")
+  since        String   @default("2023")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// 포트폴리오 프로젝트 / Portfolio Projects
+model Project {
+  id              Int      @id @default(autoincrement())
+  title           String
+  titleKo         String?
+  client          String
+  category        String
+  year            String
+  description     String
+  descriptionKo   String?
+  longDescription String?  @db.Text
+  tags            String[] @default([])
+  featured        Boolean  @default(false)
+  url             String?
+  isActive        Boolean  @default(true)
+  images          String[] @default([])
+  challenges      String[] @default([])
+  solutions       String[] @default([])
+  results         String[] @default([])
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// 홈페이지 콘텐츠 / Home Page Content
+model HomeContent {
+  id          String   @id @default("main")
+  lang        String   @default("ko") // ko or en
+
+  // Hero Section
+  heroEyebrow  String   @default("Digital Solution Partner")
+  heroHeadline String[] @default(["아이디어를", "현실로"])
+  heroSubtext  String   @default("기획부터 디자인, 개발까지.\n비즈니스에 필요한 디지털 솔루션을 제공합니다.")
+  heroCta      String   @default("프로젝트 문의")
+
+  // Services Section
+  servicesEyebrow  String @default("Services")
+  servicesHeadline String @default("무엇이 필요하신가요?")
+  servicesViewAll  String @default("전체 서비스 보기")
+
+  // Process Section
+  processEyebrow  String @default("Process")
+  processHeadline String @default("진행 방식")
+
+  // AI Section
+  aiEyebrow     String @default("AI Solutions")
+  aiHeadline    String @default("AI를 비즈니스에\n실용적으로 적용합니다")
+  aiDescription String @default("자체 AI 서비스 개발부터, ChatGPT·Claude 등 외부 AI를 업무에 쉽게 활용할 수 있도록 세팅해드립니다.")
+
+  // CTA Section
+  ctaSubtext String @default("어떤 서비스가 필요하신지 편하게 문의해주세요.")
+  ctaButton  String @default("문의하기")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([id, lang])
+}
+
+// 서비스 항목 / Service Items
+model ServiceItem {
+  id          Int      @id @default(autoincrement())
+  lang        String   @default("ko")
+  number      String
+  title       String
+  subtitle    String
+  description String
+  details     String[] @default([])
+  order       Int      @default(0)
+  pageType    String   @default("home") // home or services
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 프로세스 단계 / Process Steps
+model ProcessStep {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  num       String
+  title     String
+  desc      String
+  order     Int      @default(0)
+  pageType  String   @default("home") // home or services
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// AI 아이템 / AI Items
+model AiItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  content   String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 회사소개 페이지 / About Page Content
+model AboutContent {
+  id        String   @id @default("main")
+  lang      String   @default("ko")
+
+  // Hero
+  headline    String @default("NQ Solution")
+  intro       String @default("기획, 웹개발, 디자인을 중심으로\n디지털 솔루션을 제공합니다.")
+  description String @default("기존 웹사이트 리뉴얼, 신규 서비스 구축, AI 도입까지. 고객이 필요한 것을 파악하고 적합한 방법을 찾아 실행합니다.")
+
+  // Future Section
+  futureDescription String @default("현재 법인 설립을 준비하고 있으며, 자체 앱과 서비스 개발을 통한 꾸준한 성장을 목표로 하고 있습니다.")
+  futureSubtext     String @default("의뢰 프로젝트에서 쌓은 경험을 바탕으로, 자체 서비스를 통해 더 많은 분들께 가치를 전달하고자 합니다.")
+
+  // CTA
+  ctaSubtext String @default("어떤 서비스가 필요하신지 편하게 문의해주세요.")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([id, lang])
+}
+
+// What We Do 항목 / What We Do Items
+model WhatWeDoItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  title     String
+  desc      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 가치 항목 / Value Items
+model ValueItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  num       String
+  title     String
+  desc      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 로드맵 항목 / Roadmap Items
+model RoadmapItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  year      String
+  title     String
+  desc      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 서비스 페이지 / Services Page Content
+model ServicesContent {
+  id        String   @id @default("main")
+  lang      String   @default("ko")
+
+  // Hero
+  heroDescription String @default("웹사이트, 앱, AI 연동까지.\n필요한 디지털 솔루션을 맞춤형으로 제공합니다.")
+
+  // Pricing
+  pricingDescription String @default("프로젝트 특성에 따라 유연하게 견적을 산정합니다. 상담 시 범위와 요구사항을 파악한 후 정확한 견적을 안내해 드립니다.")
+
+  // CTA
+  ctaSubtext String @default("어떤 서비스가 필요하신지 편하게 문의해주세요.")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([id, lang])
+}
+
+// 가격 항목 / Pricing Items
+model PricingItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  content   String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 문의 페이지 / Contact Page Content
+model ContactContent {
+  id        String   @id @default("main")
+  lang      String   @default("ko")
+
+  // Hero
+  heroIntro       String @default("프로젝트에 대해\n편하게 문의해 주세요.")
+  heroDescription String @default("어떤 서비스가 필요하신지 알려주시면, 적합한 솔루션을 안내해 드립니다.")
+
+  // Form
+  formDescription String @default("아래 내용을 포함해 문의해 주시면 더 정확한 상담이 가능합니다.")
+  formButton      String @default("프로젝트 상담 신청")
+
+  // CTA
+  ctaSubtext String @default("어떤 서비스가 필요하신지 편하게 문의해주세요.")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([id, lang])
+}
+
+// 문의 폼 항목 / Contact Form Items
+model ContactFormItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  content   String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// FAQ 항목 / FAQ Items
+model FaqItem {
+  id        Int      @id @default(autoincrement())
+  lang      String   @default("ko")
+  question  String
+  answer    String   @db.Text
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 네비게이션 / Navigation
+model Navigation {
+  id        String   @id @default("main")
+  lang      String   @default("ko")
+  about     String   @default("About Us")
+  services  String   @default("Services")
+  portfolio String   @default("Works")
+  contact   String   @default("Contact")
+  cta       String   @default("Start a Project")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([id, lang])
+}

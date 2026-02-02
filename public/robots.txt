@@ -1,0 +1,11 @@
+# Robots.txt for NQ Solution
+# https://www.nqsolution.com
+
+User-agent: *
+Allow: /
+
+# Block admin page from search engines
+Disallow: /admin
+
+# Sitemap location
+Sitemap: https://www.nqsolution.com/sitemap.xml

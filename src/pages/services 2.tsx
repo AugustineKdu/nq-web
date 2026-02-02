@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import Head from "next/head";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { koContent } from "../config";
-
-interface ServicesContent {
-    heroDescription: string;
-    pricingDescription: string;
-    ctaSubtext: string;
-}
 
 // Animation variants
 const fadeIn = {
@@ -27,48 +20,10 @@ const slideIn = {
 };
 
 export default function Services() {
-    const staticContent = koContent.services;
-    const [servicesContent, setServicesContent] = useState<ServicesContent | null>(null);
-
-    useEffect(() => {
-        fetch("/api/services-content?lang=ko")
-            .then(r => r.ok ? r.json() : null)
-            .then(data => {
-                if (data) setServicesContent(data);
-            })
-            .catch(() => {});
-    }, []);
-
-    // Use DB content or fallback to static
-    const content = {
-        hero: {
-            ...staticContent.hero,
-            description: servicesContent?.heroDescription || staticContent.hero.description
-        },
-        items: staticContent.items,
-        process: staticContent.process,
-        pricing: {
-            ...staticContent.pricing,
-            description: servicesContent?.pricingDescription || staticContent.pricing.description
-        },
-        cta: {
-            ...staticContent.cta,
-            subtext: servicesContent?.ctaSubtext || staticContent.cta.subtext
-        }
-    };
+    const content = koContent.services;
 
     return (
-        <>
-            <Head>
-                <title>서비스 | NQ Solution - 웹개발, 앱개발, AI솔루션</title>
-                <meta name="description" content="NQ Solution이 제공하는 서비스: 웹사이트 개발, 모바일 앱 개발, UI/UX 디자인, AI 솔루션 구축. 기획부터 개발, 운영까지 원스톱 서비스를 제공합니다." />
-                <meta name="keywords" content="웹개발 서비스, 앱개발 서비스, UI/UX 디자인, AI 솔루션, 홈페이지 제작, 모바일앱 개발, IT 컨설팅" />
-                <meta property="og:title" content="서비스 | NQ Solution" />
-                <meta property="og:description" content="웹사이트 개발, 모바일 앱 개발, UI/UX 디자인, AI 솔루션 구축. 기획부터 개발, 운영까지 원스톱 서비스." />
-                <meta property="og:url" content="https://www.nqsolution.com/services" />
-                <link rel="canonical" href="https://www.nqsolution.com/services" />
-            </Head>
-            <div className="min-h-screen">
+        <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">
                 <div className="container-custom">
@@ -351,7 +306,6 @@ export default function Services() {
                     </motion.div>
                 </div>
             </section>
-            </div>
-        </>
+        </div>
     );
 }

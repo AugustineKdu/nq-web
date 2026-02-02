@@ -1,257 +1,543 @@
-import React, { useEffect } from "react";
-import { ArrowRight } from "lucide-react";
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Head from "next/head";
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowDownRight } from "lucide-react";
+import { koContent } from "../config";
+import { useTheme } from "../context/ThemeContext";
+
+interface HomeContent {
+    heroEyebrow: string;
+    heroHeadline: string[];
+    heroSubtext: string;
+    heroCta: string;
+    servicesEyebrow: string;
+    servicesHeadline: string;
+    servicesViewAll: string;
+    processEyebrow: string;
+    processHeadline: string;
+    aiEyebrow: string;
+    aiHeadline: string;
+    aiDescription: string;
+    ctaSubtext: string;
+    ctaButton: string;
+}
+
+interface ServiceItem {
+    number: string;
+    title: string;
+    subtitle: string;
+    description: string;
+}
+
+interface ProcessStep {
+    num: string;
+    title: string;
+    desc: string;
+}
+
+interface AiItem {
+    content: string;
+}
+
+// Animation variants
+const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
+};
+
+const stagger = {
+    visible: { transition: { staggerChildren: 0.15 } }
+};
+
+const slideIn = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0 }
+};
+
+const scaleIn = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1 }
+};
 
 export default function Home() {
+    const { dark } = useTheme();
+    const staticContent = koContent.home;
 
-  return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
-      {/* Grid Background */}
-      <div className="fixed inset-0 opacity-[0.02] dark:opacity-[0.05]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, currentColor 1px, transparent 1px),
-              linear-gradient(to bottom, currentColor 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px'
-          }}
-        />
-      </div>
+    // State for DB content
+    const [homeContent, setHomeContent] = useState<HomeContent | null>(null);
+    const [services, setServices] = useState<ServiceItem[]>([]);
+    const [processSteps, setProcessSteps] = useState<ProcessStep[]>([]);
+    const [aiItems, setAiItems] = useState<AiItem[]>([]);
 
-      {/* Hero Section - Typography Focus */}
-      <section className="relative min-h-screen flex items-center justify-center px-8">
-        <div className="max-w-6xl mx-auto w-full">
-          {/* Small Label */}
-          <div className="mb-8">
-            <p className="text-sm tracking-[0.3em] text-neutral-500 dark:text-neutral-100 uppercase">
-              New & Quick Solution
-            </p>
-          </div>
+    // Fetch content from DB
+    useEffect(() => {
+        Promise.all([
+            fetch("/api/home-content?lang=ko").then(r => r.ok ? r.json() : null),
+            fetch("/api/services").then(r => r.ok ? r.json() : []),
+            fetch("/api/process").then(r => r.ok ? r.json() : []),
+            fetch("/api/ai-items").then(r => r.ok ? r.json() : [])
+        ]).then(([content, servicesData, processData, aiData]) => {
+            if (content) setHomeContent(content);
+            if (servicesData?.length) setServices(servicesData.filter((s: ServiceItem & { lang: string; pageType: string }) => s.lang === "ko" && s.pageType === "home"));
+            if (processData?.length) setProcessSteps(processData.filter((p: ProcessStep & { lang: string; pageType: string }) => p.lang === "ko" && p.pageType === "home"));
+            if (aiData?.length) setAiItems(aiData.filter((a: AiItem & { lang: string }) => a.lang === "ko"));
+        }).catch(() => {});
+    }, []);
 
-          {/* Main Typography */}
-          <div className="mb-16">
-            <h1 className="text-[clamp(3rem,10vw,8rem)] font-light leading-[0.9] tracking-tighter">
-              <span className="block text-neutral-900 dark:text-neutral-50">NQ</span>
-              <span className="block text-neutral-400 dark:text-neutral-200">SOLUTION</span>
-            </h1>
-          </div>
+    // Use DB content or fallback to static
+    const content = {
+        hero: {
+            eyebrow: homeContent?.heroEyebrow || staticContent.hero.eyebrow,
+            subtext: homeContent?.heroSubtext || staticContent.hero.subtext,
+            cta: homeContent?.heroCta || staticContent.hero.cta
+        },
+        services: {
+            eyebrow: homeContent?.servicesEyebrow || staticContent.services.eyebrow,
+            headline: homeContent?.servicesHeadline || staticContent.services.headline,
+            viewAll: homeContent?.servicesViewAll || staticContent.services.viewAll,
+            items: services.length > 0
+                ? services.map(s => ({ title: s.title, desc: s.description }))
+                : staticContent.services.items
+        },
+        process: {
+            eyebrow: homeContent?.processEyebrow || staticContent.process.eyebrow,
+            headline: homeContent?.processHeadline || staticContent.process.headline,
+            steps: processSteps.length > 0
+                ? processSteps.map(p => ({ title: p.title, desc: p.desc }))
+                : staticContent.process.steps
+        },
+        ai: {
+            eyebrow: homeContent?.aiEyebrow || staticContent.ai.eyebrow,
+            headline: homeContent?.aiHeadline || staticContent.ai.headline,
+            description: homeContent?.aiDescription || staticContent.ai.description,
+            items: aiItems.length > 0
+                ? aiItems.map(a => a.content)
+                : staticContent.ai.items
+        },
+        cta: {
+            subtext: homeContent?.ctaSubtext || staticContent.cta.subtext,
+            button: homeContent?.ctaButton || staticContent.cta.button
+        }
+    };
 
-          {/* Divider Line */}
-          <div className="w-full h-px bg-neutral-900 dark:bg-neutral-100 mb-8" />
+    // Use DB headline or default
+    const heroHeadline = homeContent?.heroHeadline || ["Ideas into", "Reality"];
 
-          {/* Description */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div>
-              <p className="text-lg font-light leading-relaxed text-neutral-900 dark:text-neutral-50">
-                혁신적인 아이디어를 빠르게 실현하는<br />
-                디지털 솔루션 파트너
-              </p>
-            </div>
-            <div className="md:text-right">
-              <p className="text-sm text-neutral-800 dark:text-neutral-100">
-                웹 개발 / 앱 개발 / UI·UX 디자인<br />
-                2025 서울, 대한민국
-              </p>
-            </div>
-          </div>
+    return (
+        <>
+            <Head>
+                <title>NQ Solution | 디지털 솔루션 파트너 - 웹개발, 앱개발, AI 솔루션</title>
+                <meta name="description" content="혁신적인 아이디어를 빠르게 실현하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인, AI 솔루션을 제공합니다. 서울 기반 IT 개발 전문 회사입니다." />
+                <meta name="keywords" content="웹개발, 앱개발, IT개발, 디자인, AI솔루션, 웹사이트 제작, 앱 제작, 홈페이지 제작, 서울 개발사, NQ Solution, 엔큐솔루션" />
+                <meta property="og:title" content="NQ Solution | 디지털 솔루션 파트너" />
+                <meta property="og:description" content="혁신적인 아이디어를 빠르게 실현하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인, AI 솔루션을 제공합니다." />
+                <meta property="og:url" content="https://www.nqsolution.com/" />
+                <link rel="canonical" href="https://www.nqsolution.com/" />
+            </Head>
+            <div className="min-h-screen">
+            {/* Hero Section - 더 독특한 레이아웃 */}
+            <section className="min-h-screen relative flex items-center overflow-hidden">
+                {/* Large decorative logo - hidden on mobile */}
+                <motion.div
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.5, delay: 0.5 }}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none w-[50vw] max-w-[700px] hidden md:block"
+                >
+                    <Image
+                        src={dark ? "/logo-dark.png" : "/logo-light.png"}
+                        alt=""
+                        width={700}
+                        height={280}
+                        className={`w-full h-auto ${dark ? "brightness-0 invert opacity-[0.08]" : "opacity-[0.06]"}`}
+                        priority
+                    />
+                </motion.div>
 
-          {/* CTA */}
-          <div className="flex items-center gap-8">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-4 text-lg"
-            >
-              <span className="relative text-neutral-900 dark:text-neutral-50">
-                프로젝트 시작하기
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-neutral-900 dark:bg-neutral-100 group-hover:w-full transition-all duration-500" />
-              </span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-            </Link>
-          </div>
+                <div className="container-custom w-full pt-32 pb-20 relative z-10">
+                    <div className="grid grid-cols-12 gap-8">
+                        {/* Left column - eyebrow */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="col-span-12 lg:col-span-2 lg:pt-4"
+                        >
+                            <div className="flex items-center gap-4">
+                                <span className="w-12 h-px bg-[var(--color-accent)]" />
+                                <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)] font-mono">
+                                    {content.hero.eyebrow}
+                                </span>
+                            </div>
+                        </motion.div>
 
-          {/* Corner Numbers */}
-          <div className="absolute top-20 right-8 text-sm text-neutral-400 dark:text-neutral-200">
-            <p>01</p>
-          </div>
-        </div>
-      </section>
+                        {/* Right column - main content */}
+                        <div className="col-span-12 lg:col-span-10">
+                            {/* Main Headline - 스플릿 디자인 */}
+                            <motion.h1
+                                className="text-display-xl font-serif mb-16"
+                                initial="hidden"
+                                animate="visible"
+                                variants={stagger}
+                            >
+                                {heroHeadline.map((line, i) => (
+                                    <motion.span
+                                        key={i}
+                                        variants={fadeIn}
+                                        className={`block ${i === 1 ? 'italic text-[var(--color-accent)] ml-4 md:ml-8 lg:ml-24' : ''}`}
+                                    >
+                                        {line}
+                                    </motion.span>
+                                ))}
+                            </motion.h1>
 
-      {/* Services Section - Minimal Grid */}
-      <section className="py-32 px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Title */}
-          <div className="mb-20">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-neutral-400 dark:text-neutral-500">02</span>
-              <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
-            </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-neutral-50">Services</h2>
-          </div>
+                            {/* Subtext with decorative line */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.6, duration: 0.8 }}
+                                className="flex items-start gap-8 mb-16 max-w-2xl"
+                            >
+                                <div className="w-px h-24 bg-[var(--color-border)] shrink-0 hidden md:block" />
+                                <p className="text-[var(--color-text-secondary)] text-xl leading-relaxed">
+                                    {content.hero.subtext.split('\n').map((line, i) => (
+                                        <React.Fragment key={i}>
+                                            {line}
+                                            {i < content.hero.subtext.split('\n').length - 1 && <br />}
+                                        </React.Fragment>
+                                    ))}
+                                </p>
+                            </motion.div>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                title: "웹 개발",
-                desc: "React, Next.js를 활용한 모던 웹사이트",
-                tags: ["Frontend", "Backend", "Full-stack"]
-              },
-              {
-                title: "앱 개발",
-                desc: "Flutter 기반 크로스플랫폼 앱",
-                tags: ["iOS", "Android", "Cross-platform"]
-              },
-              {
-                title: "UI/UX 디자인",
-                desc: "사용자 중심의 인터페이스 설계",
-                tags: ["Research", "Design", "Prototype"]
-              },
-              {
-                title: "컨설팅",
-                desc: "디지털 전환 전략 수립",
-                tags: ["Strategy", "Growth", "Analysis"]
-              }
-            ].map((service, i) => (
-              <div
-                key={i}
-                className="group relative p-12 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-850 hover:shadow-lg dark:hover:shadow-2xl transition-all"
-              >
-                <h3 className="text-3xl font-light mb-4 text-neutral-900 dark:text-neutral-50">{service.title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-300 mb-8">
-                  {service.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag, j) => (
-                    <span key={j} className="text-xs px-3 py-1 border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
+                            {/* CTA with corner decoration */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.8 }}
+                            >
+                                <Link
+                                    href="/contact"
+                                    className="group inline-flex items-center gap-6"
+                                >
+                                    <span className="btn-primary corner-accent">
+                                        {content.hero.cta}
+                                    </span>
+                                    <motion.span
+                                        className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[var(--color-border)] flex items-center justify-center group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)] transition-all duration-500"
+                                        whileHover={{ scale: 1.1, rotate: 45 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-[var(--color-text-secondary)] group-hover:text-white transition-colors" />
+                                    </motion.span>
+                                </Link>
+                            </motion.div>
+                        </div>
+                    </div>
+
+                    {/* Scroll indicator - repositioned */}
+                    <motion.div
+                        className="absolute bottom-12 right-12 hidden lg:flex items-center gap-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.2 }}
+                    >
+                        <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] font-mono">
+                            Scroll
+                        </span>
+                        <motion.div
+                            animate={{ y: [0, 8, 0] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                        >
+                            <ArrowDownRight className="w-4 h-4 text-[var(--color-text-tertiary)]" />
+                        </motion.div>
+                    </motion.div>
                 </div>
-                {/* Hover Indicator */}
-                <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
+            </section>
+
+            {/* Services Section - 비대칭 그리드 */}
+            <section className="section-padding border-t border-[var(--color-border)] relative overflow-hidden">
+                {/* Background decoration */}
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-[var(--color-bg-secondary)] -z-10 hidden lg:block" />
+
+                <div className="container-custom">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={stagger}
+                        className="grid grid-cols-12 gap-8 mb-20"
+                    >
+                        <motion.div variants={slideIn} className="col-span-12 lg:col-span-3">
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="font-mono text-xs text-[var(--color-text-tertiary)]">01</span>
+                                <span className="w-8 h-px bg-[var(--color-border)]" />
+                            </div>
+                            <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
+                                {content.services.eyebrow}
+                            </span>
+                        </motion.div>
+                        <motion.div variants={fadeIn} className="col-span-12 lg:col-span-9">
+                            <h2 className="text-display-md font-serif">
+                                {content.services.headline}
+                            </h2>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Services grid - 독특한 배치 */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        variants={stagger}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-[var(--color-border)]"
+                    >
+                        {content.services.items.map((service, i) => (
+                            <motion.div
+                                key={i}
+                                variants={scaleIn}
+                                whileHover={{ backgroundColor: "var(--color-accent-subtle)" }}
+                                className={`p-8 lg:p-10 group cursor-pointer transition-colors duration-500 ${
+                                    i < content.services.items.length - 1 ? 'border-b md:border-b-0 md:border-r border-[var(--color-border)]' : ''
+                                } ${i === 1 || i === 3 ? 'lg:border-r-0' : ''} ${i < 2 ? 'lg:border-b border-[var(--color-border)]' : ''}`}
+                            >
+                                <span className="font-mono text-6xl lg:text-7xl text-[var(--color-border)] group-hover:text-[var(--color-accent)] transition-colors duration-500 block mb-8">
+                                    {String(i + 1).padStart(2, '0')}
+                                </span>
+                                <h3 className="text-2xl font-serif mb-4 group-hover:text-[var(--color-accent)] transition-colors">
+                                    {service.title}
+                                </h3>
+                                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                                    {service.desc}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-12 flex justify-end"
+                    >
+                        <Link
+                            href="/services"
+                            className="btn-text"
+                        >
+                            {content.services.viewAll}
+                        </Link>
+                    </motion.div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* About Section - Typography Layout */}
-      <section className="py-32 px-8 bg-white dark:bg-neutral-900">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Title */}
-          <div className="mb-20">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-neutral-400 dark:text-neutral-500">03</span>
-              <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
-            </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-neutral-50">About</h2>
-          </div>
+            {/* Process Section - 수평 스크롤 스타일 */}
+            <section className="section-padding bg-[var(--color-bg-secondary)]">
+                <div className="container-custom">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={stagger}
+                        className="grid grid-cols-12 gap-8 mb-20"
+                    >
+                        <motion.div variants={slideIn} className="col-span-12 lg:col-span-3">
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="font-mono text-xs text-[var(--color-text-tertiary)]">02</span>
+                                <span className="w-8 h-px bg-[var(--color-border)]" />
+                            </div>
+                            <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
+                                {content.process.eyebrow}
+                            </span>
+                        </motion.div>
+                        <motion.div variants={fadeIn} className="col-span-12 lg:col-span-9">
+                            <h2 className="text-display-md font-serif">
+                                {content.process.headline}
+                            </h2>
+                        </motion.div>
+                    </motion.div>
 
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <div className="md:col-span-2">
-              <p className="text-2xl font-light leading-relaxed mb-8 text-neutral-900 dark:text-neutral-50">
-                우리는 단순함 속에서 혁신을 찾습니다.
-                복잡한 문제를 간결하고 우아하게 해결하며,
-                모든 프로젝트에 깊이와 의미를 담습니다.
-              </p>
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                2023년 설립 이후, 50개 이상의 프로젝트를 성공적으로 완료했으며,
-                클라이언트의 비즈니스 성장을 위한 최적의 솔루션을 제공하고 있습니다.
-              </p>
-            </div>
-            <div>
-              <div className="space-y-8">
-                <div>
-                  <p className="text-4xl font-light mb-2 text-neutral-900 dark:text-neutral-50">50+</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">완료된 프로젝트</p>
+                    {/* Process steps - 독특한 타임라인 */}
+                    <div className="grid grid-cols-12 gap-8">
+                        <div className="col-span-12 lg:col-span-3" />
+                        <div className="col-span-12 lg:col-span-9">
+                            <div className="relative">
+                                {/* Connecting line */}
+                                <div className="absolute left-6 top-0 bottom-0 w-px bg-[var(--color-border)] hidden lg:block" />
+
+                                {content.process.steps.map((step, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -30 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.15 }}
+                                        className="flex items-start gap-8 py-10 border-t border-[var(--color-border)] group relative"
+                                    >
+                                        {/* Step number with dot */}
+                                        <div className="relative">
+                                            <motion.span
+                                                className="font-mono text-4xl lg:text-5xl text-[var(--color-accent)] block"
+                                                whileHover={{ scale: 1.1 }}
+                                            >
+                                                {String(i + 1).padStart(2, '0')}
+                                            </motion.span>
+                                            {/* Dot on the line */}
+                                            <div className="absolute -left-[1.5px] top-1/2 w-3 h-3 rounded-full bg-[var(--color-accent)] hidden lg:block" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-2xl font-serif mb-3 group-hover:text-[var(--color-accent)] transition-colors">
+                                                {step.title}
+                                            </h3>
+                                            <p className="text-[var(--color-text-secondary)]">
+                                                {step.desc}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                                <div className="border-t border-[var(--color-border)]" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                  <p className="text-4xl font-light mb-2 text-neutral-900 dark:text-neutral-50">100%</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">고객 만족도</p>
+            </section>
+
+            {/* AI Section - 풀 위드 배경 */}
+            <section className="section-padding relative overflow-hidden">
+                {/* Decorative elements */}
+                <div className="absolute top-20 left-10 w-40 h-40 border border-[var(--color-border)] rounded-full opacity-30" />
+                <div className="absolute bottom-20 right-20 w-60 h-60 border border-[var(--color-accent)] rounded-full opacity-20" />
+
+                <div className="container-custom">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={stagger}
+                        className="grid grid-cols-12 gap-8"
+                    >
+                        <motion.div variants={slideIn} className="col-span-12 lg:col-span-3">
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="font-mono text-xs text-[var(--color-text-tertiary)]">03</span>
+                                <span className="w-8 h-px bg-[var(--color-border)]" />
+                            </div>
+                            <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
+                                {content.ai.eyebrow}
+                            </span>
+                        </motion.div>
+                        <motion.div variants={fadeIn} className="col-span-12 lg:col-span-9">
+                            <h2 className="text-display-md font-serif mb-10">
+                                {content.ai.headline.split('\n').map((line, i) => (
+                                    <React.Fragment key={i}>
+                                        {line}
+                                        {i < content.ai.headline.split('\n').length - 1 && <br />}
+                                    </React.Fragment>
+                                ))}
+                            </h2>
+                            <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed max-w-2xl mb-12">
+                                {content.ai.description}
+                            </p>
+
+                            {/* AI items - 카드 스타일 */}
+                            <motion.div
+                                variants={stagger}
+                                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                            >
+                                {content.ai.items.map((item, i) => (
+                                    <motion.div
+                                        key={i}
+                                        variants={fadeIn}
+                                        className="card-interactive p-8"
+                                    >
+                                        <span className="font-mono text-4xl text-[var(--color-border)] block mb-6">
+                                            {String(i + 1).padStart(2, '0')}
+                                        </span>
+                                        <span className="text-sm text-[var(--color-text-secondary)]">
+                                            {item}
+                                        </span>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
                 </div>
-                <div>
-                  <p className="text-4xl font-light mb-2 text-neutral-900 dark:text-neutral-50">2년</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">전문 경험</p>
+            </section>
+
+            {/* CTA Section */}
+            <section className="section-padding bg-[var(--color-accent)] overflow-hidden relative">
+                {/* Animated background circles */}
+                <motion.div
+                    className="absolute -left-20 -top-20 w-60 h-60 rounded-full border border-white/10"
+                    animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                />
+                <motion.div
+                    className="absolute -right-10 -bottom-10 w-40 h-40 rounded-full border border-white/10"
+                    animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                />
+                <motion.div
+                    className="absolute right-1/4 top-10 w-20 h-20 rounded-full bg-white/5"
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+                <div className="container-custom relative z-10">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={{
+                            hidden: {},
+                            visible: { transition: { staggerChildren: 0.15 } }
+                        }}
+                        className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12"
+                    >
+                        <div>
+                            <motion.h2
+                                variants={{
+                                    hidden: { opacity: 0, x: -30 },
+                                    visible: { opacity: 1, x: 0 }
+                                }}
+                                className="text-display-sm font-serif text-white mb-4"
+                            >
+                                Ready to Start?
+                            </motion.h2>
+                            <motion.p
+                                variants={{
+                                    hidden: { opacity: 0, x: -30 },
+                                    visible: { opacity: 1, x: 0 }
+                                }}
+                                className="text-white/60 text-lg"
+                            >
+                                {content.cta.subtext}
+                            </motion.p>
+                        </div>
+                        <motion.div
+                            variants={{
+                                hidden: { opacity: 0, scale: 0.8 },
+                                visible: { opacity: 1, scale: 1 }
+                            }}
+                        >
+                            <Link
+                                href="/contact"
+                                className="group relative inline-flex items-center gap-3 md:gap-4 px-6 py-4 md:px-10 md:py-5 bg-white text-[var(--color-accent)] text-xs md:text-sm tracking-widest uppercase font-medium transition-all overflow-hidden"
+                            >
+                                <motion.span
+                                    className="absolute inset-0 bg-stone-100"
+                                    initial={{ x: "-100%" }}
+                                    whileHover={{ x: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                />
+                                <span className="relative z-10">{content.cta.button}</span>
+                                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </motion.div>
+                    </motion.div>
                 </div>
-              </div>
+            </section>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section - Linear Design */}
-      <section className="py-32 px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Title */}
-          <div className="mb-20">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-neutral-400 dark:text-neutral-500">04</span>
-              <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
-            </div>
-            <h2 className="text-6xl font-light tracking-tight text-neutral-900 dark:text-neutral-50">Process</h2>
-          </div>
-
-          {/* Process Steps */}
-          <div className="space-y-px">
-            {[
-              { step: "01", title: "Research", desc: "문제 정의와 시장 조사" },
-              { step: "02", title: "Planning", desc: "전략 수립과 설계" },
-              { step: "03", title: "Design", desc: "비주얼 디자인과 프로토타입" },
-              { step: "04", title: "Development", desc: "개발과 테스트" },
-              { step: "05", title: "Launch", desc: "배포와 최적화" }
-            ].map((process, i) => (
-              <div
-                key={i}
-                className="group flex items-center gap-8 p-8 border-b border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
-              >
-                <span className="text-sm text-neutral-400 dark:text-neutral-300">{process.step}</span>
-                <h3 className="text-2xl font-light flex-1 text-neutral-900 dark:text-neutral-50">{process.title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-100">{process.desc}</p>
-                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-600 dark:text-neutral-300" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section - Minimal CTA */}
-      <section className="py-32 px-8 bg-neutral-900 dark:bg-black text-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
-            <div>
-              <h2 className="text-6xl font-light tracking-tight mb-8 text-white">
-                Let&apos;s work<br />together
-              </h2>
-              <p className="text-lg text-white/80 mb-8">
-                프로젝트에 대해 이야기해보세요.<br />
-                24시간 내에 답변드립니다.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-4 text-lg group"
-              >
-                <span className="relative text-white">
-                  프로젝트 문의하기
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-500" />
-                </span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform text-white" />
-              </Link>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-white/60">
-                hello@nqsolution.com<br />
-                +82 10-1234-5678<br />
-                Seoul, South Korea
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+        </>
+    );
 }

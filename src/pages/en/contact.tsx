@@ -1,23 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
-import { siteConfig, koContent } from "../config";
-
-interface ContactContent {
-    heroIntro: string;
-    heroDescription: string;
-    formDescription: string;
-    formButton: string;
-    ctaSubtext: string;
-}
-
-interface FaqItem {
-    question: string;
-    answer: string;
-}
+import { useTheme } from "../../context/ThemeContext";
 
 // Animation variants
 const fadeIn = {
@@ -34,74 +19,50 @@ const slideIn = {
     visible: { opacity: 1, x: 0 }
 };
 
-// Default settings from config
 const DEFAULT_SETTINGS = {
-    contactFormUrl: siteConfig.contactFormUrl,
-    email: siteConfig.contact.email,
-    phone: siteConfig.contact.phone,
-    location: siteConfig.contact.location,
-    locationKo: siteConfig.contact.locationKo,
-    showEmail: true,
-    showPhone: true,
-    showLocation: true,
+    contactFormUrl: "https://forms.google.com/your-form-url",
+    email: "hello@nqsolution.com",
+    phone: "+82 10-1234-5678",
+    location: "Seoul, South Korea"
 };
 
-export default function Contact() {
+export default function ContactEN() {
     const { dark } = useTheme();
-    const staticContent = koContent.contact;
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-    const [contactContent, setContactContent] = useState<ContactContent | null>(null);
-    const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
 
-    // Fetch settings and content from database API
     useEffect(() => {
-        Promise.all([
-            fetch("/api/settings").then(r => r.ok ? r.json() : null),
-            fetch("/api/contact-content?lang=ko").then(r => r.ok ? r.json() : null),
-            fetch("/api/faq").then(r => r.ok ? r.json() : [])
-        ]).then(([settingsData, contentData, faqData]) => {
-            if (settingsData) setSettings({ ...DEFAULT_SETTINGS, ...settingsData });
-            if (contentData) setContactContent(contentData);
-            if (faqData?.length) setFaqItems(faqData.filter((f: FaqItem & { lang: string }) => f.lang === "ko"));
-        }).catch(() => {
-            console.log("Using default settings from config");
-        });
+        const savedSettings = localStorage.getItem("nq-site-settings");
+        if (savedSettings) {
+            setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) });
+        }
     }, []);
 
-    // Use DB content or fallback to static
-    const content = {
-        hero: {
-            intro: contactContent?.heroIntro || staticContent.hero.intro,
-            description: contactContent?.heroDescription || staticContent.hero.description
+    const faqs = [
+        {
+            q: "How long does a project take?",
+            a: "It depends on the scope. Simple landing pages take 1-2 weeks, standard websites 4-6 weeks, and complex web apps 8+ weeks. We'll provide an estimated timeline during consultation."
         },
-        form: {
-            description: contactContent?.formDescription || staticContent.form.description,
-            items: staticContent.form.items,
-            button: contactContent?.formButton || staticContent.form.button
+        {
+            q: "How is pricing determined?",
+            a: "Pricing varies based on scope and features. After consultation, we organize your requirements and provide a detailed quote. Payment is typically split into deposit, progress, and final payments."
         },
-        faq: {
-            items: faqItems.length > 0
-                ? faqItems.map(f => ({ q: f.question, a: f.answer }))
-                : staticContent.faq.items
+        {
+            q: "Do you offer maintenance?",
+            a: "Yes, we provide maintenance services after project completion. From simple updates to regular management, we can accommodate your needs."
         },
-        cta: {
-            subtext: contactContent?.ctaSubtext || staticContent.cta.subtext
+        {
+            q: "Can you renew an existing site?",
+            a: "Yes, we analyze your existing site and proceed with design improvements, feature additions, and performance optimization. Both full renewals and partial modifications are possible."
+        },
+        {
+            q: "How does AI integration work?",
+            a: "Through consultation, we identify which tasks you want to use AI for, then recommend suitable approaches. The scope ranges from simple setup to custom development."
         }
-    };
+    ];
 
     return (
-        <>
-            <Head>
-                <title>문의하기 | NQ Solution - 프로젝트 상담</title>
-                <meta name="description" content="NQ Solution에 프로젝트를 문의하세요. 웹 개발, 앱 개발, AI 솔루션 등 디지털 프로젝트에 대한 무료 상담을 제공합니다." />
-                <meta name="keywords" content="프로젝트 문의, 개발 상담, 웹개발 견적, 앱개발 비용, IT 컨설팅, NQ Solution 연락처" />
-                <meta property="og:title" content="문의하기 | NQ Solution" />
-                <meta property="og:description" content="NQ Solution에 프로젝트를 문의하세요. 무료 상담을 제공합니다." />
-                <meta property="og:url" content="https://www.nqsolution.com/contact" />
-                <link rel="canonical" href="https://www.nqsolution.com/contact" />
-            </Head>
-            <div className="min-h-screen">
+        <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">
                 <div className="container-custom">
@@ -135,15 +96,13 @@ export default function Contact() {
                                 className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl"
                             >
                                 <p className="text-xl leading-relaxed text-[var(--color-text-secondary)]">
-                                    {content.hero.intro.split('\n').map((line, i) => (
-                                        <span key={i}>
-                                            {line}
-                                            {i < content.hero.intro.split('\n').length - 1 && <br />}
-                                        </span>
-                                    ))}
+                                    Feel free to reach out
+                                    <br />
+                                    about your project.
                                 </p>
                                 <p className="text-base leading-relaxed text-[var(--color-text-tertiary)]">
-                                    {content.hero.description}
+                                    Let us know what service you need and
+                                    we&apos;ll guide you to the right solution.
                                 </p>
                             </motion.div>
                         </div>
@@ -173,7 +132,7 @@ export default function Contact() {
                                     <div className="flex items-start justify-between mb-12">
                                         <Image
                                             src={dark ? "/logo-dark.png" : "/logo-light.png"}
-                                            alt={siteConfig.company.name}
+                                            alt="NQ Solution"
                                             width={100}
                                             height={40}
                                             className={`h-8 w-auto ${dark ? "brightness-0 invert" : ""}`}
@@ -181,11 +140,11 @@ export default function Contact() {
                                     </div>
 
                                     <div className="space-y-6 mb-12">
-                                        {([
-                                            settings.showEmail !== false ? { label: "Email", value: settings.email, href: `mailto:${settings.email}` } : null,
-                                            settings.showPhone !== false ? { label: "Phone", value: settings.phone, href: `tel:${settings.phone.replace(/[^+\d]/g, '')}` } : null,
-                                            settings.showLocation !== false ? { label: "Location", value: settings.locationKo || settings.location, href: null as string | null } : null,
-                                        ].filter((item): item is { label: string; value: string; href: string | null } => item !== null)).map((item, i) => (
+                                        {[
+                                            { label: "Email", value: settings.email, href: `mailto:${settings.email}` },
+                                            { label: "Phone", value: settings.phone, href: `tel:${settings.phone.replace(/[^+\d]/g, '')}` },
+                                            { label: "Location", value: settings.location, href: null },
+                                        ].map((item, i) => (
                                             <motion.div
                                                 key={i}
                                                 initial={{ opacity: 0, x: -10 }}
@@ -219,22 +178,26 @@ export default function Contact() {
                                     className="flex flex-col justify-center"
                                 >
                                     <h2 className="text-display-sm font-serif mb-6">
-                                        Start a Project
+                                        Project Inquiry
                                     </h2>
                                     <p className="text-[var(--color-text-secondary)] mb-6">
-                                        {content.form.description}
+                                        Click the button below to fill in your project details.
                                     </p>
                                     <ul className="space-y-2 text-sm text-[var(--color-text-tertiary)] mb-10">
-                                        {content.form.items.map((item, i) => (
+                                        {[
+                                            "Type of service you need",
+                                            "Approximate budget and timeline",
+                                            "Reference sites or materials (if any)"
+                                        ].map((item, i) => (
                                             <motion.li
                                                 key={i}
                                                 initial={{ opacity: 0, x: -10 }}
                                                 whileInView={{ opacity: 1, x: 0 }}
                                                 viewport={{ once: true }}
                                                 transition={{ delay: i * 0.1 }}
-                                                className="flex items-center gap-3"
+                                                className="flex items-center gap-2"
                                             >
-                                                <span className="text-[var(--color-accent)]">—</span>
+                                                <span className="text-[var(--color-accent)]">-</span>
                                                 {item}
                                             </motion.li>
                                         ))}
@@ -247,7 +210,7 @@ export default function Contact() {
                                         whileTap={{ scale: 0.98 }}
                                         className="btn-primary inline-flex self-start"
                                     >
-                                        {content.form.button}
+                                        Fill Out Inquiry Form
                                         <ArrowUpRight className="w-4 h-4" />
                                     </motion.a>
                                 </motion.div>
@@ -274,7 +237,7 @@ export default function Contact() {
                         </motion.div>
                         <motion.div variants={fadeIn} className="col-span-12 lg:col-span-10">
                             <h2 className="text-display-sm font-serif">
-                                Common Questions
+                                Frequently Asked Questions
                             </h2>
                         </motion.div>
                     </motion.div>
@@ -282,7 +245,7 @@ export default function Contact() {
                     <div className="grid grid-cols-12 gap-8">
                         <div className="col-span-12 lg:col-span-2" />
                         <div className="col-span-12 lg:col-span-8">
-                            {content.faq.items.map((faq, i) => (
+                            {faqs.map((faq, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, y: 10 }}
@@ -331,77 +294,34 @@ export default function Contact() {
             </section>
 
             {/* CTA Section */}
-            <section className="section-padding bg-[var(--color-accent)] overflow-hidden relative">
-                {/* Animated background circles */}
-                <motion.div
-                    className="absolute -left-20 -top-20 w-60 h-60 rounded-full border border-white/10"
-                    animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                    className="absolute -right-10 -bottom-10 w-40 h-40 rounded-full border border-white/10"
-                    animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                    className="absolute right-1/4 top-10 w-20 h-20 rounded-full bg-white/5"
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                />
-
-                <div className="container-custom relative z-10">
+            <section className="section-padding bg-[var(--color-accent)] overflow-hidden">
+                <div className="container-custom">
                     <motion.div
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        variants={{
-                            hidden: {},
-                            visible: { transition: { staggerChildren: 0.15 } }
-                        }}
+                        transition={{ duration: 0.8 }}
                         className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12"
                     >
                         <div>
-                            <motion.h2
-                                variants={{
-                                    hidden: { opacity: 0, x: -30 },
-                                    visible: { opacity: 1, x: 0 }
-                                }}
-                                className="text-display-sm font-serif text-white mb-4"
-                            >
-                                Let&apos;s Talk
-                            </motion.h2>
-                            <motion.p
-                                variants={{
-                                    hidden: { opacity: 0, x: -30 },
-                                    visible: { opacity: 1, x: 0 }
-                                }}
-                                className="text-white/60 text-lg"
-                            >
-                                {content.cta.subtext}
-                            </motion.p>
+                            <h2 className="text-display-sm font-serif text-white mb-4">
+                                Contact via Email
+                            </h2>
+                            <p className="text-white/60 text-lg">
+                                For simple inquiries, email works too.
+                            </p>
                         </div>
                         <motion.a
                             href={`mailto:${settings.email}`}
-                            variants={{
-                                hidden: { opacity: 0, scale: 0.8 },
-                                visible: { opacity: 1, scale: 1 }
-                            }}
-                            whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(0,0,0,0.2)" }}
+                            whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group relative inline-flex items-center gap-3 md:gap-4 px-5 py-3 md:px-8 md:py-4 bg-white text-[var(--color-accent)] text-xs md:text-sm tracking-wider md:tracking-widest uppercase font-medium transition-all shrink-0 overflow-hidden"
+                            className="inline-flex items-center gap-4 px-8 py-4 bg-white text-[var(--color-accent)] text-sm tracking-widest uppercase font-medium hover:bg-stone-100 transition-colors shrink-0"
                         >
-                            <motion.span
-                                className="absolute inset-0 bg-stone-100"
-                                initial={{ x: "-100%" }}
-                                whileHover={{ x: 0 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                            <span className="relative z-10">{settings.email}</span>
+                            {settings.email}
                         </motion.a>
                     </motion.div>
                 </div>
             </section>
-            </div>
-        </>
+        </div>
     );
 }

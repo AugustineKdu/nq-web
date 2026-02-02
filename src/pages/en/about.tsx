@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import Head from "next/head";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { koContent } from "../config";
-
-interface AboutContent {
-    headline: string;
-    intro: string;
-    description: string;
-    futureDescription: string;
-    futureSubtext: string;
-    ctaSubtext: string;
-}
 
 // Animation variants
 const fadeIn = {
@@ -29,51 +18,34 @@ const slideIn = {
     visible: { opacity: 1, x: 0 }
 };
 
-export default function About() {
-    const staticContent = koContent.about;
-    const [aboutContent, setAboutContent] = useState<AboutContent | null>(null);
-
-    useEffect(() => {
-        fetch("/api/about-content?lang=ko")
-            .then(r => r.ok ? r.json() : null)
-            .then(data => {
-                if (data) setAboutContent(data);
-            })
-            .catch(() => {});
-    }, []);
-
-    // Use DB content or fallback to static
-    const content = {
-        hero: {
-            headline: aboutContent?.headline || staticContent.hero.headline,
-            intro: aboutContent?.intro || staticContent.hero.intro,
-            description: aboutContent?.description || staticContent.hero.description
+export default function AboutEN() {
+    const values = [
+        {
+            num: "01",
+            title: "Practicality",
+            desc: "We build solutions that are actually used, not just technically impressive. Our work must provide real value to your business."
         },
-        whatWeDo: staticContent.whatWeDo,
-        values: staticContent.values,
-        roadmap: staticContent.roadmap,
-        future: {
-            ...staticContent.future,
-            description: aboutContent?.futureDescription || staticContent.future.description,
-            subtext: aboutContent?.futureSubtext || staticContent.future.subtext
+        {
+            num: "02",
+            title: "Clarity",
+            desc: "We simplify complexity. Progress, costs, and timelines are all shared transparently throughout the project."
         },
-        cta: {
-            subtext: aboutContent?.ctaSubtext || staticContent.cta.subtext
-        }
-    };
+        {
+            num: "03",
+            title: "Sustainability",
+            desc: "We don't just build and walk away. Our designs consider long-term maintenance and future improvements."
+        },
+    ];
+
+    const roadmap = [
+        { year: "2023", title: "NQ Solution Founded", desc: "Started as a solo web development practice" },
+        { year: "2024", title: "Service Expansion", desc: "Expanded into planning, design, and AI solutions" },
+        { year: "2025", title: "Incorporation", desc: "Preparing for stable growth through incorporation" },
+        { year: "2026", title: "Own Service Launch", desc: "Developing our own app/service products" },
+    ];
 
     return (
-        <>
-            <Head>
-                <title>회사소개 | NQ Solution - 디지털 솔루션 파트너</title>
-                <meta name="description" content="NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 디지털 에이전시입니다. 아이디어를 현실로 만드는 파트너입니다." />
-                <meta name="keywords" content="NQ Solution, 엔큐솔루션, 회사소개, IT개발회사, 웹개발회사, 디지털에이전시, 서울 IT회사" />
-                <meta property="og:title" content="회사소개 | NQ Solution" />
-                <meta property="og:description" content="NQ Solution은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 디지털 에이전시입니다." />
-                <meta property="og:url" content="https://www.nqsolution.com/about" />
-                <link rel="canonical" href="https://www.nqsolution.com/about" />
-            </Head>
-            <div className="min-h-screen">
+        <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">
                 <div className="container-custom">
@@ -96,7 +68,7 @@ export default function About() {
                                 variants={stagger}
                             >
                                 <motion.span variants={fadeIn} className="block">
-                                    {content.hero.headline}
+                                    NQ Solution
                                 </motion.span>
                             </motion.h1>
 
@@ -107,15 +79,13 @@ export default function About() {
                                 className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl"
                             >
                                 <p className="text-xl leading-relaxed text-[var(--color-text-secondary)]">
-                                    {content.hero.intro.split('\n').map((line, i) => (
-                                        <span key={i}>
-                                            {line}
-                                            {i < content.hero.intro.split('\n').length - 1 && <br />}
-                                        </span>
-                                    ))}
+                                    We provide digital solutions
+                                    <br />
+                                    with planning, web development, and design.
                                 </p>
                                 <p className="text-base leading-relaxed text-[var(--color-text-tertiary)]">
-                                    {content.hero.description}
+                                    From website renewals to new service builds and AI adoption.
+                                    We identify what you need and find the right approach to deliver it.
                                 </p>
                             </motion.div>
                         </div>
@@ -148,7 +118,11 @@ export default function About() {
                     <div className="grid grid-cols-12 gap-8">
                         <div className="col-span-12 lg:col-span-2" />
                         <div className="col-span-12 lg:col-span-8">
-                            {content.whatWeDo.items.map((item, i) => (
+                            {[
+                                { title: "Core Services", desc: "Website planning, design, and development. Service renewals, landing pages, and everything web-related." },
+                                { title: "AI Solutions", desc: "We develop custom AI services and help integrate external AI like ChatGPT and Claude into your business workflows." },
+                                { title: "App Development (In Progress)", desc: "We're also working on mobile app development while conducting technical research for better quality service." },
+                            ].map((item, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, x: -20 }}
@@ -199,7 +173,7 @@ export default function About() {
                         variants={stagger}
                         className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--color-border)]"
                     >
-                        {content.values.items.map((value, i) => (
+                        {values.map((value, i) => (
                             <motion.div
                                 key={i}
                                 variants={fadeIn}
@@ -249,7 +223,7 @@ export default function About() {
                     <div className="grid grid-cols-12 gap-8">
                         <div className="col-span-12 lg:col-span-2" />
                         <div className="col-span-12 lg:col-span-10">
-                            {content.roadmap.items.map((item, i) => (
+                            {roadmap.map((item, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, x: -20 }}
@@ -300,10 +274,12 @@ export default function About() {
                                 Looking Ahead
                             </h2>
                             <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-6">
-                                {content.future.description}
+                                We&apos;re currently preparing for incorporation,
+                                aiming for steady growth through our own app and service development.
                             </p>
                             <p className="text-[var(--color-text-tertiary)] leading-relaxed">
-                                {content.future.subtext}
+                                Building on the experience gained from client projects,
+                                we want to deliver value to more people through our own services.
                             </p>
                         </motion.div>
                     </motion.div>
@@ -311,79 +287,38 @@ export default function About() {
             </section>
 
             {/* CTA */}
-            <section className="section-padding bg-[var(--color-accent)] overflow-hidden relative">
-                {/* Animated background circles */}
-                <motion.div
-                    className="absolute -left-20 -top-20 w-60 h-60 rounded-full border border-white/10"
-                    animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                    className="absolute -right-10 -bottom-10 w-40 h-40 rounded-full border border-white/10"
-                    animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                    className="absolute right-1/4 top-10 w-20 h-20 rounded-full bg-white/5"
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                />
-
-                <div className="container-custom relative z-10">
+            <section className="section-padding bg-[var(--color-accent)] overflow-hidden">
+                <div className="container-custom">
                     <motion.div
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        variants={{
-                            hidden: {},
-                            visible: { transition: { staggerChildren: 0.15 } }
-                        }}
+                        transition={{ duration: 0.8 }}
                         className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12"
                     >
                         <div>
-                            <motion.h2
-                                variants={{
-                                    hidden: { opacity: 0, x: -30 },
-                                    visible: { opacity: 1, x: 0 }
-                                }}
-                                className="text-display-sm font-serif text-white mb-4"
-                            >
+                            <h2 className="text-display-sm font-serif text-white mb-4">
                                 Let&apos;s Work Together
-                            </motion.h2>
-                            <motion.p
-                                variants={{
-                                    hidden: { opacity: 0, x: -30 },
-                                    visible: { opacity: 1, x: 0 }
-                                }}
-                                className="text-white/60 text-lg"
-                            >
-                                {content.cta.subtext}
-                            </motion.p>
+                            </h2>
+                            <p className="text-white/60 text-lg">
+                                Feel free to reach out about your project.
+                            </p>
                         </div>
                         <motion.div
-                            variants={{
-                                hidden: { opacity: 0, scale: 0.8 },
-                                visible: { opacity: 1, scale: 1 }
-                            }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             <Link
-                                href="/contact"
-                                className="group relative inline-flex items-center gap-3 md:gap-4 px-6 py-4 md:px-8 bg-white text-[var(--color-accent)] text-xs md:text-sm tracking-widest uppercase font-medium transition-all shrink-0 overflow-hidden"
+                                href="/en/contact"
+                                className="group inline-flex items-center gap-4 px-8 py-4 bg-white text-[var(--color-accent)] text-sm tracking-widest uppercase font-medium hover:bg-stone-100 transition-colors shrink-0"
                             >
-                                <motion.span
-                                    className="absolute inset-0 bg-stone-100"
-                                    initial={{ x: "-100%" }}
-                                    whileHover={{ x: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                />
-                                <span className="relative z-10">Contact Us</span>
-                                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                Contact Us
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </motion.div>
                     </motion.div>
                 </div>
             </section>
-            </div>
-        </>
+        </div>
     );
 }

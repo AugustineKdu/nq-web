@@ -3,249 +3,660 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font Import - Pretendard */
+/* Font Imports */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
 
-/* Root Variables */
+/*
+ * Premium Color System
+ * Inspired by: Aesop, Byredo, Le Labo
+ */
+
 :root {
-    --color-neutral: #0a0a0a;
-    --color-accent: #2563eb;
-    --color-bg: #fafafa;
+    /* Base Colors */
+    --color-bg-primary: #FAFAF9;
+    --color-bg-secondary: #F5F5F4;
+    --color-bg-tertiary: #FFFFFF;
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #57534E;
+    --color-text-tertiary: #A8A29E;
+
+    /* Accent - Teal (로고 컬러) */
+    --color-accent: #3D7A80;
+    --color-accent-light: #4A9299;
+    --color-accent-subtle: rgba(61, 122, 128, 0.08);
+
+    /* Borders */
+    --color-border: rgba(28, 25, 23, 0.08);
+    --color-border-hover: rgba(28, 25, 23, 0.15);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04);
+    --shadow-md: 0 4px 12px rgba(28, 25, 23, 0.06);
+    --shadow-lg: 0 12px 40px rgba(28, 25, 23, 0.08);
+}
+
+.dark {
+    --color-bg-primary: #0C0A09;
+    --color-bg-secondary: #1C1917;
+    --color-bg-tertiary: #292524;
+    --color-text-primary: #FAFAF9;
+    --color-text-secondary: #A8A29E;
+    --color-text-tertiary: #57534E;
+
+    /* Accent - Teal (다크모드용 밝은 버전) */
+    --color-accent: #4A9299;
+    --color-accent-light: #5BA8AF;
+    --color-accent-subtle: rgba(74, 146, 153, 0.1);
+
+    /* Borders */
+    --color-border: rgba(250, 250, 249, 0.06);
+    --color-border-hover: rgba(250, 250, 249, 0.12);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 html {
-    color-scheme: dark light;
     scroll-behavior: smooth;
 }
 
+html.dark {
+    color-scheme: dark;
+}
+
+html.light {
+    color-scheme: light;
+}
+
 body {
-    @apply bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200;
     font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Typography Classes */
+.font-serif {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
+}
+
+.font-display {
+    font-family: 'Syne', 'Pretendard Variable', sans-serif;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+}
+
+/* Heading Styles */
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
+    font-weight: 400;
     letter-spacing: -0.02em;
+    color: var(--color-text-primary);
 }
 
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    @apply font-light tracking-tight text-neutral-800 dark:text-neutral-100;
+h4, h5, h6 {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
 }
 
-/* Minimal Animations */
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
+/* ============================================
+   UNIQUE VISUAL ELEMENTS
+   ============================================ */
 
-    to {
-        opacity: 1;
-    }
+/* Gradient text */
+.text-gradient {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-@keyframes slide-up {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Outline text (stroke effect) */
+.text-outline {
+    -webkit-text-stroke: 1px var(--color-text-primary);
+    -webkit-text-fill-color: transparent;
 }
 
-/* Animation Classes */
-.animate-fade-in {
-    animation: fade-in 0.6s ease-out;
+.text-outline-accent {
+    -webkit-text-stroke: 1px var(--color-accent);
+    -webkit-text-fill-color: transparent;
 }
 
-.animate-slide-up {
-    animation: slide-up 0.6s ease-out;
+/* Large number styling */
+.number-large {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--color-border);
 }
 
-/* Buttons - Minimal Style */
-.btn {
-    @apply inline-flex items-center gap-3 px-6 py-3 text-sm tracking-wide uppercase transition-all duration-300;
+.number-large-accent {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--color-accent);
+    opacity: 0.3;
 }
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+
+/* Diagonal line decoration */
+.line-diagonal {
+    position: relative;
+}
+
+.line-diagonal::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+    transform: rotate(-3deg);
+}
+
+/* Corner accent */
+.corner-accent {
+    position: relative;
+}
+
+.corner-accent::before,
+.corner-accent::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-accent);
+    opacity: 0.5;
+    transition: all 0.4s ease;
+}
+
+.corner-accent::before {
+    top: -10px;
+    left: -10px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.corner-accent::after {
+    bottom: -10px;
+    right: -10px;
+    border-left: none;
+    border-top: none;
+}
+
+.corner-accent:hover::before,
+.corner-accent:hover::after {
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+}
+
+/* Grid background pattern */
+.bg-grid {
+    background-image:
+        linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* Dot pattern */
+.bg-dots {
+    background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* ============================================
+   INTERACTIVE ELEMENTS
+   ============================================ */
+
+/* Premium Underline Link */
+.link-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-underline:hover::after {
+    width: 100%;
+}
+
+/* Link with arrow animation */
+.link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.link-arrow:hover {
+    gap: 1rem;
+}
+
+/* Magnetic hover effect wrapper */
+.magnetic {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Scale on hover */
+.hover-lift {
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Reveal from side */
+.reveal-left {
+    clip-path: inset(0 100% 0 0);
+    animation: revealLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes revealLeft {
+    to { clip-path: inset(0 0 0 0); }
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
 
 .btn-primary {
-    @apply bg-neutral-800 text-white dark:bg-neutral-200 dark:text-neutral-900;
-    @apply hover:bg-neutral-700 dark:hover:bg-neutral-300;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+    .btn-primary {
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent-light);
+    transform: translateY(-2px);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-outline {
-    @apply border border-neutral-700 dark:border-neutral-300 text-neutral-700 dark:text-neutral-200;
-    @apply hover:bg-neutral-700 hover:text-white dark:hover:bg-neutral-200 dark:hover:text-neutral-900;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Links */
-a {
-    @apply transition-colors duration-300;
+@media (min-width: 768px) {
+    .btn-outline {
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+    }
 }
 
-/* Custom Scrollbar - Minimal */
+.btn-outline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* Text button with line */
+.btn-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+}
+
+.btn-text::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.btn-text:hover {
+    color: var(--color-accent);
+}
+
+.btn-text:hover::after {
+    width: 60px;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.card {
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.card-interactive {
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-interactive:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+/* Container */
+.container-custom {
+    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
+}
+
+/* Wide Container */
+.container-wide {
+    @apply max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24;
+}
+
+/* Full bleed container */
+.container-bleed {
+    @apply w-full px-6 md:px-12;
+}
+
+/* Section Spacing */
+.section-padding {
+    @apply py-24 md:py-32 lg:py-40;
+}
+
+.section-padding-sm {
+    @apply py-16 md:py-24 lg:py-32;
+}
+
+/* Asymmetric grid helper */
+.grid-asymmetric {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+    .grid-asymmetric {
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+    }
+}
+
+/* Overlap layout */
+.overlap-section {
+    margin-top: -100px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ============================================
+   DIVIDERS & DECORATIONS
+   ============================================ */
+
+.divider {
+    height: 1px;
+    background-color: var(--color-border);
+}
+
+.divider-accent {
+    height: 2px;
+    width: 60px;
+    background-color: var(--color-accent);
+}
+
+.divider-vertical {
+    width: 1px;
+    height: 100%;
+    background-color: var(--color-border);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    background: var(--color-bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-300 dark:bg-neutral-700;
+    background: var(--color-border);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    @apply bg-neutral-400 dark:bg-neutral-600;
+    background: var(--color-accent);
 }
 
-/* Selection */
+/* ============================================
+   SELECTION & FOCUS
+   ============================================ */
+
 ::selection {
-    @apply bg-neutral-700 text-white dark:bg-neutral-300 dark:text-neutral-900;
+    background-color: var(--color-accent);
+    color: white;
 }
 
-/* Focus States */
 *:focus {
     @apply outline-none;
 }
 
 *:focus-visible {
-    @apply ring-1 ring-neutral-700 dark:ring-neutral-300 ring-offset-2 ring-offset-white dark:ring-offset-neutral-900;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
 }
 
-/* Container */
-.container {
-    @apply max-w-6xl mx-auto px-8;
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Section Spacing */
-.section {
-    @apply py-20 md:py-32;
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Grid Pattern Background */
-.grid-pattern {
-    background-image:
-        linear-gradient(to right, currentColor 1px, transparent 1px),
-        linear-gradient(to bottom, currentColor 1px, transparent 1px);
-    background-size: 60px 60px;
+@keyframes reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
 }
 
-/* Line Dividers */
-.divider-h {
-    @apply w-full h-px bg-neutral-200 dark:bg-neutral-800;
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
-.divider-v {
-    @apply w-px h-full bg-neutral-200 dark:bg-neutral-800;
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
 
-/* Matte Surface Effect */
-.matte {
-    @apply bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-sm;
+@keyframes pulse-border {
+    0%, 100% { border-color: var(--color-border); }
+    50% { border-color: var(--color-accent); }
 }
 
-/* Typography Utilities */
+.animate-fade-in {
+    animation: fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-reveal {
+    animation: reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-marquee {
+    animation: marquee 30s linear infinite;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
 .text-balance {
     text-wrap: balance;
 }
 
-/* Hover Underline Effect */
-.hover-underline {
-    @apply relative;
+.text-accent {
+    color: var(--color-accent);
 }
 
-.hover-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500;
+.bg-accent {
+    background-color: var(--color-accent);
 }
 
-.hover-underline:hover::after {
-    @apply w-full;
+.border-accent {
+    border-color: var(--color-accent);
 }
 
-/* Number Labels - 부드러운 대비 */
-.label-number {
-    @apply text-xs text-neutral-500 dark:text-neutral-400 tracking-wider;
+/* Image effects */
+.img-grayscale {
+    filter: grayscale(100%);
+    transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Card Minimal */
-.card-minimal {
-    @apply bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700;
-    @apply hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors;
+.img-grayscale:hover {
+    filter: grayscale(0%);
 }
 
-/* Responsive Text Sizes */
-.text-responsive-xl {
-    font-size: clamp(3rem, 10vw, 8rem);
+/* Blend modes */
+.mix-blend-difference {
+    mix-blend-mode: difference;
 }
 
-.text-responsive-lg {
-    font-size: clamp(2rem, 8vw, 6rem);
+/* Hide scrollbar but keep functionality */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.text-responsive-md {
-    font-size: clamp(1.5rem, 4vw, 3rem);
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
 }
 
-/* Remove all gradients and complex effects for minimal design */
-.no-gradient {
-    background: none !important;
-    background-image: none !important;
-}
-
-/* Noise texture for matte effect */
-.noise-texture {
+/* Gradient overlays */
+.gradient-overlay {
     position: relative;
 }
 
-.noise-texture::before {
+.gradient-overlay::after {
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background: linear-gradient(180deg, transparent 0%, var(--color-bg-primary) 100%);
     pointer-events: none;
 }
 
-/* Transition utilities */
-.transition-slow {
-    @apply transition-all duration-700 ease-out;
+/* ============================================
+   MARQUEE TEXT (무한 스크롤 텍스트)
+   ============================================ */
+
+.marquee-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.transition-medium {
-    @apply transition-all duration-500 ease-out;
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
 }
 
-.transition-fast {
-    @apply transition-all duration-300 ease-out;
-}
-
-/* Text Color Utilities - 부드러운 대비 */
-@layer utilities {
-    .text-primary {
-        @apply text-neutral-800 dark:text-neutral-100;
-    }
-
-    .text-secondary {
-        @apply text-neutral-700 dark:text-neutral-200;
-    }
-
-    .text-tertiary {
-        @apply text-neutral-600 dark:text-neutral-300;
-    }
-
-    .text-muted {
-        @apply text-neutral-500 dark:text-neutral-400;
-    }
-
-    .text-faint {
-        @apply text-neutral-400 dark:text-neutral-500;
-    }
+.marquee-content:hover {
+    animation-play-state: paused;
 }
