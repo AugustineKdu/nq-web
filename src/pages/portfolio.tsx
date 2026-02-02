@@ -54,11 +54,11 @@ export default function Portfolio() {
     return (
         <>
             <Head>
-                <title>포트폴리오 | NQ Solution - 프로젝트 사례</title>
-                <meta name="description" content="NQ Solution이 제작한 웹사이트, 모바일 앱, AI 솔루션 프로젝트 포트폴리오입니다. 다양한 업종의 성공적인 프로젝트 사례를 확인하세요." />
-                <meta name="keywords" content="웹개발 포트폴리오, 앱개발 사례, IT 프로젝트, 홈페이지 제작 사례, 개발 레퍼런스" />
-                <meta property="og:title" content="포트폴리오 | NQ Solution" />
-                <meta property="og:description" content="NQ Solution이 제작한 웹사이트, 모바일 앱, AI 솔루션 프로젝트 포트폴리오입니다." />
+                <title>포트폴리오 | NQ Solution (엔큐솔루션) - 프로젝트 사례</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션) 포트폴리오. 웹사이트, 모바일 앱, AI 솔루션 프로젝트 사례. nqsolution 엔큐솔루션이 만든 성공적인 프로젝트들." />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 포트폴리오, 웹개발사례, 앱개발사례, IT프로젝트, 홈페이지제작사례" />
+                <meta property="og:title" content="포트폴리오 | NQ Solution (엔큐솔루션)" />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹사이트, 앱, AI 솔루션 프로젝트 포트폴리오" />
                 <meta property="og:url" content="https://www.nqsolution.com/portfolio" />
                 <link rel="canonical" href="https://www.nqsolution.com/portfolio" />
             </Head>

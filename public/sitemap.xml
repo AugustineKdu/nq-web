@@ -1,56 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Korean pages -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Korean pages (Primary) -->
   <url>
     <loc>https://www.nqsolution.com/</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/about</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/about"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/services</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/services"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/portfolio</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/portfolio"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/contact</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/contact"/>
   </url>
 
   <!-- English pages -->
   <url>
     <loc>https://www.nqsolution.com/en</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/en/about</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/about"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/en/services</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/services"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/en/portfolio</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/portfolio"/>
   </url>
   <url>
     <loc>https://www.nqsolution.com/en/contact</loc>
+    <lastmod>2025-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.nqsolution.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nqsolution.com/en/contact"/>
   </url>
 </urlset>

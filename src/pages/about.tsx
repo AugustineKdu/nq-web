@@ -64,11 +64,11 @@ export default function About() {
     return (
         <>
             <Head>
-                <title>회사소개 | NQ Solution - 디지털 솔루션 파트너</title>
-                <meta name="description" content="NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 디지털 에이전시입니다. 아이디어를 현실로 만드는 파트너입니다." />
-                <meta name="keywords" content="NQ Solution, 엔큐솔루션, 회사소개, IT개발회사, 웹개발회사, 디지털에이전시, 서울 IT회사" />
-                <meta property="og:title" content="회사소개 | NQ Solution" />
-                <meta property="og:description" content="NQ Solution은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 디지털 에이전시입니다." />
+                <title>회사소개 | NQ Solution (엔큐솔루션) - IT개발 전문</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션) 회사소개. 웹 개발, 앱 개발, AI 솔루션 전문 IT 개발 회사. nqsolution 엔큐솔루션" />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 회사소개, IT개발회사, 웹개발회사, 앱개발회사, 디지털에이전시" />
+                <meta property="og:title" content="회사소개 | NQ Solution (엔큐솔루션)" />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹 개발, 앱 개발, AI 솔루션 전문" />
                 <meta property="og:url" content="https://www.nqsolution.com/about" />
                 <link rel="canonical" href="https://www.nqsolution.com/about" />
             </Head>

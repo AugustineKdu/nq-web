@@ -60,11 +60,11 @@ export default function Services() {
     return (
         <>
             <Head>
-                <title>서비스 | NQ Solution - 웹개발, 앱개발, AI솔루션</title>
-                <meta name="description" content="NQ Solution이 제공하는 서비스: 웹사이트 개발, 모바일 앱 개발, UI/UX 디자인, AI 솔루션 구축. 기획부터 개발, 운영까지 원스톱 서비스를 제공합니다." />
-                <meta name="keywords" content="웹개발 서비스, 앱개발 서비스, UI/UX 디자인, AI 솔루션, 홈페이지 제작, 모바일앱 개발, IT 컨설팅" />
-                <meta property="og:title" content="서비스 | NQ Solution" />
-                <meta property="og:description" content="웹사이트 개발, 모바일 앱 개발, UI/UX 디자인, AI 솔루션 구축. 기획부터 개발, 운영까지 원스톱 서비스." />
+                <title>서비스 | NQ Solution (엔큐솔루션) - 웹개발, 앱개발, AI솔루션</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션) 서비스: 웹사이트 개발, 모바일 앱 개발, UI/UX 디자인, AI 솔루션. 기획부터 개발, 운영까지 원스톱 서비스. nqsolution 엔큐솔루션" />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 웹개발서비스, 앱개발서비스, UI/UX디자인, AI솔루션, 홈페이지제작, 모바일앱개발, IT컨설팅, 전국개발" />
+                <meta property="og:title" content="서비스 | NQ Solution (엔큐솔루션)" />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹 개발, 앱 개발, AI 솔루션 서비스. 기획부터 운영까지 원스톱." />
                 <meta property="og:url" content="https://www.nqsolution.com/services" />
                 <link rel="canonical" href="https://www.nqsolution.com/services" />
             </Head>

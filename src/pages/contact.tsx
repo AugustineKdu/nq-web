@@ -93,11 +93,11 @@ export default function Contact() {
     return (
         <>
             <Head>
-                <title>문의하기 | NQ Solution - 프로젝트 상담</title>
-                <meta name="description" content="NQ Solution에 프로젝트를 문의하세요. 웹 개발, 앱 개발, AI 솔루션 등 디지털 프로젝트에 대한 무료 상담을 제공합니다." />
-                <meta name="keywords" content="프로젝트 문의, 개발 상담, 웹개발 견적, 앱개발 비용, IT 컨설팅, NQ Solution 연락처" />
-                <meta property="og:title" content="문의하기 | NQ Solution" />
-                <meta property="og:description" content="NQ Solution에 프로젝트를 문의하세요. 무료 상담을 제공합니다." />
+                <title>문의하기 | NQ Solution (엔큐솔루션) - 프로젝트 상담</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹 개발, 앱 개발, AI 솔루션 무료 상담. nqsolution 엔큐솔루션 연락처" />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, IT컨설팅, 연락처" />
+                <meta property="og:title" content="문의하기 | NQ Solution (엔큐솔루션)" />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 무료 상담 제공." />
                 <meta property="og:url" content="https://www.nqsolution.com/contact" />
                 <link rel="canonical" href="https://www.nqsolution.com/contact" />
             </Head>

@@ -128,11 +128,11 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>NQ Solution | 디지털 솔루션 파트너 - 웹개발, 앱개발, AI 솔루션</title>
-                <meta name="description" content="혁신적인 아이디어를 빠르게 실현하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인, AI 솔루션을 제공합니다. 서울 기반 IT 개발 전문 회사입니다." />
-                <meta name="keywords" content="웹개발, 앱개발, IT개발, 디자인, AI솔루션, 웹사이트 제작, 앱 제작, 홈페이지 제작, 서울 개발사, NQ Solution, 엔큐솔루션" />
-                <meta property="og:title" content="NQ Solution | 디지털 솔루션 파트너" />
-                <meta property="og:description" content="혁신적인 아이디어를 빠르게 실현하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인, AI 솔루션을 제공합니다." />
+                <title>NQ Solution (엔큐솔루션) | 웹개발, 앱개발, AI솔루션 전문 IT개발 회사</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 IT 개발 회사입니다. 평택 기반 전국 서비스. 홈페이지 제작, 모바일 앱 개발, UI/UX 디자인. nqsolution 엔큐솔루션" />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 웹개발, 앱개발, AI솔루션, 홈페이지제작, 웹사이트제작, 모바일앱개발, IT개발, 평택개발사, 전국IT개발, 웹에이전시, 디지털에이전시" />
+                <meta property="og:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, AI솔루션 전문" />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹 개발, 앱 개발, AI 솔루션 전문. 평택 기반 전국 서비스." />
                 <meta property="og:url" content="https://www.nqsolution.com/" />
                 <link rel="canonical" href="https://www.nqsolution.com/" />
             </Head>
