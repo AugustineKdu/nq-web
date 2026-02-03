@@ -7,3 +7,4 @@ Disallow: /admin
 Disallow: /api/
 
 Sitemap: http://nqsolution.kr/sitemap.xml
+RSS: http://nqsolution.kr/rss.xml

@@ -52,6 +52,9 @@ class MyDocument extends Document {
           {/* Canonical */}
           <link rel="canonical" href="http://nqsolution.kr" />
 
+          {/* RSS Feed */}
+          <link rel="alternate" type="application/rss+xml" title="NQ Solution RSS" href="http://nqsolution.kr/rss.xml" />
+
           {/* Preconnect for performance */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
