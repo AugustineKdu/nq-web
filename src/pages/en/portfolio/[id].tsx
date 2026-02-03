@@ -83,8 +83,8 @@ export default function PortfolioDetailEN() {
                 <meta name="description" content={project.description} />
                 <meta property="og:title" content={`${project.title} | NQ Solution`} />
                 <meta property="og:description" content={project.description} />
-                <meta property="og:url" content={`https://www.nqsolution.com/en/portfolio/${project.id}`} />
-                <link rel="canonical" href={`https://www.nqsolution.com/en/portfolio/${project.id}`} />
+                <meta property="og:url" content={`http://nqsolution.kr/en/portfolio/${project.id}`} />
+                <link rel="canonical" href={`http://nqsolution.kr/en/portfolio/${project.id}`} />
             </Head>
             <div className={`min-h-screen ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
             {/* Hero Section */}

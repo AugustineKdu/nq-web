@@ -69,8 +69,8 @@ export default function About() {
                 <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 회사소개, IT개발회사, 웹개발회사, 앱개발회사, 디지털에이전시" />
                 <meta property="og:title" content="회사소개 | NQ Solution (엔큐솔루션)" />
                 <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹 개발, 앱 개발, AI 솔루션 전문" />
-                <meta property="og:url" content="https://www.nqsolution.com/about" />
-                <link rel="canonical" href="https://www.nqsolution.com/about" />
+                <meta property="og:url" content="http://nqsolution.kr/about" />
+                <link rel="canonical" href="http://nqsolution.kr/about" />
             </Head>
             <div className="min-h-screen">
             {/* Hero */}

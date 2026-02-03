@@ -38,7 +38,7 @@ class MyDocument extends Document {
           <meta property="og:description" content="NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 IT 개발 회사입니다." />
           <meta property="og:locale" content="ko_KR" />
           <meta property="og:locale:alternate" content="en_US" />
-          <meta property="og:image" content="https://www.nqsolution.com/logo.png" />
+          <meta property="og:image" content="http://nqsolution.kr/logo.png" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
           <meta property="og:image:alt" content="NQ Solution 엔큐솔루션 로고" />
@@ -47,10 +47,10 @@ class MyDocument extends Document {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, AI솔루션" />
           <meta name="twitter:description" content="웹 개발, 앱 개발, AI 솔루션 전문 IT 개발 회사" />
-          <meta name="twitter:image" content="https://www.nqsolution.com/logo.png" />
+          <meta name="twitter:image" content="http://nqsolution.kr/logo.png" />
 
           {/* Canonical */}
-          <link rel="canonical" href="https://www.nqsolution.com" />
+          <link rel="canonical" href="http://nqsolution.kr" />
 
           {/* Preconnect for performance */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -65,8 +65,8 @@ class MyDocument extends Document {
                 "@type": "Organization",
                 "name": "NQ Solution",
                 "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
-                "url": "https://www.nqsolution.com",
-                "logo": "https://www.nqsolution.com/logo.png",
+                "url": "http://nqsolution.kr",
+                "logo": "http://nqsolution.kr/logo.png",
                 "description": "NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 평택 기반 전국 서비스 디지털 에이전시입니다.",
                 "email": "hello@nqsolution.com",
                 "foundingDate": "2024",
@@ -96,7 +96,7 @@ class MyDocument extends Document {
                 "@type": "WebSite",
                 "name": "NQ Solution",
                 "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
-                "url": "https://www.nqsolution.com",
+                "url": "http://nqsolution.kr",
                 "inLanguage": ["ko-KR", "en-US"],
                 "description": "웹개발, 앱개발, AI솔루션 전문 IT 개발 회사 NQ Solution(엔큐솔루션)",
                 "publisher": {
@@ -117,8 +117,8 @@ class MyDocument extends Document {
                 "@type": "LocalBusiness",
                 "name": "NQ Solution (엔큐솔루션)",
                 "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
-                "image": "https://www.nqsolution.com/logo.png",
-                "url": "https://www.nqsolution.com",
+                "image": "http://nqsolution.kr/logo.png",
+                "url": "http://nqsolution.kr",
                 "email": "hello@nqsolution.com",
                 "description": "NQ Solution(엔큐솔루션) - 웹 개발, 앱 개발, AI 솔루션 전문 IT 개발 회사",
                 "address": {
@@ -151,28 +151,28 @@ class MyDocument extends Document {
                     "position": 1,
                     "name": "회사 소개",
                     "description": "NQ Solution(엔큐솔루션) 소개",
-                    "url": "https://www.nqsolution.com/about"
+                    "url": "http://nqsolution.kr/about"
                   },
                   {
                     "@type": "SiteNavigationElement",
                     "position": 2,
                     "name": "서비스",
                     "description": "웹 개발, 앱 개발, AI 솔루션 서비스",
-                    "url": "https://www.nqsolution.com/services"
+                    "url": "http://nqsolution.kr/services"
                   },
                   {
                     "@type": "SiteNavigationElement",
                     "position": 3,
                     "name": "포트폴리오",
                     "description": "NQ Solution 프로젝트 사례",
-                    "url": "https://www.nqsolution.com/portfolio"
+                    "url": "http://nqsolution.kr/portfolio"
                   },
                   {
                     "@type": "SiteNavigationElement",
                     "position": 4,
                     "name": "문의하기",
                     "description": "프로젝트 상담 및 문의",
-                    "url": "https://www.nqsolution.com/contact"
+                    "url": "http://nqsolution.kr/contact"
                   }
                 ]
               })
@@ -188,9 +188,9 @@ class MyDocument extends Document {
                 "@type": "ProfessionalService",
                 "name": "NQ Solution",
                 "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
-                "url": "https://www.nqsolution.com",
-                "logo": "https://www.nqsolution.com/logo.png",
-                "image": "https://www.nqsolution.com/logo.png",
+                "url": "http://nqsolution.kr",
+                "logo": "http://nqsolution.kr/logo.png",
+                "image": "http://nqsolution.kr/logo.png",
                 "description": "NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 IT 개발 회사입니다.",
                 "address": {
                   "@type": "PostalAddress",

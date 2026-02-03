@@ -98,8 +98,8 @@ export default function Contact() {
                 <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, IT컨설팅, 연락처" />
                 <meta property="og:title" content="문의하기 | NQ Solution (엔큐솔루션)" />
                 <meta property="og:description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 무료 상담 제공." />
-                <meta property="og:url" content="https://www.nqsolution.com/contact" />
-                <link rel="canonical" href="https://www.nqsolution.com/contact" />
+                <meta property="og:url" content="http://nqsolution.kr/contact" />
+                <link rel="canonical" href="http://nqsolution.kr/contact" />
             </Head>
             <div className="min-h-screen">
             {/* Hero */}
