@@ -12,9 +12,9 @@ class MyDocument extends Document {
           />
 
           {/* Primary Meta Tags - 브랜드명 강조 */}
-          <meta name="title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, AI솔루션 전문" />
-          <meta name="description" content="NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 평택 기반 전국 서비스 IT 개발 회사입니다. nqsolution, 엔큐솔루션으로 검색하세요." />
-          <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 웹개발, 앱개발, AI솔루션, 홈페이지제작, 웹사이트제작, 모바일앱개발, IT개발, 평택개발사, 전국IT개발, 웹에이전시, 디지털에이전시" />
+          <meta name="title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발 전문" />
+          <meta name="description" content="NQ Solution(엔큐솔루션) - 웹개발, 앱개발 전문 IT 개발 회사. 평택 기반 전국 서비스." />
+          <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 웹개발, 앱개발, 홈페이지제작, 웹사이트제작, 모바일앱개발, IT개발, 평택개발사, 전국IT개발, 웹에이전시, 디지털에이전시" />
 
           {/* Favicon */}
           <link rel="icon" type="image/png" href="/favicon.png" />
@@ -26,7 +26,7 @@ class MyDocument extends Document {
           <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
           <meta name="naverbot" content="index, follow" />
           <meta name="yeti" content="index, follow" />
-          <meta name="subject" content="웹개발, 앱개발, AI솔루션 - NQ Solution 엔큐솔루션" />
+          <meta name="subject" content="웹개발, 앱개발 전문 - NQ Solution 엔큐솔루션" />
           <meta name="coverage" content="Worldwide" />
           <meta name="rating" content="General" />
           <meta name="revisit-after" content="3 days" />
@@ -34,8 +34,8 @@ class MyDocument extends Document {
           {/* Open Graph Tags - 네이버/카카오/페이스북 */}
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content="NQ Solution (엔큐솔루션)" />
-          <meta property="og:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, AI솔루션" />
-          <meta property="og:description" content="NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 IT 개발 회사입니다." />
+          <meta property="og:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발 전문" />
+          <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹개발, 앱개발 전문 IT 개발 회사. 평택 기반 전국 서비스." />
           <meta property="og:locale" content="ko_KR" />
           <meta property="og:locale:alternate" content="en_US" />
           <meta property="og:image" content="http://nqsolution.kr/logo.png" />
@@ -45,8 +45,8 @@ class MyDocument extends Document {
 
           {/* Twitter Card */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, AI솔루션" />
-          <meta name="twitter:description" content="웹 개발, 앱 개발, AI 솔루션 전문 IT 개발 회사" />
+          <meta name="twitter:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발 전문" />
+          <meta name="twitter:description" content="웹개발, 앱개발 전문 IT 개발 회사 - 평택 기반 전국 서비스" />
           <meta name="twitter:image" content="http://nqsolution.kr/logo.png" />
 
           {/* Canonical */}
@@ -70,7 +70,7 @@ class MyDocument extends Document {
                 "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
                 "url": "http://nqsolution.kr",
                 "logo": "http://nqsolution.kr/logo.png",
-                "description": "NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 평택 기반 전국 서비스 디지털 에이전시입니다.",
+                "description": "NQ Solution(엔큐솔루션) - 웹개발, 앱개발 전문 IT 개발 회사. 평택 기반 전국 서비스.",
                 "email": "hello@nqsolution.com",
                 "foundingDate": "2024",
                 "address": {
@@ -101,7 +101,7 @@ class MyDocument extends Document {
                 "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
                 "url": "http://nqsolution.kr",
                 "inLanguage": ["ko-KR", "en-US"],
-                "description": "웹개발, 앱개발, AI솔루션 전문 IT 개발 회사 NQ Solution(엔큐솔루션)",
+                "description": "웹개발, 앱개발 전문 IT 개발 회사 NQ Solution(엔큐솔루션)",
                 "publisher": {
                   "@type": "Organization",
                   "name": "NQ Solution",
@@ -123,7 +123,7 @@ class MyDocument extends Document {
                 "image": "http://nqsolution.kr/logo.png",
                 "url": "http://nqsolution.kr",
                 "email": "hello@nqsolution.com",
-                "description": "NQ Solution(엔큐솔루션) - 웹 개발, 앱 개발, AI 솔루션 전문 IT 개발 회사",
+                "description": "NQ Solution(엔큐솔루션) - 웹개발, 앱개발 전문 IT 개발 회사",
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "평택",
@@ -160,7 +160,7 @@ class MyDocument extends Document {
                     "@type": "SiteNavigationElement",
                     "position": 2,
                     "name": "서비스",
-                    "description": "웹 개발, 앱 개발, AI 솔루션 서비스",
+                    "description": "웹개발, 앱개발 서비스",
                     "url": "http://nqsolution.kr/services"
                   },
                   {
@@ -194,7 +194,7 @@ class MyDocument extends Document {
                 "url": "http://nqsolution.kr",
                 "logo": "http://nqsolution.kr/logo.png",
                 "image": "http://nqsolution.kr/logo.png",
-                "description": "NQ Solution(엔큐솔루션)은 웹 개발, 앱 개발, AI 솔루션을 전문으로 하는 IT 개발 회사입니다.",
+                "description": "NQ Solution(엔큐솔루션) - 웹개발, 앱개발 전문 IT 개발 회사. 평택 기반 전국 서비스.",
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "Pyeongtaek",
@@ -202,7 +202,7 @@ class MyDocument extends Document {
                   "addressCountry": "KR"
                 },
                 "priceRange": "$$",
-                "serviceType": ["웹 개발", "웹사이트 제작", "홈페이지 제작", "앱 개발", "모바일 앱 개발", "AI 솔루션", "UI/UX 디자인"],
+                "serviceType": ["웹 개발", "웹사이트 제작", "홈페이지 제작", "앱 개발", "모바일 앱 개발", "UI/UX 디자인"],
                 "areaServed": {
                   "@type": "Country",
                   "name": "South Korea"
@@ -223,13 +223,6 @@ class MyDocument extends Document {
                       "itemOffered": {
                         "@type": "Service",
                         "name": "앱 개발"
-                      }
-                    },
-                    {
-                      "@type": "Offer",
-                      "itemOffered": {
-                        "@type": "Service",
-                        "name": "AI 솔루션"
                       }
                     }
                   ]
