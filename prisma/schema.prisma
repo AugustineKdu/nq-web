@@ -291,6 +291,18 @@ model FaqItem {
   updatedAt DateTime @updatedAt
 }
 
+// 문의 접수 / Inquiry Submissions
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String?
+  message   String   @db.Text
+  status    String   @default("new") // new, read, replied
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // 네비게이션 / Navigation
 model Navigation {
   id        String   @id @default("main")

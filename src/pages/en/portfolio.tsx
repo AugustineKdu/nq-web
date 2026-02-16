@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -51,7 +52,16 @@ export default function PortfolioEN() {
         : projects.filter(p => p.category === activeFilter);
 
     return (
-        <div className="min-h-screen">
+        <>
+            <Head>
+                <title>Portfolio | NQ Solution</title>
+                <meta name="description" content="NQ Solution portfolio - Web, app, and AI solution project showcases." />
+                <meta property="og:title" content="Portfolio | NQ Solution" />
+                <meta property="og:description" content="NQ Solution - Web, app, and AI solution projects." />
+                <meta property="og:url" content="https://nqsolution.kr/en/portfolio" />
+                <link rel="canonical" href="https://nqsolution.kr/en/portfolio" />
+            </Head>
+            <div className="min-h-screen">
             {/* Hero Section */}
             <section className="pt-32 md:pt-40 pb-20">
                 <div className="container-custom">
@@ -267,5 +277,6 @@ export default function PortfolioEN() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
@@ -32,10 +33,14 @@ export default function ContactEN() {
     const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
     useEffect(() => {
-        const savedSettings = localStorage.getItem("nq-site-settings");
-        if (savedSettings) {
-            setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) });
-        }
+        fetch("/api/settings")
+            .then(res => res.ok ? res.json() : null)
+            .then(data => {
+                if (data) setSettings({ ...DEFAULT_SETTINGS, ...data });
+            })
+            .catch(() => {
+                console.log("Using default settings");
+            });
     }, []);
 
     const faqs = [
@@ -62,7 +67,16 @@ export default function ContactEN() {
     ];
 
     return (
-        <div className="min-h-screen">
+        <>
+            <Head>
+                <title>Contact | NQ Solution</title>
+                <meta name="description" content="Contact NQ Solution for your project. Free consultation for web development, app development, and AI solutions." />
+                <meta property="og:title" content="Contact | NQ Solution" />
+                <meta property="og:description" content="Contact NQ Solution for project consultation." />
+                <meta property="og:url" content="https://nqsolution.kr/en/contact" />
+                <link rel="canonical" href="https://nqsolution.kr/en/contact" />
+            </Head>
+            <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">
                 <div className="container-custom">
@@ -323,5 +337,6 @@ export default function ContactEN() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

@@ -3,6 +3,8 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import type { ReactElement, ReactNode } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import { ThemeProvider, useTheme } from "../context/ThemeContext";
@@ -19,9 +21,16 @@ type AppPropsWithLayout = AppProps & {
 
 function AppContent({ Component, pageProps }: AppPropsWithLayout) {
     const { dark, setDark } = useTheme();
+    const router = useRouter();
 
     // Track page views
     usePageView();
+
+    // Set html lang attribute based on route
+    useEffect(() => {
+        const lang = router.pathname.startsWith("/en") ? "en" : "ko";
+        document.documentElement.lang = lang;
+    }, [router.pathname]);
 
     // Check if page has custom layout
     const getLayout = Component.getLayout;

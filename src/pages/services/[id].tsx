@@ -2,7 +2,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Code, Smartphone, Palette, LineChart, CheckCircle } from "lucide-react";
-import { useTheme } from "../../context/ThemeContext";
 
 const servicesData = [
     {
@@ -126,7 +125,6 @@ NQ Solution은 다양한 산업 분야의 경험을 바탕으로 귀사에 맞�
 export default function ServiceDetail() {
     const router = useRouter();
     const { id } = router.query;
-    const { dark } = useTheme();
 
     const service = servicesData.find(s => s.id === id);
     const currentIndex = servicesData.findIndex(s => s.id === id);
@@ -135,12 +133,12 @@ export default function ServiceDetail() {
 
     if (!service) {
         return (
-            <div className={`min-h-screen flex items-center justify-center ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
+            <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <p className={`text-lg ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+                    <p className="text-lg text-[var(--color-text-secondary)]">
                         서비스를 찾을 수 없습니다.
                     </p>
-                    <Link href="/services" className="mt-4 inline-block text-teal-500 hover:underline">
+                    <Link href="/services" className="mt-4 inline-block text-[var(--color-accent)] hover:underline">
                         서비스 목록으로 돌아가기
                     </Link>
                 </div>
@@ -151,13 +149,13 @@ export default function ServiceDetail() {
     const IconComponent = service.icon;
 
     return (
-        <div className={`min-h-screen ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
+        <div className="min-h-screen">
             {/* Hero Section */}
             <section className="pt-32 pb-20">
                 <div className="container-custom">
                     <Link
                         href="/services"
-                        className={`inline-flex items-center gap-2 text-sm mb-8 ${dark ? "text-neutral-400 hover:text-white" : "text-neutral-600 hover:text-neutral-900"} transition-colors`}
+                        className="inline-flex items-center gap-2 text-sm mb-8 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         모든 서비스 보기
@@ -166,19 +164,19 @@ export default function ServiceDetail() {
                     <div className="grid grid-cols-12 gap-12 items-start">
                         <div className="col-span-12 lg:col-span-8">
                             <div className="flex items-center gap-4 mb-6">
-                                <span className="text-teal-500 text-sm font-medium">{service.number}</span>
-                                <span className={`text-sm ${dark ? "text-neutral-500" : "text-neutral-400"}`}>{service.subtitle}</span>
+                                <span className="text-[var(--color-accent)] text-sm font-medium">{service.number}</span>
+                                <span className="text-sm text-[var(--color-text-tertiary)]">{service.subtitle}</span>
                             </div>
-                            <h1 className={`text-5xl md:text-6xl font-normal tracking-tight mb-8 ${dark ? "text-white" : "text-neutral-900"}`}>
+                            <h1 className="text-5xl md:text-6xl font-normal tracking-tight mb-8 text-[var(--color-text-primary)]">
                                 {service.title}
                             </h1>
-                            <p className={`text-xl leading-relaxed ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
+                            <p className="text-xl leading-relaxed text-[var(--color-text-secondary)]">
                                 {service.description}
                             </p>
                         </div>
                         <div className="col-span-12 lg:col-span-4 flex justify-center lg:justify-end">
-                            <div className={`w-32 h-32 rounded-3xl flex items-center justify-center ${dark ? "bg-teal-500/10" : "bg-teal-500/10"}`}>
-                                <IconComponent className="w-16 h-16 text-teal-500" />
+                            <div className="w-32 h-32 flex items-center justify-center bg-[var(--color-accent-subtle)]">
+                                <IconComponent className="w-16 h-16 text-[var(--color-accent)]" />
                             </div>
                         </div>
                     </div>
@@ -186,13 +184,13 @@ export default function ServiceDetail() {
             </section>
 
             {/* Long Description */}
-            <section className={`py-20 ${dark ? "bg-neutral-900/50" : "bg-white"}`}>
+            <section className="py-20 bg-[var(--color-bg-secondary)]">
                 <div className="container-custom">
                     <div className="max-w-3xl">
-                        <h2 className={`text-2xl font-medium mb-8 ${dark ? "text-white" : "text-neutral-900"}`}>
+                        <h2 className="text-2xl font-medium mb-8 text-[var(--color-text-primary)]">
                             Overview
                         </h2>
-                        <div className={`text-lg leading-relaxed whitespace-pre-line ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
+                        <div className="text-lg leading-relaxed whitespace-pre-line text-[var(--color-text-secondary)]">
                             {service.longDescription}
                         </div>
                     </div>
@@ -204,31 +202,27 @@ export default function ServiceDetail() {
                 <div className="container-custom">
                     <div className="grid grid-cols-12 gap-12">
                         <div className="col-span-12 lg:col-span-6">
-                            <h2 className={`text-2xl font-medium mb-8 ${dark ? "text-white" : "text-neutral-900"}`}>
+                            <h2 className="text-2xl font-medium mb-8 text-[var(--color-text-primary)]">
                                 What We Offer
                             </h2>
                             <ul className="space-y-4">
                                 {service.details.map((detail, i) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <CheckCircle className="w-5 h-5 text-teal-500 mt-0.5 shrink-0" />
-                                        <span className={`${dark ? "text-neutral-300" : "text-neutral-600"}`}>{detail}</span>
+                                        <CheckCircle className="w-5 h-5 text-[var(--color-accent)] mt-0.5 shrink-0" />
+                                        <span className="text-[var(--color-text-secondary)]">{detail}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         <div className="col-span-12 lg:col-span-6">
-                            <h2 className={`text-2xl font-medium mb-8 ${dark ? "text-white" : "text-neutral-900"}`}>
+                            <h2 className="text-2xl font-medium mb-8 text-[var(--color-text-primary)]">
                                 Tech Stack
                             </h2>
                             <div className="flex flex-wrap gap-3">
                                 {service.tech.map((tech, i) => (
                                     <span
                                         key={i}
-                                        className={`px-4 py-2 rounded-full text-sm ${
-                                            dark
-                                                ? "bg-neutral-800 text-neutral-300 border border-neutral-700"
-                                                : "bg-neutral-100 text-neutral-700 border border-neutral-200"
-                                        }`}
+                                        className="px-4 py-2 rounded-full text-sm bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]"
                                     >
                                         {tech}
                                     </span>
@@ -240,32 +234,28 @@ export default function ServiceDetail() {
             </section>
 
             {/* Process */}
-            <section className={`py-20 ${dark ? "bg-neutral-900/50" : "bg-white"}`}>
+            <section className="py-20 bg-[var(--color-bg-secondary)]">
                 <div className="container-custom">
-                    <h2 className={`text-2xl font-medium mb-12 ${dark ? "text-white" : "text-neutral-900"}`}>
+                    <h2 className="text-2xl font-medium mb-12 text-[var(--color-text-primary)]">
                         Process
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                         {service.process.map((item, i) => (
                             <div key={i} className="relative">
-                                <div className={`p-6 rounded-2xl h-full ${
-                                    dark
-                                        ? "bg-[#0a0a0a] border border-neutral-800"
-                                        : "bg-neutral-50 border border-neutral-200"
-                                }`}>
-                                    <span className="text-teal-500 text-sm font-medium mb-3 block">
+                                <div className="card p-6 h-full">
+                                    <span className="text-[var(--color-accent)] text-sm font-medium mb-3 block">
                                         Step {String(i + 1).padStart(2, '0')}
                                     </span>
-                                    <h3 className={`text-lg font-medium mb-2 ${dark ? "text-white" : "text-neutral-900"}`}>
+                                    <h3 className="text-lg font-medium mb-2 text-[var(--color-text-primary)]">
                                         {item.step}
                                     </h3>
-                                    <p className={`text-sm ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+                                    <p className="text-sm text-[var(--color-text-secondary)]">
                                         {item.desc}
                                     </p>
                                 </div>
                                 {i < service.process.length - 1 && (
                                     <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
-                                        <ArrowRight className={`w-5 h-5 ${dark ? "text-neutral-700" : "text-neutral-300"}`} />
+                                        <ArrowRight className="w-5 h-5 text-[var(--color-text-tertiary)]" />
                                     </div>
                                 )}
                             </div>
@@ -277,16 +267,16 @@ export default function ServiceDetail() {
             {/* CTA */}
             <section className="py-20">
                 <div className="container-custom">
-                    <div className={`p-12 rounded-3xl text-center ${dark ? "bg-teal-500/10 border border-teal-500/20" : "bg-teal-50 border border-teal-100"}`}>
-                        <h2 className={`text-3xl font-normal mb-4 ${dark ? "text-white" : "text-neutral-900"}`}>
+                    <div className="p-12 bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-center">
+                        <h2 className="text-3xl font-normal mb-4 text-[var(--color-text-primary)]">
                             {service.title} 프로젝트를 시작하세요
                         </h2>
-                        <p className={`mb-8 ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
+                        <p className="mb-8 text-[var(--color-text-secondary)]">
                             전문 팀이 귀사의 프로젝트를 함께합니다.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-teal-500 text-white rounded-full font-medium hover:bg-teal-600 transition-colors"
+                            className="btn-primary inline-flex items-center gap-2"
                         >
                             프로젝트 문의하기
                             <ArrowRight className="w-4 h-4" />
@@ -296,13 +286,13 @@ export default function ServiceDetail() {
             </section>
 
             {/* Navigation */}
-            <section className={`py-12 border-t ${dark ? "border-neutral-800" : "border-neutral-200"}`}>
+            <section className="py-12 border-t border-[var(--color-border)]">
                 <div className="container-custom">
                     <div className="flex justify-between items-center">
                         {prevService ? (
                             <Link
                                 href={`/services/${prevService.id}`}
-                                className={`flex items-center gap-3 group ${dark ? "text-neutral-400 hover:text-white" : "text-neutral-600 hover:text-neutral-900"} transition-colors`}
+                                className="flex items-center gap-3 group text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                             >
                                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                                 <div>
@@ -314,7 +304,7 @@ export default function ServiceDetail() {
                         {nextService ? (
                             <Link
                                 href={`/services/${nextService.id}`}
-                                className={`flex items-center gap-3 text-right group ${dark ? "text-neutral-400 hover:text-white" : "text-neutral-600 hover:text-neutral-900"} transition-colors`}
+                                className="flex items-center gap-3 text-right group text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                             >
                                 <div>
                                     <p className="text-xs uppercase tracking-wider mb-1">다음 서비스</p>

@@ -44,7 +44,7 @@ export const siteConfig = {
         description: "From planning to design and development. We deliver digital solutions for your business.",
         descriptionKo: "기획부터 디자인, 개발까지. 비즈니스에 필요한 디지털 솔루션을 제공합니다.",
         keywords: ["web development", "design", "AI", "digital solution", "웹개발", "디자인", "AI", "디지털 솔루션"],
-        url: "https://nqsolution.com",
+        url: "https://nqsolution.kr",
     },
 };
 

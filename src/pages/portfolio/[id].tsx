@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Building, CheckCircle, Globe } from "lucide-react";
-import { useTheme } from "../../context/ThemeContext";
 
 interface PortfolioProject {
     id: number;
@@ -27,7 +26,6 @@ interface PortfolioProject {
 export default function PortfolioDetail() {
     const router = useRouter();
     const { id } = router.query;
-    const { dark } = useTheme();
     const [projects, setProjects] = useState<PortfolioProject[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -52,8 +50,8 @@ export default function PortfolioDetail() {
 
     if (loading) {
         return (
-            <div className={`min-h-screen flex items-center justify-center ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
-                <p className={`text-lg ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+            <div className="min-h-screen flex items-center justify-center">
+                <p className="text-lg text-[var(--color-text-secondary)]">
                     로딩 중...
                 </p>
             </div>
@@ -62,12 +60,12 @@ export default function PortfolioDetail() {
 
     if (!project) {
         return (
-            <div className={`min-h-screen flex items-center justify-center ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
+            <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <p className={`text-lg ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
+                    <p className="text-lg text-[var(--color-text-secondary)]">
                         프로젝트를 찾을 수 없습니다.
                     </p>
-                    <Link href="/portfolio" className="mt-4 inline-block text-teal-500 hover:underline">
+                    <Link href="/portfolio" className="mt-4 inline-block text-[var(--color-accent)] hover:underline">
                         포트폴리오로 돌아가기
                     </Link>
                 </div>
@@ -76,13 +74,13 @@ export default function PortfolioDetail() {
     }
 
     return (
-        <div className={`min-h-screen ${dark ? "bg-[#0a0a0a]" : "bg-[#fafafa]"}`}>
+        <div className="min-h-screen">
             {/* Hero Section */}
             <section className="pt-32 pb-16">
                 <div className="container-custom">
                     <Link
                         href="/portfolio"
-                        className={`inline-flex items-center gap-2 text-sm mb-8 ${dark ? "text-neutral-400 hover:text-white" : "text-neutral-600 hover:text-neutral-900"} transition-colors`}
+                        className="inline-flex items-center gap-2 text-sm mb-8 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         모든 프로젝트 보기
@@ -91,44 +89,40 @@ export default function PortfolioDetail() {
                     <div className="grid grid-cols-12 gap-8 items-start">
                         <div className="col-span-12 lg:col-span-8">
                             <div className="flex items-center gap-4 mb-4">
-                                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                                    dark ? "bg-teal-500/10 text-teal-500" : "bg-teal-50 text-teal-600"
-                                }`}>
+                                <span className="px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-accent-subtle)] text-[var(--color-accent)]">
                                     {project.category}
                                 </span>
                                 {project.isActive !== undefined && (
                                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                                         project.isActive
-                                            ? dark ? "bg-green-500/10 text-green-500" : "bg-green-50 text-green-600"
-                                            : dark ? "bg-neutral-500/10 text-neutral-500" : "bg-neutral-100 text-neutral-500"
+                                            ? "bg-green-500/10 text-green-500"
+                                            : "bg-[var(--color-bg-secondary)] text-[var(--color-text-tertiary)]"
                                     }`}>
                                         {project.isActive ? "서비스 운영중" : "서비스 종료"}
                                     </span>
                                 )}
                             </div>
-                            <h1 className={`text-4xl md:text-5xl font-normal tracking-tight mb-6 ${dark ? "text-white" : "text-neutral-900"}`}>
+                            <h1 className="text-4xl md:text-5xl font-normal tracking-tight mb-6 text-[var(--color-text-primary)]">
                                 {project.titleKo || project.title}
                             </h1>
-                            <p className={`text-xl leading-relaxed ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
+                            <p className="text-xl leading-relaxed text-[var(--color-text-secondary)]">
                                 {project.descriptionKo || project.description}
                             </p>
                         </div>
                         <div className="col-span-12 lg:col-span-4">
-                            <div className={`p-6 rounded-2xl space-y-4 ${
-                                dark ? "bg-neutral-900 border border-neutral-800" : "bg-white border border-neutral-200"
-                            }`}>
+                            <div className="card p-6 space-y-4">
                                 <div className="flex items-center gap-3">
-                                    <Building className="w-5 h-5 text-teal-500" />
+                                    <Building className="w-5 h-5 text-[var(--color-accent)]" />
                                     <div>
-                                        <p className={`text-xs ${dark ? "text-neutral-500" : "text-neutral-400"}`}>Client</p>
-                                        <p className={`font-medium ${dark ? "text-white" : "text-neutral-900"}`}>{project.client}</p>
+                                        <p className="text-xs text-[var(--color-text-tertiary)]">Client</p>
+                                        <p className="font-medium text-[var(--color-text-primary)]">{project.client}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Calendar className="w-5 h-5 text-teal-500" />
+                                    <Calendar className="w-5 h-5 text-[var(--color-accent)]" />
                                     <div>
-                                        <p className={`text-xs ${dark ? "text-neutral-500" : "text-neutral-400"}`}>Year</p>
-                                        <p className={`font-medium ${dark ? "text-white" : "text-neutral-900"}`}>{project.year}</p>
+                                        <p className="text-xs text-[var(--color-text-tertiary)]">Year</p>
+                                        <p className="font-medium text-[var(--color-text-primary)]">{project.year}</p>
                                     </div>
                                 </div>
                                 {project.url && (
@@ -138,10 +132,10 @@ export default function PortfolioDetail() {
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-3 group"
                                     >
-                                        <Globe className="w-5 h-5 text-teal-500" />
+                                        <Globe className="w-5 h-5 text-[var(--color-accent)]" />
                                         <div className="flex-1">
-                                            <p className={`text-xs ${dark ? "text-neutral-500" : "text-neutral-400"}`}>Website</p>
-                                            <p className="font-medium text-teal-500 group-hover:underline flex items-center gap-1">
+                                            <p className="text-xs text-[var(--color-text-tertiary)]">Website</p>
+                                            <p className="font-medium text-[var(--color-accent)] group-hover:underline flex items-center gap-1">
                                                 사이트 방문 <ExternalLink className="w-3 h-3" />
                                             </p>
                                         </div>
@@ -161,11 +155,9 @@ export default function PortfolioDetail() {
                             {project.images.map((img, i) => (
                                 <div
                                     key={i}
-                                    className={`aspect-video rounded-2xl overflow-hidden ${
-                                        dark ? "bg-neutral-800" : "bg-neutral-200"
-                                    }`}
+                                    className="aspect-video overflow-hidden bg-[var(--color-bg-secondary)]"
                                 >
-                                    <div className="w-full h-full flex items-center justify-center text-neutral-500">
+                                    <div className="w-full h-full flex items-center justify-center text-[var(--color-text-tertiary)]">
                                         {/* Placeholder for images */}
                                         <span className="text-sm">Image {i + 1}</span>
                                     </div>
@@ -178,13 +170,13 @@ export default function PortfolioDetail() {
 
             {/* Long Description */}
             {project.longDescription && (
-                <section className={`py-16 ${dark ? "bg-neutral-900/50" : "bg-white"}`}>
+                <section className="py-16 bg-[var(--color-bg-secondary)]">
                     <div className="container-custom">
                         <div className="max-w-3xl">
-                            <h2 className={`text-2xl font-medium mb-8 ${dark ? "text-white" : "text-neutral-900"}`}>
+                            <h2 className="text-2xl font-medium mb-8 text-[var(--color-text-primary)]">
                                 프로젝트 소개
                             </h2>
-                            <div className={`text-lg leading-relaxed whitespace-pre-line ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
+                            <div className="text-lg leading-relaxed whitespace-pre-line text-[var(--color-text-secondary)]">
                                 {project.longDescription}
                             </div>
                         </div>
@@ -194,19 +186,19 @@ export default function PortfolioDetail() {
 
             {/* Challenges & Solutions */}
             {(project.challenges || project.solutions || project.results) && (
-                <section className={`py-16 ${dark ? "bg-neutral-900/50" : "bg-white"}`}>
+                <section className="py-16 bg-[var(--color-bg-secondary)]">
                     <div className="container-custom">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {project.challenges && project.challenges.length > 0 && (
                                 <div>
-                                    <h3 className={`text-lg font-medium mb-6 ${dark ? "text-white" : "text-neutral-900"}`}>
+                                    <h3 className="text-lg font-medium mb-6 text-[var(--color-text-primary)]">
                                         Challenges
                                     </h3>
                                     <ul className="space-y-3">
                                         {project.challenges.map((item, i) => (
                                             <li key={i} className="flex items-start gap-3">
-                                                <span className="text-teal-500 mt-1">-</span>
-                                                <span className={`text-sm ${dark ? "text-neutral-300" : "text-neutral-600"}`}>{item}</span>
+                                                <span className="text-[var(--color-accent)] mt-1">-</span>
+                                                <span className="text-sm text-[var(--color-text-secondary)]">{item}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -214,14 +206,14 @@ export default function PortfolioDetail() {
                             )}
                             {project.solutions && project.solutions.length > 0 && (
                                 <div>
-                                    <h3 className={`text-lg font-medium mb-6 ${dark ? "text-white" : "text-neutral-900"}`}>
+                                    <h3 className="text-lg font-medium mb-6 text-[var(--color-text-primary)]">
                                         Solutions
                                     </h3>
                                     <ul className="space-y-3">
                                         {project.solutions.map((item, i) => (
                                             <li key={i} className="flex items-start gap-3">
-                                                <CheckCircle className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
-                                                <span className={`text-sm ${dark ? "text-neutral-300" : "text-neutral-600"}`}>{item}</span>
+                                                <CheckCircle className="w-4 h-4 text-[var(--color-accent)] mt-0.5 shrink-0" />
+                                                <span className="text-sm text-[var(--color-text-secondary)]">{item}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -229,14 +221,14 @@ export default function PortfolioDetail() {
                             )}
                             {project.results && project.results.length > 0 && (
                                 <div>
-                                    <h3 className={`text-lg font-medium mb-6 ${dark ? "text-white" : "text-neutral-900"}`}>
+                                    <h3 className="text-lg font-medium mb-6 text-[var(--color-text-primary)]">
                                         Results
                                     </h3>
                                     <ul className="space-y-3">
                                         {project.results.map((item, i) => (
                                             <li key={i} className="flex items-start gap-3">
-                                                <span className="text-teal-500 font-bold mt-0.5">+</span>
-                                                <span className={`text-sm ${dark ? "text-neutral-300" : "text-neutral-600"}`}>{item}</span>
+                                                <span className="text-[var(--color-accent)] font-bold mt-0.5">+</span>
+                                                <span className="text-sm text-[var(--color-text-secondary)]">{item}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -250,16 +242,16 @@ export default function PortfolioDetail() {
             {/* CTA */}
             <section className="py-16">
                 <div className="container-custom">
-                    <div className={`p-12 rounded-3xl text-center ${dark ? "bg-teal-500/10 border border-teal-500/20" : "bg-teal-50 border border-teal-100"}`}>
-                        <h2 className={`text-3xl font-normal mb-4 ${dark ? "text-white" : "text-neutral-900"}`}>
+                    <div className="p-12 bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-center">
+                        <h2 className="text-3xl font-normal mb-4 text-[var(--color-text-primary)]">
                             비슷한 프로젝트를 계획하고 계신가요?
                         </h2>
-                        <p className={`mb-8 ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
+                        <p className="mb-8 text-[var(--color-text-secondary)]">
                             지금 바로 프로젝트에 대해 이야기해보세요.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-teal-500 text-white rounded-full font-medium hover:bg-teal-600 transition-colors"
+                            className="btn-primary inline-flex items-center gap-2"
                         >
                             프로젝트 문의하기
                             <ArrowRight className="w-4 h-4" />
@@ -269,13 +261,13 @@ export default function PortfolioDetail() {
             </section>
 
             {/* Navigation */}
-            <section className={`py-12 border-t ${dark ? "border-neutral-800" : "border-neutral-200"}`}>
+            <section className="py-12 border-t border-[var(--color-border)]">
                 <div className="container-custom">
                     <div className="flex justify-between items-center">
                         {prevProject ? (
                             <Link
                                 href={`/portfolio/${prevProject.id}`}
-                                className={`flex items-center gap-3 group ${dark ? "text-neutral-400 hover:text-white" : "text-neutral-600 hover:text-neutral-900"} transition-colors`}
+                                className="flex items-center gap-3 group text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                             >
                                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                                 <div>
@@ -287,7 +279,7 @@ export default function PortfolioDetail() {
                         {nextProject ? (
                             <Link
                                 href={`/portfolio/${nextProject.id}`}
-                                className={`flex items-center gap-3 text-right group ${dark ? "text-neutral-400 hover:text-white" : "text-neutral-600 hover:text-neutral-900"} transition-colors`}
+                                className="flex items-center gap-3 text-right group text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                             >
                                 <div>
                                     <p className="text-xs uppercase tracking-wider mb-1">다음 프로젝트</p>

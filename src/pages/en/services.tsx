@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -91,7 +92,16 @@ export default function ServicesEN() {
     ];
 
     return (
-        <div className="min-h-screen">
+        <>
+            <Head>
+                <title>Services | NQ Solution</title>
+                <meta name="description" content="NQ Solution services: Web development, app development, UI/UX design, AI solutions. End-to-end digital services." />
+                <meta property="og:title" content="Services | NQ Solution" />
+                <meta property="og:description" content="NQ Solution - Web development, app development, UI/UX design, and AI solutions." />
+                <meta property="og:url" content="https://nqsolution.kr/en/services" />
+                <link rel="canonical" href="https://nqsolution.kr/en/services" />
+            </Head>
+            <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">
                 <div className="container-custom">
@@ -339,5 +349,6 @@ export default function ServicesEN() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

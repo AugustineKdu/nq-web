@@ -59,8 +59,8 @@ export default function Portfolio() {
                 <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 포트폴리오, 웹개발사례, 앱개발사례, IT프로젝트, 홈페이지제작사례" />
                 <meta property="og:title" content="포트폴리오 | NQ Solution (엔큐솔루션)" />
                 <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹사이트, 앱, AI 솔루션 프로젝트 포트폴리오" />
-                <meta property="og:url" content="http://nqsolution.kr/portfolio" />
-                <link rel="canonical" href="http://nqsolution.kr/portfolio" />
+                <meta property="og:url" content="https://nqsolution.kr/portfolio" />
+                <link rel="canonical" href="https://nqsolution.kr/portfolio" />
             </Head>
             <div className="min-h-screen">
             {/* Hero Section */}

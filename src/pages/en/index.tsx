@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
@@ -27,7 +28,16 @@ export default function HomeEN() {
     ];
 
     return (
-        <div className="min-h-screen">
+        <>
+            <Head>
+                <title>NQ Solution | Web Development, App Development, AI Solutions</title>
+                <meta name="description" content="NQ Solution - Professional web development, app development, and AI solutions. From planning to design and development." />
+                <meta property="og:title" content="NQ Solution | Web & App Development" />
+                <meta property="og:description" content="NQ Solution - Professional web development, app development, and AI solutions." />
+                <meta property="og:url" content="https://nqsolution.kr/en" />
+                <link rel="canonical" href="https://nqsolution.kr/en" />
+            </Head>
+            <div className="min-h-screen">
             {/* Hero Section */}
             <section className="min-h-screen relative flex items-center overflow-hidden">
                 <div className="container-custom w-full pt-32 pb-20">
@@ -329,5 +339,6 @@ export default function HomeEN() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

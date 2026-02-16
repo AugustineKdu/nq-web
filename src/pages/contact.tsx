@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown, MessageCircle, Send, CheckCircle, Phone, User, Mail, MessageSquare } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { siteConfig, koContent } from "../config";
 
@@ -54,6 +54,11 @@ export default function Contact() {
     const [contactContent, setContactContent] = useState<ContactContent | null>(null);
     const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
 
+    // Inquiry form state
+    const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
+    const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+    const [formError, setFormError] = useState("");
+
     // Fetch settings and content from database API
     useEffect(() => {
         Promise.all([
@@ -64,9 +69,7 @@ export default function Contact() {
             if (settingsData) setSettings({ ...DEFAULT_SETTINGS, ...settingsData });
             if (contentData) setContactContent(contentData);
             if (faqData?.length) setFaqItems(faqData.filter((f: FaqItem & { lang: string }) => f.lang === "ko"));
-        }).catch(() => {
-            console.log("Using default settings from config");
-        });
+        }).catch(() => {});
     }, []);
 
     // Use DB content or fallback to static
@@ -98,8 +101,8 @@ export default function Contact() {
                 <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, IT컨설팅, 연락처" />
                 <meta property="og:title" content="문의하기 | NQ Solution (엔큐솔루션)" />
                 <meta property="og:description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 무료 상담 제공." />
-                <meta property="og:url" content="http://nqsolution.kr/contact" />
-                <link rel="canonical" href="http://nqsolution.kr/contact" />
+                <meta property="og:url" content="https://nqsolution.kr/contact" />
+                <link rel="canonical" href="https://nqsolution.kr/contact" />
             </Head>
             <div className="min-h-screen">
             {/* Hero */}
@@ -184,6 +187,7 @@ export default function Contact() {
                                         {([
                                             settings.showEmail !== false ? { label: "Email", value: settings.email, href: `mailto:${settings.email}` } : null,
                                             settings.showPhone !== false ? { label: "Phone", value: settings.phone, href: `tel:${settings.phone.replace(/[^+\d]/g, '')}` } : null,
+                                            { label: "KakaoTalk", value: "카카오톡 채널 상담", href: "https://pf.kakao.com/_nqsolution/chat" },
                                             settings.showLocation !== false ? { label: "Location", value: settings.locationKo || settings.location, href: null as string | null } : null,
                                         ].filter((item): item is { label: string; value: string; href: string | null } => item !== null)).map((item, i) => (
                                             <motion.div
@@ -257,6 +261,180 @@ export default function Contact() {
                 </div>
             </section>
 
+            {/* Inquiry Form */}
+            <section className="section-padding border-t border-[var(--color-border)]">
+                <div className="container-custom">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={stagger}
+                        className="grid grid-cols-12 gap-8 mb-16"
+                    >
+                        <motion.div variants={slideIn} className="col-span-12 lg:col-span-2">
+                            <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
+                                Inquiry
+                            </span>
+                        </motion.div>
+                        <motion.div variants={fadeIn} className="col-span-12 lg:col-span-10">
+                            <h2 className="text-display-sm font-serif mb-4">
+                                빠른 문의
+                            </h2>
+                            <p className="text-[var(--color-text-secondary)] max-w-lg">
+                                간단한 정보를 남겨주시면 빠르게 연락드리겠습니다.
+                            </p>
+                        </motion.div>
+                    </motion.div>
+
+                    <div className="grid grid-cols-12 gap-8">
+                        <div className="col-span-12 lg:col-span-2" />
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="col-span-12 lg:col-span-8"
+                        >
+                            {formStatus === "success" ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="card p-12 text-center"
+                                >
+                                    <CheckCircle className="w-12 h-12 text-[var(--color-accent)] mx-auto mb-6" />
+                                    <h3 className="text-2xl font-serif mb-3">문의가 접수되었습니다</h3>
+                                    <p className="text-[var(--color-text-secondary)] mb-8">
+                                        빠른 시간 내에 연락드리겠습니다.
+                                    </p>
+                                    <button
+                                        onClick={() => {
+                                            setFormStatus("idle");
+                                            setFormData({ name: "", phone: "", email: "", message: "" });
+                                        }}
+                                        className="btn-outline"
+                                    >
+                                        새 문의 작성
+                                    </button>
+                                </motion.div>
+                            ) : (
+                                <form
+                                    onSubmit={async (e) => {
+                                        e.preventDefault();
+                                        setFormStatus("sending");
+                                        setFormError("");
+                                        try {
+                                            const res = await fetch("/api/inquiry", {
+                                                method: "POST",
+                                                headers: { "Content-Type": "application/json" },
+                                                body: JSON.stringify(formData),
+                                            });
+                                            if (!res.ok) {
+                                                const data = await res.json();
+                                                throw new Error(data.error || "오류가 발생했습니다.");
+                                            }
+                                            setFormStatus("success");
+                                        } catch (err) {
+                                            setFormStatus("error");
+                                            setFormError(err instanceof Error ? err.message : "오류가 발생했습니다.");
+                                        }
+                                    }}
+                                    className="space-y-6"
+                                >
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="text-xs tracking-widest uppercase text-[var(--color-accent)] block mb-3">
+                                                <User className="w-3.5 h-3.5 inline mr-2" />
+                                                이름 *
+                                            </label>
+                                            <input
+                                                type="text"
+                                                required
+                                                value={formData.name}
+                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                placeholder="홍길동"
+                                                className="w-full bg-transparent border-b border-[var(--color-border)] py-3 text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:border-[var(--color-accent)] transition-colors outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-xs tracking-widest uppercase text-[var(--color-accent)] block mb-3">
+                                                <Phone className="w-3.5 h-3.5 inline mr-2" />
+                                                연락처 *
+                                            </label>
+                                            <input
+                                                type="tel"
+                                                required
+                                                value={formData.phone}
+                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                                placeholder="010-1234-5678"
+                                                className="w-full bg-transparent border-b border-[var(--color-border)] py-3 text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:border-[var(--color-accent)] transition-colors outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="text-xs tracking-widest uppercase text-[var(--color-accent)] block mb-3">
+                                            <Mail className="w-3.5 h-3.5 inline mr-2" />
+                                            이메일
+                                        </label>
+                                        <input
+                                            type="email"
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            placeholder="email@example.com"
+                                            className="w-full bg-transparent border-b border-[var(--color-border)] py-3 text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:border-[var(--color-accent)] transition-colors outline-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-xs tracking-widest uppercase text-[var(--color-accent)] block mb-3">
+                                            <MessageSquare className="w-3.5 h-3.5 inline mr-2" />
+                                            문의 내용 *
+                                        </label>
+                                        <textarea
+                                            required
+                                            rows={4}
+                                            value={formData.message}
+                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                            placeholder="프로젝트에 대해 간단히 알려주세요"
+                                            className="w-full bg-transparent border-b border-[var(--color-border)] py-3 text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:border-[var(--color-accent)] transition-colors outline-none resize-none"
+                                        />
+                                    </div>
+
+                                    {formStatus === "error" && (
+                                        <p className="text-red-500 text-sm">{formError}</p>
+                                    )}
+
+                                    <div className="flex items-center gap-6 pt-4">
+                                        <motion.button
+                                            type="submit"
+                                            disabled={formStatus === "sending"}
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className="btn-primary inline-flex"
+                                        >
+                                            {formStatus === "sending" ? (
+                                                "전송 중..."
+                                            ) : (
+                                                <>
+                                                    문의하기
+                                                    <Send className="w-4 h-4" />
+                                                </>
+                                            )}
+                                        </motion.button>
+                                        <a
+                                            href="https://pf.kakao.com/_nqsolution/chat"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn-outline inline-flex items-center gap-2"
+                                        >
+                                            <MessageCircle className="w-4 h-4" />
+                                            카카오톡 상담
+                                        </a>
+                                    </div>
+                                </form>
+                            )}
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             {/* FAQ */}
             <section className="section-padding bg-[var(--color-bg-secondary)]">
                 <div className="container-custom">
@@ -294,6 +472,7 @@ export default function Contact() {
                                     <button
                                         onClick={() => setOpenFaq(openFaq === i ? null : i)}
                                         className="w-full flex items-start justify-between text-left group"
+                                        aria-expanded={openFaq === i}
                                     >
                                         <h3 className="text-lg font-serif pr-8 group-hover:text-[var(--color-accent)] transition-colors">
                                             {faq.q}
@@ -401,6 +580,23 @@ export default function Contact() {
                     </motion.div>
                 </div>
             </section>
+            {/* Floating Kakao Chat Button */}
+            <motion.a
+                href="https://pf.kakao.com/_nqsolution/chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1, duration: 0.4 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#FEE500] flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+                aria-label="카카오톡 상담"
+            >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67-.15.53-.96 3.39-.99 3.6 0 0-.02.17.09.24.11.06.24.01.24.01.32-.04 3.7-2.44 4.28-2.85.56.08 1.14.13 1.72.13 5.52 0 10-3.58 10-7.94S17.52 3 12 3z" fill="#3C1E1E"/>
+                </svg>
+            </motion.a>
             </div>
         </>
     );
