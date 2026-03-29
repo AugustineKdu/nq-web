@@ -1,10 +1,9 @@
 # Robots.txt for NQ Solution (엔큐솔루션)
-# http://nqsolution.kr
+# https://nqsolution.kr
 
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: http://nqsolution.kr/sitemap.xml
-RSS: http://nqsolution.kr/rss.xml
+Sitemap: https://nqsolution.kr/sitemap.xml

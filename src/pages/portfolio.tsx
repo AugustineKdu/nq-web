@@ -4,6 +4,7 @@ import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { koContent, categories } from "../config";
+import { statusLabels, statusColors } from "../config/projects";
 
 // Animation variants
 const fadeIn = {
@@ -22,6 +23,7 @@ interface Project {
     client: string;
     category: string;
     year: string;
+    status?: string;
     description: string;
     descriptionKo?: string;
 }
@@ -54,11 +56,11 @@ export default function Portfolio() {
     return (
         <>
             <Head>
-                <title>포트폴리오 | NQ Solution (엔큐솔루션) - 프로젝트 사례</title>
-                <meta name="description" content="NQ Solution(엔큐솔루션) 포트폴리오. 웹사이트, 모바일 앱, AI 솔루션 프로젝트 사례. nqsolution 엔큐솔루션이 만든 성공적인 프로젝트들." />
-                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 포트폴리오, 웹개발사례, 앱개발사례, IT프로젝트, 홈페이지제작사례" />
+                <title>포트폴리오 | NQ Solution (엔큐솔루션) - 웹개발, 앱개발, 프로그램개발 사례</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션) 포트폴리오. 웹사이트, 모바일 앱, 프로그램, 시스템 개발 프로젝트 사례. 홈페이지 제작부터 업무 자동화까지 nqsolution 엔큐솔루션이 만든 프로젝트들." />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 포트폴리오, 웹개발사례, 앱개발사례, 프로그램개발사례, IT프로젝트, 홈페이지제작사례, 시스템개발사례" />
                 <meta property="og:title" content="포트폴리오 | NQ Solution (엔큐솔루션)" />
-                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹사이트, 앱, AI 솔루션 프로젝트 포트폴리오" />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹사이트, 앱, 프로그램, 시스템 개발 프로젝트 포트폴리오" />
                 <meta property="og:url" content="https://nqsolution.kr/portfolio" />
                 <link rel="canonical" href="https://nqsolution.kr/portfolio" />
             </Head>
@@ -179,9 +181,16 @@ export default function Portfolio() {
                                                         {String(index + 1).padStart(2, '0')}
                                                     </span>
                                                     <div>
-                                                        <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] block mb-1">
-                                                            {project.category}
-                                                        </span>
+                                                        <div className="flex items-center gap-2 mb-1">
+                                                            <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)]">
+                                                                {project.category}
+                                                            </span>
+                                                            {project.status && project.status !== "completed" && (
+                                                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${statusColors[project.status] || ""}`}>
+                                                                    {statusLabels[project.status] || project.status}
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                         <h3 className="text-lg font-serif group-hover:text-[var(--color-accent)] transition-colors">
                                                             {project.titleKo || project.title}
                                                         </h3>
@@ -211,9 +220,16 @@ export default function Portfolio() {
 
                                             {/* Title & Category */}
                                             <div className="col-span-4">
-                                                <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] block mb-2">
-                                                    {project.category}
-                                                </span>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)]">
+                                                        {project.category}
+                                                    </span>
+                                                    {project.status && project.status !== "completed" && (
+                                                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${statusColors[project.status] || ""}`}>
+                                                            {statusLabels[project.status] || project.status}
+                                                        </span>
+                                                    )}
+                                                </div>
                                                 <h3 className="text-xl font-serif group-hover:text-[var(--color-accent)] transition-colors">
                                                     {project.titleKo || project.title}
                                                 </h3>

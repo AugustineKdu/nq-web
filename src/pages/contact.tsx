@@ -96,11 +96,11 @@ export default function Contact() {
     return (
         <>
             <Head>
-                <title>문의하기 | NQ Solution (엔큐솔루션) - 프로젝트 상담</title>
-                <meta name="description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹 개발, 앱 개발, AI 솔루션 무료 상담. nqsolution 엔큐솔루션 연락처" />
-                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, IT컨설팅, 연락처" />
+                <title>문의하기 | NQ Solution (엔큐솔루션) - 웹개발, 앱개발, 프로그램개발 상담</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹개발, 앱개발, 프로그램개발, 시스템개발 무료 상담. 홈페이지 제작 견적부터 업무 자동화까지. nqsolution 엔큐솔루션 연락처" />
+                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, 프로그램개발견적, 시스템개발비용, 홈페이지제작비용, IT외주, 연락처" />
                 <meta property="og:title" content="문의하기 | NQ Solution (엔큐솔루션)" />
-                <meta property="og:description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 무료 상담 제공." />
+                <meta property="og:description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹개발, 프로그램개발, 시스템개발 무료 상담." />
                 <meta property="og:url" content="https://nqsolution.kr/contact" />
                 <link rel="canonical" href="https://nqsolution.kr/contact" />
             </Head>
@@ -185,11 +185,11 @@ export default function Contact() {
 
                                     <div className="space-y-6 mb-12">
                                         {([
-                                            settings.showEmail !== false ? { label: "Email", value: settings.email, href: `mailto:${settings.email}` } : null,
-                                            settings.showPhone !== false ? { label: "Phone", value: settings.phone, href: `tel:${settings.phone.replace(/[^+\d]/g, '')}` } : null,
-                                            { label: "KakaoTalk", value: "카카오톡 채널 상담", href: "https://pf.kakao.com/_nqsolution/chat" },
-                                            settings.showLocation !== false ? { label: "Location", value: settings.locationKo || settings.location, href: null as string | null } : null,
-                                        ].filter((item): item is { label: string; value: string; href: string | null } => item !== null)).map((item, i) => (
+                                            settings.showEmail !== false ? { label: "Email", value: settings.email, href: `mailto:${settings.email}`, kakao: false } : null,
+                                            settings.showPhone !== false ? { label: "Phone", value: settings.phone, href: `tel:${settings.phone.replace(/[^+\d]/g, '')}`, kakao: false } : null,
+                                            { label: "KakaoTalk", value: "카카오톡 채널 상담", href: null as string | null, kakao: true },
+                                            settings.showLocation !== false ? { label: "Location", value: settings.locationKo || settings.location, href: null as string | null, kakao: false } : null,
+                                        ].filter((item): item is { label: string; value: string; href: string | null; kakao: boolean } => item !== null)).map((item, i) => (
                                             <motion.div
                                                 key={i}
                                                 initial={{ opacity: 0, x: -10 }}
@@ -200,7 +200,20 @@ export default function Contact() {
                                                 <span className="text-xs tracking-widest uppercase text-[var(--color-accent)] block mb-2">
                                                     {item.label}
                                                 </span>
-                                                {item.href ? (
+                                                {item.kakao ? (
+                                                    <button
+                                                        onClick={() => {
+                                                            if (window.Kakao?.Channel) {
+                                                                window.Kakao.Channel.chat({ channelPublicId: "_iTLzX" });
+                                                            } else {
+                                                                window.open("https://pf.kakao.com/_iTLzX/chat", "_blank");
+                                                            }
+                                                        }}
+                                                        className="text-lg hover:text-[var(--color-accent)] transition-colors text-left"
+                                                    >
+                                                        {item.value}
+                                                    </button>
+                                                ) : item.href ? (
                                                     <a
                                                         href={item.href}
                                                         className="text-lg hover:text-[var(--color-accent)] transition-colors"
@@ -418,15 +431,20 @@ export default function Contact() {
                                                 </>
                                             )}
                                         </motion.button>
-                                        <a
-                                            href="https://pf.kakao.com/_nqsolution/chat"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                        <button
+                                            onClick={() => {
+                                                if (window.Kakao?.Channel) {
+                                                    window.Kakao.Channel.chat({ channelPublicId: "_iTLzX" });
+                                                } else {
+                                                    window.open("https://pf.kakao.com/_iTLzX/chat", "_blank");
+                                                }
+                                            }}
+                                            type="button"
                                             className="btn-outline inline-flex items-center gap-2"
                                         >
                                             <MessageCircle className="w-4 h-4" />
                                             카카오톡 상담
-                                        </a>
+                                        </button>
                                     </div>
                                 </form>
                             )}
@@ -581,10 +599,14 @@ export default function Contact() {
                 </div>
             </section>
             {/* Floating Kakao Chat Button */}
-            <motion.a
-                href="https://pf.kakao.com/_nqsolution/chat"
-                target="_blank"
-                rel="noopener noreferrer"
+            <motion.button
+                onClick={() => {
+                    if (window.Kakao?.Channel) {
+                        window.Kakao.Channel.chat({ channelPublicId: "_iTLzX" });
+                    } else {
+                        window.open("https://pf.kakao.com/_iTLzX/chat", "_blank");
+                    }
+                }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1, duration: 0.4 }}
@@ -596,7 +618,7 @@ export default function Contact() {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67-.15.53-.96 3.39-.99 3.6 0 0-.02.17.09.24.11.06.24.01.24.01.32-.04 3.7-2.44 4.28-2.85.56.08 1.14.13 1.72.13 5.52 0 10-3.58 10-7.94S17.52 3 12 3z" fill="#3C1E1E"/>
                 </svg>
-            </motion.a>
+            </motion.button>
             </div>
         </>
     );

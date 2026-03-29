@@ -5,7 +5,7 @@
 
 /* Font Imports */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
 
 /*
  * Premium Color System
@@ -82,7 +82,7 @@ body {
 
 /* Typography Classes */
 .font-serif {
-    font-family: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
+    font-family: 'Syne', 'Pretendard Variable', sans-serif;
 }
 
 .font-display {
@@ -95,8 +95,8 @@ body {
 
 /* Heading Styles */
 h1, h2, h3 {
-    font-family: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
-    font-weight: 400;
+    font-family: 'Syne', 'Pretendard Variable', sans-serif;
+    font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
 }

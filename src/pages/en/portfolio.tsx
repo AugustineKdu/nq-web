@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { statusColors } from "../../config/projects";
 
 // Animation variants
 const fadeIn = {
@@ -14,6 +15,13 @@ const stagger = {
     visible: { transition: { staggerChildren: 0.1 } }
 };
 
+const statusLabelsEn: Record<string, string> = {
+    completed: "Completed",
+    in_progress: "In Progress",
+    developing: "Developing",
+    planned: "Planned",
+};
+
 interface Project {
     id: number;
     title: string;
@@ -21,6 +29,7 @@ interface Project {
     client: string;
     category: string;
     year: string;
+    status?: string;
     description: string;
     descriptionKo?: string;
 }
@@ -45,7 +54,7 @@ export default function PortfolioEN() {
             });
     }, []);
 
-    const filters = ["All", "Web", "Design", "App"];
+    const filters = ["All", "Web", "App", "Program", "System", "Design", "ETC"];
 
     const filteredProjects = activeFilter === "All"
         ? projects
@@ -184,9 +193,16 @@ export default function PortfolioEN() {
 
                                             {/* Title & Category */}
                                             <div className="col-span-10 md:col-span-4">
-                                                <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] block mb-2">
-                                                    {project.category}
-                                                </span>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)]">
+                                                        {project.category}
+                                                    </span>
+                                                    {project.status && project.status !== "completed" && (
+                                                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${statusColors[project.status] || ""}`}>
+                                                            {statusLabelsEn[project.status] || project.status}
+                                                        </span>
+                                                    )}
+                                                </div>
                                                 <h3 className="text-xl md:text-2xl font-serif group-hover:text-[var(--color-accent)] transition-colors">
                                                     {project.title}
                                                 </h3>

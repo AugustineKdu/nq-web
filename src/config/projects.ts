@@ -6,13 +6,17 @@
  * Edit portfolio items in this file.
  */
 
+export type ProjectCategory = "Web" | "Design" | "App" | "Program" | "System" | "ETC";
+export type ProjectStatus = "completed" | "in_progress" | "developing" | "planned";
+
 export interface Project {
     id: number;
     title: string;
     titleKo?: string;
     client: string;
-    category: "Web" | "Design" | "App";
+    category: ProjectCategory;
     year: string;
+    status?: ProjectStatus;
     description: string;
     descriptionKo?: string;
     longDescription?: string;
@@ -107,5 +111,20 @@ export const projects: Project[] = [
 ];
 
 // 카테고리 목록 / Category list
-export const categories = ["All", "Web", "Design", "App"] as const;
+export const categories = ["All", "Web", "App", "Program", "System", "Design", "ETC"] as const;
 export type Category = typeof categories[number];
+
+// 상태 목록 / Status list
+export const projectStatuses = ["completed", "in_progress", "developing", "planned"] as const;
+export const statusLabels: Record<string, string> = {
+    completed: "완료",
+    in_progress: "진행중",
+    developing: "개발중",
+    planned: "계획중",
+};
+export const statusColors: Record<string, string> = {
+    completed: "text-green-500 bg-green-500/10",
+    in_progress: "text-blue-500 bg-blue-500/10",
+    developing: "text-amber-500 bg-amber-500/10",
+    planned: "text-[var(--color-text-tertiary)] bg-[var(--color-bg-secondary)]",
+};

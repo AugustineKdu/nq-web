@@ -14,8 +14,13 @@ export default async function handler(
         }
 
         if (req.method === "POST") {
+            // 기존 프로젝트들의 order를 +1 하여 밀어내기
+            await prisma.project.updateMany({
+                data: { order: { increment: 1 } },
+            });
+            // 새 프로젝트를 order: 0으로 맨 위에 추가
             const project = await prisma.project.create({
-                data: req.body,
+                data: { ...req.body, order: 0 },
             });
             return res.status(201).json(project);
         }
@@ -31,9 +36,17 @@ export default async function handler(
 
         if (req.method === "DELETE") {
             const { id } = req.query;
+            const target = await prisma.project.findUnique({ where: { id: Number(id) } });
             await prisma.project.delete({
                 where: { id: Number(id) },
             });
+            // 삭제된 항목보다 뒤에 있던 항목들의 order를 -1
+            if (target) {
+                await prisma.project.updateMany({
+                    where: { order: { gt: target.order } },
+                    data: { order: { decrement: 1 } },
+                });
+            }
             return res.status(204).end();
         }
 

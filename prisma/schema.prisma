@@ -71,6 +71,7 @@ model Project {
   client          String
   category        String
   year            String
+  status          String   @default("completed") // completed, in_progress, developing, planned
   description     String
   descriptionKo   String?
   longDescription String?  @db.Text

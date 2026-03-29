@@ -1,62 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://nqsolution.kr/</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/about</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/about</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/about" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/services</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/services</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/services" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/portfolio</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/portfolio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/portfolio" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/contact</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/contact" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/en</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/en</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/en/about</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/about" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/en/services</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/en/services</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/services" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/en/portfolio</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/en/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/portfolio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/portfolio" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://nqsolution.kr/en/contact</loc>
-    <lastmod>2026-02-03</lastmod>
+    <loc>https://nqsolution.kr/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nqsolution.kr/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nqsolution.kr/en/contact" />
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

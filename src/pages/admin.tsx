@@ -10,6 +10,7 @@ interface PortfolioProject {
     client: string;
     category: string;
     year: string;
+    status: string;
     description: string;
     descriptionKo?: string;
     longDescription?: string;
@@ -136,7 +137,13 @@ interface FaqItem {
     order: number;
 }
 
-const PORTFOLIO_CATEGORIES = ["Web", "Design", "App"] as const;
+const PORTFOLIO_CATEGORIES = ["Web", "App", "Program", "System", "Design", "ETC"] as const;
+const PORTFOLIO_STATUSES = [
+    { value: "completed", label: "완료" },
+    { value: "in_progress", label: "진행중" },
+    { value: "developing", label: "개발중" },
+    { value: "planned", label: "계획중" },
+] as const;
 const DEFAULT_PASSWORD = "nqadmin1234";
 
 export default function Admin() {
@@ -181,7 +188,7 @@ export default function Admin() {
     const [portfolioProjects, setPortfolioProjects] = useState<PortfolioProject[]>([]);
     const [editingProject, setEditingProject] = useState<PortfolioProject | null>(null);
     const [newPortfolioProject, setNewPortfolioProject] = useState<Partial<PortfolioProject>>({
-        title: "", titleKo: "", client: "", category: "Web", year: new Date().getFullYear().toString(),
+        title: "", titleKo: "", client: "", category: "Web", year: new Date().getFullYear().toString(), status: "developing",
         description: "", descriptionKo: "", longDescription: "", tags: [], url: "", isActive: true, featured: false
     });
     const [tagInput, setTagInput] = useState("");
@@ -571,13 +578,13 @@ export default function Admin() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...newPortfolioProject,
-                    order: portfolioProjects.length + 1
+                    order: 0
                 })
             });
             if (res.ok) {
                 await fetchData();
                 setNewPortfolioProject({
-                    title: "", titleKo: "", client: "", category: "Web", year: new Date().getFullYear().toString(),
+                    title: "", titleKo: "", client: "", category: "Web", year: new Date().getFullYear().toString(), status: "developing",
                     description: "", descriptionKo: "", longDescription: "", tags: [], url: "", isActive: true, featured: false
                 });
                 setTagInput("");
@@ -1432,8 +1439,15 @@ export default function Admin() {
                                                                         ({project.titleKo})
                                                                     </span>
                                                                 )}
-                                                                {project.isActive && (
-                                                                    <span className="px-2 py-0.5 text-xs rounded-full bg-green-500/10 text-green-500">운영중</span>
+                                                                {project.status && (
+                                                                    <span className={`px-2 py-0.5 text-xs rounded-full ${
+                                                                        project.status === "completed" ? "bg-green-500/10 text-green-500" :
+                                                                        project.status === "in_progress" ? "bg-blue-500/10 text-blue-500" :
+                                                                        project.status === "developing" ? "bg-amber-500/10 text-amber-500" :
+                                                                        "bg-neutral-500/10 text-neutral-500"
+                                                                    }`}>
+                                                                        {PORTFOLIO_STATUSES.find(s => s.value === project.status)?.label || project.status}
+                                                                    </span>
                                                                 )}
                                                                 {project.featured && (
                                                                     <span className="px-2 py-0.5 text-xs rounded-full bg-teal-500/10 text-teal-500">대표</span>
@@ -1569,7 +1583,7 @@ export default function Admin() {
                                                 />
                                             </div>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                                                 <select
                                                     value={editingProject ? editingProject.category : newPortfolioProject.category}
                                                     onChange={(e) => editingProject
@@ -1579,6 +1593,17 @@ export default function Admin() {
                                                 >
                                                     {PORTFOLIO_CATEGORIES.map((cat) => (
                                                         <option key={cat} value={cat}>{cat}</option>
+                                                    ))}
+                                                </select>
+                                                <select
+                                                    value={editingProject ? editingProject.status : newPortfolioProject.status}
+                                                    onChange={(e) => editingProject
+                                                        ? setEditingProject({...editingProject, status: e.target.value})
+                                                        : setNewPortfolioProject({...newPortfolioProject, status: e.target.value})}
+                                                    className={`px-4 py-2.5 rounded-lg ${dark ? "bg-neutral-800 border border-neutral-700 text-white" : "bg-white border border-neutral-200"}`}
+                                                >
+                                                    {PORTFOLIO_STATUSES.map((s) => (
+                                                        <option key={s.value} value={s.value}>{s.label}</option>
                                                     ))}
                                                 </select>
                                                 <input
