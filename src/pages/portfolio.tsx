@@ -4,7 +4,7 @@ import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { koContent, categories } from "../config";
-import { statusLabels, statusColors } from "../config/projects";
+import { statusLabels, statusColors, categoryLabels } from "../config/projects";
 
 // Animation variants
 const fadeIn = {
@@ -132,7 +132,7 @@ export default function Portfolio() {
                                             : "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)]"
                                     }`}
                                 >
-                                    {filter}
+                                    {categoryLabels[filter] || filter}
                                 </motion.button>
                             ))}
                         </div>
@@ -183,7 +183,7 @@ export default function Portfolio() {
                                                     <div>
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <span className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)]">
-                                                                {project.category}
+                                                                {categoryLabels[project.category] || project.category}
                                                             </span>
                                                             {project.status && project.status !== "completed" && (
                                                                 <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${statusColors[project.status] || ""}`}>

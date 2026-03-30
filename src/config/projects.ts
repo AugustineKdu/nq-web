@@ -6,7 +6,7 @@
  * Edit portfolio items in this file.
  */
 
-export type ProjectCategory = "Web" | "Design" | "App" | "Program" | "System" | "ETC";
+export type ProjectCategory = "Web" | "Design" | "App" | "Program" | "System" | "Planning" | "ETC";
 export type ProjectStatus = "completed" | "in_progress" | "developing" | "planned";
 
 export interface Project {
@@ -111,8 +111,20 @@ export const projects: Project[] = [
 ];
 
 // 카테고리 목록 / Category list
-export const categories = ["All", "Web", "App", "Program", "System", "Design", "ETC"] as const;
+export const categories = ["All", "Web", "App", "Program", "System", "Design", "Planning", "ETC"] as const;
 export type Category = typeof categories[number];
+
+// 카테고리 한글 라벨
+export const categoryLabels: Record<string, string> = {
+    All: "전체",
+    Web: "웹",
+    App: "앱",
+    Program: "프로그램",
+    System: "시스템",
+    Design: "디자인",
+    Planning: "기획",
+    ETC: "기타",
+};
 
 // 상태 목록 / Status list
 export const projectStatuses = ["completed", "in_progress", "developing", "planned"] as const;

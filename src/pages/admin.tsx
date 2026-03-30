@@ -137,7 +137,15 @@ interface FaqItem {
     order: number;
 }
 
-const PORTFOLIO_CATEGORIES = ["Web", "App", "Program", "System", "Design", "ETC"] as const;
+const PORTFOLIO_CATEGORIES = [
+    { value: "Web", label: "웹" },
+    { value: "App", label: "앱" },
+    { value: "Program", label: "프로그램" },
+    { value: "System", label: "시스템" },
+    { value: "Design", label: "디자인" },
+    { value: "Planning", label: "기획" },
+    { value: "ETC", label: "기타" },
+] as const;
 const PORTFOLIO_STATUSES = [
     { value: "completed", label: "완료" },
     { value: "in_progress", label: "진행중" },
@@ -1454,7 +1462,7 @@ export default function Admin() {
                                                                 )}
                                                             </div>
                                                             <p className={`text-sm ${dark ? "text-neutral-400" : "text-neutral-600"}`}>
-                                                                {project.client} • {project.category} • {project.year}
+                                                                {project.client} • {PORTFOLIO_CATEGORIES.find(c => c.value === project.category)?.label || project.category} • {project.year}
                                                             </p>
                                                             <p className={`text-sm mt-1 truncate ${dark ? "text-neutral-500" : "text-neutral-500"}`}>
                                                                 {project.description}
@@ -1592,7 +1600,7 @@ export default function Admin() {
                                                     className={`px-4 py-2.5 rounded-lg ${dark ? "bg-neutral-800 border border-neutral-700 text-white" : "bg-white border border-neutral-200"}`}
                                                 >
                                                     {PORTFOLIO_CATEGORIES.map((cat) => (
-                                                        <option key={cat} value={cat}>{cat}</option>
+                                                        <option key={cat.value} value={cat.value}>{cat.label}</option>
                                                     ))}
                                                 </select>
                                                 <select

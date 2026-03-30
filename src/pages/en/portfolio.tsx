@@ -54,7 +54,7 @@ export default function PortfolioEN() {
             });
     }, []);
 
-    const filters = ["All", "Web", "App", "Program", "System", "Design", "ETC"];
+    const filters = ["All", "Web", "App", "Program", "System", "Design", "Planning", "ETC"];
 
     const filteredProjects = activeFilter === "All"
         ? projects
