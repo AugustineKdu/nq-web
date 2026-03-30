@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import type { ReactElement, ReactNode } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import { ThemeProvider, useTheme } from "../context/ThemeContext";
@@ -67,6 +68,15 @@ function AppContent({ Component, pageProps }: AppPropsWithLayout) {
 export default function MyApp(props: AppPropsWithLayout) {
     return (
         <ThemeProvider>
+            <Script
+                src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+                strategy="afterInteractive"
+                onLoad={() => {
+                    if (window.Kakao && !window.Kakao.isInitialized()) {
+                        window.Kakao.init("213024e44cf9462918c343077ad80a8f");
+                    }
+                }}
+            />
             <AppContent {...props} />
         </ThemeProvider>
     );
