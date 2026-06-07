@@ -40,10 +40,10 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
             ...(showEstimate ? [{ href: "/estimate", label: "Estimate" }] : []),
         ]
         : [
-            { href: "/about", label: "About Us" },
-            { href: "/services", label: "Services" },
+            { href: "/about", label: "회사소개" },
+            { href: "/services", label: "서비스" },
             { href: "/portfolio", label: "포트폴리오" },
-            { href: "/contact", label: "Contact" },
+            { href: "/contact", label: "문의하기" },
             ...(showEstimate ? [{ href: "/estimate", label: "견적계산" }] : []),
         ];
 

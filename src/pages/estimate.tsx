@@ -39,6 +39,21 @@ const STEPS: { id: StepId; label: string; helper: string }[] = [
   { id: "contact", label: "예상 견적을 확인하세요", helper: "연락처를 남기시면 정식 상담으로 이어집니다." },
 ];
 
+const HOW_STEPS: { n: string; t: string; d: string }[] = [
+  { n: "01", t: "선택", d: "프로젝트 유형과 필요한 기능, 일정을 고릅니다." },
+  { n: "02", t: "즉시 견적", d: "예상 비용과 기간이 실시간으로 계산됩니다." },
+  { n: "03", t: "상담 신청", d: "마음에 들면 연락처를 남기고 신청하세요." },
+  { n: "04", t: "맞춤 제안서", d: "영업일 기준 2~3일 내 정식 제안서를 드립니다." },
+];
+
+const ESTIMATE_FAQ: { q: string; a: string }[] = [
+  { q: "견적이 정확한가요?", a: "입력하신 정보를 기반으로 한 예상 범위입니다. 정확한 금액은 상담을 통해 요구사항을 확정한 뒤 결정됩니다." },
+  { q: "견적을 받으면 비용이 드나요?", a: "아니요. 견적 확인과 상담은 모두 무료입니다. 부담 없이 받아보세요." },
+  { q: "견적 후 금액이 달라질 수 있나요?", a: "요구사항이 추가·변경되면 조정될 수 있습니다. 최종 금액은 확정 견적서로 명확히 안내드립니다." },
+  { q: "계약과 진행은 어떻게 되나요?", a: "상담 후 작업 범위·일정·비용을 계약서로 확정하고, 디자인 → 개발 → 검수 → 배포 순으로 단계별 진행합니다." },
+  { q: "오픈 후 유지보수도 되나요?", a: "네. 수정·기능 추가·서버 운영까지 지원하며, 월 단위 또는 건당으로 진행할 수 있습니다." },
+];
+
 interface ContactState {
   name: string;
   phone: string;
@@ -318,6 +333,32 @@ export default function EstimatePage() {
           </div>
         </section>
 
+        {/* 이용 방법 */}
+        <section className="section-padding-sm border-t border-[var(--color-border)]">
+          <div className="container-custom">
+            <div className="grid grid-cols-12 gap-8 mb-12">
+              <div className="col-span-12 lg:col-span-2">
+                <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">How it works</span>
+              </div>
+              <div className="col-span-12 lg:col-span-10">
+                <h2 className="text-display-sm font-serif">이렇게 진행돼요</h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-8">
+              <div className="hidden lg:block lg:col-span-2" />
+              <div className="col-span-12 lg:col-span-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {HOW_STEPS.map((s) => (
+                  <div key={s.n} className="border-t border-[var(--color-accent)] pt-5">
+                    <div className="text-xs font-mono text-[var(--color-accent)] mb-2">{s.n}</div>
+                    <h3 className="text-base font-medium mb-2">{s.t}</h3>
+                    <p className="text-sm text-[var(--color-text-tertiary)] leading-relaxed">{s.d}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 투명성 */}
         <section className="section-padding-sm bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
           <div className="container-custom">
@@ -375,6 +416,34 @@ export default function EstimatePage() {
                 <p className="text-sm text-[var(--color-text-tertiary)] mt-6">
                   오픈 이후 유지비를 줄이고, 필요한 순간 바로 업데이트하세요. 콘텐츠 변경은 추가 비용 없이 직접 처리합니다.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 견적 FAQ */}
+        <section className="section-padding-sm border-t border-[var(--color-border)]">
+          <div className="container-custom">
+            <div className="grid grid-cols-12 gap-8 mb-12">
+              <div className="col-span-12 lg:col-span-2">
+                <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">FAQ</span>
+              </div>
+              <div className="col-span-12 lg:col-span-10">
+                <h2 className="text-display-sm font-serif">견적, 자주 묻는 질문</h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-8">
+              <div className="hidden lg:block lg:col-span-2" />
+              <div className="col-span-12 lg:col-span-8 space-y-8">
+                {ESTIMATE_FAQ.map((f) => (
+                  <div key={f.q} className="border-t border-[var(--color-border)] pt-6">
+                    <h3 className="text-lg font-serif mb-3 flex items-start gap-3">
+                      <Check className="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-1" />
+                      {f.q}
+                    </h3>
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed pl-8">{f.a}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
