@@ -44,3 +44,6 @@ next-env.d.ts
 
 # inquiry data
 /data
+
+# Claude 작업 노트
+.claude/WORKLOG.md

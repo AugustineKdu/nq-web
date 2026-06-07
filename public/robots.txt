@@ -1,9 +1,64 @@
 # Robots.txt for NQ Solution (엔큐솔루션)
 # https://nqsolution.kr
 
+# 기본 — 모든 검색엔진 허용
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /admin/
 Disallow: /api/
+Disallow: /estimate
+
+# 네이버 (Yeti) — 명시 허용
+User-agent: Yeti
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /estimate
+
+# 다음 (Daumoa)
+User-agent: Daumoa
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /estimate
+
+# 구글 AI (Gemini 학습/요약 제어용 — 검색 색인과 별개)
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI / ChatGPT 검색
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic / Claude 검색
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# 저가치 스크래퍼 차단
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
 
 Sitemap: https://nqsolution.kr/sitemap.xml
+
+# LLM context
+LLM: https://nqsolution.kr/llms.txt

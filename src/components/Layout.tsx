@@ -26,18 +26,25 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // 견적 계산기 — 개발 서버/플래그에서만 노출 (프로덕션 기본 숨김)
+    const showEstimate =
+        process.env.NODE_ENV !== "production" ||
+        process.env.NEXT_PUBLIC_ENABLE_ESTIMATE === "true";
+
     const navItems = isEnglish
         ? [
             { href: "/en/about", label: "About" },
             { href: "/en/services", label: "Services" },
             { href: "/en/portfolio", label: "Works" },
             { href: "/en/contact", label: "Contact" },
+            ...(showEstimate ? [{ href: "/estimate", label: "Estimate" }] : []),
         ]
         : [
             { href: "/about", label: "About Us" },
             { href: "/services", label: "Services" },
-            { href: "/portfolio", label: "Works" },
+            { href: "/portfolio", label: "포트폴리오" },
             { href: "/contact", label: "Contact" },
+            ...(showEstimate ? [{ href: "/estimate", label: "견적계산" }] : []),
         ];
 
     // Get the corresponding page in other language
@@ -242,6 +249,17 @@ const Footer = ({ dark }: { dark: boolean }) => {
                             {isEnglish
                                 ? "Turning new ideas into reality, fast."
                                 : "새로운 아이디어를 빠르게 현실로."
+                            }
+                        </p>
+                        {/* 가시 브랜드/지역 텍스트 — 네이버·구글 브랜드 검색(엔큐솔루션/NQ Solution) 및 평택 로컬 신호 */}
+                        <p className="text-sm text-[var(--color-text-secondary)] mt-4">
+                            <strong className="font-medium text-[var(--color-text-primary)]">NQ Solution</strong>
+                            {!isEnglish && <span className="text-[var(--color-text-secondary)]"> (엔큐솔루션)</span>}
+                        </p>
+                        <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed mt-1">
+                            {isEnglish
+                                ? "Web · App · Program · System development. Based in Pyeongtaek, serving nationwide."
+                                : "평택 기반 전국 웹개발 · 앱개발 · 프로그램개발 · 시스템개발 파트너"
                             }
                         </p>
                     </div>

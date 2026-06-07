@@ -21,24 +21,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }, []);
 
     useEffect(() => {
-        if (mounted) {
-            localStorage.setItem('theme', dark ? 'dark' : 'light');
-            if (dark) {
-                document.documentElement.classList.add('dark');
-                document.documentElement.classList.remove('light');
-            } else {
-                document.documentElement.classList.add('light');
-                document.documentElement.classList.remove('dark');
-            }
-        }
+        if (!mounted) return;
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.classList.toggle('light', !dark);
     }, [dark, mounted]);
 
-    const toggleDark = () => setDark(!dark);
+    const toggleDark = () => setDark((d) => !d);
 
-    if (!mounted) {
-        return null;
-    }
-
+    // 항상 children을 렌더한다 — 서버에서 본문을 출력해야 크롤러(특히 네이버 Yeti)가 콘텐츠를 본다.
+    // mount 전 `return null` 은 사이트 전체를 클라이언트 전용 렌더로 만들어 SSR 본문을 비우므로 금지.
     return (
         <ThemeContext.Provider value={{ dark, setDark, toggleDark }}>
             {children}

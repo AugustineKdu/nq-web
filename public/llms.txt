@@ -1,0 +1,33 @@
+# NQ Solution (엔큐솔루션)
+
+> 평택에 기반을 두고 전국을 대상으로 서비스하는 IT 개발 회사입니다. 웹개발, 앱개발, 프로그램개발, 시스템개발을 전문으로 하며, 홈페이지 제작부터 쇼핑몰 구축, 업무 자동화 시스템까지 기획·디자인·개발·운영을 원스톱으로 제공합니다.
+
+## 회사 개요 (Facts)
+
+- 상호: NQ Solution (한글: 엔큐솔루션, 표기 변형: NQ솔루션, nqsolution)
+- 소재지: 경기도 평택시 (전국 서비스)
+- 분야: 웹사이트/홈페이지 제작, 모바일 앱 개발, 프로그램·소프트웨어 개발, 업무 시스템·자동화
+- 포지셔닝: 디지털 크래프트맨십 — 프리미엄 품질의 맞춤 개발
+- 웹사이트: https://nqsolution.kr
+
+## 핵심 페이지
+
+- [회사 소개](https://nqsolution.kr/about): NQ Solution(엔큐솔루션)의 철학과 일하는 방식
+- [서비스](https://nqsolution.kr/services): 웹개발·앱개발·프로그램개발·시스템개발 등 제공 서비스 상세
+- [포트폴리오](https://nqsolution.kr/portfolio): 실제 진행한 웹·앱·시스템 개발 프로젝트 사례
+- [문의·상담](https://nqsolution.kr/contact): 프로젝트 문의 및 견적 상담, 자주 묻는 질문(FAQ)
+
+## 자주 묻는 질문 (요약)
+
+- 어떤 회사인가요?: NQ Solution(엔큐솔루션)은 평택 기반의 전국 IT 개발 회사로, 웹·앱·프로그램·시스템 개발을 전문으로 합니다.
+- 어떤 지역을 서비스하나요?: 평택 및 인근(오산·안성·송탄·고덕신도시)을 포함해 전국 어디든 비대면으로 진행 가능합니다.
+- 어떤 것을 만들 수 있나요?: 브랜드 홈페이지, 쇼핑몰/커머스, 예약·회원 플랫폼, 모바일 앱, 내부 업무 시스템과 자동화까지 만듭니다.
+
+## English
+
+NQ Solution is an IT development studio based in Pyeongtaek, South Korea, serving clients nationwide. We specialize in web development, app development, software/program development, and business system & automation — from websites and e-commerce to mobile apps and internal tools.
+
+- [About](https://nqsolution.kr/en/about)
+- [Services](https://nqsolution.kr/en/services)
+- [Works](https://nqsolution.kr/en/portfolio)
+- [Contact](https://nqsolution.kr/en/contact)

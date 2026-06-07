@@ -20,10 +20,10 @@ export const siteConfig = {
 
     // 연락처 / Contact Info
     contact: {
-        email: "hello@nqsolution.com",
-        phone: "+82 10-1234-5678",
-        location: "Seoul, South Korea",
-        locationKo: "서울, 대한민국",
+        email: "dwkim@nqsolution.kr",
+        phone: "010-3368-1594",
+        location: "Pyeongtaek, Gyeonggi-do, South Korea",
+        locationKo: "경기도 평택시",
     },
 
     // 문의 폼 URL / Contact Form URL

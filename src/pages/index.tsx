@@ -211,6 +211,17 @@ export default function Home() {
                                 </p>
                             </motion.div>
 
+                            {/* 가시 브랜드/지역 텍스트 — 브랜드 검색(엔큐솔루션) & 평택 로컬 신호 */}
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.7, duration: 0.8 }}
+                                className="text-sm text-[var(--color-text-tertiary)] mb-10 -mt-6 max-w-2xl"
+                            >
+                                <span className="text-[var(--color-text-secondary)]">NQ Solution (엔큐솔루션)</span>
+                                {" · "}평택 기반 전국 웹개발 · 앱개발 · 프로그램개발 · 시스템개발
+                            </motion.p>
+
                             {/* CTA with corner decoration */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}

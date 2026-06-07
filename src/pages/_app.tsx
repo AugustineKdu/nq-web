@@ -53,8 +53,8 @@ function AppContent({ Component, pageProps }: AppPropsWithLayout) {
     return (
         <>
             <Head>
-                <title>NQ Solution | Digital Solution Partner</title>
-                <meta name="description" content="혁신적인 아이디어를 빠르게 실현하는 디지털 솔루션 파트너. 웹 개발, 앱 개발, UI/UX 디자인, 컨설팅 서비스를 제공합니다." />
+                <title>NQ Solution (엔큐솔루션) | 평택 웹개발·앱개발·프로그램개발 전문</title>
+                <meta name="description" content="NQ Solution(엔큐솔루션) - 평택 기반 전국 웹개발, 앱개발, 프로그램개발, 시스템개발 전문 IT 회사. 홈페이지 제작부터 업무 자동화까지." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="theme-color" content={dark ? "#0a0a0a" : "#ffffff"} />
             </Head>
