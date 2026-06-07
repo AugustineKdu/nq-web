@@ -254,7 +254,7 @@ const Footer = ({ dark }: { dark: boolean }) => {
                         {/* 가시 브랜드/지역 텍스트 — 네이버·구글 브랜드 검색(엔큐솔루션/NQ Solution) 및 평택 로컬 신호 */}
                         <p className="text-sm text-[var(--color-text-secondary)] mt-4">
                             <strong className="font-medium text-[var(--color-text-primary)]">NQ Solution</strong>
-                            {!isEnglish && <span className="text-[var(--color-text-secondary)]"> (엔큐솔루션)</span>}
+                            {!isEnglish && <span className="text-[var(--color-text-secondary)]"> (엔큐솔루션 · NQ솔루션)</span>}
                         </p>
                         <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed mt-1">
                             {isEnglish

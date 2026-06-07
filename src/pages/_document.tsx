@@ -25,7 +25,7 @@ class MyDocument extends Document {
           {/* Primary Meta Tags - 브랜드명 + 서비스 키워드 강조 */}
           <meta name="title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발, 시스템개발 전문" />
           <meta name="description" content="NQ Solution(엔큐솔루션) - 웹개발, 앱개발, 프로그램개발, 시스템개발 전문 IT 개발 회사. 홈페이지 제작, 쇼핑몰 구축, 업무 자동화 시스템까지. 평택 기반 전국 서비스." />
-          <meta name="keywords" content="NQ Solution, 엔큐솔루션, 평택 웹개발, 웹개발, 앱개발, 홈페이지제작, 시스템개발, IT외주" />
+          <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 엔큐 솔루션, NQ솔루션, 평택 웹개발, 웹개발, 앱개발, 홈페이지제작, 시스템개발, IT외주" />
 
           {/* Favicon */}
           <link rel="icon" type="image/png" href="/favicon.png" />
@@ -84,7 +84,7 @@ class MyDocument extends Document {
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "name": "NQ Solution",
-                "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
+                "alternateName": ["엔큐솔루션", "엔큐 솔루션", "NQ솔루션", "NQ 솔루션", "NQ Solution", "nqsolution"],
                 "url": "https://nqsolution.kr",
                 "logo": "https://nqsolution.kr/logo.png",
                 "description": "NQ Solution(엔큐솔루션) - 웹개발, 앱개발, 프로그램개발, 시스템개발 전문 IT 개발 회사. 평택 기반 전국 서비스.",
@@ -117,7 +117,7 @@ class MyDocument extends Document {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 "name": "NQ Solution",
-                "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
+                "alternateName": ["엔큐솔루션", "엔큐 솔루션", "NQ솔루션", "NQ 솔루션", "NQ Solution", "nqsolution"],
                 "url": "https://nqsolution.kr",
                 "inLanguage": ["ko-KR", "en-US"],
                 "description": "웹개발, 앱개발 전문 IT 개발 회사 NQ Solution(엔큐솔루션)",
@@ -138,7 +138,7 @@ class MyDocument extends Document {
                 "@context": "https://schema.org",
                 "@type": "LocalBusiness",
                 "name": "NQ Solution (엔큐솔루션)",
-                "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
+                "alternateName": ["엔큐솔루션", "엔큐 솔루션", "NQ솔루션", "NQ 솔루션", "NQ Solution", "nqsolution"],
                 "image": "https://nqsolution.kr/logo.png",
                 "url": "https://nqsolution.kr",
                 "email": "dwkim@nqsolution.kr",
@@ -217,7 +217,7 @@ class MyDocument extends Document {
                 "@context": "https://schema.org",
                 "@type": "ProfessionalService",
                 "name": "NQ Solution",
-                "alternateName": ["엔큐솔루션", "NQ솔루션", "nqsolution"],
+                "alternateName": ["엔큐솔루션", "엔큐 솔루션", "NQ솔루션", "NQ 솔루션", "NQ Solution", "nqsolution"],
                 "url": "https://nqsolution.kr",
                 "logo": "https://nqsolution.kr/logo.png",
                 "image": "https://nqsolution.kr/logo.png",
