@@ -1,5 +1,4 @@
 import Head from "next/head";
-import type { GetServerSideProps } from "next";
 import EstimateWizard from "../../components/EstimateWizard";
 
 export default function EstimatePageEn() {
@@ -17,11 +16,3 @@ export default function EstimatePageEn() {
     </>
   );
 }
-
-/* dev-server / flag only — returns 404 in production unless enabled */
-export const getServerSideProps: GetServerSideProps = async () => {
-  const enabled =
-    process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ENABLE_ESTIMATE === "true";
-  if (!enabled) return { notFound: true };
-  return { props: {} };
-};

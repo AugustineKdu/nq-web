@@ -26,25 +26,20 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // 견적 계산기 — 개발 서버/플래그에서만 노출 (프로덕션 기본 숨김)
-    const showEstimate =
-        process.env.NODE_ENV !== "production" ||
-        process.env.NEXT_PUBLIC_ENABLE_ESTIMATE === "true";
-
     const navItems = isEnglish
         ? [
             { href: "/en/about", label: "About" },
             { href: "/en/services", label: "Services" },
             { href: "/en/portfolio", label: "Works" },
+            { href: "/en/estimate", label: "Estimate" },
             { href: "/en/contact", label: "Contact" },
-            ...(showEstimate ? [{ href: "/en/estimate", label: "Estimate" }] : []),
         ]
         : [
             { href: "/about", label: "회사소개" },
             { href: "/services", label: "서비스" },
             { href: "/portfolio", label: "포트폴리오" },
+            { href: "/estimate", label: "견적계산" },
             { href: "/contact", label: "문의하기" },
-            ...(showEstimate ? [{ href: "/estimate", label: "견적계산" }] : []),
         ];
 
     // Get the corresponding page in other language

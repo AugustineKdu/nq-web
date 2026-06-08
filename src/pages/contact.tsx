@@ -55,11 +55,6 @@ export default function Contact() {
     const [contactContent, setContactContent] = useState<ContactContent | null>(null);
     const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
 
-    // 견적 계산기 노출 여부 (개발 서버/플래그)
-    const showEstimate =
-        process.env.NODE_ENV !== "production" ||
-        process.env.NEXT_PUBLIC_ENABLE_ESTIMATE === "true";
-
     // Fetch settings and content from database API
     useEffect(() => {
         Promise.all([
@@ -313,18 +308,15 @@ export default function Contact() {
                                 견적이 궁금하세요?
                             </h2>
                             <p className="text-[var(--color-text-secondary)] max-w-lg">
-                                {showEstimate
-                                    ? "원하는 기능만 고르면 예상 견적이 바로 나옵니다. 더 자세한 요구사항이나 파일 첨부가 필요하면 의뢰서를 남겨주세요."
-                                    : "프로젝트 의뢰서를 남겨주시면 영업일 기준 2~3일 내 제안서를 드립니다. 간단한 문의는 카카오톡·전화·이메일로도 편하게 연락 주세요."}
+                                원하는 기능만 고르면 예상 견적이 바로 나옵니다. 더 자세한 요구사항이나 파일 첨부가 필요하면 의뢰서를 남겨주세요.
                             </p>
                         </motion.div>
                     </motion.div>
 
                     <div className="grid grid-cols-12 gap-8">
                         <div className="hidden lg:block lg:col-span-2" />
-                        <div className={`col-span-12 lg:col-span-10 grid grid-cols-1 gap-6 ${showEstimate ? "md:grid-cols-2" : "md:grid-cols-1"}`}>
-                            {showEstimate && (
-                                <Link href="/estimate" className="card-interactive p-10 group block">
+                        <div className="col-span-12 lg:col-span-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <Link href="/estimate" className="card-interactive p-10 group block">
                                     <div className="text-xs tracking-widest uppercase text-[var(--color-accent)] mb-4">
                                         1분 견적 계산기
                                     </div>
@@ -338,7 +330,6 @@ export default function Contact() {
                                         견적 계산하기 <ArrowUpRight className="w-4 h-4" />
                                     </span>
                                 </Link>
-                            )}
                             <a
                                 href={settings.contactFormUrl}
                                 target="_blank"
