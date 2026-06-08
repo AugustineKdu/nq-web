@@ -37,7 +37,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
             { href: "/en/services", label: "Services" },
             { href: "/en/portfolio", label: "Works" },
             { href: "/en/contact", label: "Contact" },
-            ...(showEstimate ? [{ href: "/estimate", label: "Estimate" }] : []),
+            ...(showEstimate ? [{ href: "/en/estimate", label: "Estimate" }] : []),
         ]
         : [
             { href: "/about", label: "회사소개" },
