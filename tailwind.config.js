@@ -50,14 +50,14 @@ module.exports = {
                 mono: ['JetBrains Mono', 'SF Mono', 'Consolas', 'monospace'],
             },
             fontSize: {
-                // Display sizes for hero sections - 더 극적인 사이즈
-                'display-xl': ['clamp(4rem, 12vw, 10rem)', { lineHeight: '0.9', letterSpacing: '-0.03em', fontWeight: '600' }],
-                'display-lg': ['clamp(3rem, 8vw, 7rem)', { lineHeight: '0.95', letterSpacing: '-0.02em', fontWeight: '500' }],
-                'display-md': ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1', letterSpacing: '-0.02em', fontWeight: '500' }],
-                'display-sm': ['clamp(1.75rem, 4vw, 2.5rem)', { lineHeight: '1.15', letterSpacing: '-0.01em', fontWeight: '500' }],
+                // Display sizes — 일반 모니터(1366~1920) 기준 상한 보정 (43" 4K에서도 충분히 큼)
+                'display-xl': ['clamp(3.25rem, 8.5vw, 7rem)', { lineHeight: '0.95', letterSpacing: '-0.03em', fontWeight: '600' }],
+                'display-lg': ['clamp(2.5rem, 6.5vw, 5.5rem)', { lineHeight: '1', letterSpacing: '-0.02em', fontWeight: '500' }],
+                'display-md': ['clamp(2.25rem, 5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '500' }],
+                'display-sm': ['clamp(1.6rem, 3.5vw, 2.25rem)', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '500' }],
                 // 숫자용 - 포트폴리오 넘버링 등
-                'number-xl': ['clamp(5rem, 15vw, 12rem)', { lineHeight: '0.85', letterSpacing: '-0.05em', fontWeight: '300' }],
-                'number-lg': ['clamp(3rem, 10vw, 8rem)', { lineHeight: '0.9', letterSpacing: '-0.04em', fontWeight: '300' }],
+                'number-xl': ['clamp(4rem, 11vw, 8.5rem)', { lineHeight: '0.85', letterSpacing: '-0.05em', fontWeight: '300' }],
+                'number-lg': ['clamp(2.5rem, 8vw, 6rem)', { lineHeight: '0.9', letterSpacing: '-0.04em', fontWeight: '300' }],
             },
             letterSpacing: {
                 tightest: '-0.05em',

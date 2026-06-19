@@ -17,7 +17,7 @@ export type ProjectTypeKey =
   | "system";
 
 export type ScaleKey = "xs" | "s" | "m" | "l";
-export type DesignKey = "template" | "custom" | "premium";
+export type DesignKey = "template" | "custom" | "premium" | "partner";
 export type TimelineKey = "urgent" | "normal" | "flexible";
 export type FeatureKey =
   | "auth"
@@ -111,6 +111,7 @@ export const DESIGNS: DesignOption[] = [
   { key: "template", label: "템플릿 기반", labelEn: "Template-based", desc: "검증된 레이아웃 · 합리적 비용", descEn: "Proven layout · cost-effective", mult: 0.75 },
   { key: "custom", label: "세미 커스텀", labelEn: "Semi-custom", desc: "메인 맞춤 + 서브 템플릿", descEn: "Custom main + template sub-pages", mult: 1.0 },
   { key: "premium", label: "풀 커스텀 · 브랜딩 포함", labelEn: "Full custom · branding", desc: "전체 맞춤 디자인 · 모션", descEn: "Fully bespoke design · motion", mult: 1.5 },
+  { key: "partner", label: "전문 브랜딩 디자인 (바로브랜딩 협업)", labelEn: "Pro branding (with BaroBranding)", desc: "부산 웹디자인 전문 파트너 협업 · 별도 진행", descEn: "Collaboration with our Busan web-design partner · handled separately", mult: 1.9 },
 ];
 
 export const TIMELINES: TimelineOption[] = [

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowDownRight } from "lucide-react";
+import { ArrowRight, ArrowDownRight, ArrowUpRight, Sparkles, Award } from "lucide-react";
 import { koContent } from "../config";
 import { useTheme } from "../context/ThemeContext";
 
@@ -70,6 +70,7 @@ export default function Home() {
     const [services, setServices] = useState<ServiceItem[]>([]);
     const [processSteps, setProcessSteps] = useState<ProcessStep[]>([]);
     const [aiItems, setAiItems] = useState<AiItem[]>([]);
+    const [featuredCase, setFeaturedCase] = useState<{ title: string; category: string } | null>(null);
 
     // Fetch content from DB
     useEffect(() => {
@@ -84,6 +85,21 @@ export default function Home() {
             if (processData?.length) setProcessSteps(processData.filter((p: ProcessStep & { lang: string; pageType: string }) => p.lang === "ko" && p.pageType === "home"));
             if (aiData?.length) setAiItems(aiData.filter((a: AiItem & { lang: string }) => a.lang === "ko"));
         }).catch(() => {});
+    }, []);
+
+    // 최신 AI 자동화 사례 — AI 섹션에 실사례로 연결
+    useEffect(() => {
+        fetch("/api/projects")
+            .then(r => (r.ok ? r.json() : []))
+            .then((projects: { title: string; category?: string }[]) => {
+                if (!Array.isArray(projects) || projects.length === 0) return;
+                const ai = projects.find(p =>
+                    /\bai\b|automation|자동화|hybrid|system/i.test(`${p.title} ${p.category ?? ""}`)
+                );
+                const pick = ai ?? projects[0];
+                setFeaturedCase({ title: pick.title, category: pick.category ?? "Project" });
+            })
+            .catch(() => {});
     }, []);
 
     // Use DB content or fallback to static
@@ -414,7 +430,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* AI Section - 풀 위드 배경 */}
+            {/* AI Section - 메인 서비스: AI 자동화 강조 */}
             <section className="section-padding relative overflow-hidden">
                 {/* Decorative elements */}
                 <div className="absolute top-20 left-10 w-40 h-40 border border-[var(--color-border)] rounded-full opacity-30" />
@@ -433,12 +449,15 @@ export default function Home() {
                                 <span className="font-mono text-xs text-[var(--color-text-tertiary)]">03</span>
                                 <span className="w-8 h-px bg-[var(--color-border)]" />
                             </div>
-                            <span className="text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
-                                {content.ai.eyebrow}
+                            <span className="inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-[var(--color-accent)]">
+                                <Sparkles className="w-3.5 h-3.5" /> {content.ai.eyebrow}
+                            </span>
+                            <span className="mt-5 inline-flex items-center px-3 py-1 text-[11px] tracking-[0.2em] uppercase border border-[var(--color-accent)] text-[var(--color-accent)] rounded-full">
+                                Main Service
                             </span>
                         </motion.div>
                         <motion.div variants={fadeIn} className="col-span-12 lg:col-span-9">
-                            <h2 className="text-display-md font-serif mb-10">
+                            <h2 className="text-display-md font-serif mb-6">
                                 {content.ai.headline.split('\n').map((line, i) => (
                                     <React.Fragment key={i}>
                                         {line}
@@ -446,9 +465,34 @@ export default function Home() {
                                     </React.Fragment>
                                 ))}
                             </h2>
-                            <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed max-w-2xl mb-12">
+                            <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed max-w-2xl mb-10">
                                 {content.ai.description}
                             </p>
+
+                            {/* Featured case — 최신 AI 자동화 실사례 */}
+                            {featuredCase && (
+                                <Link
+                                    href="/portfolio"
+                                    className="group block mb-12 border border-[var(--color-border)] hover:border-[var(--color-accent)] bg-[var(--color-bg-secondary)] transition-colors duration-500 p-8 md:p-10"
+                                >
+                                    <div className="flex items-center justify-between gap-6">
+                                        <div>
+                                            <span className="text-xs tracking-widest uppercase text-[var(--color-accent)] mb-3 block">
+                                                Featured · {featuredCase.category}
+                                            </span>
+                                            <h3 className="text-xl md:text-2xl font-serif group-hover:text-[var(--color-accent)] transition-colors">
+                                                {featuredCase.title}
+                                            </h3>
+                                            <p className="text-sm text-[var(--color-text-secondary)] mt-3 max-w-xl leading-relaxed">
+                                                AI·자동화를 실제 업무에 적용한 대표 사례입니다. 포트폴리오에서 더 많은 작업을 확인하세요.
+                                            </p>
+                                        </div>
+                                        <span className="shrink-0 w-12 h-12 rounded-full border border-[var(--color-border)] flex items-center justify-center group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)] transition-all duration-500">
+                                            <ArrowUpRight className="w-5 h-5 text-[var(--color-text-secondary)] group-hover:text-white transition-colors" />
+                                        </span>
+                                    </div>
+                                </Link>
+                            )}
 
                             {/* AI items - 카드 스타일 */}
                             <motion.div
@@ -470,6 +514,12 @@ export default function Home() {
                                     </motion.div>
                                 ))}
                             </motion.div>
+
+                            {/* 평택시 청년 지원사업 — 신뢰 신호 */}
+                            <div className="mt-10 inline-flex items-center gap-3 text-sm text-[var(--color-text-secondary)] border-t border-[var(--color-border)] pt-6">
+                                <Award className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                                <span>2026 평택시 청년 우수 초기창업자 지원사업 선정 기업</span>
+                            </div>
                         </motion.div>
                     </motion.div>
                 </div>

@@ -46,10 +46,10 @@ export const koContent = {
             ],
         },
         ai: {
-            eyebrow: "AI Solutions",
-            headline: "AI를 비즈니스에\n실용적으로 적용합니다",
-            description: "자체 AI 서비스 개발부터, ChatGPT·Claude 등 외부 AI를 업무에 쉽게 활용할 수 있도록 세팅해드립니다.",
-            items: ["AI 챗봇 / 고객 응대", "문서 작성 자동화", "기존 시스템 AI 연동"],
+            eyebrow: "AI · Automation",
+            headline: "AI 자동화로\n일하는 방식을 바꿉니다",
+            description: "반복 업무 자동화부터 자체 AI 서비스 개발, ChatGPT·Claude 등 외부 AI 연동까지 — AI를 실제 업무에 적용하는 것이 NQ의 메인 서비스입니다.",
+            items: ["업무 자동화 · 워크플로우", "AI 챗봇 / 고객 응대", "기존 시스템 AI 연동"],
         },
         cta: {
             headline: "프로젝트를\n시작해볼까요?",

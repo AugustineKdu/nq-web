@@ -18,8 +18,8 @@
     --color-bg-secondary: #F5F5F4;
     --color-bg-tertiary: #FFFFFF;
     --color-text-primary: #1C1917;
-    --color-text-secondary: #57534E;
-    --color-text-tertiary: #A8A29E;
+    --color-text-secondary: #4F4B46;
+    --color-text-tertiary: #6B675F;
 
     /* Accent - Teal (로고 컬러) */
     --color-accent: #3D7A80;
@@ -41,8 +41,8 @@
     --color-bg-secondary: #1C1917;
     --color-bg-tertiary: #292524;
     --color-text-primary: #FAFAF9;
-    --color-text-secondary: #A8A29E;
-    --color-text-tertiary: #57534E;
+    --color-text-secondary: #BBB5AC;
+    --color-text-tertiary: #938D83;
 
     /* Accent - Teal (다크모드용 밝은 버전) */
     --color-accent: #4A9299;
@@ -78,6 +78,9 @@ body {
     background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
     transition: background-color 0.5s ease, color 0.5s ease;
+    /* 한국어: 음절 중간이 아니라 어절(띄어쓰기) 단위로만 줄바꿈 */
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 /* Typography Classes */
@@ -99,6 +102,8 @@ h1, h2, h3 {
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 h4, h5, h6 {
@@ -106,6 +111,8 @@ h4, h5, h6 {
     font-weight: 500;
     letter-spacing: -0.01em;
     color: var(--color-text-primary);
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 /* ============================================

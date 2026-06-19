@@ -145,15 +145,15 @@ const CONTENT: Record<Lang, WizardContent> = {
       ],
     },
     cms: {
-      eyebrow: "CMS", title: "만들고 끝이 아니라, 직접 운영하세요",
-      lead: (<>NQ의 모든 사이트는 <strong className="text-[var(--color-text-primary)] font-medium">CMS(콘텐츠 관리 시스템)</strong> 기반입니다. 코드를 몰라도 관리자 페이지에서 글·이미지·메뉴를 직접 바꿀 수 있어, 오픈 이후에도 스스로 운영합니다.</>),
+      eyebrow: "How we build", title: "한 가지 방식만 고집하지 않습니다",
+      lead: (<>프로젝트 성격에 맞춰 <strong className="text-[var(--color-text-primary)] font-medium">제작 방식과 디자인 방식</strong>을 고릅니다. 빠르고 합리적인 웹빌더부터 풀커스텀 개발 + CMS까지, 디자인은 자사 인하우스 또는 전문 파트너 협업으로 진행합니다.</>),
       cards: [
-        { n: "01", t: "관리자 페이지 기본 제공", d: "코드를 몰라도 텍스트·이미지·포트폴리오·FAQ를 직접 수정합니다." },
-        { n: "02", t: "콘텐츠 수정 무제한", d: "글자 하나 바꾸려고 개발사에 연락하거나 추가비를 낼 필요가 없습니다." },
-        { n: "03", t: "우리도 이렇게 운영합니다", d: "지금 보고 계신 이 사이트도 동일한 CMS로 직접 관리됩니다." },
-        { n: "04", t: "다국어·공지·설정까지", d: "번역, 공지, 노출 설정까지 직접 컨트롤할 수 있습니다." },
+        { n: "01", t: "웹빌더 기반 빠른 제작", d: "일반 홈페이지는 검증된 웹빌더로 합리적 비용·빠른 오픈도 가능합니다." },
+        { n: "02", t: "풀개발 + CMS 직접 운영", d: "맞춤 기능·확장이 필요하면 직접 개발하고, 관리자(CMS)로 글·이미지를 직접 바꿉니다." },
+        { n: "03", t: "디자인은 인하우스 또는 협업", d: "자사 디자인이 기본이며, 원하시면 부산 웹디자인 전문 파트너 ‘바로브랜딩’과 협업해 따로 진행합니다." },
+        { n: "04", t: "오픈 이후에도 함께", d: "콘텐츠 수정·기능 추가·유지보수까지. 지금 이 사이트도 같은 방식으로 직접 운영합니다." },
       ],
-      foot: "오픈 이후 유지비를 줄이고, 필요한 순간 바로 업데이트하세요. 콘텐츠 변경은 추가 비용 없이 직접 처리합니다.",
+      foot: "방식은 달라도 기준은 같습니다 — 필요 이상으로 비싸지 않게, 오픈 이후에도 스스로 운영할 수 있게.",
     },
     faq: {
       eyebrow: "FAQ", title: "견적, 자주 묻는 질문",
@@ -181,6 +181,7 @@ const CONTENT: Record<Lang, WizardContent> = {
         { l: "템플릿 기반", r: "150 ~ 300만원" },
         { l: "세미 커스텀", r: "300 ~ 500만원" },
         { l: "풀 커스텀 · 브랜딩", r: "500 ~ 800만원" },
+        { l: "전문 브랜딩 (바로브랜딩 협업)", r: "별도 견적" },
       ],
       recurring: [
         { l: "도메인", r: "연 1 ~ 3만원" },
@@ -236,15 +237,15 @@ const CONTENT: Record<Lang, WizardContent> = {
       ],
     },
     cms: {
-      eyebrow: "CMS", title: "Not just built — yours to run",
-      lead: (<>Every NQ site is built on a <strong className="text-[var(--color-text-primary)] font-medium">CMS (content management system)</strong>. No code needed — edit text, images and menus yourself from an admin panel, and keep running it after launch.</>),
+      eyebrow: "How we build", title: "We don't force a single method",
+      lead: (<>We pick the <strong className="text-[var(--color-text-primary)] font-medium">build and design approach</strong> that fits your project — from fast, cost-effective web builders to full custom development with a CMS, with design handled in-house or with a specialist partner.</>),
       cards: [
-        { n: "01", t: "Admin panel included", d: "Edit text, images, portfolio and FAQ yourself — no code required." },
-        { n: "02", t: "Unlimited content edits", d: "No need to contact the agency or pay extra to change a single word." },
-        { n: "03", t: "We run ours this way too", d: "The very site you're viewing is managed with the same CMS." },
-        { n: "04", t: "Languages, notices, settings", d: "Control translations, announcements and visibility directly." },
+        { n: "01", t: "Fast web-builder builds", d: "For general homepages, a proven web builder keeps cost down and launch quick." },
+        { n: "02", t: "Full dev + CMS you run", d: "Need custom features or scale? We build it, and you edit text & images via an admin panel." },
+        { n: "03", t: "Design in-house or partnered", d: "In-house design by default — or, if you prefer, a separate collaboration with our Busan web-design partner ‘BaroBranding’." },
+        { n: "04", t: "With you after launch", d: "Edits, new features and maintenance. This very site runs the same way." },
       ],
-      foot: "Cut maintenance costs after launch and update the moment you need to — content changes are handled by you, at no extra cost.",
+      foot: "Different methods, same standard — never costlier than it needs to be, and yours to run after launch.",
     },
     faq: {
       eyebrow: "FAQ", title: "Estimate — FAQ",
@@ -272,6 +273,7 @@ const CONTENT: Record<Lang, WizardContent> = {
         { l: "Template-based", r: "₩1.5M – ₩3M" },
         { l: "Semi-custom", r: "₩3M – ₩5M" },
         { l: "Full custom · branding", r: "₩5M – ₩8M" },
+        { l: "Pro branding (BaroBranding)", r: "Separate quote" },
       ],
       recurring: [
         { l: "Domain", r: "₩10K – ₩30K / yr" },

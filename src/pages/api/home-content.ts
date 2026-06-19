@@ -29,11 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         servicesViewAll: lang === "ko" ? "전체 서비스 보기" : "View All Services",
                         processEyebrow: "Process",
                         processHeadline: lang === "ko" ? "진행 방식" : "How We Work",
-                        aiEyebrow: "AI Solutions",
-                        aiHeadline: lang === "ko" ? "AI를 비즈니스에\n실용적으로 적용합니다" : "Apply AI\npractically to business",
+                        aiEyebrow: "AI · Automation",
+                        aiHeadline: lang === "ko" ? "AI 자동화로\n일하는 방식을 바꿉니다" : "AI automation that\nchanges how you work",
                         aiDescription: lang === "ko"
-                            ? "자체 AI 서비스 개발부터, ChatGPT·Claude 등 외부 AI를 업무에 쉽게 활용할 수 있도록 세팅해드립니다."
-                            : "From developing custom AI services to setting up external AI like ChatGPT and Claude for easy business use.",
+                            ? "반복 업무 자동화부터 자체 AI 서비스 개발, ChatGPT·Claude 등 외부 AI 연동까지 — AI를 실제 업무에 적용하는 것이 NQ의 메인 서비스입니다."
+                            : "From automating repetitive work to building custom AI services and integrating external AI like ChatGPT and Claude — applying AI to real work is NQ's main service.",
                         ctaSubtext: lang === "ko" ? "어떤 서비스가 필요하신지 편하게 문의해주세요." : "Feel free to contact us about your needs.",
                         ctaButton: lang === "ko" ? "문의하기" : "Contact Us"
                     });

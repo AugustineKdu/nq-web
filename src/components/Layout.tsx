@@ -78,12 +78,12 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
                     </Link>
 
                     {/* Desktop Navigation - Minimal */}
-                    <div className="hidden md:flex items-center gap-12">
+                    <div className="hidden md:flex items-center gap-9 lg:gap-10">
                         {navItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`relative text-xs tracking-widest uppercase transition-all duration-400 link-underline ${
+                                className={`relative text-base tracking-wide uppercase transition-all duration-400 link-underline ${
                                     router.pathname === item.href
                                         ? "text-[var(--color-accent)]"
                                         : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
@@ -99,7 +99,7 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
                         {/* Language Switcher */}
                         <Link
                             href={getLanguageSwitchPath()}
-                            className="text-xs tracking-widest uppercase text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors"
+                            className="text-sm tracking-wide uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                         >
                             {isEnglish ? "KR" : "EN"}
                         </Link>
