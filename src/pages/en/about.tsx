@@ -1,8 +1,8 @@
 import React from "react";
-import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Seo from "../../components/Seo";
 
 // Animation variants
 const fadeIn = {
@@ -40,14 +40,11 @@ export default function AboutEN() {
 
     return (
         <>
-            <Head>
-                <title>About Us | NQ Solution</title>
-                <meta name="description" content="Learn about NQ Solution - A digital solutions company specializing in web development, design, and AI integration." />
-                <meta property="og:title" content="About Us | NQ Solution" />
-                <meta property="og:description" content="NQ Solution - Digital solutions from planning to development." />
-                <meta property="og:url" content="https://nqsolution.kr/en/about" />
-                <link rel="canonical" href="https://nqsolution.kr/en/about" />
-            </Head>
+            <Seo
+                title="About Us | NQ Solution"
+                description="Learn about NQ Solution - A digital solutions company specializing in web development, design, and AI integration."
+                path="/en/about"
+            />
             <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">

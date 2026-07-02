@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "next/head";
+import Seo from "../../components/Seo";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -93,14 +93,11 @@ export default function ServicesEN() {
 
     return (
         <>
-            <Head>
-                <title>Services | NQ Solution</title>
-                <meta name="description" content="NQ Solution services: Web development, app development, UI/UX design, AI solutions. End-to-end digital services." />
-                <meta property="og:title" content="Services | NQ Solution" />
-                <meta property="og:description" content="NQ Solution - Web development, app development, UI/UX design, and AI solutions." />
-                <meta property="og:url" content="https://nqsolution.kr/en/services" />
-                <link rel="canonical" href="https://nqsolution.kr/en/services" />
-            </Head>
+            <Seo
+                title="Services | NQ Solution"
+                description="NQ Solution services: Web development, app development, UI/UX design, AI solutions. End-to-end digital services."
+                path="/en/services"
+            />
             <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">

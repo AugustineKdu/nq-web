@@ -1,79 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from "react";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Building, CheckCircle, Globe } from "lucide-react";
+import Seo from "../../components/Seo";
+import prisma from "@/lib/prisma";
 
 interface PortfolioProject {
     id: number;
     title: string;
-    titleKo?: string;
+    titleKo?: string | null;
     client: string;
     category: string;
     year: string;
     description: string;
-    descriptionKo?: string;
-    longDescription?: string;
+    descriptionKo?: string | null;
+    longDescription?: string | null;
     tags: string[];
     featured: boolean;
     images?: string[];
-    url?: string;
+    url?: string | null;
     isActive?: boolean;
     challenges?: string[];
     solutions?: string[];
     results?: string[];
 }
 
-export default function PortfolioDetail() {
-    const router = useRouter();
-    const { id } = router.query;
-    const [projects, setProjects] = useState<PortfolioProject[]>([]);
-    const [loading, setLoading] = useState(true);
+interface PortfolioDetailProps {
+    project: PortfolioProject;
+    prevProject: { id: number; title: string } | null;
+    nextProject: { id: number; title: string } | null;
+}
 
-    useEffect(() => {
-        fetch("/api/projects")
-            .then(res => res.ok ? res.json() : [])
-            .then(data => {
-                setProjects(data || []);
-            })
-            .catch(() => {
-                setProjects([]);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
-
-    const project = projects.find(p => p.id === Number(id));
-    const currentIndex = projects.findIndex(p => p.id === Number(id));
-    const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
-    const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
-
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p className="text-lg text-[var(--color-text-secondary)]">
-                    로딩 중...
-                </p>
-            </div>
-        );
-    }
-
-    if (!project) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-lg text-[var(--color-text-secondary)]">
-                        프로젝트를 찾을 수 없습니다.
-                    </p>
-                    <Link href="/portfolio" className="mt-4 inline-block text-[var(--color-accent)] hover:underline">
-                        포트폴리오로 돌아가기
-                    </Link>
-                </div>
-            </div>
-        );
-    }
+// SSG(+ISR) 전환 — CSR이라 서버 HTML에 메타·본문이 비어 있던 P0 문제 해소
+export default function PortfolioDetail({ project, prevProject, nextProject }: PortfolioDetailProps) {
+    const pageTitle = `${project.titleKo || project.title} | 포트폴리오 - NQ Solution (엔큐솔루션)`;
+    const pageDescription = (project.descriptionKo || project.description).slice(0, 160);
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "홈", item: "https://nqsolution.kr" },
+            { "@type": "ListItem", position: 2, name: "포트폴리오", item: "https://nqsolution.kr/portfolio" },
+            { "@type": "ListItem", position: 3, name: project.titleKo || project.title, item: `https://nqsolution.kr/portfolio/${project.id}` },
+        ],
+    };
 
     return (
+        <>
+        <Seo
+            title={pageTitle}
+            description={pageDescription}
+            path={`/portfolio/${project.id}`}
+            enPath={`/en/portfolio/${project.id}`}
+            jsonLd={breadcrumbJsonLd}
+        />
         <div className="min-h-screen">
             {/* Hero Section */}
             <section className="pt-32 pb-16">
@@ -292,5 +272,67 @@ export default function PortfolioDetail() {
                 </div>
             </section>
         </div>
+        </>
     );
 }
+
+const projectSelect = {
+    id: true,
+    title: true,
+    titleKo: true,
+    client: true,
+    category: true,
+    year: true,
+    description: true,
+    descriptionKo: true,
+    longDescription: true,
+    tags: true,
+    featured: true,
+    images: true,
+    url: true,
+    isActive: true,
+    challenges: true,
+    solutions: true,
+    results: true,
+} as const;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    try {
+        const projects = await prisma.project.findMany({ select: { id: true } });
+        return {
+            paths: projects.map((p) => ({ params: { id: String(p.id) } })),
+            fallback: "blocking",
+        };
+    } catch {
+        // 빌드 시 DB 미가용이어도 빌드가 깨지지 않게 — 요청 시 blocking 생성
+        return { paths: [], fallback: "blocking" };
+    }
+};
+
+export const getStaticProps: GetStaticProps<PortfolioDetailProps> = async ({ params }) => {
+    const id = Number(params?.id);
+    if (!Number.isInteger(id)) return { notFound: true };
+
+    try {
+        // 목록 순서는 /api/projects GET과 동일(order asc, id desc) — 이전/다음 내비 일치
+        const projects = await prisma.project.findMany({
+            select: projectSelect,
+            orderBy: [{ order: "asc" }, { id: "desc" }],
+        });
+        const index = projects.findIndex((p) => p.id === id);
+        if (index === -1) return { notFound: true, revalidate: 60 };
+
+        const pick = (p?: { id: number; title: string }) => (p ? { id: p.id, title: p.title } : null);
+
+        return {
+            props: {
+                project: projects[index],
+                prevProject: pick(projects[index - 1]),
+                nextProject: pick(projects[index + 1]),
+            },
+            revalidate: 300,
+        };
+    } catch {
+        return { notFound: true, revalidate: 60 };
+    }
+};

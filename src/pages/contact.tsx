@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { siteConfig, koContent } from "../config";
+import Seo from "../components/Seo";
 
 interface ContactContent {
     heroIntro: string;
@@ -89,35 +89,26 @@ export default function Contact() {
         }
     };
 
+    const faqJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: staticContent.faq.items.map((f: { q: string; a: string }) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+    };
+
     return (
         <>
-            <Head>
-                <title>문의하기 | NQ Solution (엔큐솔루션) - 웹개발, 앱개발, 프로그램개발 상담</title>
-                <meta name="description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹개발, 앱개발, 프로그램개발, 시스템개발 무료 상담. 홈페이지 제작 견적부터 업무 자동화까지. nqsolution 엔큐솔루션 연락처" />
-                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, 프로그램개발견적, 시스템개발비용, 홈페이지제작비용, IT외주, 연락처" />
-                <meta property="og:title" content="문의하기 | NQ Solution (엔큐솔루션)" />
-                <meta property="og:description" content="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹개발, 프로그램개발, 시스템개발 무료 상담." />
-                <meta property="og:url" content="https://nqsolution.kr/contact" />
-                <link rel="canonical" href="https://nqsolution.kr/contact" />
-                <link rel="alternate" hrefLang="ko" href="https://nqsolution.kr/contact" />
-                <link rel="alternate" hrefLang="en" href="https://nqsolution.kr/en/contact" />
-                <link rel="alternate" hrefLang="x-default" href="https://nqsolution.kr/contact" />
-                {/* FAQPage 구조화 데이터 — 정적 FAQ로 SSR 항상 포함 (GEO/리치결과) */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "FAQPage",
-                            mainEntity: staticContent.faq.items.map((f: { q: string; a: string }) => ({
-                                "@type": "Question",
-                                name: f.q,
-                                acceptedAnswer: { "@type": "Answer", text: f.a },
-                            })),
-                        }),
-                    }}
-                />
-            </Head>
+            <Seo
+                title="문의하기 | NQ Solution (엔큐솔루션) - 웹개발, 앱개발, 프로그램개발 상담"
+                description="NQ Solution(엔큐솔루션)에 프로젝트를 문의하세요. 웹개발, 앱개발, 프로그램개발, 시스템개발 무료 상담. 홈페이지 제작 견적부터 업무 자동화까지. nqsolution 엔큐솔루션 연락처"
+                path="/contact"
+                enPath="/en/contact"
+                jsonLd={faqJsonLd}
+                keywords="NQ Solution, nqsolution, 엔큐솔루션, 프로젝트문의, 개발상담, 웹개발견적, 앱개발비용, 프로그램개발견적, 시스템개발비용, 홈페이지제작비용, IT외주, 연락처"
+            />
             <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">

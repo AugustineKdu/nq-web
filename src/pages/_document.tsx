@@ -22,19 +22,9 @@ class MyDocument extends Document {
             content="YOUR_GOOGLE_VERIFICATION_CODE"
           />
 
-          {/* Primary Meta Tags - 브랜드명 + 서비스 키워드 강조 */}
-          <meta name="title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발, 시스템개발 전문" />
-          <meta name="description" content="NQ Solution(엔큐솔루션) - 웹개발, 앱개발, 프로그램개발, 시스템개발 전문 IT 개발 회사. 홈페이지 제작, 쇼핑몰 구축, 업무 자동화 시스템까지. 평택 기반 전국 서비스." />
-          <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, 엔큐 솔루션, NQ솔루션, 평택 웹개발, 웹개발, 앱개발, 홈페이지제작, 시스템개발, IT외주" />
-
           {/* Favicon */}
           <link rel="icon" type="image/png" href="/favicon.png" />
           <link rel="apple-touch-icon" href="/favicon.png" />
-
-          {/* Canonical & Hreflang */}
-          <link rel="alternate" hrefLang="ko" href="https://nqsolution.kr/" />
-          <link rel="alternate" hrefLang="en" href="https://nqsolution.kr/en" />
-          <link rel="alternate" hrefLang="x-default" href="https://nqsolution.kr/" />
 
           {/* SEO Meta Tags - Naver & Google */}
           <meta name="author" content="NQ Solution (엔큐솔루션)" />
@@ -47,27 +37,8 @@ class MyDocument extends Document {
           <meta name="rating" content="General" />
           <meta name="revisit-after" content="3 days" />
 
-          {/* Open Graph Tags - 네이버/카카오/페이스북 */}
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="NQ Solution (엔큐솔루션)" />
-          <meta property="og:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발 전문" />
-          <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹개발, 앱개발, 프로그램개발, 시스템개발 전문 IT 개발 회사. 홈페이지 제작부터 업무 자동화까지." />
-          <meta property="og:url" content="https://nqsolution.kr" />
-          <meta property="og:locale" content="ko_KR" />
+          {/* Open Graph - Locale (페이지별 og:locale은 Seo 컴포넌트가 담당, alternate만 전역 유지) */}
           <meta property="og:locale:alternate" content="en_US" />
-          <meta property="og:image" content="https://nqsolution.kr/og-image.png" />
-          <meta property="og:image:secure_url" content="https://nqsolution.kr/og-image.png" />
-          <meta property="og:image:type" content="image/png" />
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
-          <meta property="og:image:alt" content="NQ Solution 엔큐솔루션 - 웹개발·앱개발·시스템개발 · 평택 기반 전국 IT 개발 파트너" />
-
-          {/* Twitter Card */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발 전문" />
-          <meta name="twitter:description" content="웹개발, 앱개발, 프로그램개발, 시스템개발 전문 IT 개발 회사 - 평택 기반 전국 서비스" />
-          <meta name="twitter:image" content="https://nqsolution.kr/og-image.png" />
-          <meta name="twitter:image:alt" content="NQ Solution 엔큐솔루션 - 웹개발·앱개발·시스템개발" />
 
           {/* RSS Feed */}
           <link rel="alternate" type="application/rss+xml" title="NQ Solution RSS" href="https://nqsolution.kr/rss.xml" />

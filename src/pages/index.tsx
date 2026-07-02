@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Head from "next/head";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDownRight, ArrowUpRight, Sparkles, Award } from "lucide-react";
 import { koContent } from "../config";
 import { useTheme } from "../context/ThemeContext";
+import Seo from "../components/Seo";
 
 interface HomeContent {
     heroEyebrow: string;
@@ -143,15 +143,13 @@ export default function Home() {
 
     return (
         <>
-            <Head>
-                <title>NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발, 시스템개발 전문</title>
-                <meta name="description" content="NQ Solution(엔큐솔루션)은 웹개발, 앱개발, 프로그램개발, 시스템개발을 전문으로 하는 IT 개발 회사입니다. 홈페이지 제작, 쇼핑몰 구축, 업무 자동화 시스템, 모바일 앱까지. 평택 기반 전국 서비스. nqsolution 엔큐솔루션" />
-                <meta name="keywords" content="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 웹개발, 앱개발, 프로그램개발, 시스템개발, 소프트웨어개발, 홈페이지제작, 웹사이트제작, 쇼핑몰제작, 모바일앱개발, IT개발, 외주개발, IT외주, 업무자동화, 평택웹개발, 전국IT개발, 웹에이전시" />
-                <meta property="og:title" content="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발 전문" />
-                <meta property="og:description" content="NQ Solution(엔큐솔루션) - 웹개발, 앱개발, 프로그램개발, 시스템개발 전문. 홈페이지 제작부터 업무 자동화까지." />
-                <meta property="og:url" content="https://nqsolution.kr/" />
-                <link rel="canonical" href="https://nqsolution.kr/" />
-            </Head>
+            <Seo
+                title="NQ Solution (엔큐솔루션) | 웹개발, 앱개발, 프로그램개발, 시스템개발 전문"
+                description="NQ Solution(엔큐솔루션)은 웹개발, 앱개발, 프로그램개발, 시스템개발을 전문으로 하는 IT 개발 회사입니다. 홈페이지 제작, 쇼핑몰 구축, 업무 자동화 시스템, 모바일 앱까지. 평택 기반 전국 서비스. nqsolution 엔큐솔루션"
+                path="/"
+                enPath="/en"
+                keywords="NQ Solution, nqsolution, 엔큐솔루션, NQ솔루션, 웹개발, 앱개발, 프로그램개발, 시스템개발, 소프트웨어개발, 홈페이지제작, 웹사이트제작, 쇼핑몰제작, 모바일앱개발, IT개발, 외주개발, IT외주, 업무자동화, 평택웹개발, 전국IT개발, 웹에이전시"
+            />
             <div className="min-h-screen">
             {/* Hero Section - 더 독특한 레이아웃 */}
             <section className="min-h-screen relative flex items-center overflow-hidden">

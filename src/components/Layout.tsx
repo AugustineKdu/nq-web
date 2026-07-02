@@ -43,14 +43,15 @@ const Navbar = ({ dark, setDark }: { dark: boolean; setDark: (dark: boolean) => 
         ];
 
     // Get the corresponding page in other language
+    // pathname은 라우트 템플릿(/portfolio/[id])이라 상세 페이지에서 리터럴 [id] 링크가 생기므로 asPath(실제 경로) 사용
     const getLanguageSwitchPath = () => {
+        const currentPath = router.asPath.split("?")[0].split("#")[0];
         if (isEnglish) {
             // Remove /en prefix
-            const koreanPath = router.pathname.replace(/^\/en/, "") || "/";
-            return koreanPath;
+            return currentPath.replace(/^\/en/, "") || "/";
         } else {
             // Add /en prefix
-            return `/en${router.pathname === "/" ? "" : router.pathname}`;
+            return `/en${currentPath === "/" ? "" : currentPath}`;
         }
     };
 

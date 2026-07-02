@@ -1,16 +1,19 @@
 import React from "react";
 import Link from "next/link";
-import Head from "next/head";
 import { motion } from "framer-motion";
 import { ArrowLeft, Home } from "lucide-react";
+import Seo from "../components/Seo";
 
 export default function Custom404() {
     return (
         <>
-            <Head>
-                <title>404 - Page Not Found | NQ Solution</title>
-                <meta name="description" content="The page you are looking for does not exist." />
-            </Head>
+            <Seo
+                title="404 - Page Not Found | NQ Solution"
+                description="The page you are looking for does not exist."
+                path="/404"
+                enPath={null}
+                noindex
+            />
             <div className="min-h-screen flex items-center justify-center">
                 <div className="container-custom">
                     <div className="max-w-2xl mx-auto text-center">

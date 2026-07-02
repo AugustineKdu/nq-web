@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Head from "next/head";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
+import Seo from "../../components/Seo";
 
 // Animation variants
 const fadeIn = {
@@ -68,14 +68,11 @@ export default function ContactEN() {
 
     return (
         <>
-            <Head>
-                <title>Contact | NQ Solution</title>
-                <meta name="description" content="Contact NQ Solution for your project. Free consultation for web development, app development, and AI solutions." />
-                <meta property="og:title" content="Contact | NQ Solution" />
-                <meta property="og:description" content="Contact NQ Solution for project consultation." />
-                <meta property="og:url" content="https://nqsolution.kr/en/contact" />
-                <link rel="canonical" href="https://nqsolution.kr/en/contact" />
-            </Head>
+            <Seo
+                title="Contact | NQ Solution"
+                description="Contact NQ Solution for your project. Free consultation for web development, app development, and AI solutions."
+                path="/en/contact"
+            />
             <div className="min-h-screen">
             {/* Hero */}
             <section className="pt-32 md:pt-40 pb-20">

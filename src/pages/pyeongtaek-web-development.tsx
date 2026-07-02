@@ -1,8 +1,8 @@
 import React from "react";
-import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Check, MessageCircle } from "lucide-react";
+import Seo from "../components/Seo";
 
 const CANONICAL = "https://nqsolution.kr/pyeongtaek-web-development";
 
@@ -106,21 +106,13 @@ export default function PyeongtaekWebDevelopment() {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={CANONICAL} />
-        <meta property="og:image" content="https://nqsolution.kr/og-image.png" />
-        <link rel="canonical" href={CANONICAL} />
-        <link rel="alternate" hrefLang="ko" href={CANONICAL} />
-        <link rel="alternate" hrefLang="x-default" href={CANONICAL} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      </Head>
+      <Seo
+        title={title}
+        description={description}
+        path="/pyeongtaek-web-development"
+        enPath={null}
+        jsonLd={[serviceJsonLd, breadcrumbJsonLd, faqJsonLd]}
+      />
 
       <div className="min-h-screen">
         {/* Hero */}
